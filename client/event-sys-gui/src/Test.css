@@ -1,0 +1,20 @@
+.test-results {
+  width: 50%;
+  max-height: 75%;
+  overflow: auto;
+  border: thin solid grey;
+  text-align: center;
+  margin: auto;
+}
+
+.test-results > tbody > tr > td {
+  padding: 1em;
+}
+
+.test-results > tbody > tr:nth-child(odd) {
+  background: rgba(50, 50, 50, .35);
+}
+
+.test-results > tbody > tr:nth-child(even) {
+  background: rgba(50, 50, 50, .15);
+}
