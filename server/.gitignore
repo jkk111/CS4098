@@ -1,1 +1,4 @@
 node_modules
+config.json
+user.db
+session.db
