@@ -1,9 +1,19 @@
+/**
+ * This module provides an abstraction layer around a database allowing,
+   construction and execution of queries on a database
+ */
 const fs = require('fs');
 const sql = require('sqlite3').verbose();
 
+/**
+ * Builds a query to update rows in a table
+ * @param { string } table - the target table name
+ * @param { object } insert - the keys to update
+ * @param { object } select - the keys to match
+ * @param { string } extra - any additional query string
+ * @returns { string }
+ */
 let construct_update_query = (table, insert, select, extra = '') => {
-
-
   let where = ''
   let select_keys = Object.keys(select)
   if(select_keys && select_keys.length) {
@@ -33,6 +43,15 @@ let construct_update_query = (table, insert, select, extra = '') => {
   return `UPDATE user ${SET} ${WHERE} ${extra}`
 }
 
+
+
+/**
+ * Builds a query to insert rows into a table
+ * @param { string } table - the target table name
+ * @param { object } params - key value pairs for row columns
+ * @param { string } extra - any additional query string
+ * @returns { string }
+ */
 let construct_insert_query = (table, params, extra = '') => {
   let keys = [];
   for(var key in params) {
@@ -43,6 +62,15 @@ let construct_insert_query = (table, params, extra = '') => {
   return `INSERT INTO ${table} (${keys.join(', ')}) VALUES(${keys_mapped.join(', ')}) ${extra}`;
 }
 
+
+/**
+ * Builds a query to select rows from a table
+ * @param { string } table - the target table name
+ * @param { array | string } keys - the keys to get
+ * @param { object } params - the key value pairs to match
+ * @param { string } extra - any additional query string
+ * @returns { string }
+ */
 let construct_select_query = (table, keys = '*', params = {}, extra = '') => {
   if(Array.isArray(keys)) {
     keys = keys.join(', ');
@@ -65,6 +93,12 @@ let construct_select_query = (table, keys = '*', params = {}, extra = '') => {
   return `SELECT ${keys} FROM ${table} ${WHERE} ${extra}`
 }
 
+/**
+ * Runs a specified query on a provided database
+ * @param { Object } db - The database to run
+ * @param { string } q - the sql query to run
+ * @param { Object | Array } params - the params for the query
+ */
 let run_query = (db, q, params) => {
   return new Promise((resolve) => {
     db.all(q, params, (err, result) => {
@@ -79,8 +113,15 @@ let run_query = (db, q, params) => {
   })
 }
 
+
+// We can't have a static instances list on the database class so we scope a list locally
 let instances = {};
 
+/**
+ * Maps from kv pair to sqlite friendly varient
+ * @param { object } params - the params to convert
+ * @returns { object }
+ */
 let map_params = (params) => {
   let mapped = {};
   for(var param in params) {
