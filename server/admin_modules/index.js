@@ -29,6 +29,8 @@ app.post('/create_user', bodyParser.json(), (req, res) => {
 
 app.post('/promote', bodyParser.json(), (req, res) => {
   let { id } = req.body;
+  let users = await Users.update('user', { is_admin: 1 }, { id });
+  res.json({ success: true })
 })
 
 module.exports = app;

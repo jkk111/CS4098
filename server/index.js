@@ -9,7 +9,7 @@ const admin_modules = require('./admin_modules');
 const Database = require('./database');
 const Sessions = Database.Get('session');
 const Users = Database.Get('user');
-const { verify_password } = require('./util')
+const { hash_password, verify_password } = require('./util')
 const config = require('./config.json')
 const crypto = require('crypto')
 const { sendMail, Email } = require('./email');
@@ -78,7 +78,7 @@ app.post('/exists', bodyParser.json(), async(req, res) => {
  */
 app.post('/register', bodyParser.json(), async(req, res, next) => {
   let { username, password, email, f_name, l_name } = req.body;
-
+  password = hash_password(password, config.salt);
   let user = await Users.get('user', { username }, 'id');
   let user_email = await Users.get('user', { email }, 'id');
   if(user.length > 0) {
@@ -106,7 +106,7 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
 /**
  * Endpoint to log a user in.
  * @method POST
- * @name /register
+ * @name /login
  * @body { Object } - the body of the request
  * @body.username { string } - the username for the user
  * @body.password { string } - the password for the user

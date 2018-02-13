@@ -29,6 +29,11 @@ let password = (q) => {
 }
 
 let init = async() => {
+  let admins = await Users.get('user', { is_admin: 1 }, 'id');
+  if(admins.length > 0) {
+    console.log('Database Already Setup\nSkipping.')
+    return;
+  }
   let salt = await generate_salt();
   console.log("First we will create an admin user");
   let f_name = await question("First Name");
