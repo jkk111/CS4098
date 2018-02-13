@@ -12,6 +12,7 @@ const Users = Database.Get('user');
 const { verify_password } = require('./util')
 const config = require('./config.json')
 const crypto = require('crypto')
+const { sendMail, Email } = require('./email');
 
 app.use(express.static('static'));
 app.listen(80);
@@ -95,6 +96,10 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
     await Sessions.add('session', { id, user_id, expires });
     res.cookie('id', id, { expires });
     res.json({ success: true })
+
+
+    let mail = new Email('no-reply@john-kevin.me', email, 'Registered', 'you registered');
+    sendMail(mail);
   }
 })
 
@@ -112,7 +117,7 @@ app.post('/login', bodyParser.json(), async(req, res) => {
   if(user.length > 0) {
     let user_id = user[0].id
     let hash = user[0].password;
-    let success = verify_password(pass, hash);
+    let success = verify_password(password, hash);
     if(success) {
       let id = generate_session_id();
       let expires = new Date();
@@ -134,7 +139,7 @@ app.post('/login', bodyParser.json(), async(req, res) => {
  */
 let get_auth_level = (session_id) => {
   return new Promise(async(resolve) => {
-    let session = Sessions.get('session', { id: session_id }, ['user_id'])
+    let session = await Sessions.get('session', { id: session_id }, ['user_id'])
     if(session.length > 0) {
       let user_id = session[0].user_id;
       let user = await Users.get('user', { id: user_id }, [ 'is_admin' ]);
@@ -156,7 +161,7 @@ let get_auth_level = (session_id) => {
  * @param { string } id - the session id to test
  * @param { Number } required - the minimum required level (default: 2)
  */
-let verify_auth = async(id, required = 2) => {
+let verify_auth = async(id, required = 2, next) => {
   let level = await get_auth_level(id);
   if(level >= required) {
     next();
@@ -166,8 +171,15 @@ let verify_auth = async(id, required = 2) => {
 }
 
 let test_auth = (level) => async(req, res, next) => {
-  let err = await verify_auth((req.cookie || {}).id, level, next);
+  let err = await verify_auth((req.cookies || {}).id, level, next);
 }
+
+app.get('/status', async(req, res) => {
+  let level = await get_auth_level(req.cookies.id);
+  res.json({
+    auth_level: level
+  })
+})
 
 /**
  * User Modules

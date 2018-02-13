@@ -1,6 +1,8 @@
 let express = require('express')
 let app = express.Router();
-
+const bodyParser = require('body-parser')
+let Database = require('../database')
+let Users = Database.Get('user')
 /*
   User Struct {
     id: { integer }
@@ -16,4 +18,17 @@ let app = express.Router();
     Create Events
  */
 
- module.exports = app;
+app.get('/users', async(req, res) => {
+  let users = await Users.get('user', {}, [ 'id', 'f_name', 'l_name', 'email', 'is_admin' ]);
+  res.json(users);
+});
+
+app.post('/create_user', bodyParser.json(), (req, res) => {
+
+});
+
+app.post('/promote', bodyParser.json(), (req, res) => {
+  let { id } = req.body;
+})
+
+module.exports = app;
