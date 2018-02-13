@@ -8,10 +8,11 @@ let hash_password = (pass, salt) => {
 
 let verify_password = (pass, hashed) => {
   return new Promise((resolve) => {
-    bcrypt.compare(pass, hash, (_, match) => resolve(match));
+    bcrypt.compare(pass, hashed, (_, match) => resolve(match));
   })
 }
 
 module.exports = {
-  hash_password
+  hash_password,
+  verify_password
 }

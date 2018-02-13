@@ -4,6 +4,7 @@ const { hash_password } = require('./util');
 const Users = new Database('user');
 const nodemailer = require('nodemailer')
 const fs = require('fs')
+const { _send } = require('./email')
 
 const bcrypt = require('bcrypt');
 const salt_iterations = 10;
@@ -51,17 +52,6 @@ let init = async() => {
     m_pass = await password("Mail Password");
   }
 
-  let smtpTransport = nodemailer.createTransport({
-    host,
-    port,
-    secure: pass == 465,
-    auth: {
-      user: m_user,
-      pass: m_pass
-    }
-  });
-
-
   let options = {
     from: `Admin <${m_user}>`,
     to: mail,
@@ -76,17 +66,19 @@ let init = async() => {
 
   await Users.add('user', { username: user, password: pass, f_name, l_name, email: mail, is_admin: 1 })
 
-  // Register User
-  smtpTransport.sendMail(options, (err, info) => {
+  let config = {
+    smtp_host: host,
+    smtp_port: port,
+    smtp_user: m_user,
+    smtp_pass: m_pass,
+    salt: salt
+  }
+
+  _send(config, options, (err, info) => {
     if(!err) {
-      let config = {
-        smtp_host: host,
-        smtp_port: port,
-        smtp_user: m_user,
-        smtp_pass: m_pass,
-        salt: salt
-      }
       fs.writeFileSync('./config.json', JSON.stringify(config, null, '  '));
+    } else {
+      throw err;
     }
   })
 }

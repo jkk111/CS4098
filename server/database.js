@@ -130,10 +130,13 @@ let map_params = (params) => {
   return mapped
 }
 
+/**
+ * Class to represent a connection to a given database
+ */
 class Database {
   static Get(name) {
     if(instances[name]) {
-      return name;
+      return instances[name];
     }
     let db = new Database(name);
     instances[name] = db;
