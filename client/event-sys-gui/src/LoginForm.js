@@ -10,7 +10,7 @@ let LoginForm = ({ onSubmit }) => {
       </div>
       <div>
         <label>Password:</label>
-        <input type="text" name="password" />
+        <input type="password" name="password" />
       </div>
       <div>
         <input type="submit" value="Log In" />
