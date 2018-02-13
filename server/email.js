@@ -26,6 +26,8 @@ class Email {
 }
 
 let _send = (conf, options, cb) => {
+  if(conf.noEmail)
+    return
   let smtpTransport = nodemailer.createTransport({
     host: conf.smtp_host,
     port: conf.smtp_port,

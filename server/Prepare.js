@@ -78,7 +78,9 @@ let init = async() => {
     if(!err) {
       fs.writeFileSync('./config.json', JSON.stringify(config, null, '  '));
     } else {
-      throw err;
+      config.noEmail = true;
+      fs.writeFileSync('./config.json', JSON.stringify(config, null, '  '));
+      console.log(err);
     }
   })
 }

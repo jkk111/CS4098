@@ -15,6 +15,8 @@ fi
 cd CS4098
 cd server
 npm install
+# Prepare all the server side stuff.
+sudo node Prepare.js
 sudo node index.js &
 
 # Start Client in dev mode
