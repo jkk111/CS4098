@@ -22,11 +22,11 @@ let SignupForm = ({ onSubmit }) => {
       </div>
       <div>
         <label>Password:</label>
-        <input type="password" name="password" />
+        <input type="password" name="password" autoComplete='off' />
       </div>
       <div>
         <label>Confirm Password:</label>
-        <input type="text" name="password_confirm" />
+        <input type="password" name="password_confirm" autoComplete='off' />
       </div>
       <div>
         <input type="submit" value="Sign Up" />

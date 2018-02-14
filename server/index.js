@@ -78,7 +78,7 @@ app.post('/exists', bodyParser.json(), async(req, res) => {
  */
 app.post('/register', bodyParser.json(), async(req, res, next) => {
   let { username, password, email, f_name, l_name } = req.body;
-  password = hash_password(password, config.salt);
+  password = await hash_password(password, config.salt);
   let user = await Users.get('user', { username }, 'id');
   let user_email = await Users.get('user', { email }, 'id');
   if(user.length > 0) {
@@ -97,9 +97,10 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
     res.cookie('id', id, { expires });
     res.json({ success: true })
 
-
-    let mail = new Email('no-reply@john-kevin.me', email, 'Registered', 'you registered');
-    sendMail(mail);
+    try {
+      let mail = new Email('no-reply@john-kevin.me', email, 'Registered', 'you registered');
+      sendMail(mail);
+    } catch(e) { /* */ }
   }
 })
 
@@ -113,24 +114,28 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
  */
 app.post('/login', bodyParser.json(), async(req, res) => {
   let { username, password } = req.body;
-  let user = await Users.get('user', { username }, [ 'id', 'password' ])
+  let user = await Users.get('user', { username }, [ 'id', 'password', 'is_admin' ])
   if(user.length > 0) {
     let user_id = user[0].id
     let hash = user[0].password;
     let success = await verify_password(password, hash);
-    console.log(success);
     if(success) {
       let id = generate_session_id();
       let expires = new Date();
       expires.setDate(expires.getDate() + 30);
       await Sessions.add('session', { id, user_id, expires })
       res.cookie('id', id, { expires })
-      res.json({ success: true });
+      res.json({ success: true, auth_level: user[0].is_admin ? 'ADMIN' : 'USER' });
     } else {
-      res.json({ success: false, error: 'INVALID_AUTH' })
+      res.json({ success: false, error: 'INVALID_AUTH', auth_level: 'UNAUTH' });
     }
   }
 })
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('id');
+  res.json({ success: true });
+});
 
 /**
  * Gets the login level of the user [ 0 = Unauthenticated, 1 = Logged-In, 2 = Admin ]

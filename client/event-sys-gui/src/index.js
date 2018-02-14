@@ -11,7 +11,7 @@ let props = {
 }
 
 let reducers = {
-  logged_in: (state = false, action) => {
+  logged_in: (state = 'UNAUTH', action) => {
     if(action.type === 'LOGIN_STATE_CHANGED') {
       return action.value;
     }

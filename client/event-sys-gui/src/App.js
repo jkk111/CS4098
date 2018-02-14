@@ -48,7 +48,7 @@ class App extends Component {
       body
     })
     resp = await resp.json();
-    this.props.set_logged_in(resp.success);
+    this.props.set_logged_in(resp.auth_level);
   }
 
   async register(e) {
