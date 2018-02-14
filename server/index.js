@@ -13,6 +13,7 @@ const { hash_password, verify_password } = require('./util')
 const config = require('./config.json')
 const crypto = require('crypto')
 const { sendMail, Email } = require('./email');
+const AUTH_LEVELS = [ 'UNAUTH', 'USER', 'ADMIN' ]
 
 app.use(express.static('static'));
 app.listen(80);
@@ -183,7 +184,7 @@ let test_auth = (level) => async(req, res, next) => {
 app.get('/status', async(req, res) => {
   let level = await get_auth_level(req.cookies.id);
   res.json({
-    auth_level: level
+    auth_level: AUTH_LEVELS[level]
   })
 })
 

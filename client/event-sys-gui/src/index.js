@@ -23,6 +23,8 @@ reducers = combineReducers(reducers);
 
 let store = createStore(reducers);
 
+window.store = store;
+
 let resp = fetch('/status', {
   method: 'GET'
 }).then((body) => {
