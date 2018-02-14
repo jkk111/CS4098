@@ -26,7 +26,7 @@ let SignupForm = ({ onSubmit }) => {
       </div>
       <div>
         <label>Confirm Password:</label>
-        <input type="text" name="password_confirm" />
+        <input type="password" name="password_confirm" />
       </div>
       <div>
         <input type="submit" value="Sign Up" />
