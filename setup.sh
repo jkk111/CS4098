@@ -22,4 +22,4 @@ sudo node Prepare.js
 # Start Client in dev mode
 cd ../client/event-sys-gui
 npm install
-concurrently -k "npm start" "node ../../server/index.js"
+concurrently -k "npm start" "sudo node ../../server/index.js"
