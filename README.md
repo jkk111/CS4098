@@ -8,6 +8,13 @@ Repo to store source code for CS4098 - Group Design Project
 4. Clone the repo - ```git clone https://github.com/jkk111/cs4098.git```
 5. Navigate to newly created folder - ```cd cs4098```
 6. Run setup script - ```./setup.sh```
+7. If this is the first time you're running the script, follow the instructions on screen and enter your details. Keep a note of your login credentials.
+
+### Signing Up
+
+### Logging In
+
+### Logging Out
 
 ## Tests
 Tests can be viewed by setting the url to /?tests=tests
