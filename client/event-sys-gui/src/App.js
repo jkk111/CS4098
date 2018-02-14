@@ -33,6 +33,7 @@ class App extends Component {
 
     this.register = this.register.bind(this);
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   async login(e) {
@@ -51,9 +52,13 @@ class App extends Component {
     this.props.set_logged_in(resp.auth_level);
   }
 
-  logout(){
-    console.log('not implemented');
-    //this.props.set_logged_in(false);
+  async logout(){
+    let resp = await fetch('/logout');
+    resp = await resp.json();
+
+    console.log(resp);
+
+    this.props.set_logged_in('UNAUTH');
   }
 
   async register(e) {
@@ -90,11 +95,11 @@ class App extends Component {
       return <Test results={this.state.test_results} />
     }
 
-    if (this.props.logged_in){
+    if (this.props.logged_in !== 'UNAUTH'){
       return (
         <div>
           <h2>You are logged in</h2>
-          <input type="submit" value="Log Out" onSubmit={this.logout}/>
+          <input type="submit" value="Log Out" onClick={this.logout}/>
         </div>
       )
     } else {
