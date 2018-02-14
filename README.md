@@ -12,13 +12,16 @@ Repo to store source code for CS4098 - Group Design Project
 8. Once complete, the script should open the webapp in a browser. If this fails, navigate to ```localhost:3000``` in your favorite browser.
 
 ### Signing Up
-TODO
+1. Fill in your information in the sign-up and take note of your username and password for later.
+2. To test if it works, try to log in to the account your just created.
 
 ### Logging In
-TODO
+1. Enter your username and password into the log in form.
+2. A successful login will redirect you to the main landing page.
+3. If login is failing, ensure your username and password are correct.
 
 ### Logging Out
-TODO
+1. To log out, simply press the logout button. You should be redirected to the login/signup page.
 
 ## Tests
 Tests can be viewed by setting the url to /?tests=tests
