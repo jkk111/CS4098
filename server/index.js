@@ -117,7 +117,8 @@ app.post('/login', bodyParser.json(), async(req, res) => {
   if(user.length > 0) {
     let user_id = user[0].id
     let hash = user[0].password;
-    let success = verify_password(password, hash);
+    let success = await verify_password(password, hash);
+    console.log(success);
     if(success) {
       let id = generate_session_id();
       let expires = new Date();
@@ -126,7 +127,7 @@ app.post('/login', bodyParser.json(), async(req, res) => {
       res.cookie('id', id, { expires })
       res.json({ success: true });
     } else {
-      res.json({ error: 'INVALID_AUTH' })
+      res.json({ success: false, error: 'INVALID_AUTH' })
     }
   }
 })

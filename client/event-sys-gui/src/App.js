@@ -4,6 +4,24 @@ import './App.css';
 import Test from "./Test"
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
+import { connect } from 'react-redux'
+
+let mapStateToProps = (state) => {
+  return {
+    logged_in: state.logged_in
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    set_logged_in: (logged_in) => {
+      dispatch({
+        type: 'LOGIN_STATE_CHANGED',
+        value: logged_in
+      })
+    }
+  }
+}
 
 class App extends Component {
   constructor(props) {
@@ -29,6 +47,8 @@ class App extends Component {
       },
       body
     })
+    resp = await resp.json();
+    this.props.set_logged_in(resp.success);
   }
 
   async register(e) {
@@ -82,4 +102,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
