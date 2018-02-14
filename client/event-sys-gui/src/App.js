@@ -49,6 +49,12 @@ class App extends Component {
     })
     resp = await resp.json();
     this.props.set_logged_in(resp.success);
+    console.log(resp.success);
+  }
+
+  logout(){
+    console.log('not implemented');
+    //this.props.set_logged_in(false);
   }
 
   async register(e) {
@@ -85,20 +91,29 @@ class App extends Component {
       return <Test results={this.state.test_results} />
     }
 
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Event-Management-System</h1>
-        </header>
-        <p className="App-intro">
-          <code>// TODO</code>
-          <br />
-          Want to see the test results? <a href="?tests" >Click Here</a>
-        </p>
-        <LoginForm error={loginError} onSubmit={this.login} />
-        <SignupForm error={registerError} onSubmit={this.register} />
-      </div>
-    );
+    if (this.props.logged_in){
+      return (
+        <div>
+          <h2>You are logged in</h2>
+          <input type="submit" value="Log Out" onSubmit={this.logout}/>
+        </div>
+      )
+    } else {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">Event-Management-System</h1>
+          </header>
+          <p className="App-intro">
+            <code>// TODO</code>
+            <br />
+            Want to see the test results? <a href="?tests" >Click Here</a>
+          </p>
+          <LoginForm error={loginError} onSubmit={this.login} />
+          <SignupForm error={registerError} onSubmit={this.register} />
+        </div>
+      );
+    }
   }
 }
 
