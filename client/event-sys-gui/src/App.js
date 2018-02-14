@@ -29,6 +29,10 @@ class App extends Component {
       },
       body
     })
+    if (resp) {
+      console.log('login success')
+      this.setState({logged_in: true});
+    }
   }
 
   async register(e) {
@@ -61,24 +65,31 @@ class App extends Component {
 
   render() {
     let { registerError, loginError } = this.state;
+
     if(this.props.test_view) {
       return <Test results={this.state.test_results} />
     }
 
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Event-Management-System</h1>
-        </header>
-        <p className="App-intro">
-          <code>// TODO</code>
-          <br />
-          Want to see the test results? <a href="?tests" >Click Here</a>
-        </p>
-        <LoginForm error={loginError} onSubmit={this.login} />
-        <SignupForm error={registerError} onSubmit={this.register} />
-      </div>
-    );
+    if (this.state.logged_in) {
+      return (
+        <h1>you are now logged in</h1>
+      );
+    } else {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">Event-Management-System</h1>
+          </header>
+          <p className="App-intro">
+            //<code> TODO</code>
+            <br />
+            Want to see the test results? <a href="?tests" >Click Here</a>
+          </p>
+          <LoginForm error={loginError} onSubmit={this.login} />
+          <SignupForm error={registerError} onSubmit={this.register} />
+        </div>
+      );
+    }
   }
 }
 
