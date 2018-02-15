@@ -1,5 +1,5 @@
 import React from 'react';
-
+import 'moment/locale/en-ie'
 //TODO Remove this
 import DateTime from './react-datetime'
 
@@ -40,7 +40,7 @@ let CreateUser = () => {
         <input type='text' autoComplete="off" name='email' />
       </div>
       <div className='create-user-input'>
-        <DateTime />
+        <DateTime locale='en-ie' />
       </div>
       <div className='create-user-input'>
         <input type='submit' />
