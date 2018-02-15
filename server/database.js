@@ -99,18 +99,22 @@ let construct_select_query = (table, keys = '*', params = {}, extra = '') => {
  * @param { string } q - the sql query to run
  * @param { Object | Array } params - the params for the query
  */
-let run_query = (db, q, params) => {
+let run_query = (db, q, params, method = 'all') => {
   return new Promise((resolve) => {
-    db.all(q, params, (err, result) => {
+    db[method](q, params, function(err, result) {
       if(err) {
         console.log(err)
         throw err;
       }
       else {
-        resolve(result);
+        resolve(result || this);
       }
     })
   })
+}
+
+let run_insert = (db, q, params) => {
+  return run_query(db, q, params, 'run')
 }
 
 
@@ -186,6 +190,13 @@ class Database {
     return run_query(this.db, q, params)
   }
 
+  async insert_query(q, params) {
+    if(!this.ready) {
+      await this.prepare();
+    }
+    return run_insert(this.db, q, params)
+  }
+
   get(table, params, keys, extra) {
     let query = construct_select_query(table, keys, params, extra);
     return this.query(query, map_params(params));
@@ -199,7 +210,7 @@ class Database {
       mapped_params[`$${param}`] = params[param];
     }
 
-    return this.query(query, mapped_params);
+    return this.insert_query(query, mapped_params);
   }
 
   update(table, params, select_params, extra) {

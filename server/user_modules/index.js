@@ -46,4 +46,12 @@ app.post('/change_password', bodyParser.json(), async(req, res) => {
   }
 });
 
+app.get('/resend_confirmation', (req, res) => {
+
+})
+
+app.get('/confirm', (req, res) => {
+
+})
+
 module.exports = app;

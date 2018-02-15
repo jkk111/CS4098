@@ -1,7 +1,8 @@
 const readline = require('readline-sync');
 const Database = require('./database');
 const { hash_password } = require('./util');
-const Users = new Database('user');
+const Users = Database.Get('user');
+const Pending = Database.Get('pending_user');
 const nodemailer = require('nodemailer')
 const fs = require('fs')
 const { _send } = require('./email')
@@ -29,6 +30,8 @@ let password = (q) => {
 }
 
 let init = async() => {
+  await Pending.prepare();
+  await Users.prepare();
   let admins = await Users.get('user', { is_admin: 1 }, 'id');
   if(admins.length > 0) {
     console.log('Database Already Setup\nSkipping.')

@@ -61,11 +61,15 @@ let sendMail = (mail) => {
 };
 
 let sendTemplate = (template, data) => {
-  let mail = pug.renderFile(`email_templates/${template}.pug`, data);
-  parse(mail, (_, mail) => {
-    let m = new Email(data.from, data.to, data.subject, data.text, mail);
-    sendMail(m);
-  })
+  try {
+    let mail = pug.renderFile(`email_templates/${template}.pug`, data);
+    parse(mail, (_, mail) => {
+      let m = new Email(data.from, data.to, data.subject, data.text, mail);
+      sendMail(m);
+    })
+  } catch(e) {
+
+  }
 }
 
 module.exports = {

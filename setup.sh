@@ -15,6 +15,7 @@ fi
 cd CS4098
 cd server
 sudo npm install -g concurrently
+sudo npm install -g nodemon
 npm install
 # Prepare all the server side stuff.
 sudo node Prepare.js
@@ -22,4 +23,4 @@ sudo node Prepare.js
 # Start Client in dev mode
 cd ../client/event-sys-gui
 npm install
-concurrently -k "npm start" "cd ../../server; sudo node index.js"
+concurrently -k "npm start" "cd ../../server; sudo nodemon index.js"

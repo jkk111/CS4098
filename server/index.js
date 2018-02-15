@@ -106,7 +106,7 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
   } else if(user_email.length) {
     res.json({ success: false, error: 'EMAIL_EXISTS' });
   } else {
-    await Users.add('user', { username, password, email, f_name, l_name });
+    await Users.add('user', { username, password, email, f_name, l_name, registered: true, email_confirmed: false });
     user = await Users.get('user', { username }, 'id');
 
     let user_id = user[0].id;

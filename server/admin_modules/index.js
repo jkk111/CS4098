@@ -5,7 +5,8 @@ const crypto = require('crypto');
 const { encode } = require('urlsafe-base64')
 let Database = require('../database');
 let Users = Database.Get('user')
-let PendingUsers = Database.Get('pending-user');
+let PendingUsers = Database.Get('pending_user');
+let { sendTemplate } = require('../email')
 /*
   User Struct {
     id: { integer }
@@ -34,12 +35,14 @@ app.get('/users', async(req, res) => {
   res.json(users);
 });
 
-app.post('/create_user', bodyParser.json(), (req, res) => {
-  let id = create_registration_token();
+app.post('/create_user', bodyParser.json(), async(req, res) => {
+  let token = create_registration_token();
   let { f_name, l_name, email } = req.body;
-  PendingUsers.add('pending-user', { f_name, l_name, email, id });
-  sendTemplate('pending-user', { f_name, l_name, email, id })
-  res.send({ id })
+  let result = await Users.add('user', { username: token, f_name, l_name, email, password: '' });
+  let id = result.lastID;
+  PendingUsers.add('pending-user', { id, f_name, l_name, email, token });
+  sendTemplate('pending-user', { f_name, l_name, email, token })
+  res.send({ token })
 });
 
 app.post('/promote', bodyParser.json(), async(req, res) => {
