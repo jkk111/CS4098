@@ -9,12 +9,40 @@
   background: var(--nav-background-color);
 }
 
-.nav-item {
+.nav-item, .nav-item-idle {
   text-align: center;
   color: var(--nav-font-color);
-  padding: 1em;
   background: var(--nav-item-background-color);
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.nav-item {
+  padding: 1em;
+  font-size: 1em;
+  transition: all 1s;
+  height: 3em;
+}
+
+.nav-item-idle {
+  height: 0;
+  background: var(--nav-item-background-color);
+  box-sizing: border-box;
+  transition: all 1s;
+}
+
+.nav-toggle {
+  transition: all 1s;
+  text-align: center;
+  color: white;
+}
+
+.nav-toggle-closed {
+  padding: 1em;
+}
+
+.nav-toggle-open {
+  padding: 0.5em;
 }
 
 .nav-item:hover {

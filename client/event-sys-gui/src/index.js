@@ -49,6 +49,17 @@ let reducers = {
       }
     }
     return state;
+  },
+
+  active_view: (state = 'HOME', action) => {
+    if(action.type === 'VIEW_CHANGED') {
+      return action.value;
+    } else if(action.type === 'LOGIN_STATE_CHANGED') {
+      if(action.value === 'UNAUTH') {
+        return 'HOME'
+      }
+    }
+    return state;
   }
 }
 
