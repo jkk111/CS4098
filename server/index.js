@@ -12,8 +12,9 @@ const Users = Database.Get('user');
 const { hash_password, verify_password } = require('./util')
 const config = require('./config.json')
 const crypto = require('crypto')
-const { sendMail, Email } = require('./email');
+const { sendMail, sendTemplate, Email } = require('./email');
 const AUTH_LEVELS = [ 'UNAUTH', 'USER', 'ADMIN' ]
+const pug = require('pug')
 
 process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise', p, 'reason:', reason, Error.stack);
@@ -218,6 +219,11 @@ let identify = async(req, res, next) => {
     res.json({ success: false, error: "UNAUTH" });
   }
 }
+
+app.post('/preview', bodyParser.json(), (req, res) => {
+  sendTemplate("index", { ...req.body, from: 'admin@john-kevin.me', to: 'kellyj58@tcd.ie', subject: 'email-preview', text: 'Hello World' })
+  res.send("ok");
+})
 
 /**
  * User Modules

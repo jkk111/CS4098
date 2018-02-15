@@ -2,6 +2,7 @@ const fs = require('fs')
 let nodemailer = require('nodemailer');
 let conf = null;
 let pug = require('pug')
+let { parse } = require('emailify')
 
 class Email {
   constructor(sender, to, subject, text, html) {
@@ -60,7 +61,11 @@ let sendMail = (mail) => {
 };
 
 let sendTemplate = (template, data) => {
-
+  let mail = pug.renderFile(`email_templates/${template}.pug`, data);
+  parse(mail, (_, mail) => {
+    let m = new Email(data.from, data.to, data.subject, data.text, mail);
+    sendMail(m);
+  })
 }
 
 module.exports = {
