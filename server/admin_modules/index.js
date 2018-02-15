@@ -25,6 +25,10 @@ let create_registration_token = () => {
   return encode(crypto.randomBytes(32));
 }
 
+app.get('/info', async(req, res) => {
+  res.json({ success: false, error: 'UNIMPL' })
+})
+
 app.get('/users', async(req, res) => {
   let users = await Users.get('user', {}, [ 'id', 'f_name', 'l_name', 'email', 'is_admin' ]);
   res.json(users);

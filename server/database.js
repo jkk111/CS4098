@@ -14,16 +14,16 @@ const sql = require('sqlite3').verbose();
  * @returns { string }
  */
 let construct_update_query = (table, insert, select, extra = '') => {
-  let where = ''
+  let WHERE = ''
   let select_keys = Object.keys(select)
   if(select_keys && select_keys.length) {
-    where = 'WHERE '
+    WHERE = 'WHERE '
     let first = true;
-    for(var key in params) {
+    for(var key in select) {
       if(!first)
-        where += ' AND '
+        WHERE += ' AND '
       first = false;
-      where += `${key} = ?`
+      WHERE += `${key} = ?`
     }
   }
 
@@ -32,7 +32,7 @@ let construct_update_query = (table, insert, select, extra = '') => {
   if(set_keys && set_keys.length) {
     SET = 'SET '
     let first = true;
-    for(var key in set) {
+    for(var key in insert) {
       if(!first)
         SET += ', '
       first = false;
@@ -203,7 +203,7 @@ class Database {
   }
 
   update(table, params, select_params, extra) {
-    let query = construct_update_query(table, insert, select, extra);
+    let query = construct_update_query(table, params, select_params, extra);
 
     let joined = [];
     for(var param in params) {
@@ -213,7 +213,7 @@ class Database {
     for(var param in select_params) {
       joined.push(select_params[param]);
     }
-    return this.query(query, params);
+    return this.query(query, joined);
   }
 }
 
