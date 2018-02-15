@@ -1,6 +1,7 @@
 const fs = require('fs')
 let nodemailer = require('nodemailer');
 let conf = null;
+let pug = require('pug')
 
 class Email {
   constructor(sender, to, subject, text, html) {
@@ -58,8 +59,13 @@ let sendMail = (mail) => {
   _send(conf, mail)
 };
 
+let sendTemplate = (template, data) => {
+
+}
+
 module.exports = {
   _send,
   sendMail,
-  Email
+  Email,
+  sendTemplate
 };

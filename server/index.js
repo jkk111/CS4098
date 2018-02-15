@@ -15,6 +15,24 @@ const crypto = require('crypto')
 const { sendMail, Email } = require('./email');
 const AUTH_LEVELS = [ 'UNAUTH', 'USER', 'ADMIN' ]
 
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason, Error.stack);
+  // application specific logging, throwing an error, or other logic here
+});
+
+
+global.Promise = require('bluebird')
+let Promise = require('bluebird')
+Promise.config({
+    // Enable warnings
+    warnings: true,
+    // Enable long stack traces
+    longStackTraces: true,
+    // Enable cancellation
+    cancellation: true,
+    // Enable monitoring
+    monitoring: true
+});
 app.use(express.static('static'));
 app.listen(80);
 app.use(cookieParser());
@@ -23,7 +41,7 @@ const test_path = path.join(__dirname, '..', 'client', 'event-sys-gui', 'test-re
 /**
  * Generates a session id for cookies
  */
-let generate_session_id = () => crypto.randomBytes(8).toString('base64');
+let generate_session_id = () => crypto.randomBytes(8).toString('hex');
 
 /**
  * Endpoint to get latest test run
@@ -96,7 +114,8 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
     expires.setDate(expires.getDate(), + 30);
     await Sessions.add('session', { id, user_id, expires });
     res.cookie('id', id, { expires });
-    res.json({ success: true })
+    // res.cookie('id', id, { domain: null }); // Cookies don't work on localhost, so use a session cookie to bypass this
+    res.json({ id, success: true })
 
     try {
       let mail = new Email('no-reply@john-kevin.me', email, 'Registered', 'you registered');
@@ -126,7 +145,7 @@ app.post('/login', bodyParser.json(), async(req, res) => {
       expires.setDate(expires.getDate() + 30);
       await Sessions.add('session', { id, user_id, expires })
       res.cookie('id', id, { expires })
-      res.json({ success: true, auth_level: user[0].is_admin ? 'ADMIN' : 'USER' });
+      res.json({ id, success: true, auth_level: user[0].is_admin ? 'ADMIN' : 'USER' });
     } else {
       res.json({ success: false, error: 'INVALID_AUTH', auth_level: 'UNAUTH' });
     }
@@ -168,17 +187,17 @@ let get_auth_level = (session_id) => {
  * @param { string } id - the session id to test
  * @param { Number } required - the minimum required level (default: 2)
  */
-let verify_auth = async(id, required = 2, next) => {
+let verify_auth = async(id, required = 2, req, res, next) => {
   let level = await get_auth_level(id);
   if(level >= required) {
     next();
   } else {
-    next(new Error('Unauthenticated'));
+    res.json({ success: false, error: 'UNAUTH' });
   }
 }
 
 let test_auth = (level) => async(req, res, next) => {
-  let err = await verify_auth((req.cookies || {}).id, level, next);
+  let err = await verify_auth((req.cookies || {}).id, level, req, res, next);
 }
 
 app.get('/status', async(req, res) => {
@@ -188,14 +207,26 @@ app.get('/status', async(req, res) => {
   })
 })
 
+let identify = async(req, res, next) => {
+  let id = req.cookies.id;
+  let session = await Sessions.get('session', { id }, [ 'user_id' ]);
+
+  if(session.length > 0) {
+    req.user_id = session[0].user_id;
+    next();
+  } else {
+    res.json({ success: false, error: "UNAUTH" });
+  }
+}
+
 /**
  * User Modules
  * @level 1
  */
-app.use('/user', test_auth(1), user_modules);
+app.use('/user', test_auth(1), identify, user_modules);
 
 /**
  * Admin Modules
  * @level 2
  */
-app.use('/admin', test_auth(2), admin_modules);
+app.use('/admin', test_auth(2), identify, admin_modules);

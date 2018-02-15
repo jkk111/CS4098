@@ -23,6 +23,14 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
+// Dev Only, localhost + ips don't agree with cookies :(
+let set_cookie = (id) => {
+  let expires = new Date();
+  expires.setYear(expires.getUTCFullYear() + 1);
+  let c_str = `id=${id}; expires=` + expires;
+  document.cookie = c_str;
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -43,6 +51,7 @@ class App extends Component {
     let body = JSON.stringify({ username, password });
     let resp = await fetch('/login', {
       method: 'POST',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -50,6 +59,7 @@ class App extends Component {
     })
     resp = await resp.json();
     this.props.set_logged_in(resp.auth_level);
+    set_cookie(resp.id)
   }
 
   async logout(){
@@ -76,11 +86,14 @@ class App extends Component {
     let body = JSON.stringify({ username, password, f_name, l_name, email });
     let resp = await fetch('/register', {
       method: 'POST',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
       body
     })
+    resp = await resp.json();
+    set_cookie(resp.id)
   }
 
   async getTestResults() {
