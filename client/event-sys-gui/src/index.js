@@ -35,6 +35,17 @@ let reducers = {
       }
     }
     return state;
+  },
+
+  admin_info: (state = { pending: true }, action) => {
+    if(action.type === 'ADMIN_INFO_CHANGED') {
+      return action.value
+    } else if(action.type === 'LOGIN_STATE_CHANGED') {
+      if(action.value !== 'ADMIN') {
+        return { pending: true }
+      }
+    }
+    return state;
   }
 }
 
