@@ -4,7 +4,7 @@ import Nav from './Nav'
 
 let Home = ({ is_admin }) => {
   return <div className='home'>
-    <Nav />
+    Welcome Home
   </div>
 }
 

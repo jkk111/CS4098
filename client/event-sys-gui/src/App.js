@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Test from "./Test"
@@ -6,10 +6,12 @@ import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
 import { connect } from 'react-redux'
 import Home from './Home'
+import Nav from './Nav'
 
 let mapStateToProps = (state) => {
   return {
-    logged_in: state.logged_in
+    logged_in: state.logged_in,
+    view: state.active_view
   }
 }
 
@@ -30,6 +32,10 @@ let set_cookie = (id) => {
   expires.setYear(expires.getUTCFullYear() + 1);
   let c_str = `id=${id}; expires=` + expires;
   document.cookie = c_str;
+}
+
+const views = {
+  HOME: Home
 }
 
 class App extends Component {
@@ -110,7 +116,11 @@ class App extends Component {
     }
 
     if (this.props.logged_in !== 'UNAUTH'){
-      return <Home />
+      let View = views[this.props.view] || views.HOME
+      return <Fragment>
+        <Nav />
+        <View />
+      </Fragment>
     } else {
       return (
         <div className="App">
