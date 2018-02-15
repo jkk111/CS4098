@@ -1,0 +1,26 @@
+:root {
+  --nav-background-color: blue;
+  --nav-item-background-color: red;
+  --nav-font-color: white;
+}
+
+.nav {
+  width: 100%;
+  background: var(--nav-background-color);
+}
+
+.nav-item {
+  text-align: center;
+  color: var(--nav-font-color);
+  padding: 1em;
+  background: var(--nav-item-background-color);
+  box-sizing: border-box;
+}
+
+.nav-item:hover {
+  filter: brightness(80%);
+}
+
+.nav-item:active {
+  filter: brightness(60%);
+}

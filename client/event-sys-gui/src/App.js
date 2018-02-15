@@ -5,6 +5,7 @@ import Test from "./Test"
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
 import { connect } from 'react-redux'
+import Home from './Home'
 
 let mapStateToProps = (state) => {
   return {
@@ -109,12 +110,7 @@ class App extends Component {
     }
 
     if (this.props.logged_in !== 'UNAUTH'){
-      return (
-        <div>
-          <h2>You are logged in</h2>
-          <input type="submit" value="Log Out" onClick={this.logout}/>
-        </div>
-      )
+      return <Home />
     } else {
       return (
         <div className="App">
