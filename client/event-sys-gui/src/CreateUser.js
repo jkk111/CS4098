@@ -1,7 +1,7 @@
 import React from 'react';
 
 //TODO Remove this
-import DateTime from 'react-datetime'
+import DateTime from './react-datetime'
 
 let create_user = async(e) => {
   e.preventDefault();
