@@ -70,6 +70,18 @@ let init = async() => {
   }
 
   await Users.add('user', { username: user, password: pass, f_name, l_name, email: mail, is_admin: 1 })
+  let hash_test = await hash_password('test', salt)
+
+  for(var i = 0; i < 5; i++) {
+    let username = `test${i + 1}`;
+    let password = hash_test;
+    let f_name = `Test-${i + 1}`;
+    let l_name = 'User';
+    let email = `test-${i + 1}@user.abstact.domain.that.does.not.exist.tcd.ie`
+    await Users.add('user', { username, password, f_name, l_name, email})
+  }
+
+  await Users.add('user', { username: 'test-admin', password: hash_test, f_name: 'test', l_name: 'admin', email: 'admin@user.abstact.domain.that.does.not.exist.tcd.ie', is_admin: 1 })
 
   let config = {
     smtp_host: host,
