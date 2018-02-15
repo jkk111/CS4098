@@ -35,6 +35,16 @@ Promise.config({
     monitoring: true
 });
 app.use(express.static('static'));
+
+app.get('*', (req, res, next) => {
+  console.log(req.headers);
+  if(req.headers.api_request) {
+    next(); // Awesome we know this is a link/fetch request
+  } else {
+    res.sendFile(__dirname + '/static/index.html')
+  }
+})
+
 app.listen(80);
 app.use(cookieParser());
 const test_path = path.join(__dirname, '..', 'client', 'event-sys-gui', 'test-results.json')
@@ -223,6 +233,10 @@ let identify = async(req, res, next) => {
 app.post('/preview', bodyParser.json(), (req, res) => {
   sendTemplate("index", { ...req.body, from: 'admin@john-kevin.me', to: 'kellyj58@tcd.ie', subject: 'email-preview', text: 'Hello World' })
   res.send("ok");
+})
+
+app.get('/events', bodyParser.json(), (req, res) => {
+  res.json({ success: false, error: 'UNIMPL' })
 })
 
 /**

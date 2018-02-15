@@ -6,6 +6,7 @@ const { encode } = require('urlsafe-base64')
 let Database = require('../database');
 let Users = Database.Get('user')
 let PendingUsers = Database.Get('pending_user');
+let Events = Database.Get('event');
 let { sendTemplate } = require('../email')
 /*
   User Struct {
@@ -50,5 +51,21 @@ app.post('/promote', bodyParser.json(), async(req, res) => {
   let users = await Users.update('user', { is_admin: 1 }, { id });
   res.json({ success: true })
 })
+
+app.post('/create_event', bodyParser.json(), async(req, res) => {
+  let { name, location, description, max_attendees, price, start_time, end_time } = req.body;
+  let event = { name, location, description, max_attendees, price, start_time, end_time };
+  let result = await Events.add('event', event)
+  let id = result.lastID
+
+  // Email All Users On Mailing List
+  let users = await Users.get('user', { email_verified: true, subscribed: true }, 'email');
+  users = users.map(user => user.email).join(', ');
+
+  let link = `/events/${id}`
+  sendTemplate('new-event', { name, description, link, users });
+
+  res.send({ id, success: true })
+});
 
 module.exports = app;

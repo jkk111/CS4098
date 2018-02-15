@@ -8,6 +8,9 @@ import { Provider } from 'react-redux'
 
 let _fetch = fetch;
 window.fetch = (res = '', init = {}) => {
+  let headers = init.headers || {};
+  init.headers = headers;
+  headers.api_request = true
   return _fetch(res, {
     ...init,
     credentials: 'same-origin'
