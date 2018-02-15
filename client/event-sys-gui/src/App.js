@@ -7,6 +7,7 @@ import LoginForm from './LoginForm'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Nav from './Nav'
+import CreateUser from './CreateUser'
 
 let mapStateToProps = (state) => {
   return {
@@ -35,7 +36,8 @@ let set_cookie = (id) => {
 }
 
 const views = {
-  HOME: Home
+  HOME: Home,
+  CREATE_USER: CreateUser
 }
 
 class App extends Component {

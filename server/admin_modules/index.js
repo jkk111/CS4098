@@ -41,7 +41,7 @@ app.post('/create_user', bodyParser.json(), async(req, res) => {
   let { f_name, l_name, email } = req.body;
   let result = await Users.add('user', { username: token, f_name, l_name, email, password: '' });
   let id = result.lastID;
-  PendingUsers.add('pending-user', { id, f_name, l_name, email, token });
+  PendingUsers.add('pending_user', { id, f_name, l_name, email, token });
   sendTemplate('pending-user', { f_name, l_name, email, token })
   res.send({ token })
 });

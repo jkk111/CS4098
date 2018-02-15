@@ -72,13 +72,13 @@ let update_user_data = async() => {
   let resp = await fetch('/status');
   let status = await resp.json();
 
-  if(resp.auth_level !== 'UNAUTH') {
+  if(status.auth_level !== 'UNAUTH') {
     let user_info = await fetch('/user/info');
     user_info = await user_info.json();
     store.dispatch({ type: 'USER_INFO_CHANGED', value: user_info })
   }
 
-  if (resp.auth_level === 'ADMIN') {
+  if (status.auth_level === 'ADMIN') {
     let admin_info = await fetch('/admin/info');
     admin_info = await admin_info.json();
     store.dispatch({ type: 'ADMIN_INFO_CHANGED', value: admin_info })

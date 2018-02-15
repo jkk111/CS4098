@@ -44,7 +44,7 @@ class Nav extends React.Component {
     let nav_toggle_class = 'nav-toggle ' + (this.state.open ? 'nav-toggle-open' : 'nav-toggle-closed')
     let user_nav_items = null;
     let admin_nav_items = null;
-
+    console.log(is_admin)
     let nav_item_class = this.state.open ? 'nav-item' : 'nav-item-idle'
 
     user_nav_items = <div>
@@ -52,8 +52,15 @@ class Nav extends React.Component {
       <div className={nav_item_class} onClick={logout(onLogout)}>Logout</div>
     </div>
 
+    if(is_admin) {
+      admin_nav_items = <div>
+        <div className={nav_item_class} onClick={set_view('CREATE_USER')}>Create User</div>
+      </div>
+    }
+
     return <div className='nav'>
       {user_nav_items}
+      {admin_nav_items}
       <div className={nav_toggle_class} onClick={this.toggle}>Menu</div>
     </div>
   }
