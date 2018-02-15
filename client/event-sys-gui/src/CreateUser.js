@@ -1,5 +1,8 @@
 import React from 'react';
 
+//TODO Remove this
+import DateTime from 'react-datetime'
+
 let create_user = async(e) => {
   e.preventDefault();
   let form = e.target;
@@ -35,6 +38,9 @@ let CreateUser = () => {
       <div className='create-user-input'>
         <label>Email:</label>
         <input type='text' autoComplete="off" name='email' />
+      </div>
+      <div className='create-user-input'>
+        <DateTime />
       </div>
       <div className='create-user-input'>
         <input type='submit' />

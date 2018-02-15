@@ -22,6 +22,8 @@
   font-size: 1em;
   transition: all 1s;
   height: 3em;
+  user-select: none;
+  cursor: pointer;
 }
 
 .nav-item-idle {
