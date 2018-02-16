@@ -1,7 +1,7 @@
 import React from 'react';
 import './Nav.css'
 import { connect } from 'react-redux';
-import { logout, noop } from './Util';
+import { logout } from './Util';
 
 let mapStateToProps = (state) => {
   return {

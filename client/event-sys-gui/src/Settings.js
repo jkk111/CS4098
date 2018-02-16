@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { FloatPassword, FloatText } from './FloatText'
-
+import { Logger } from './Util'
 
 let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, defaults = {} }) => {
   console.log(defaults)
@@ -69,7 +69,9 @@ class Settings extends React.Component {
       body
     })
 
-    resp = await resp.json
+    resp = await resp.json();
+
+    Logger.log("Change Settings", resp)
   }
 
   async change_password(e) {
@@ -102,6 +104,7 @@ class Settings extends React.Component {
       });
       resp = await resp.json();
 
+      Logger.Log("Change Password", resp)
     } else {
       this.setState({ change_password_error: 'Passwords must match' })
     }

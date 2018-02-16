@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Logger } from './Util'
 
 class ViewUsers extends React.Component {
   constructor(props) {
@@ -19,8 +19,8 @@ class ViewUsers extends React.Component {
     this.setState({
       users: resp
     })
-
-    console.log(resp)
+    console.log(Logger)
+    Logger.log("Refresh Users", resp)
   }
 
   render() {

@@ -2,6 +2,7 @@ import React from 'react';
 //TODO Remove this
 import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
+import { Logger } from './Util'
 
 let create_user = async(e) => {
   e.preventDefault();
@@ -20,6 +21,10 @@ let create_user = async(e) => {
     },
     body: JSON.stringify(body)
   })
+
+  resp = await resp.json();
+
+  Logger.log("Create User Response", resp)
 
   form.reset();
 }
