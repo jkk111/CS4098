@@ -16,10 +16,15 @@ let mapDispatchToProps = (dispatch) => {
       value: 'UNAUTH'
     }),
 
-    set_view: (view) => () => dispatch({
-      type: 'VIEW_CHANGED',
-      value: view
-    })
+    set_view: (view, cb) => () => {
+      dispatch({
+        type: 'VIEW_CHANGED',
+        value: view
+      })
+      if(typeof cb === 'function') {
+        cb();
+      }
+    }
   }
 }
 
@@ -48,16 +53,17 @@ class Nav extends React.Component {
     let nav_item_class = this.state.open ? 'nav-item' : 'nav-item-idle'
 
     user_nav_items = <div>
-      <div className={nav_item_class} onClick={set_view('HOME')}>Home</div>
-      <div className={nav_item_class} onClick={set_view('SETTINGS')}>Settings</div>
-      <div className={nav_item_class} onClick={set_view('EVENT_LIST')}>Events</div>
+      <div className={nav_item_class} onClick={set_view('HOME', this.toggle)}>Home</div>
+      <div className={nav_item_class} onClick={set_view('SETTINGS', this.toggle)}>Settings</div>
+      <div className={nav_item_class} onClick={set_view('EVENT_LIST', this.toggle)}>Events</div>
     </div>
 
     if(is_admin) {
       admin_nav_items = <div>
-        <div className={nav_item_class} onClick={set_view('CREATE_USER')}>Create User</div>
-        <div className={nav_item_class} onClick={set_view('CREATE_EVENT')}>Create Event</div>
-        <div className={nav_item_class} onClick={set_view('VIEW_USERS')}>View Users</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_USER', this.toggle)}>Create User</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_EVENT', this.toggle)}>Create Event</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_MENU', this.toggle)}>Create Menu</div>
+        <div className={nav_item_class} onClick={set_view('VIEW_USERS', this.toggle)}>View Users</div>
       </div>
     }
 

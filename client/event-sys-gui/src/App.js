@@ -1,17 +1,18 @@
 import React, { Component, Fragment } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Test from "./Test"
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
+import EventForm from './CreateEvent'
+import MenuForm from './MenuForm'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Nav from './Nav'
 import CreateUser from './CreateUser'
 import Settings from './Settings'
 import EventList from './EventList'
-import CreateEvent from './CreateEvent'
-import ViewUsers from './ViewUsers'
+//import ViewGuests from './ViewGuests'
+
 
 let mapStateToProps = (state) => {
   return {
@@ -44,8 +45,9 @@ const views = {
   CREATE_USER: CreateUser,
   SETTINGS: Settings,
   EVENT_LIST: EventList,
-  CREATE_EVENT: CreateEvent,
-  VIEW_USERS: ViewUsers
+  CREATE_EVENT: EventForm,
+  CREATE_MENU: MenuForm,
+  //VIEW_GUESTS: ViewGuests
 }
 
 class App extends Component {
@@ -59,6 +61,8 @@ class App extends Component {
     this.register = this.register.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.CreateEvent = this.CreateEvent.bind(this);
+    this.CreateMenu = this.CreateMenu.bind(this);
   }
 
   async login(e) {
@@ -113,6 +117,51 @@ class App extends Component {
     set_cookie(resp.id)
   }
 
+ async CreateEvent(e) {
+    e.preventDefault();
+    let event_name = e.target.event_name.value;
+    let location = e.target.location.value;
+    let date = e.target.date.value;
+    let time = e.target.time.value;
+    let desp = e.target.desp.value;
+    let body = JSON.stringify({ event_name, location, date, time, desp });
+    let resp = await fetch('/CreateEvent', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body
+    })
+    resp = await resp.json();
+    set_cookie(resp.id)
+  }
+
+
+ async CreateMenu(e) {
+    e.preventDefault();
+    let starter1 = e.target.starter1.value;
+    let starter2 = e.target.starter2.value;
+    let starter3 = e.target.starter3.value;
+    let main1 = e.target.main1.value;
+    let main2 = e.target.main2.value;
+    let main3 = e.target.main3.value;
+    let dessert1 = e.target.dessert1.value;
+    let dessert2 = e.target.dessert2.value;
+    let dessert3 = e.target.dessert3.value;
+    let body = JSON.stringify({ starter1, starter2, starter3, main1, main2, main3, dessert1, dessert2, dessert3 });
+    let resp = await fetch('/CreateMenu', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body
+    })
+    resp = await resp.json();
+    set_cookie(resp.id)
+  }
+
   async getTestResults() {
     let resp = await fetch('/tests')
     let data = await resp.json();
@@ -120,13 +169,14 @@ class App extends Component {
   }
 
   render() {
-    let { registerError, loginError } = this.state;
+    let { registerError, loginError, menuError,eventError } = this.state;
     if(this.props.test_view) {
       return <Test results={this.state.test_results} />
     }
 
     if (this.props.logged_in !== 'UNAUTH'){
       let View = views[this.props.view] || views.HOME
+
       return <Fragment>
         <Nav />
         <View />
@@ -151,3 +201,6 @@ class App extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+/////        //<EventForm error={eventError} onSubmit={this.CreateEvent}/>
+        //<MenuForm error={menuError} onSubmit={this.CreateMenu}/>

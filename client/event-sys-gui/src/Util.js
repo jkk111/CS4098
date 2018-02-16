@@ -1,3 +1,6 @@
+import Logger from './Logger'
+
+let noop = () => {}
 
 let logout = (onLogout) => async() => {
   await fetch('/logout')
@@ -5,5 +8,7 @@ let logout = (onLogout) => async() => {
 }
 
 export {
-  logout
+  logout,
+  noop,
+  Logger
 }
