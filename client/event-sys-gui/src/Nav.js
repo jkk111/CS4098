@@ -57,7 +57,7 @@ class Nav extends React.Component {
       admin_nav_items = <div>
         <div className={nav_item_class} onClick={set_view('CREATE_USER')}>Create User</div>
         <div className={nav_item_class} onClick={set_view('CREATE_EVENT')}>Create Event</div>
-        <div className={nav_item_class} onClick={set_view('VIEW_GUESTS')}>View Guests</div>
+        <div className={nav_item_class} onClick={set_view('VIEW_USERS')}>View Users</div>
       </div>
     }
 
