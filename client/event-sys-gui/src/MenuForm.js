@@ -1,6 +1,4 @@
 import React from 'react';
-import './Home.css'
-import Nav from './Nav'
 
 let MenuForm = ({ onSubmit }) => {
   return <div className="event-form">
