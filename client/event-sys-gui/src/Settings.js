@@ -1,47 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { FloatPassword, FloatText } from './FloatText'
+
 
 let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, defaults = {} }) => {
   console.log(defaults)
-  return <form ref={ref} onSubmit={onSubmit}>
-    <div>
-      <label>First Name:</label>
-      <input type='text' name='f_name' autoComplete='off' defaultValue={defaults.f_name} />
-    </div>
-    <div>
-      <label>Last Name:</label>
-      <input type='text' name='l_name' autoComplete='off' defaultValue={defaults.l_name} />
-    </div>
-    <div>
-      <label>Email:</label>
-      <input type='text' name='email' autoComplete='off' defaultValue={defaults.email} />
-    </div>
-    <div className='form-button' onClick={onChangePassword}>Change Password</div>
-    <div>
-      <input type='submit' />
+  return <form ref={ref} onSubmit={onSubmit} className='form'>
+    <FloatText name='f_name' label='First Name:' defaultValue={defaults.f_name} />
+    <FloatText name='l_name' label='Last Name:' defaultValue={defaults.l_name} />
+    <FloatText name='email' label='Email:' defaultValue={defaults.email} />
+    <div className='form-button form-field' onClick={onChangePassword}>Change Password</div>
+    <div className='form-field'>
+      <input className='form-field-input' type='submit' />
     </div>
   </form>
 }
 
 let PasswordSettings = ({ onSubmit, onBack }) => {
-  return <form onSubmit={onSubmit} >
-    <div>
-      <label>Current Password:</label>
-      <input type='password' name='current' />
-    </div>
-    <div>
-
-      <label>New Password:</label>
-      <input type='password' name='password' />
-    </div>
-    <div>
-      <label>Confirm Password:</label>
-      <input type='password' name='confirm' />
-    </div>
-
-    <div>
-      <button onClick={onBack}>Cancel</button>
-    </div>
+  return <form onSubmit={onSubmit} className='form' >
+    <FloatPassword name='current' label="Current Password:" />
+    <FloatPassword name='password' label="New Password:" />
+    <FloatPassword name='confirm' label="Confirm New Password:" />
 
     <div>
       <input type='submit' />
@@ -68,8 +47,29 @@ class Settings extends React.Component {
     this.show_change_password = this.show_change_password.bind(this);
   }
 
-  change_settings(e) {
+  async change_settings(e) {
     e.preventDefault();
+
+    let form = e.target;
+    let f_name = form.f_name.value;
+    let l_name = form.l_name.value;
+    let email = form.email.value;
+
+    let body = {
+      f_name,
+      l_name,
+      email
+    }
+
+    let resp = await fetch('/user/update_info', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body
+    })
+
+    resp = await resp.json
   }
 
   async change_password(e) {
