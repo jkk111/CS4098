@@ -219,6 +219,7 @@ app.get('/status', async(req, res) => {
 })
 
 let identify = async(req, res, next) => {
+  console.log(req.body)
   let id = req.cookies.id;
   let session = await Sessions.get('session', { id }, [ 'user_id' ]);
 
@@ -235,7 +236,11 @@ app.post('/preview', bodyParser.json(), (req, res) => {
   res.send("ok");
 })
 
-app.get('/events', bodyParser.json(), (req, res) => {
+app.get('/events', (req, res) => {
+  res.json({ success: false, error: 'UNIMPL' })
+})
+
+app.get('/events/:id', (req, res) => {
   res.json({ success: false, error: 'UNIMPL' })
 })
 

@@ -49,6 +49,7 @@ class Nav extends React.Component {
 
     user_nav_items = <div>
       <div className={nav_item_class} onClick={set_view('HOME')}>Home</div>
+      <div className={nav_item_class} onClick={set_view('SETTINGS')}>Settings</div>
     </div>
 
     if(is_admin) {
