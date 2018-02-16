@@ -1,6 +1,4 @@
 import React from 'react';
-import './Home.css'
-import Nav from './Nav'
 
 let EventList = ({is_admin}) => {
   return <div className='event_list'>

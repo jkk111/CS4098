@@ -18,6 +18,8 @@ window.fetch = (res = '', init = {}) => {
   })
 }
 
+let loading = true;
+
 let props = {
   test_view: window.location.search.indexOf("tests") > -1
 }
@@ -67,7 +69,7 @@ let reducers = {
 reducers = combineReducers(reducers);
 
 let store = createStore(reducers);
-let last = store.getState();
+let last = null
 
 let update_user_data = async() => {
   let resp = await fetch('/status');
@@ -89,20 +91,65 @@ let update_user_data = async() => {
   store.dispatch({ type: 'LOGIN_STATE_CHANGED', value: status.auth_level });
 }
 
+let state_whitelist = [ 'active_view' ]
+
+let update_state = () => {
+  let state = {};
+  let currentState = store.getState();
+
+  for(var key of state_whitelist) {
+    state[key] = currentState[key];
+  }
+  let state_obj = state;
+  state = btoa(JSON.stringify(state));
+
+  window.history.pushState(state_obj, 'Current State', `/?state=${state}`);
+}
+
 store.subscribe(async() => {
+  if(loading) {
+    return
+  }
   let state = store.getState();
 
-  if(state.logged_in !== 'UNAUTH' && state.logged_in !== last.logged_in && state.info.pending) {
+  if(last === null || state.logged_in !== 'UNAUTH' && state.logged_in !== last.logged_in && state.info.pending) {
     last = state;
     await update_user_data();
   }
-
+  update_state();
   last = state;
 })
 
 window.store = store;
 
+let parse_query = () => {
+  let query = window.location.search.slice(1);
+  let pairs = query.split('&')
+  let result = {};
+  pairs.forEach(pair => {
+    let [key, value = '' ] = pair.split('=');
+    result[key] = value;
+  })
+  return result
+}
+
 update_user_data().then(() => {
+  loading = false;
+  if(store.getState().logged_in !== 'UNAUTH') {
+    let qs = parse_query();
+    let { state = '' } = qs;
+    state = atob(state);
+    console.log(store.getState().logged_in, state)
+
+    if(state.trim() !== '') {
+      state = JSON.parse(state)
+      console.log(state)
+      if(state.active_view) {
+        store.dispatch({ type: 'VIEW_CHANGED', value: state.active_view })
+      }
+    }
+  }
+
   ReactDOM.render(<Provider store={store}>
     <App {...props}  />
   </Provider>, document.getElementById('root'));
