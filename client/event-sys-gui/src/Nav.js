@@ -49,13 +49,16 @@ class Nav extends React.Component {
 
     user_nav_items = <div>
       <div className={nav_item_class} onClick={set_view('HOME')}>Home</div>
+      <div className={nav_item_class} onClick={set_view('EVENT_LIST')}>Events</div>
     </div>
 
     if(is_admin) {
       admin_nav_items = <div>
         <div className={nav_item_class} onClick={set_view('CREATE_USER')}>Create User</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_EVENT')}>Create Event</div>
       </div>
     }
+
 
     return <div className='nav'>
       {user_nav_items}
