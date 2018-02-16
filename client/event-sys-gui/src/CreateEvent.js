@@ -2,8 +2,8 @@ import React from 'react';
 import './Home.css'
 import Nav from './Nav'
 
-let CreateEvent = ({is_admin}) => {
-  return <div className='create_event'>
+let EventForm = ({onSubmit}) => {
+  return <div className='event_form'>
     <h1>Create an Event</h1>
     <form onSubmit={onSubmit}>
       <div>

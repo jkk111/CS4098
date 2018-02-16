@@ -12,8 +12,7 @@ import Nav from './Nav'
 import CreateUser from './CreateUser'
 import Settings from './Settings'
 import EventList from './EventList'
-import CreateEvent from './CreateEvent'
-import ViewGuests from './ViewGuests'
+//import ViewGuests from './ViewGuests'
 
 
 let mapStateToProps = (state) => {
@@ -47,8 +46,9 @@ const views = {
   CREATE_USER: CreateUser,
   SETTINGS: Settings,
   EVENT_LIST: EventList,
-  CREATE_EVENT: CreateEvent,
-  VIEW_GUESTS: ViewGuests
+  CREATE_EVENT: EventForm,
+  CREATE_MENU: MenuForm,
+  //VIEW_GUESTS: ViewGuests
 }
 
 class App extends Component {
@@ -177,8 +177,7 @@ class App extends Component {
 
     if (this.props.logged_in !== 'UNAUTH'){
       let View = views[this.props.view] || views.HOME
-        <EventForm error={eventError} onSubmit={this.CreateEvent}/>
-        MenuForm error={menuError} onSubmit={this.CreateMenu}/>
+
       return <Fragment>
         <Nav />
         <View />
@@ -203,3 +202,6 @@ class App extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+/////        //<EventForm error={eventError} onSubmit={this.CreateEvent}/>
+        //<MenuForm error={menuError} onSubmit={this.CreateMenu}/>
