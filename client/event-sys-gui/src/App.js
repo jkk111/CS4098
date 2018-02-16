@@ -4,7 +4,7 @@ import './App.css';
 import Test from "./Test"
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
-import EventForm from './EventForm'
+import EventForm from './CreateEvent'
 import MenuForm from './MenuForm'
 import { connect } from 'react-redux'
 import Home from './Home'
@@ -12,8 +12,7 @@ import Nav from './Nav'
 import CreateUser from './CreateUser'
 import Settings from './Settings'
 import EventList from './EventList'
-import CreateEvent from './CreateEvent'
-import ViewUsers from './ViewUsers'
+//import ViewGuests from './ViewGuests'
 
 
 let mapStateToProps = (state) => {
@@ -47,8 +46,9 @@ const views = {
   CREATE_USER: CreateUser,
   SETTINGS: Settings,
   EVENT_LIST: EventList,
-  CREATE_EVENT: CreateEvent,
-  VIEW_USERS: ViewUsers
+  CREATE_EVENT: EventForm,
+  CREATE_MENU: MenuForm,
+  //VIEW_GUESTS: ViewGuests
 }
 
 class App extends Component {
@@ -177,6 +177,7 @@ class App extends Component {
 
     if (this.props.logged_in !== 'UNAUTH'){
       let View = views[this.props.view] || views.HOME
+
       return <Fragment>
         <Nav />
         <View />
@@ -186,8 +187,6 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">Event-Management-System</h1>
-            <EventForm error={eventError} onSubmit={this.CreateEvent}/>
-            <MenuForm error={menuError} onSubmit={this.CreateMenu}/>
           </header>
           <p className="App-intro">
             <code>// TODO</code>
@@ -203,3 +202,6 @@ class App extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+/////        //<EventForm error={eventError} onSubmit={this.CreateEvent}/>
+        //<MenuForm error={menuError} onSubmit={this.CreateMenu}/>

@@ -46,7 +46,7 @@ let MenuForm = ({ onSubmit }) => {
         <input type="text" name="dessert3" />
       </div>
       <div>
-        <input type="submit" value="Create Event" />
+        <input type="submit" value="Create Menu" />
       </div>
     </form>
   </div>
