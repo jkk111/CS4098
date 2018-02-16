@@ -42,7 +42,6 @@ class ViewUsers extends React.Component {
           <td>{data[i].id}</td>
           <td>{data[i].f_name}</td>
           <td>{data[i].l_name}</td>
-          <td>{data[i].email}</td>
         </tr>
       );
     }
@@ -52,7 +51,7 @@ class ViewUsers extends React.Component {
 
         <p>To see guests for a specific event, go to that event and view the guestlist</p>
         <table>
-          <thead><tr><td>ID</td><td>First Name</td><td>Last Name</td><td>Email</td></tr></thead>
+          <thead><tr><td>ID</td><td>First Name</td><td>Last Name</td></tr></thead>
           <tbody>{rows}</tbody>
         </table>
       </div>

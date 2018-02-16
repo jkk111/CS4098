@@ -96,7 +96,9 @@
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
-      "no-unused-vars": [ "error" ]
+      "no-unused-vars": [
+        "error"
+      ]
     }
   },
   "devDependencies": {
