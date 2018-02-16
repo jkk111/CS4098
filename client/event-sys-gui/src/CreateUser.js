@@ -1,6 +1,6 @@
 import React from 'react';
-import 'moment/locale/en-ie'
 //TODO Remove this
+import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
 
 let create_user = async(e) => {
@@ -25,7 +25,7 @@ let create_user = async(e) => {
 }
 
 let CreateUser = () => {
-  return <div className='create-user'>
+  return <div className='create-user form'>
     <form onSubmit={create_user} autoComplete="off">
       <div className='create-user-input'>
         <label>First Name:</label>

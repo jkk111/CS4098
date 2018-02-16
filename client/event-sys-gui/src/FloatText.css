@@ -1,0 +1,54 @@
+:root {
+  --float-text-padding-w: 0.5em;
+  --float-text-padding-h: 0.5em;
+  --float-label-padding-w: 0.5em;
+  --float-label-padding-h: 0.5em;
+  --float-text-transform-h: calc(2em + var(--float-text-padding-h) + (2 * var(--float-label-padding-h)));
+}
+
+.float-label {
+  cursor: text;
+  max-width: 66.66%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform-origin: left bottom;
+  transform: translate(0, var(--float-text-transform-h)) scale(1.5);
+}
+
+.float-input:not(:placeholder-shown) + .float-label,
+.float-input:focus + .float-label {
+  transform: translate(0, 0) scale(1)!important;
+  cursor: pointer;
+}
+
+.float-text {
+  display: flex;
+  flex-flow: column-reverse;
+  margin-bottom: 1em;
+  background: green;
+}
+
+.float-input {
+  font-size: 1.5em;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-family: inherit;
+  -webkit-appearance: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: text;
+  padding: 0.5em;
+}
+
+.float-input:focus {
+  outline: 0;
+  border-bottom: 1px solid #666;
+}
+
+.float-label {
+  padding: var(--float-label-padding-h) var(--float-label-padding-w);
+  letter-spacing: 0.05em;
+  transition: all .2s;
+  pointer-events: none;
+}
