@@ -9,6 +9,9 @@ import Home from './Home'
 import Nav from './Nav'
 import CreateUser from './CreateUser'
 import Settings from './Settings'
+import EventList from './EventList'
+import CreateEvent from './CreateEvent'
+import ViewGuests from './ViewGuests'
 
 let mapStateToProps = (state) => {
   return {
@@ -39,7 +42,10 @@ let set_cookie = (id) => {
 const views = {
   HOME: Home,
   CREATE_USER: CreateUser,
-  SETTINGS: Settings
+  SETTINGS: Settings,
+  EVENT_LIST: EventList,
+  CREATE_EVENT: CreateEvent,
+  VIEW_GUESTS: ViewGuests
 }
 
 class App extends Component {
