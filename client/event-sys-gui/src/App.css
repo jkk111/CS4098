@@ -44,3 +44,31 @@
   align-items: center;
   justify-content: center;
 }
+
+.form {
+  width: 100%;
+  background: magenta;
+}
+
+.form-field {
+  margin-bottom: 1em;
+  background: green;
+  padding: 1em 5%;
+  width: 100%;
+}
+
+.form-button {
+  background: orange;
+}
+
+.form-field-input {
+  width: 90%;
+  font-size: 1.2em;
+  padding: .25em 0;
+}
+
+.form-field-label {
+  display: block;
+  font-weight: 800;
+  line-height: 2em;
+}

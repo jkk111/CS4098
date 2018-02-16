@@ -32,7 +32,7 @@ app.get('/info', async(req, res) => {
 })
 
 app.get('/users', async(req, res) => {
-  let users = await Users.get('user', {}, [ 'id', 'f_name', 'l_name', 'email', 'is_admin' ]);
+  let users = await Users.get('user', {}, [ 'id', 'f_name', 'l_name', 'email', 'email_verified', 'subscribed', 'is_admin' ]);
   res.json(users);
 });
 
