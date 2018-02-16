@@ -1,0 +1,38 @@
+.user {
+  background: purple;
+  color: white;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+
+.user-name-collapsed, .user-name-expanded {
+  padding: 1em;
+  cursor: pointer;
+}
+
+.user-content {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 0fr 1fr;
+  grid-gap: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-content-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.user-content-key {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.user-name + .user-content {
+  background: orange;
+}
