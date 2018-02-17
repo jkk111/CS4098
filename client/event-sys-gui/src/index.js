@@ -111,8 +111,11 @@ store.subscribe(async() => {
     return
   }
   let state = store.getState();
-
-  if(last === null || state.logged_in !== 'UNAUTH' && state.logged_in !== last.logged_in && state.info.pending) {
+  let due_update = false;
+  if(last !== null) {
+    due_update = state.logged_in !== 'UNAUTH' && state.logged_in !== last.logged_in && state.info.pending;
+  }
+  if(last === null || due_update) {
     last = state;
     await update_user_data();
   }

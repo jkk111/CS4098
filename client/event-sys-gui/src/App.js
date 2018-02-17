@@ -187,11 +187,10 @@ class App extends Component {
           <header className="App-header">
             <h1 className="App-title">Event-Management-System</h1>
           </header>
-          <p className="App-intro">
-            <code>// TODO</code>
+          {/*<p className="App-intro">
             <br />
             Want to see the test results? <a href="?tests" >Click Here</a>
-          </p>
+          </p>*/}
           <LoginForm error={loginError} onSubmit={this.login} />
           <SignupForm error={registerError} onSubmit={this.register} />
         </div>

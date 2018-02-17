@@ -45,7 +45,9 @@ let _send = (conf, options, cb) => {
   }
 
   // Register User
-  smtpTransport.sendMail(options, cb)
+  try {
+    smtpTransport.sendMail(options, cb)
+  } catch(e) {}
 };
 
 let sendMail = (mail) => {
@@ -53,8 +55,7 @@ let sendMail = (mail) => {
     try {
       conf = require('./config.json')
     } catch(e) {
-      console.log(e);
-      throw e;
+      console.log(e); // Log to console, but don't care about the error, happens
     }
   }
   _send(conf, mail)

@@ -4,8 +4,8 @@ import "./Test.css"
 import pass from './pass.png'
 import fail from './fail.png'
 
-let success = <img src={pass} />
-let failure = <img src={fail} />
+let success = <img src={pass} alt='pass'/>
+let failure = <img src={fail} alt='fail'/>
 
 let Test = ({ results = [] }) => {
   return <div className='center-flex'>

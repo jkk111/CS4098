@@ -206,7 +206,7 @@ class DateTime extends React.Component {
 
 	showView(view) {
 		return () => {
-			if(this.state.currentView != view) {
+			if(this.state.currentView !== view) {
 				this.props.onViewModeChange(view)
 			}
 
