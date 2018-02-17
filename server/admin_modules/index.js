@@ -49,6 +49,7 @@ app.post('/create_user', bodyParser.json(), async(req, res) => {
 app.post('/promote', bodyParser.json(), async(req, res) => {
   let { id } = req.body;
   let users = await Users.update('user', { is_admin: 1 }, { id });
+  console.log(users);
   res.json({ success: true })
 })
 

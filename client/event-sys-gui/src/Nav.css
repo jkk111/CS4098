@@ -37,6 +37,7 @@
   transition: all 1s;
   text-align: center;
   color: white;
+  cursor: pointer;
 }
 
 .nav-toggle-closed {

@@ -37,7 +37,6 @@ Promise.config({
 app.use(express.static('static'));
 
 app.get('*', (req, res, next) => {
-  console.log(req.headers);
   if(req.headers.api_request) {
     next(); // Awesome we know this is a link/fetch request
   } else {
@@ -219,7 +218,6 @@ app.get('/status', async(req, res) => {
 })
 
 let identify = async(req, res, next) => {
-  console.log(req.body)
   let id = req.cookies.id;
   let session = await Sessions.get('session', { id }, [ 'user_id' ]);
 

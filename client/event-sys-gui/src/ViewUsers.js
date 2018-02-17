@@ -9,6 +9,7 @@ class ViewUsers extends React.Component {
       users: []
     }
     this.handleChange = this.handleChange.bind(this);
+    this.refresh = this.refresh.bind(this);
     this.refresh();
 
   }
@@ -33,7 +34,7 @@ class ViewUsers extends React.Component {
   render() {
     let { users } = this.state;
 
-    users = users.map((user, i) => <User {...user} key={i} />)
+    users = users.map((user, i) => <User refresh={this.refresh} {...user} key={i} />)
     return users
   }
 }

@@ -32,14 +32,11 @@ app.post('/update_info', bodyParser.json(), async(req, res) => {
 })
 
 app.post('/change_password', bodyParser.json(), async(req, res) => {
-  console.log(req.body);
   let existing = req.body.currentPassword;
   let newPass = req.body.newPassword;
   let id = req.user_id;
   let user = await Users.get('user', { id }, 'password');
   let match = await verify_password(existing, user[0].password);
-
-  console.log(id, user, match, existing);
 
   if(match) {
     let hashed = await hash_password(newPass, config.salt);
