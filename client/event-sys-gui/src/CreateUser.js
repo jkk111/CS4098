@@ -3,6 +3,7 @@ import React from 'react';
 import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
 import { Logger } from './Util'
+import FloatText from './FloatText'
 
 let create_user = async(e) => {
   e.preventDefault();
@@ -32,20 +33,11 @@ let create_user = async(e) => {
 let CreateUser = () => {
   return <div className='create-user form'>
     <form onSubmit={create_user} autoComplete="off">
+      <FloatText name="f_name" label="First Name:" />
+      <FloatText name="l_name" label="Last Name:" />
+      <FloatText name="email" label="Email:" />
       <div className='create-user-input'>
-        <label>First Name:</label>
-        <input type='text' autoComplete="off" name='f_name' />
-      </div>
-      <div className='create-user-input'>
-        <label>Last Name:</label>
-        <input type='text' autoComplete="off" name='l_name' />
-      </div>
-      <div className='create-user-input'>
-        <label>Email:</label>
-        <input type='text' autoComplete="off" name='email' />
-      </div>
-      <div className='create-user-input'>
-        <DateTime locale='en-ie' />
+        <DateTime locale='en-ie' label="Start Date: "/>
       </div>
       <div className='create-user-input'>
         <input type='submit' />

@@ -3,7 +3,7 @@
   --float-text-padding-h: 0.5em;
   --float-label-padding-w: 0.5em;
   --float-label-padding-h: 0.5em;
-  --float-text-transform-h: calc(2em + var(--float-text-padding-h) + (2 * var(--float-label-padding-h)));
+  --float-text-transform-h: calc(1.75em + var(--float-text-padding-h) + (2 * var(--float-label-padding-h)));
 }
 
 .float-label {
@@ -25,7 +25,7 @@
 .float-text {
   display: flex;
   flex-flow: column-reverse;
-  margin-bottom: 1em;
+  padding-bottom: 1em;
   background: green;
 }
 
@@ -39,6 +39,7 @@
   padding: 0;
   cursor: text;
   padding: 0.5em;
+  border-radius: 4px;
 }
 
 .float-input:focus {

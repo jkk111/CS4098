@@ -2,19 +2,8 @@ import React from 'react';
 import moment from 'moment'
 import onClickOutside from 'react-onclickoutside'
 
+
 class DateTimePickerDays extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.renderFooter = this.renderFooter.bind(this);
-    this.getDaysOfWeek = this.getDaysOfWeek.bind(this);
-    this.renderDays = this.renderDays.bind(this);
-    this.updateSelectedDate = this.updateSelectedDate.bind(this);
-    this.renderDay = this.renderDay.bind(this);
-    this.alwaysValidDate = this.alwaysValidDate.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-  }
-
   renderFooter() {
     if(!this.props.timeFormat) {
       return null;
@@ -44,13 +33,13 @@ class DateTimePickerDays extends React.Component {
   renderDays() {
     let date = this.props.viewDate;
     let selected = this.props.selectedDate && this.props.selectedDate.clone();
-    let prevMonth = date.clone().subtract(1, 'months');
+    let prev_month = date.clone().subtract(1, 'months');
     let currentYear = date.year();
     let currentMonth = date.month();
     let weeks = [];
     let days = [];
     let renderer = this.props.renderDay || this.renderDay;
-    let isValid = this.props.isValidDate || this.alwaysValidDate;
+    let isValidDate = this.props.isValidDate || this.alwaysValidDate;
 
     prevMonth.date(prevMonth.daysInMonth()).startOf('week');
     let lastDay = prevMonth.clone().add(42, 'd');
@@ -145,7 +134,7 @@ class DateTimePickerDays extends React.Component {
               <span>‹</span>
             </th>
             <th className='react-date-time-switch' onClick={this.props.showView('months')} colSpan={5} data-value={this.props.viewDate.month()}>
-              {locale.months(date) + ' ' + date.year()}
+              {locale.months( date ) + ' ' + date.year()}
             </th>
             <th className='react-date-time-next' onClick={this.props.addTime(1, 'months')}>
               <span>›</span>
@@ -158,10 +147,9 @@ class DateTimePickerDays extends React.Component {
         <tbody>
           {this.renderDays()}
         </tbody>
-        {footer}
       </table>
     </div>
   }
 }
 
-export default onClickOutside(DateTimePickerDays);
+export default DateTimePickerDays;
