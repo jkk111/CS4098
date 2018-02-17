@@ -72,3 +72,23 @@
   font-weight: 800;
   line-height: 2em;
 }
+
+.form-button {
+  appearance: none;
+  width: 100%;
+  padding: .5em;
+  font-size: 1.5em;
+  margin: .5em 0;
+  outline: none;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  filter: brightness(80%);
+}
+
+.form-button:active {
+  filter: brightness(60%);
+}

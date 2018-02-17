@@ -40,7 +40,7 @@ let CreateUser = () => {
         <DateTime locale='en-ie' label="Start Date: "/>
       </div>
       <div className='create-user-input'>
-        <input type='submit' />
+        <input type='submit' className='form-button' value='Save'/>
       </div>
     </form>
   </div>

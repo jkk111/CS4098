@@ -30,7 +30,7 @@ let EventForm = ({onSubmit}) => {
         <input type="text" name="desp" />
       </div>
       <div>
-        <input type="submit" value="Create Event" />
+        <input type="submit" value="Create Event" className='form-button' />
       </div>
     </form>
   </div>

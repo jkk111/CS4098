@@ -10,9 +10,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, defaults = {} }) 
     <FloatText name='l_name' label='Last Name:' defaultValue={defaults.l_name} />
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
     <div className='form-button form-field' onClick={onChangePassword}>Change Password</div>
-    <div className='form-field'>
-      <input className='form-field-input' type='submit' />
-    </div>
+    <input className='form-button' type='submit' value='Save'/>
   </form>
 }
 
@@ -23,7 +21,7 @@ let PasswordSettings = ({ onSubmit, onBack }) => {
     <FloatPassword name='confirm' label="Confirm New Password:" />
 
     <div>
-      <input type='submit' />
+      <input type='submit' className='form-button' value='Save Changes' />
     </div>
   </form>
 }
