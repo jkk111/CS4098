@@ -25,6 +25,6 @@ cd ../client/event-sys-gui
 npm install
 
 npm run build
-mv -v ./build/* ../../server/static
+mv -v ./build/* ../../server/static/
 
 cd ../../server; sudo node index.js
