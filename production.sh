@@ -12,7 +12,6 @@ else
 fi
 
 # Start server
-cd CS4098
 cd server
 sudo npm install -g concurrently
 sudo npm install -g nodemon
@@ -25,6 +24,6 @@ cd ../client/event-sys-gui
 npm install
 
 npm run build
-mv -v ./build/* ../../server/static/
+cp -vr ./build/* ../../server/static/
 
 cd ../../server; sudo node index.js

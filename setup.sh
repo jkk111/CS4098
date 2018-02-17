@@ -12,7 +12,6 @@ else
 fi
 
 # Start server
-cd CS4098
 cd server
 sudo npm install -g concurrently
 sudo npm install -g nodemon
