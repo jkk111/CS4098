@@ -31,6 +31,11 @@ class EventList extends React.Component {
 
   render() {
     let { events } = this.state;
+
+    //TODO implement with actual events once api exists
+    events = [{"name": "sample one", "id": "1"},
+              {"name": "sample 2", "id": "1"},
+              {"name": "sample C", "id": "2"}]
     console.log('events', events);
     let rows = []
     if (events.length === 0){

@@ -2,6 +2,7 @@
   --nav-background-color: blue;
   --nav-item-background-color: red;
   --nav-font-color: white;
+  --menu-animation-speed: 0.2s;
 }
 
 .nav {
@@ -20,7 +21,7 @@
 .nav-item {
   padding: 1em;
   font-size: 1em;
-  transition: all 0.2s;
+  transition: all var(--menu-animation-speed);
   height: 3em;
   user-select: none;
   cursor: pointer;
@@ -30,11 +31,11 @@
   height: 0;
   background: var(--nav-item-background-color);
   box-sizing: border-box;
-  transition: all 0.2s;
+  transition: all var(--menu-animation-speed);
 }
 
 .nav-toggle {
-  transition: all 0.2s;
+  transition: all var(--menu-animation-speed);
   text-align: center;
   color: white;
   cursor: pointer;
