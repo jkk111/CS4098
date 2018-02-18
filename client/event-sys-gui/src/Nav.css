@@ -30,7 +30,7 @@
   height: 0;
   background: var(--nav-item-background-color);
   box-sizing: border-box;
-  transition: all 0.s;
+  transition: all 0.2s;
 }
 
 .nav-toggle {
