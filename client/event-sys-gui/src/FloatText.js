@@ -3,13 +3,14 @@ import './FloatText.css'
 
 let merge_classes = (base, added) => `${base} ${base}-${added}`
 
-let FloatText = ({ name, label, className = '', defaultValue = '', inputProps = {} }) => {
+let FloatText = ({ name, label, className = '', defaultValue = '', inputProps = {}, children }) => {
   let el_class = merge_classes('float-text', className)
   let input_class = merge_classes('float-input', className)
   let label_class = merge_classes('float-label', className)
   return <div className={el_class}>
     <input className={input_class} type='text' name={name} placeholder=' ' defaultValue={defaultValue} {...inputProps} />
     <label className={label_class} htmlFor={name}>{label}</label>
+    {children}
   </div>
 }
 

@@ -4,7 +4,7 @@ import Test from "./Test"
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
 import EventForm from './CreateEvent'
-import MenuForm from './MenuForm'
+import CreateMenu from './CreateMenu'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Nav from './Nav'
@@ -46,7 +46,7 @@ const views = {
   SETTINGS: Settings,
   EVENT_LIST: EventList,
   CREATE_EVENT: EventForm,
-  CREATE_MENU: MenuForm,
+  CREATE_MENU: CreateMenu,
   VIEW_USERS: ViewUsers
 }
 

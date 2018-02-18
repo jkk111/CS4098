@@ -2,7 +2,7 @@
   --nav-background-color: blue;
   --nav-item-background-color: red;
   --nav-font-color: white;
-  --menu-animation-speed: 0.2s;
+  --menu-animation-speed: .5s;
 }
 
 .nav {
