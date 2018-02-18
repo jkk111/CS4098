@@ -1,53 +1,183 @@
 import React from 'react';
 
-let MenuForm = ({ onSubmit }) => {
-  return <div className="event-form">
-    <h1>Create a Menu</h1>
-    <h2>Starters</h2>
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>Starter One:</label>
-        <input type="text" name="starter1" />
-      </div>
-      <div>
-        <label>Starter Two:</label>
-        <input type="text" name="starter2" />
-      </div>
-      <div>
-        <label>Starter Three:</label>
-        <input type="text" name="starter3" />
-      </div>
-      <div>
-	<h3>Main Course</h3>
-        <label>Main One:</label>
-        <input type="text" name="Main1" />
-      </div>
-      <div>
-        <label>Main Two:</label>
-        <input type="text" name="Main2" />
-      </div>
-      <div>
-        <label>Main Three:</label>
-        <input type="text" name="Main3" />
-      </div>
-      <div>
-	<h4>Dessert</h4>
-        <label>Sweet One:</label>
-        <input type="text" name="dessert1" />
-      </div>
-      <div>
-        <label>Sweet Two:</label>
-        <input type="text" name="dessert2" />
-      </div>
-      <div>
-        <label>Sweet Three:</label>
-        <input type="text" name="dessert3" />
-      </div>
-      <div>
-        <input type="submit" value="Create Menu" />
-      </div>
-    </form>
-  </div>
-}
+class MenuForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      starters: [{ name: '' }],
+      sides: [{ name: '' }],
+      mains: [{ name: '' }],
+      desserts: [{ name: '' }],
+    };
+  }
 
+  handleStarterNameChange = (idx) => (evt) => {
+    const newStarters = this.state.starters.map((starter, sidx) => {
+      if (idx !== sidx) return starter;
+      return { ...starter, name: evt.target.value };
+    });
+
+    this.setState({ starters: newStarters });
+  }
+
+  handleSideNameChange = (idx) => (evt) => {
+    const newSides = this.state.sides.map((side, sidx) => {
+      if (idx !== sidx) return side;
+      return { ...side, name: evt.target.value };
+    });
+
+    this.setState({ sides: newSides });
+  }
+
+  handleMainNameChange = (idx) => (evt) => {
+    const newMains = this.state.mains.map((main, sidx) => {
+      if (idx !== sidx) return main;
+      return { ...main, name: evt.target.value };
+    });
+
+    this.setState({ mains: newMains });
+  }
+
+  handleDessertNameChange = (idx) => (evt) => {
+    const newDesserts = this.state.desserts.map((dessert, sidx) => {
+      if (idx !== sidx) return dessert;
+      return { ...dessert, name: evt.target.value };
+    });
+
+    this.setState({ desserts: newDesserts });
+  }
+
+  handleSubmit = (evt) => {
+    const {starters, sides, mains, desserts } = this.state;
+    alert(` Added: ${starters.length} starters`+
+    	  `\n Added: ${sides.length} sides`+
+          `\n Added: ${mains.length} mains`+
+          `\n Added: ${desserts.length} desserts`);
+  }
+
+  handleAddStarter = () => {
+    this.setState({
+      starters: this.state.starters.concat([{ name: '' }])
+    });
+  }
+
+  handleAddSide = () => {
+    this.setState({
+      sides: this.state.sides.concat([{ name: '' }])
+    });
+  }
+
+  handleAddMain = () => {
+    this.setState({
+      mains: this.state.mains.concat([{ name: '' }])
+    });
+  }
+
+  handleAddDessert = () => {
+    this.setState({
+      desserts: this.state.desserts.concat([{ name: '' }])
+    });
+  }
+
+  handleRemoveStarter = (idx) => () => {
+    this.setState({
+      starters: this.state.starters.filter((s, sidx) => idx !== sidx)
+    });
+  }
+
+  handleRemoveSide = (idx) => () => {
+    this.setState({
+      sides: this.state.sides.filter((s, sidx) => idx !== sidx)
+    });
+  }
+
+  handleRemoveMain = (idx) => () => {
+    this.setState({
+      mains: this.state.mains.filter((s, sidx) => idx !== sidx)
+    });
+  }
+
+  handleRemoveDessert = (idx) => () => {
+    this.setState({
+      desserts: this.state.desserts.filter((s, sidx) => idx !== sidx)
+    });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        {/* ... */}
+        <h4>Starters</h4>
+
+        {this.state.starters.map((starter, idx) => (
+          <div className="starter">
+            <input
+              type="text"
+              placeholder={`Starter #${idx + 1} name`}
+              value={starter.name}
+              onChange={this.handleStarterNameChange(idx)}
+            />
+            <button type="button" onClick={this.handleRemoveStarter(idx)} className="small">-</button>
+          </div>
+        ))}
+        <button type="button" onClick={this.handleAddStarter} className="small">Add Starter</button>
+        
+
+        <h4>Mains</h4>
+
+        {this.state.sides.map((side, idx) => (
+          <div className="side">
+            <input
+              type="text"
+              placeholder={`Side #${idx + 1} name`}
+              value={side.name}
+              onChange={this.handleSideNameChange(idx)}
+            />
+            <button type="button" onClick={this.handleRemoveSide(idx)} className="small">-</button>
+          </div>
+        ))}
+        <button type="button" onClick={this.handleAddSide} className="small">Add Side</button>
+        
+
+        <h4>Sides</h4>
+
+        {this.state.mains.map((main, idx) => (
+          <div className="main">
+            <input
+              type="text"
+              placeholder={`Main #${idx + 1} name`}
+              value={main.name}
+              onChange={this.handleMainNameChange(idx)}
+            />
+            <button type="button" onClick={this.handleRemoveMain(idx)} className="small">-</button>
+          </div>
+        ))}
+        <button type="button" onClick={this.handleAddMain} className="small">Add Main</button>
+        
+
+        <h4>Desserts</h4>
+
+        {this.state.desserts.map((dessert, idx) => (
+          <div className="dessert">
+            <input
+              type="text"
+              placeholder={`Dessert #${idx + 1} name`}
+              value={dessert.name}
+              onChange={this.handleDessertNameChange(idx)}
+            />
+            <button type="button" onClick={this.handleRemoveDessert(idx)} className="small">-</button>
+          </div>
+        ))}
+        <button type="button" onClick={this.handleAddDessert} className="small">Add Dessert</button>
+        
+        <div>
+
+          <button>Confirm Selection</button>
+        </div>
+      </form>
+
+    )
+  }
+}
 export default MenuForm
