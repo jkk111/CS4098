@@ -20,7 +20,7 @@
 .nav-item {
   padding: 1em;
   font-size: 1em;
-  transition: all 1s;
+  transition: all 0.2s;
   height: 3em;
   user-select: none;
   cursor: pointer;
@@ -30,11 +30,11 @@
   height: 0;
   background: var(--nav-item-background-color);
   box-sizing: border-box;
-  transition: all 1s;
+  transition: all 0.s;
 }
 
 .nav-toggle {
-  transition: all 1s;
+  transition: all 0.2s;
   text-align: center;
   color: white;
   cursor: pointer;
