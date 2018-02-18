@@ -29,8 +29,6 @@ class ViewUsers extends React.Component {
     Logger.log("Refresh Users", resp)
   }
 
-
-
   render() {
     let { users } = this.state;
 
@@ -38,6 +36,5 @@ class ViewUsers extends React.Component {
     return users
   }
 }
-
 
 export default ViewUsers
