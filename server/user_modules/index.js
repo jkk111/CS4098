@@ -4,6 +4,7 @@ let app = express.Router();
 let bodyParser = require('body-parser')
 let Database = require('../database');
 let Users = Database.Get('user');
+let Events = Database.Get('events');
 let config = require('../config.json');
 let { hash_password, verify_password } = require('../util')
 
@@ -16,6 +17,11 @@ app.get('/info', async(req, res) => {
   } else {
     res.json({ success: false, error: 'UNKNOWN_USER' })
   }
+});
+
+app.get('/events', async(req, res) => {
+  let events = await Events.get('event', {}, ['id','name','location','description', 'price']);
+  res.json(events);
 });
 
 app.post('/update_info', bodyParser.json(), async(req, res) => {

@@ -19,7 +19,7 @@ class EventList extends React.Component {
   }
 
   async refresh() {
-    let resp = await fetch('/admin/events')
+    let resp = await fetch('/user/events')
     resp = await resp.json();
 
     this.setState({

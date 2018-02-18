@@ -36,11 +36,6 @@ app.get('/users', async(req, res) => {
   res.json(users);
 });
 
-app.get('/events', async(req, res) => {
-  let events = await Events.get('event', {}, ['id','name','location','description', 'price']);
-  res.json(events);
-});
-
 app.post('/create_user', bodyParser.json(), async(req, res) => {
   let token = create_registration_token();
   let { f_name, l_name, email } = req.body;
