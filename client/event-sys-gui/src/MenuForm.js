@@ -12,8 +12,6 @@ class MenuForm extends React.Component {
     };
   }
 
-  // ...
-
   handleStarterNameChange = (idx) => (evt) => {
     const newStarters = this.state.starters.map((starter, sidx) => {
       if (idx !== sidx) return starter;
@@ -51,11 +49,11 @@ class MenuForm extends React.Component {
   }
 
   handleSubmit = (evt) => {
-    const { name, starters, sides, mains, desserts } = this.state;
-    alert(`Added: ${name} with ${starters.length} starters`);
-    alert(`Added: ${name} with ${sides.length} sides`);
-    alert(`Added: ${name} with ${mains.length} mains`);
-    alert(`Added: ${name} with ${desserts.length} desserts`);
+    const {starters, sides, mains, desserts } = this.state;
+    alert(` Added: ${starters.length} starters`+
+    	  `\n Added: ${sides.length} sides`+
+          `\n Added: ${mains.length} mains`+
+          `\n Added: ${desserts.length} desserts`);
   }
 
   handleAddStarter = () => {
@@ -124,7 +122,7 @@ class MenuForm extends React.Component {
           </div>
         ))}
         <button type="button" onClick={this.handleAddStarter} className="small">Add Starter</button>
-        <button>Confirm Selection</button>
+        
 
         <h4>Mains</h4>
 
@@ -140,7 +138,7 @@ class MenuForm extends React.Component {
           </div>
         ))}
         <button type="button" onClick={this.handleAddSide} className="small">Add Side</button>
-        <button>Confirm Selection</button>
+        
 
         <h4>Sides</h4>
 
@@ -156,7 +154,7 @@ class MenuForm extends React.Component {
           </div>
         ))}
         <button type="button" onClick={this.handleAddMain} className="small">Add Main</button>
-        <button>Confirm Selection</button>
+        
 
         <h4>Desserts</h4>
 
@@ -172,7 +170,11 @@ class MenuForm extends React.Component {
           </div>
         ))}
         <button type="button" onClick={this.handleAddDessert} className="small">Add Dessert</button>
-        <button>Confirm Selection</button>
+        
+        <div>
+
+          <button>Confirm Selection</button>
+        </div>
       </form>
 
     )
