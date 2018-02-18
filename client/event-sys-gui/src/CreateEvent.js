@@ -42,6 +42,10 @@ let EventForm = () => {
         <DateTime locale='en-ie' label="Start Date: "/>
       </div>
       <div className='event_form-input'>
+      	<h3>Upload an Event Image</h3>
+        <input type='file' className='file-button' value='Choose Image'/>
+      </div>
+      <div className='event_form-input'>
         <input type='submit' className='form-button' value='Create Event'/>
       </div>
     </form>
