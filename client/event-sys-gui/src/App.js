@@ -61,7 +61,6 @@ class App extends Component {
     this.register = this.register.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.CreateEvent = this.CreateEvent.bind(this);
     this.CreateMenu = this.CreateMenu.bind(this);
   }
 
@@ -116,27 +115,6 @@ class App extends Component {
     resp = await resp.json();
     set_cookie(resp.id)
   }
-
- async CreateEvent(e) {
-    e.preventDefault();
-    let event_name = e.target.event_name.value;
-    let location = e.target.location.value;
-    let date = e.target.date.value;
-    let time = e.target.time.value;
-    let desp = e.target.desp.value;
-    let body = JSON.stringify({ event_name, location, date, time, desp });
-    let resp = await fetch('/CreateEvent', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body
-    })
-    resp = await resp.json();
-    set_cookie(resp.id)
-  }
-
 
  async CreateMenu(e) {
     e.preventDefault();

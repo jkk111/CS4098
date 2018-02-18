@@ -1,39 +1,52 @@
 import React from 'react';
 import './Home.css'
+import 'moment/locale/en-ie'
+import DateTime from './react-datetime'
+import { Logger } from './Util'
+import FloatText from './FloatText'
 
-let EventForm = ({onSubmit}) => {
+let create_event = async(e) => {
+  e.preventDefault();
+  let form = e.target;
+
+  let body = {
+    event_name: form.event_name.value,
+    location: form.location.value,
+    price: form.price.value,
+    desp: form.desp.value
+  }
+
+  let resp = await fetch('/admin/create_event', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+
+  resp = await resp.json();
+
+  Logger.log("Create Event Response", resp)
+
+  form.reset();
+}
+
+let EventForm = () => {
   return <div className='event_form'>
-    <h1>Create an Event</h1>
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>Event Name:</label>
-        <input type="text" name="event_name" />
+    <form onSubmit={create_event} autoComplete="off">
+      <FloatText name="event_name" label="Event Name:" />
+      <FloatText name="location" label="Location:" />
+      <FloatText name="price" label="Price:" />
+      <FloatText name="desp" label="Event Description:" />
+      <div className='event_form-input'>
+        <DateTime locale='en-ie' label="Start Date: "/>
       </div>
-      <div>
-        <label>Location:</label>
-        <input type="text" name="location" />
-      </div>
-      <div>
-        <label>Date:</label>
-        <input type="text" name="date" />
-      </div>
-      <div>
-        <label>Time:</label>
-        <input type="text" name="time" />
-      </div>
-      <div>
-        <label>Price:</label>
-        <input type="text" name="price" />
-      </div>
-      <div>
-        <label> Event Description:</label>
-        <input type="text" name="desp" />
-      </div>
-      <div>
-        <input type="submit" value="Create Event" className='form-button' />
+      <div className='event_form-input'>
+        <input type='submit' className='form-button' value='Create Event'/>
       </div>
     </form>
   </div>
 }
+
 
 export default EventForm
