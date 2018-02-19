@@ -1,3 +1,38 @@
-[
-  "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, f_name TEXT NOT NULL, l_name TEXT NOT NULL, username TEXT NOT NULL UNIQUE, password TEXT NOT NULL, email TEXT NOT NULL, phone TEXT NOT NULL DEFAULT \"\", email_verified BOOL NOT NULL DEFAULT 0, registered BOOL NOT NULL DEFAULT 1, is_admin BOOL NOT NULL DEFAULT 0, subscribed BOOL NOT NULL DEFAULT 0)"
-]
+{
+  "tables": [
+    {
+      "name": "user",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "f_name": "TEXT NOT NULL",
+        "l_name": "TEXT NOT NULL",
+        "username": "TEXT NOT NULL UNIQUE",
+        "password": "TEXT NOT NULL",
+        "email": "TEXT NOT NULL",
+        "phone": "TEXT NOT NULL DEFAULT \"\"",
+        "email_verified": "BOOL NOT NULL DEFAULT 0",
+        "registered": "BOOL NOT NULL DEFAULT 0",
+        "is_admin": "BOOL NOT NULL DEFAULT 0",
+        "subscribed": "BOOL NOT NULL DEFAULT 0"
+      }
+    },
+    {
+      "name": "session",
+      "keys": {
+        "id": "TEXT PRIMARY KEY NOT NULL",
+        "user_id": "INTEGER NOT NULL",
+        "expires": "INTEGER NOT NULL"
+      }
+    },
+    {
+      "name": "pending",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY UNIQUE",
+        "token": "TEXT NOT NULL UNIQUE",
+        "f_name": "TEXT NOT NULL",
+        "l_name": "TEXT NOT NULL",
+        "email": "TEXT NOT NULL"
+      }
+    }
+  ]
+}

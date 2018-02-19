@@ -11,6 +11,7 @@ class MenuForm extends React.Component {
       sides: [{ name: '' }],
       mains: [{ name: '' }],
       desserts: [{ name: '' }],
+      drinks: [{'name': '' }]
     };
   }
 

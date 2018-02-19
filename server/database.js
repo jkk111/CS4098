@@ -5,6 +5,24 @@
 const fs = require('fs');
 const sql = require('sqlite3').verbose();
 
+let create_table = (config) => {
+  let { name, keys, extra = [] } = config;
+
+  let query = `CREATE TABLE IF NOT EXISTS ${name} (`
+
+  let looped = false;
+
+  for(var key in keys) {
+    if(looped) {
+      query += ', '
+    }
+    looped = true;
+    query += `${key} ${keys[key]}`
+  }
+
+  return `${query}) ${extra.join(' ')}`;
+}
+
 /**
  * Builds a query to update rows in a table
  * @param { string } table - the target table name
@@ -166,7 +184,8 @@ class Database {
         let schema = JSON.parse(fs.readFileSync(`./${this.name}_schema.json`));
         let db = this.db = new sql.Database(`./${this.name}.db`);
 
-        for(var table of schema) {
+        for(var table of schema.tables) {
+          table = create_table(table);
           await run_query(db, table, []);
         }
 

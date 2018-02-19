@@ -5,7 +5,6 @@ const crypto = require('crypto');
 const { encode } = require('urlsafe-base64')
 let Database = require('../database');
 let Users = Database.Get('user')
-let PendingUsers = Database.Get('pending_user');
 let Events = Database.Get('event');
 let { sendTemplate } = require('../email')
 /*
@@ -41,7 +40,7 @@ app.post('/create_user', bodyParser.json(), async(req, res) => {
   let { f_name, l_name, email } = req.body;
   let result = await Users.add('user', { username: token, f_name, l_name, email, password: '' });
   let id = result.lastID;
-  PendingUsers.add('pending_user', { id, f_name, l_name, email, token });
+  Users.add('pending', { id, f_name, l_name, email, token });
   sendTemplate('pending-user', { f_name, l_name, email, token })
   res.send({ token })
 });
@@ -68,5 +67,40 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
 
   res.send({ id, success: true })
 });
+
+app.post('/create_ticket', bodyParser.json(), async(req, res) => {
+  let { name, description, price, currency } = req.body;
+
+  let row = {
+    name,
+    description,
+    price,
+    currency
+  }
+
+  let ticket = await Events.add('ticket', row);
+  let id = ticket.lastID;
+
+  res.json({ id, success: true });
+});
+
+app.post('/create_venue', bodyParser.json(), async(req, res) => {
+  let { name, description, address_1, address_2, city, country, capacity } = req.body;
+
+  let row = {
+    name,
+    description,
+    address_1,
+    address_2,
+    city,
+    country,
+    capacity
+  };
+
+  let venue = await Events.add('venues', row)
+  let id = venue.lastID;
+
+  res.json({ id, success: true })
+})
 
 module.exports = app;

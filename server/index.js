@@ -7,7 +7,6 @@ const bodyParser = require('body-parser')
 const user_modules = require('./user_modules');
 const admin_modules = require('./admin_modules');
 const Database = require('./database');
-const Sessions = Database.Get('session');
 const Users = Database.Get('user');
 const { hash_password, verify_password } = require('./util')
 const config = require('./config.json')
@@ -122,7 +121,7 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
     let id = generate_session_id();
     let expires = new Date();
     expires.setDate(expires.getDate(), + 30);
-    await Sessions.add('session', { id, user_id, expires });
+    await User.add('session', { id, user_id, expires });
     res.cookie('id', id, { expires });
     // res.cookie('id', id, { domain: null }); // Cookies don't work on localhost, so use a session cookie to bypass this
     res.json({ id, success: true })
@@ -153,7 +152,7 @@ app.post('/login', bodyParser.json(), async(req, res) => {
       let id = generate_session_id();
       let expires = new Date();
       expires.setDate(expires.getDate() + 30);
-      await Sessions.add('session', { id, user_id, expires })
+      await Users.add('session', { id, user_id, expires })
       res.cookie('id', id, { expires })
       res.json({ id, success: true, auth_level: user[0].is_admin ? 'ADMIN' : 'USER' });
     } else {
@@ -175,7 +174,7 @@ app.get('/logout', (req, res) => {
  */
 let get_auth_level = (session_id) => {
   return new Promise(async(resolve) => {
-    let session = await Sessions.get('session', { id: session_id }, ['user_id'])
+    let session = await Users.get('session', { id: session_id }, ['user_id'])
     if(session.length > 0) {
       let user_id = session[0].user_id;
       let user = await Users.get('user', { id: user_id }, [ 'is_admin' ]);
@@ -219,7 +218,7 @@ app.get('/status', async(req, res) => {
 
 let identify = async(req, res, next) => {
   let id = req.cookies.id;
-  let session = await Sessions.get('session', { id }, [ 'user_id' ]);
+  let session = await Users.get('session', { id }, [ 'user_id' ]);
 
   if(session.length > 0) {
     req.user_id = session[0].user_id;
