@@ -81,6 +81,9 @@ class MenuForm extends React.Component {
   render() {
     return <form onSubmit={this.handleSubmit}>
       {this.render_sections('starters', 'sides', 'mains', 'desserts', 'drinks')}
+      <div>
+        <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
+      </div>
     </form>
   }
 
