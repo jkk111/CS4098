@@ -152,6 +152,12 @@ let map_params = (params) => {
   return mapped
 }
 
+let sleep = (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  })
+}
+
 /**
  * Class to represent a connection to a given database
  */
@@ -163,6 +169,27 @@ class Database {
     let db = new Database(name);
     instances[name] = db;
     return db;
+  }
+
+  static async Destroy(name) {
+    if(instances[name]) {
+      await instances[name].close();
+      delete instances[name];
+    }
+
+    let success = false;
+
+    do {
+      try {
+        await sleep(100);
+        fs.unlinkSync(`./${name}.db`);
+        success = true;
+      } catch(e) {
+        success = e.code === 'ENOENT';
+        if(!success)
+          console.log(e);
+      }
+    } while(!success)
   }
 
   constructor(name) {
@@ -199,6 +226,12 @@ class Database {
       else {
         resolve(this.db);
       }
+    })
+  }
+
+  close() {
+    return new Promise((resolve) => {
+      this.db.close(resolve);
     })
   }
 

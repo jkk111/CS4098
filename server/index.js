@@ -5,6 +5,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 const user_modules = require('./user_modules');
+const auth_modules = require('./auth_modules');
 const admin_modules = require('./admin_modules');
 const Database = require('./database');
 const Users = Database.Get('user');
@@ -42,9 +43,20 @@ app.get('*', (req, res, next) => {
     res.sendFile(__dirname + '/static/index.html')
   }
 })
+app.use(cookieParser());
+
+app.use((req, res, next) => {
+  if(req.headers.verbose) {
+    bodyParser.json()(req, res, () => {
+      console.log(req.body, req.cookies, req.cookie);
+      next();
+    })
+  } else {
+    next();
+  }
+})
 
 app.listen(80);
-app.use(cookieParser());
 const test_path = path.join(__dirname, '..', 'client', 'event-sys-gui', 'test-results.json')
 
 /**
@@ -120,8 +132,8 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
     let user_id = user[0].id;
     let id = generate_session_id();
     let expires = new Date();
-    expires.setDate(expires.getDate(), + 30);
-    await User.add('session', { id, user_id, expires });
+    expires.setDate(expires.getDate() + 30);
+    await Users.add('session', { id, user_id, expires });
     res.cookie('id', id, { expires });
     // res.cookie('id', id, { domain: null }); // Cookies don't work on localhost, so use a session cookie to bypass this
     res.json({ id, success: true })
@@ -158,6 +170,8 @@ app.post('/login', bodyParser.json(), async(req, res) => {
     } else {
       res.json({ success: false, error: 'INVALID_AUTH', auth_level: 'UNAUTH' });
     }
+  } else {
+    res.json({ success: false, error: 'INVALID_AUTH', auth_level: 'UNAUTH' });
   }
 })
 
@@ -245,6 +259,7 @@ app.get('/events/:id', (req, res) => {
  * User Modules
  * @level 1
  */
+app.use(test_auth(1), identify, auth_modules)
 app.use('/user', test_auth(1), identify, user_modules);
 
 /**

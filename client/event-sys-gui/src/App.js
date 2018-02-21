@@ -113,7 +113,10 @@ class App extends Component {
       body
     })
     resp = await resp.json();
-    set_cookie(resp.id)
+    set_cookie(resp.id);
+    if(resp.success) {
+      this.props.set_logged_in('USER')
+    }
   }
 
  async CreateMenu(e) {
