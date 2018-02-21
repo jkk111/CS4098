@@ -7,21 +7,24 @@ class MenuForm extends React.Component {
     super();
     this.state = {
       name: '',
-      starters: [{ name: '' }],
-      sides: [{ name: '' }],
-      mains: [{ name: '' }],
-      desserts: [{ name: '' }],
-      drinks: [{'name': '' }]
+      description: '',
+      allergens: '',
+      starters: [{ name: '' , description: '', allergens: ''}],
+      sides: [{ name: '' , description: '', allergens: '' }],
+      mains: [{ name: '' , description: '', allergens: '' }],
+      desserts: [{ name: '' , description: '', allergens: ''}],
+      drinks: [{name: '' , description: '', allergens: '' }]
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let {starters, sides, mains, desserts } = this.state;
+    let {starters, sides, mains, desserts, drinks } = this.state;
     alert(` Added: ${starters.length} starters`+
     	  `\n Added: ${sides.length} sides`+
           `\n Added: ${mains.length} mains`+
-          `\n Added: ${desserts.length} desserts`);
+          `\n Added: ${desserts.length} desserts`+
+          `\n Added: ${drinks.length} drinks`);
   }
 
   add_entry(type) {
@@ -49,6 +52,10 @@ class MenuForm extends React.Component {
     return (item, i) => {
       return <div className='menu-field' key={i}>
         <FloatText name={`${type}-${i}`} label={`${str} #${i + 1} name`} >
+        </FloatText>
+        <FloatText description={`${type}-${i}`} label={`${str} #${i + 1} description`} >
+        </FloatText>
+        <FloatText allergens={`${type}-${i}`} label={`${str} #${i + 1} allegens`} >
           <span className='remove-item' onClick={this.remove_entry(type, i)}>X</span>
         </FloatText>
       </div>
@@ -73,7 +80,10 @@ class MenuForm extends React.Component {
 
   render() {
     return <form onSubmit={this.handleSubmit}>
-      {this.render_sections('starters', 'sides', 'mains', 'desserts')}
+      {this.render_sections('starters', 'sides', 'mains', 'desserts', 'drinks')}
+      <div>
+        <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
+      </div>
     </form>
   }
 

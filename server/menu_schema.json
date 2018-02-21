@@ -1,0 +1,47 @@
+{
+  "tables": [
+  	{
+      "name": "Menu",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "name": "TEXT NOT NULL",
+      }
+    },
+    {
+      "name": "starter",
+      "keys": {
+      	"menu_id" : "INTEGER PRIMARY KEY",
+        "name": "TEXT NOT NULL",
+        "description": "TEXT NOT NULL",
+        "allergen": "TEXT NOT NULL"
+      }
+    },
+    {
+      "name": "main",
+      "keys": {
+      	"menu_id" : "INTEGER PRIMARY KEY",
+        "name": "TEXT NOT NULL",
+        "description": "TEXT NOT NULL",
+        "allergen": "TEXT NOT NULL"
+      }
+    },
+    {
+      "name": "desserts",
+      "keys": {
+      	"menu_id" : "INTEGER PRIMARY KEY",
+        "name": "TEXT NOT NULL",
+        "description": "TEXT NOT NULL",
+        "allergen": "TEXT NOT NULL"
+      }
+    },
+    {
+      "name": "drinks",
+      "keys": {
+      	"menu_id" : "INTEGER PRIMARY KEY",
+       	"name": "TEXT NOT NULL",
+        "description": "TEXT NOT NULL",
+        "allergen": "TEXT NOT NULL"
+      }
+    }
+  ]
+}
