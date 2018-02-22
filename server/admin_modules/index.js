@@ -104,7 +104,25 @@ app.post('/create_venue', bodyParser.json(), async(req, res) => {
 })
 
 app.get('/venues', async(req, res) => {
-  res.json(await Events.get('venues', {}, '*'))
+  let venues = [
+    { "id": "1", "name": "venue 1",
+      "description": "venue 1 description", "address_1": "address line 1",
+      "address_2": "address line 2", "city": "city 1",
+      "country": "country 1", "capacity": "100"
+    },
+    { "id": "2", "name": "venue 2",
+      "description": "venue 2 description", "address_1": "address line 1",
+      "address_2": "address line 2", "city": "city 2",
+      "country": "country 2", "capacity": "200"
+    },
+    { "id": "3", "name": "venue 3",
+      "description": "venue 3 description", "address_1": "address line 1",
+      "address_2": "address line 2", "city": "city 3",
+      "country": "country 3", "capacity": "300"
+    }
+  ]
+  res.json(venues);
+  //res.json(await Events.get('venues', {}, '*'))
 });
 
 app.get('/tickets', async(req, res) => {

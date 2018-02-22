@@ -55,7 +55,7 @@ class MenuForm extends React.Component {
         </FloatText>
         <FloatText description={`${type}-${i}`} label={`${str} #${i + 1} description`} >
         </FloatText>
-        <FloatText allergens={`${type}-${i}`} label={`${str} #${i + 1} allegens`} >
+        <FloatText allergens={`${type}-${i}`} label={`${str} #${i + 1} allergens`} >
           <span className='remove-item' onClick={this.remove_entry(type, i)}>X</span>
         </FloatText>
       </div>
