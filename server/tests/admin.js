@@ -88,6 +88,7 @@ let setup = async() => {
     await Database.Destroy('user');
     srv = fork('index')
     await Database.Get('user').prepare();
+    await Database.Get('event').prepare();
     setTimeout(resolve, 2000);
   })
 }
