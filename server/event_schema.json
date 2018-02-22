@@ -6,7 +6,10 @@
         "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
-        "venue_id": "INTEGER NOT NULL DEFAULT 0"
+        "venue_id": "INTEGER NOT NULL DEFAULT 0",
+        "max_attendees": "INTEGER NOT NULL",
+        "start_time": "INTEGER NOT NULL",
+        "end_time": "INTEGER NOT NULL"
       }
     },
     {

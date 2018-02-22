@@ -48,15 +48,18 @@ app.post('/create_user', bodyParser.json(), async(req, res) => {
 app.post('/promote', bodyParser.json(), async(req, res) => {
   let { id } = req.body;
   let users = await Users.update('user', { is_admin: 1 }, { id });
-  console.log(users);
   res.json({ success: true })
 })
 
 app.post('/create_event', bodyParser.json(), async(req, res) => {
-  let { name, location, description, max_attendees, price, start_time, end_time } = req.body;
-  let event = { name, location, description, max_attendees, price, start_time, end_time };
+  let { name, description, venue_id, max_attendees, start_time, end_time } = req.body;
+  let event = { name, description, venue_id, max_attendees, start_time, end_time };
   let result = await Events.add('event', event)
-  let id = result.lastID
+  let id = result.lastID;
+
+  for(var ticket of req.body.tickets) {
+    await Events.add('event_tickets', { event_id: id, ticket_id: ticket.id, amount: ticket.count });
+  }
 
   // Email All Users On Mailing List
   let users = await Users.get('user', { email_verified: true, subscribed: true }, 'email');
@@ -78,7 +81,7 @@ app.post('/create_ticket', bodyParser.json(), async(req, res) => {
     currency
   }
 
-  let ticket = await Events.add('ticket', row);
+  let ticket = await Events.add('tickets', row);
   let id = ticket.lastID;
 
   res.json({ id, success: true });
