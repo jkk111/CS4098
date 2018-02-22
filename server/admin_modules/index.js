@@ -104,11 +104,11 @@ app.post('/create_venue', bodyParser.json(), async(req, res) => {
 })
 
 app.get('/venues', async(req, res) => {
-  res.json(await Events.Get('venues', {}, '*'))
+  res.json(await Events.get('venues', {}, '*'))
 });
 
 app.get('/tickets', async(req, res) => {
-  res.json(await Events.Get('tickets', {}, '*'))
+  res.json(await Events.get('tickets', {}, '*'))
 });
 
 module.exports = app;
