@@ -4,7 +4,7 @@
   "description": "Server for cs4098 project",
   "main": "index.js",
   "scripts": {
-    "test": "node Test.js"
+    "test": "node Prepare.js && node Test.js"
   },
   "author": "",
   "license": "ISC",
