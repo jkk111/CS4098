@@ -9,9 +9,9 @@ class CreateEvent extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedVenue: '',
-      venues: '',
-      selectedDateTime: ''
+      selectedVenue:'',
+      venues:'',
+      selectedDateTime:''
     };
     this.createEvent = this.createEvent.bind(this);
     this.handleVenueChange = this.handleVenueChange.bind(this);
@@ -25,7 +25,10 @@ class CreateEvent extends React.Component {
     let body = {
       name: form.event_name.value,
       description: form.description.value,
-      venue_id: this.state.selectedVenue
+      venue_id: this.state.selectedVenue,
+      max_attendees: form.capacity.value,
+      start_time: '123456789',
+      end_time: '123456789'
     }
     console.log('creating event', body);
     let resp = await fetch('/admin/create_event', {
@@ -35,9 +38,8 @@ class CreateEvent extends React.Component {
       },
       body: JSON.stringify(body)
     })
-
-    resp = await resp.json();
-    Logger.log("Create Event Response", resp)
+    console.log(resp);
+    //Logger.log("Create Event Response", await resp.json())
     form.reset();
   }
 
@@ -77,13 +79,15 @@ class CreateEvent extends React.Component {
       <form onSubmit={this.createEvent} autoComplete="off">
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
+        <FloatText name="capacity" label="Event Capacity:"/>
         <label>
           <select value={this.state.value} onChange={this.handleVenueChange} id="selectVenue">
             {venueOptions}
           </select>
         </label>
         <div className='event_form-input'>
-          <DateTime value={this.state.selectedDateTime} onChange={this.handleDataTimeChange} locale='en-ie' label="Start Date: "/>
+          <DateTime locale='en-ie' label="Start Date/Time: "/>
+          <DateTime locale='en-ie' label="End Date/Time: "/>
         </div>
         <div className='event_form-input'>
           <input type='submit' className='form-button' submit="create_event" value='Create Event'/>
