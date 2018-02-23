@@ -108,58 +108,60 @@ class MenuForm extends React.Component {
       {this.render_sections('starters', 'mains', 'desserts', 'drinks')}
       <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
       <div classname = "mine">
-      <h1> 1. Cereals containing gluten, namely: wheat (such as spelt and khorasan wheat), rye, barley, 
-      oats or their hybridised strains, and products thereof, except:
+      <h1> Allegen Information Sheet </h1>
+      <h3> 1. Cereals containing gluten, namely: wheat (such as spelt and khorasan wheat), rye, barley, 
+      oats or their hybridised strains, and products thereof, except:  </h3>
 
-(a) wheat based glucose syrups including dextrose
-(b) wheat based maltodextrins
-(c) glucose syrups based on barley
-(d) cereals used for making alcoholic distillates including ethyl alcohol of agricultural origin
+<h4>(a) wheat based glucose syrups including dextrose</h4>
+<h4>(b) wheat based maltodextrins</h4>
+<h4>(c) glucose syrups based on barley </h4>
+<h4>(d) cereals used for making alcoholic distillates including ethyl alcohol of agricultural origin </h4>
 
-2. Crustaceans and products thereof
 
-3. Eggs and products thereof
+<h3>2. Crustaceans and products thereof</h3>
 
-4. Fish and products thereof, except:
+<h3>3. Eggs and products thereof</h3>
 
-(a) fish gelatine used as carrier for vitamin or carotenoid preparations
-(b) fish gelatine or Isinglass used as fining agent in beer and wine
+<h3>4. Fish and products thereof, except:</h3>
 
-5. Peanuts and products thereof
+<h4>(a) fish gelatine used as carrier for vitamin or carotenoid preparations</h4>
+<h4>(b) fish gelatine or Isinglass used as fining agent in beer and wine</h4>
 
-6. Soybeans and products thereof, except:
+<h3>5. Peanuts and products thereof</h3>
 
-(a) fully refined soybean oil and fat
-(b) natural mixed tocopherols (E306), natural D-alpha tocopherol, natural D-alpha tocopherol acetate, 
-and natural D-alpha tocopherol succinate from soybean sources
-(c) vegetable oils derived phytosterols and phytosterol esters from soybean sources
-(d) plant stanol ester produced from vegetable oil sterols from soybean sources
+<h3>6. Soybeans and products thereof, except:</h3>
 
-7. Milk and products thereof (including lactose), except:
+<h4>(a) fully refined soybean oil and fat</h4>
+<h4>(b) natural mixed tocopherols (E306), natural D-alpha tocopherol, natural D-alpha tocopherol acetate, 
+and natural D-alpha tocopherol succinate from soybean sources</h4>
+<h4>(c) vegetable oils derived phytosterols and phytosterol esters from soybean sources</h4>
+<h4>(d) plant stanol ester produced from vegetable oil sterols from soybean sources</h4>
 
-(a) whey used for making alcoholic distillates including ethyl alcohol of agricultural origin
-(b) lactitol
+<h3>7. Milk and products thereof (including lactose), except:</h3>
 
-8. Nuts, namely: almonds (Amygdalus communis L.), hazelnuts (Corylus avellana), walnuts (Juglans regia),
+<h4>(a) whey used for making alcoholic distillates including ethyl alcohol of agricultural origin
+(b) lactitol/</h4>
+
+<h3>8. Nuts, namely: almonds (Amygdalus communis L.), hazelnuts (Corylus avellana), walnuts (Juglans regia),
  cashews (Anacardium occidentale), pecan nuts (Carya illinoinensis (Wangenh.) K. Koch), Brazil nuts 
  (Bertholletia excelsa), pistachio nuts (Pistacia vera), macadamia or Queensland nuts (Macadamia ternifolia),
-  and products thereof, except for nuts used for making alcoholic distillates including ethyl alcohol of agricultural origin
+  and products thereof, except for nuts used for making alcoholic distillates including ethyl alcohol of agricultural origin</h3>
 
-9. Celery and products thereof
+<h3>9. Celery and products thereof</h3>
 
-10. Mustard and products thereof
+<h3>10. Mustard and products thereof</h3>
 
-11. Sesame seeds and products thereof
+<h3>11. Sesame seeds and products thereof</h3>
 
-12. Sulphur dioxide and sulphites at concentrations of more than 10 mg/kg or 10 mg/litre in terms of the 
+<h3>12. Sulphur dioxide and sulphites at concentrations of more than 10 mg/kg or 10 mg/litre in terms of the 
 total SO2 which are to be calculated for products as proposed ready for consumption or as reconstituted 
-according to the instructions of the manufacturers
+according to the instructions of the manufacturers</h3>
 
-13. Lupin and products thereof
+<h3>13. Lupin and products thereof</h3>
 
-14. Molluscs and products thereof
+<h3>14. Molluscs and products thereof
 
- </h1>
+</h3>
       </div>
     </form>
   }
