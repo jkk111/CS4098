@@ -84,7 +84,7 @@ app.post('/create_menu', bodyParser.json(), async(req, res) => {
 app.post('/create_event', bodyParser.json(), async(req, res) => {
   let { name, description, venue_id, max_attendees, start_time, end_time } = req.body;
   let event = { name, description, venue_id, max_attendees, start_time, end_time };
-  let result = await Events.add('event', event);
+  let result = await Events.add('event', event)
   let id = result.lastID;
 
   for(var ticket of req.body.tickets) {
