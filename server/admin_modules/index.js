@@ -6,6 +6,7 @@ const { encode } = require('urlsafe-base64')
 let Database = require('../database');
 let Users = Database.Get('user')
 let Events = Database.Get('event');
+let Menus = Database.Get('menu');
 let { sendTemplate } = require('../email')
 /*
   User Struct {
@@ -50,6 +51,35 @@ app.post('/promote', bodyParser.json(), async(req, res) => {
   let users = await Users.update('user', { is_admin: 1 }, { id });
   res.json({ success: true })
 })
+
+app.post('/create_menu', bodyParser.json(), async(req, res) => {
+  let {menu_name, 
+      starter_name, 
+      main_name, 
+      desserts_name, 
+      drinks_name, 
+      starter_desc, 
+      main_desc, 
+      desserts_desc, 
+      drinks_desc, 
+      starter_allg, 
+      main_allg, 
+      desserts_allg, 
+      drinks_allg} = req.body;
+  let menu = {menu_name};
+  //let starters = {starter_name, starter_desc, starter_allg};
+  //let mains = {main_name, main_desc, main_allg};
+  //let desserts = {desserts_name, desserts_desc, desserts_allg};
+  //let drinks = {drinks_name, drinks_desc, drinks_allg};
+  let result = await Menus.add('menu', menu);
+  let id = result.lastID
+  await Menus.add('starter',{menu_id: id, name:starter_name, description: starter_desc, allergen: starter_allg});
+  await Menus.add('main',{menu_id: id, name:main_name, description: main_desc, allergen: main_allg});
+  await Menus.add('desserts',{menu_id: id, name:desserts_name, description: desserts_desc, allergen: desserts_allg});
+  await Menus.add('drinks',{menu_id: id, name:drinks_name, description: drinks_desc, allergen: drinks_allg});
+
+  res.sent({id, success: true})
+});
 
 app.post('/create_event', bodyParser.json(), async(req, res) => {
   let { name, description, venue_id, max_attendees, start_time, end_time } = req.body;

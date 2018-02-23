@@ -1,6 +1,7 @@
 import React from 'react';
 import FloatText from './FloatText'
 import './CreateMenu.css'
+import { Logger } from './Util'
 
 class MenuForm extends React.Component {
   constructor() {
@@ -19,25 +20,32 @@ class MenuForm extends React.Component {
 
   async createMenu(e){
     e.preventDefault();
-      let {starters, mains, desserts, drinks } = this.state;
-      alert(` Added: ${starters.length} starters.map`+
-            `\n Added: ${mains.length} mains`+
-            `\n Added: ${desserts.length} desserts`+
-            `\n Added: ${drinks.length} drinks`);
     let form = e.target;
     let body = {
-      menu_name: form.menu_name.value
+      menu_name: form.menu_name.value,
+      starter_name: this.state.starters.name,
+      main_name: this.state.mains.name,
+      desserts_name: this.state.desserts.name,
+      drinks_name: this.state.drinks.name,
+      starter_desc: this.state.starters.description,
+      main_desc: this.state.mains.description,
+      desserts_desc: this.state.desserts.description,
+      drinks_desc: this.state.drinks.description,
+      starter_allg: this.state.starters.allergens,
+      main_allg: this.state.mains.allergens,
+      desserts_allg: this.state.desserts.allergens,
+      drinks_allg: this.state.drinks.allergens
     }
-    console.log('creating menu', body);
-    let resp = await fetch('/admin/create_menu', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    })
 
-    console.log(resp);
+    Logger.log('creating menu', body);
+    let resp = await fetch('/admin/create_menu', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+    })
+    Logger.log("Create Menu Response", await resp.json())
     //Logger.log("Create Menu Response", await resp.json())
     form.reset();
   }
