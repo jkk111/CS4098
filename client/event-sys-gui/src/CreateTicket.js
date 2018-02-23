@@ -23,7 +23,7 @@ class CreateTicket extends React.Component {
       name: form.name.value,
       description: form.description.value,
       price: form.price.value,
-      currency: 'euro'
+      currency: 'EUR'
     }
     console.log('creating ticket', body);
     let resp = await fetch('/admin/create_ticket', {

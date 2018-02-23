@@ -21,21 +21,12 @@ class EventList extends React.Component {
   async refresh() {
     let resp = await fetch('/user/events')
     resp = await resp.json();
-
-    this.setState({
-      events: resp
-    })
-
+    this.setState({events: resp})
     Logger.log("Refresh Events", resp)
   }
 
   render() {
-    let { events } = this.state;
-
-    //TODO implement with actual events once api exists
-    events = [{"name": "sample one", "id": "1"},
-              {"name": "sample 2", "id": "1"},
-              {"name": "sample C", "id": "2"}]
+    let events = this.state.events;
     console.log('events', events);
     let rows = []
     if (events.length === 0){
