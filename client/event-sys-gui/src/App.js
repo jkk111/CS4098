@@ -15,6 +15,7 @@ import MenuList from './MenuList'
 import ViewUsers from './ViewUsers'
 import CreateVenue from './CreateVenue'
 import CreateTicket from './CreateTicket'
+import Contact from './Contact'
 
 let mapStateToProps = (state) => {
   return {
@@ -52,7 +53,8 @@ const views = {
   MENU_LIST : MenuList,
   VIEW_USERS: ViewUsers,
   CREATE_VENUE: CreateVenue,
-  CREATE_TICKET: CreateTicket
+  CREATE_TICKET: CreateTicket,
+  CONTACT: Contact
 }
 
 class App extends Component {
