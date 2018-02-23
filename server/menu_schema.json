@@ -1,16 +1,16 @@
 {
   "tables": [
   	{
-      "name": "Menu",
+      "name": "menu",
       "keys": {
-        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
-        "name": "TEXT NOT NULL",
+        "menu_id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "menu_name": "TEXT NOT NULL",
       }
     },
     {
       "name": "starter",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+      	"menu_id" : "INTEGER FOREIGN KEY",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
         "allergen": "TEXT NOT NULL"
@@ -19,7 +19,7 @@
     {
       "name": "main",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+      	"menu_id" : "INTEGER FOREIGN KEY",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
         "allergen": "TEXT NOT NULL"
@@ -28,7 +28,7 @@
     {
       "name": "desserts",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+      	"menu_id" : "INTEGER FOREIGN KEY",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
         "allergen": "TEXT NOT NULL"
@@ -37,7 +37,7 @@
     {
       "name": "drinks",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+      	"menu_id" : "INTEGER FOREIGN KEY",
        	"name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
         "allergen": "TEXT NOT NULL"

@@ -11,6 +11,7 @@ import Nav from './Nav'
 import CreateUser from './CreateUser'
 import Settings from './Settings'
 import EventList from './EventList'
+import MenuList from './MenuList'
 import ViewUsers from './ViewUsers'
 import CreateVenue from './CreateVenue'
 import CreateTicket from './CreateTicket'
@@ -48,6 +49,7 @@ const views = {
   EVENT_LIST: EventList,
   CREATE_EVENT: EventForm,
   CREATE_MENU: CreateMenu,
+  MENU_LIST : MenuList,
   VIEW_USERS: ViewUsers,
   CREATE_VENUE: CreateVenue,
   CREATE_TICKET: CreateTicket
@@ -64,7 +66,7 @@ class App extends Component {
     this.register = this.register.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.CreateMenu = this.CreateMenu.bind(this);
+//    this.CreateMenu = this.CreateMenu.bind(this);
   }
 
   async login(e) {
@@ -122,29 +124,29 @@ class App extends Component {
     }
   }
 
- async CreateMenu(e) {
-    e.preventDefault();
-    let starter1 = e.target.starter1.value;
-    let starter2 = e.target.starter2.value;
-    let starter3 = e.target.starter3.value;
-    let main1 = e.target.main1.value;
-    let main2 = e.target.main2.value;
-    let main3 = e.target.main3.value;
-    let dessert1 = e.target.dessert1.value;
-    let dessert2 = e.target.dessert2.value;
-    let dessert3 = e.target.dessert3.value;
-    let body = JSON.stringify({ starter1, starter2, starter3, main1, main2, main3, dessert1, dessert2, dessert3 });
-    let resp = await fetch('/CreateMenu', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body
-    })
-    resp = await resp.json();
-    set_cookie(resp.id)
-  }
+// async CreateMenu(e) {
+//    e.preventDefault();
+//    let starter1 = e.target.starter1.value;
+//    let starter2 = e.target.starter2.value;
+//    let starter3 = e.target.starter3.value;
+//    let main1 = e.target.main1.value;
+//    let main2 = e.target.main2.value;
+//    let main3 = e.target.main3.value;
+//    let dessert1 = e.target.dessert1.value;
+//    let dessert2 = e.target.dessert2.value;
+//    let dessert3 = e.target.dessert3.value;
+//    let body = JSON.stringify({ starter1, starter2, starter3, main1, main2, main3, dessert1, dessert2, dessert3 });
+//    let resp = await fetch('/CreateMenu', {
+//      method: 'POST',
+//      credentials: 'same-origin',
+//      headers: {
+//        'Content-Type': 'application/json'
+//      },
+//      body
+//    })
+//    resp = await resp.json();
+//    set_cookie(resp.id)
+//  }
 
   async getTestResults() {
     let resp = await fetch('/tests')
