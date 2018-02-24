@@ -16,8 +16,8 @@ class Contact extends React.Component {
 
   render() {
     return <div className='contact_form'>
-    <h1> If you wish to get in contact with us, please fill in the following fields,</h1>
-    <h1> and we will reply to you via e-mail as soon as possible </h1>
+    <h1> If you wish to get in contact with us, please fill in the following
+    fields, and we will reply to you via e-mail as soon as possible </h1>
       <form onSubmit={this.sendContact} autoComplete="off">
         <FloatText name="name" label="Your Name:"  />
         <FloatText name="email" label="Your Email:" />
