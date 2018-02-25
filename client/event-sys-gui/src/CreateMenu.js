@@ -1,7 +1,7 @@
 import React from 'react';
 import FloatText from './FloatText'
 import './CreateMenu.css'
-import { Logger } from './Util'
+//import { Logger } from './Util'
 
 class MenuForm extends React.Component {
   constructor() {
@@ -15,9 +15,9 @@ class MenuForm extends React.Component {
       desserts: [{ name: '' , description: '', allergens: ''}],
       drinks: [{name: '' , description: '', allergens: '' }]
     };
-    this.createMenu = this.createMenu.bind(this);
+    //this.createMenu = this.createMenu.bind(this);
   }
-
+/*
   async createMenu(e){
     e.preventDefault();
     let form = e.target;
@@ -49,15 +49,18 @@ class MenuForm extends React.Component {
     //Logger.log("Create Menu Response", await resp.json())
     form.reset();
   }
-
-//  handleSubmit = (e) => {
-//    e.preventDefault();
-//    let {starters, sides, mains, desserts, drinks } = this.state;
-//    alert(` Added: ${starters.length} starters`+
-//          `\n Added: ${mains.length} mains`+
-//          `\n Added: ${desserts.length} desserts`+
-//          `\n Added: ${drinks.length} drinks`);
-//  }
+*/
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let {starters, mains, desserts, drinks } = this.state;
+    alert(` Added: ${starters.length} starters`+
+          `\n Added: ${mains.length} mains`+
+          `\n Added: ${desserts.length} desserts`+
+          `\n Added: ${drinks.length} drinks`);
+    e.preventDefault();
+    let form = e.target;
+    form.reset();
+  }
 
   add_entry(type) {
     return () => {
@@ -111,7 +114,7 @@ class MenuForm extends React.Component {
   }
 
   render() {
-    return <form onSubmit={this.createMenu} autoComplete="off">
+    return <form onSubmit={this.handleSubmit} autoComplete="off">
       <FloatText name="menu_name" label="Menu Name:" />
       {this.render_sections('starters', 'mains', 'desserts', 'drinks')}
       <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
