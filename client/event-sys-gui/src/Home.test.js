@@ -1,14 +1,14 @@
 import React from 'react';
-import CreateTicket from './CreateTicket.js';
+import Home from './Home.js';
 import ReactDOM from 'react-dom';
 
-describe('CreateTicket', () => {
+describe('Home', () => {
   it('should be defined', () => {
-    expect(CreateTicket).toBeDefined();
+    expect(Home).toBeDefined();
   });
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<CreateTicket />, div);
+    ReactDOM.render(<Home />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

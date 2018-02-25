@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import EventList from './EventList.js';
+import ReactDOM from 'react-dom';
 
 describe('EventList', () => {
   it('should be defined', () => {

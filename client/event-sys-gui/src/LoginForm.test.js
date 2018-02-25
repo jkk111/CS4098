@@ -1,14 +1,14 @@
 import React from 'react';
-import CreateTicket from './CreateTicket.js';
+import LoginForm from './LoginForm.js';
 import ReactDOM from 'react-dom';
 
-describe('CreateTicket', () => {
+describe('LoginForm', () => {
   it('should be defined', () => {
-    expect(CreateTicket).toBeDefined();
+    expect(LoginForm).toBeDefined();
   });
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<CreateTicket />, div);
+    ReactDOM.render(<LoginForm />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

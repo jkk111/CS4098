@@ -1,14 +1,14 @@
 import React from 'react';
-import CreateTicket from './CreateTicket.js';
+import User from './User.js';
 import ReactDOM from 'react-dom';
 
-describe('CreateTicket', () => {
+describe('User', () => {
   it('should be defined', () => {
-    expect(CreateTicket).toBeDefined();
+    expect(User).toBeDefined();
   });
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<CreateTicket />, div);
+    ReactDOM.render(<User />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

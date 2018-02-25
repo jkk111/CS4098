@@ -1,14 +1,14 @@
 import React from 'react';
-import CreateTicket from './CreateTicket.js';
+import FloatText from './FloatText.js';
 import ReactDOM from 'react-dom';
 
-describe('CreateTicket', () => {
+describe('FloatText', () => {
   it('should be defined', () => {
-    expect(CreateTicket).toBeDefined();
+    expect(FloatText).toBeDefined();
   });
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<CreateTicket />, div);
+    ReactDOM.render(<FloatText />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

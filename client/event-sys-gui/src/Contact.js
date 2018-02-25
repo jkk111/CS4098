@@ -1,5 +1,5 @@
 import React from 'react';
-import './CreateContact.css'
+import './Contact.css'
 import 'moment/locale/en-ie'
 import FloatText from './FloatText'
 

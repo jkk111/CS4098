@@ -1,14 +1,14 @@
 import React from 'react';
-import CreateTicket from './CreateTicket.js';
+import Contact from './Contact.js';
 import ReactDOM from 'react-dom';
 
-describe('CreateTicket', () => {
+describe('Contact', () => {
   it('should be defined', () => {
-    expect(CreateTicket).toBeDefined();
+    expect(Contact).toBeDefined();
   });
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<CreateTicket />, div);
+    ReactDOM.render(<Contact />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });
