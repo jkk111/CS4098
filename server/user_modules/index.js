@@ -4,7 +4,7 @@ let app = express.Router();
 let bodyParser = require('body-parser')
 let Database = require('../database');
 let Users = Database.Get('user');
-let Events = Database.Get('events');
+let Events = Database.Get('event');
 let config = require('../config.json');
 let { hash_password, verify_password } = require('../util')
 

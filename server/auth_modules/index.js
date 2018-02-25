@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express.Router();
 const Database = require('../database')
-const Events = Database.Get('events')
+const Events = Database.Get('event')
 
 app.get('/events', async(req, res) => {
   let events = await Events.get('event', {}, [ 'id','name' ]);

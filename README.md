@@ -40,7 +40,7 @@ Repo to store source code for CS4098 - Group Design Project
 2.  Once tickets and venues have been created, navigate to the 'Create Event' option in the menu.
 3.  We must now fill in our information into all of the input fields.
 4. Once the data is correct, click the 'Create Event' button at the bottom of the screen.
-5. To check if your event was added to the system, navigate to the 'View Events' screen in the menu. You should now see your newly created event listed.
+5. To check if your event was added to the system, navigate to the 'Events' screen in the menu. You should now see your newly created event listed.
 
 ## Tests
 Tests can be viewed by setting the url to /?tests=tests
