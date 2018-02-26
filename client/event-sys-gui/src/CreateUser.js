@@ -1,7 +1,6 @@
 import React from 'react';
 //TODO Remove this
 import 'moment/locale/en-ie'
-import DateTime from './react-datetime'
 import { Logger } from './Util'
 import FloatText from './FloatText'
 
@@ -36,9 +35,6 @@ let CreateUser = () => {
       <FloatText name="f_name" label="First Name:" />
       <FloatText name="l_name" label="Last Name:" />
       <FloatText name="email" label="Email:" />
-      <div className='create-user-input'>
-        <DateTime locale='en-ie' label="Start Date: "/>
-      </div>
       <div className='create-user-input'>
         <input type='submit' className='form-button' value='Save'/>
       </div>

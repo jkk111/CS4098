@@ -56,7 +56,6 @@ class Nav extends React.Component {
       <div className={nav_item_class} onClick={set_view('HOME', this.toggle)}>Home</div>
       <div className={nav_item_class} onClick={set_view('SETTINGS', this.toggle)}>Settings</div>
       <div className={nav_item_class} onClick={set_view('EVENT_LIST', this.toggle)}>Events</div>
-      <div className={nav_item_class} onClick={set_view('CONTACT', this.toggle)}>Contact</div>
     </div>
 
     if(is_admin) {
