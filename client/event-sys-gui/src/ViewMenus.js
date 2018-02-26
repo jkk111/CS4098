@@ -6,7 +6,8 @@ class ViewMenus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menus: []
+      menus: [],
+      selected: false
     }
   }
 
@@ -23,7 +24,16 @@ class ViewMenus extends React.Component {
   }
 
   render() {
+    let { selected, menus } = this.state;
 
+    if(selected !== false) {
+      return <ViewMenu {...menus[selected]} />
+    } else {
+      menus = menus.map((menu, i) => {
+        return <div key={i}>{menu.name}</div>
+      });
+      return menus;
+    }
   }
 }
 
