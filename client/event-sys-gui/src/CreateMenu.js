@@ -1,19 +1,23 @@
 import React from 'react';
 import FloatText from './FloatText'
 import './CreateMenu.css'
-import { Logger } from './Util'
 
 class MenuForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      //name: '',
-      //description: '',
-      //allergens: '',
-      starters: [{ name: '' , description: '', allergens: ''}],
-      mains: [{ name: '' , description: '', allergens: '' }],
-      desserts: [{ name: '' , description: '', allergens: ''}],
-      drinks: [{name: '' , description: '', allergens: '' }]
+      starters: [
+        { name: '' , description: '', allergens: ''}
+      ],
+      mains: [
+        { name: '' , description: '', allergens: '' }
+      ],
+      desserts: [
+        { name: '' , description: '', allergens: '' }
+      ],
+      drinks: [
+        {name: '' , description: '', allergens: '' }
+      ]
     };
     this.createMenu = this.createMenu.bind(this);
   }
@@ -21,43 +25,40 @@ class MenuForm extends React.Component {
   async createMenu(e){
     e.preventDefault();
     let form = e.target;
-    let body = {
-      menu_name: form.menu_name.value,
-      starter_name: this.state.starters.name,
-      main_name: this.state.mains.name,
-      desserts_name: this.state.desserts.name,
-      drinks_name: this.state.drinks.name,
-      starter_desc: this.state.starters.description,
-      main_desc: this.state.mains.description,
-      desserts_desc: this.state.desserts.description,
-      drinks_desc: this.state.drinks.description,
-      starter_allg: this.state.starters.allergens,
-      main_allg: this.state.mains.allergens,
-      desserts_allg: this.state.desserts.allergens,
-      drinks_allg: this.state.drinks.allergens
+    console.dir(form);
+    let menu = {
+      name: form.menu_name.value,
+      starters: this.state.starters,
+      mains: this.state.mains,
+      desserts: this.state.desserts,
+      drinks: this.state.drinks
     }
 
-    Logger.log('creating menu', body);
-    let resp = await fetch('/admin/create_menu', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
+    await fetch('/admin/create_menu', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(menu)
     })
-    Logger.log("Create Menu Response", await resp.json())
-    //Logger.log("Create Menu Response", await resp.json())
+
+    this.setState({
+      starters: [
+        { name: '' , description: '', allergens: ''}
+      ],
+      mains: [
+        { name: '' , description: '', allergens: ''}
+      ],
+      desserts: [
+        { name: '' , description: '', allergens: ''}
+      ],
+      drinks: [
+        { name: '' , description: '', allergens: ''}
+      ]
+    })
+
     form.reset();
   }
-
-//  handleSubmit = (e) => {
-//    e.preventDefault();
-//    let {starters, sides, mains, desserts, drinks } = this.state;
-//    alert(` Added: ${starters.length} starters`+
-//          `\n Added: ${mains.length} mains`+
-//          `\n Added: ${desserts.length} desserts`+
-//          `\n Added: ${drinks.length} drinks`);
-//  }
 
   add_entry(type) {
     return () => {
@@ -82,12 +83,46 @@ class MenuForm extends React.Component {
   build_list(type) {
     let str = type.slice(0, 1).toUpperCase() + type.slice(1, type.length - 1);
     return (item, i) => {
+      let modify = (objs, updated) => {
+        let before = objs.slice(0, i);
+        let after = objs.slice(i + 1);
+        this.setState({
+          [type]: [ ...before, updated, ...after ]
+        })
+      }
+
+
+      let on_name_change = (e) => {
+        let items = this.state[type];
+        let item = { ...items[i] };
+        item.name = e.target.value;
+        modify(items, item)
+      }
+
+      let on_description_change = (e) => {
+        let items = this.state[type];
+        let item = { ...items[i] };
+        item.description = e.target.value;
+        modify(items, item)
+      }
+
+      let on_allergen_change = (e) => {
+        let items = this.state[type];
+        let item = { ...items[i] };
+        item.allergens = e.target.value;
+        modify(items, item)
+      }
+
+      let name_props = { onChange: on_name_change }
+      let desc_props = { onChange: on_description_change }
+      let allergen_props = { onChange: on_allergen_change }
+
       return <div className='menu-field' key={i}>
-        <FloatText name={`${type}-${i}`} label={`${str} #${i + 1} name`} >
+        <FloatText inputProps={name_props} name={`${type}-${i}`} label={`${str} #${i + 1} name`} className='menu' >
         </FloatText>
-        <FloatText description={`${type}-${i}`} label={`${str} #${i + 1} description`} >
+        <FloatText inputProps={desc_props} description={`${type}-${i}`} label={`${str} #${i + 1} description`} className='menu' >
         </FloatText>
-        <FloatText allergens={`${type}-${i}`} label={`${str} #${i + 1} allergens`} >
+        <FloatText inputProps={allergen_props} allergens={`${type}-${i}`} label={`${str} #${i + 1} allergens`} className='menu' >
           <span className='remove-item' onClick={this.remove_entry(type, i)}>X</span>
         </FloatText>
       </div>
@@ -101,8 +136,9 @@ class MenuForm extends React.Component {
       let str = section.slice(0, 1).toUpperCase() + section.slice(1, section.length - 1);
       let contents = this.state[section];
       contents = contents.map(this.build_list(section));
+      let section_name = section.slice(0, 1).toUpperCase() + section.slice(1);;
       rendered.push(<React.Fragment key={section}>
-        <h4>{section}</h4>
+        <h1 className='menu-section'>{section_name}</h1>
         {contents}
         <button type='button' onClick={this.add_entry(section)} className='form-button'>Add {str}</button>
       </React.Fragment>)
@@ -115,100 +151,7 @@ class MenuForm extends React.Component {
       <FloatText name="menu_name" label="Menu Name:" />
       {this.render_sections('starters', 'mains', 'desserts', 'drinks')}
       <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
-      <div classname = "mine">
-      <h1> Allegen Information Sheet </h1>
-      <h3> 1. Cereals containing gluten, namely: wheat (such as spelt and khorasan wheat), rye, barley, 
-      oats or their hybridised strains, and products thereof, except:  </h3>
-
-<h4>(a) wheat based glucose syrups including dextrose</h4>
-<h4>(b) wheat based maltodextrins</h4>
-<h4>(c) glucose syrups based on barley </h4>
-<h4>(d) cereals used for making alcoholic distillates including ethyl alcohol of agricultural origin </h4>
-
-
-<h3>2. Crustaceans and products thereof</h3>
-
-<h3>3. Eggs and products thereof</h3>
-
-<h3>4. Fish and products thereof, except:</h3>
-
-<h4>(a) fish gelatine used as carrier for vitamin or carotenoid preparations</h4>
-<h4>(b) fish gelatine or Isinglass used as fining agent in beer and wine</h4>
-
-<h3>5. Peanuts and products thereof</h3>
-
-<h3>6. Soybeans and products thereof, except:</h3>
-
-<h4>(a) fully refined soybean oil and fat</h4>
-<h4>(b) natural mixed tocopherols (E306), natural D-alpha tocopherol, natural D-alpha tocopherol acetate, 
-and natural D-alpha tocopherol succinate from soybean sources</h4>
-<h4>(c) vegetable oils derived phytosterols and phytosterol esters from soybean sources</h4>
-<h4>(d) plant stanol ester produced from vegetable oil sterols from soybean sources</h4>
-
-<h3>7. Milk and products thereof (including lactose), except:</h3>
-
-<h4>(a) whey used for making alcoholic distillates including ethyl alcohol of agricultural origin
-(b) lactitol/</h4>
-
-<h3>8. Nuts, namely: almonds (Amygdalus communis L.), hazelnuts (Corylus avellana), walnuts (Juglans regia),
- cashews (Anacardium occidentale), pecan nuts (Carya illinoinensis (Wangenh.) K. Koch), Brazil nuts 
- (Bertholletia excelsa), pistachio nuts (Pistacia vera), macadamia or Queensland nuts (Macadamia ternifolia),
-  and products thereof, except for nuts used for making alcoholic distillates including ethyl alcohol of agricultural origin</h3>
-
-<h3>9. Celery and products thereof</h3>
-
-<h3>10. Mustard and products thereof</h3>
-
-<h3>11. Sesame seeds and products thereof</h3>
-
-<h3>12. Sulphur dioxide and sulphites at concentrations of more than 10 mg/kg or 10 mg/litre in terms of the 
-total SO2 which are to be calculated for products as proposed ready for consumption or as reconstituted 
-according to the instructions of the manufacturers</h3>
-
-<h3>13. Lupin and products thereof</h3>
-
-<h3>14. Molluscs and products thereof
-
-</h3>
-      </div>
     </form>
   }
-
-  // render() {
-  //   let { starters, sides, mains, desserts } = this.state;
-  //   starters = starters.map(this.build_list('starters'))
-  //   sides = sides.map(this.build_list('sides'))
-  //   mains = mains.map(this.build_list('mains'))
-  //   desserts = desserts.map(this.build_list('desserts'))
-  //   console.log(starters)
-  //   return (
-  //     <form onSubmit={this.handleSubmit}>
-  //       <h4>Starters</h4>
-  //       {starters}
-  //       <button type="button" onClick={this.handleAddStarter} className="form-button">Add Starter</button>
-
-
-  //       <h4>Sides</h4>
-  //       {sides}
-  //       <button type="button" onClick={this.handleAddSide} className="form-button">Add Side</button>
-
-
-  //       <h4>Mains</h4>
-  //       {mains}
-  //       <button type="button" onClick={this.handleAddMain} className="form-button">Add Main</button>
-
-
-  //       <h4>Desserts</h4>
-  //       {desserts}
-  //       <button type="button" onClick={this.handleAddDessert} className="form-button">Add Dessert</button>
-
-  //       <div>
-
-  //         <button>Confirm Selection</button>
-  //       </div>
-  //     </form>
-
-  //   )
-  // }
 }
 export default MenuForm

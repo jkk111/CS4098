@@ -3,44 +3,48 @@
   	{
       "name": "menu",
       "keys": {
-        "menu_id": "INTEGER PRIMARY KEY AUTOINCREMENT",
-        "menu_name": "TEXT NOT NULL"
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "name": "TEXT NOT NULL"
       }
     },
     {
-      "name": "starter",
+      "name": "starters",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+      	"menu_id": "INTEGER NOT NULL",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
-        "allergen": "TEXT NOT NULL"
+        "allergens": "TEXT NOT NULL"
       }
     },
     {
-      "name": "main",
+      "name": "mains",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+      	"menu_id" : "INTEGER NOT NULL",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
-        "allergen": "TEXT NOT NULL"
+        "allergens": "TEXT NOT NULL"
       }
     },
     {
       "name": "desserts",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+      	"menu_id" : "INTEGER NOT NULL",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
-        "allergen": "TEXT NOT NULL"
+        "allergens": "TEXT NOT NULL"
       }
     },
     {
       "name": "drinks",
       "keys": {
-      	"menu_id" : "INTEGER PRIMARY KEY",
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+      	"menu_id" : "INTEGER NOT NULL",
        	"name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
-        "allergen": "TEXT NOT NULL"
+        "allergens": "TEXT NOT NULL"
       }
     }
   ]

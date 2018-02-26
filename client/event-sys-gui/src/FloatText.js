@@ -1,7 +1,7 @@
 import React from 'react';
 import './FloatText.css'
 
-let merge_classes = (base, added) => `${base} ${base}-${added}`
+let merge_classes = (base, added) => `${base} ${added}-${base}`
 
 let FloatText = ({ name, label, className = '', defaultValue = '', inputProps = {}, children }) => {
   let el_class = merge_classes('float-text', className)

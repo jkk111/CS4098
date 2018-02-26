@@ -9,7 +9,9 @@
         "venue_id": "INTEGER NOT NULL DEFAULT 0",
         "max_attendees": "INTEGER NOT NULL",
         "start_time": "INTEGER NOT NULL",
-        "end_time": "INTEGER NOT NULL"
+        "end_time": "INTEGER NOT NULL",
+        "eventbrite_id": "TEXT",
+        "eventbrite_rul": "TEXT"
       }
     },
     {

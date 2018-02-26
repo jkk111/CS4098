@@ -53,32 +53,35 @@ app.post('/promote', bodyParser.json(), async(req, res) => {
 })
 
 app.post('/create_menu', bodyParser.json(), async(req, res) => {
-  let {menu_name, 
-      starter_name, 
-      main_name, 
-      desserts_name, 
-      drinks_name, 
-      starter_desc, 
-      main_desc, 
-      desserts_desc, 
-      drinks_desc, 
-      starter_allg, 
-      main_allg, 
-      desserts_allg, 
-      drinks_allg} = req.body;
-  let menu = {menu_name};
-  //let starters = {starter_name, starter_desc, starter_allg};
-  //let mains = {main_name, main_desc, main_allg};
-  //let desserts = {desserts_name, desserts_desc, desserts_allg};
-  //let drinks = {drinks_name, drinks_desc, drinks_allg};
-  let result = await Menus.add('menu', menu);
-  let id = result.lastID
-  await Menus.add('starter',{menu_id: id, name:starter_name, description: starter_desc, allergen: starter_allg});
-  await Menus.add('main',{menu_id: id, name:main_name, description: main_desc, allergen: main_allg});
-  await Menus.add('desserts',{menu_id: id, name:desserts_name, description: desserts_desc, allergen: desserts_allg});
-  await Menus.add('drinks',{menu_id: id, name:drinks_name, description: drinks_desc, allergen: drinks_allg});
+  let menu = req.body;
 
-  res.sent({id, success: true})
+
+  let menu_data = { name: menu.name };
+  let result = await Menus.add('menu', menu_data);
+  let id = result.lastID;
+
+  for(var main of menu.mains) {
+    await Menus.add('mains', { menu_id: id, ...main })
+  }
+
+  for(var starter of menu.starters) {
+    await Menus.add('starters', { menu_id: id, ...starter })
+  }
+
+  for(var dessert of menu.desserts) {
+    await Menus.add('desserts', { menu_id: id, ...dessert })
+  }
+
+  for(var drink of menu.drinks) {
+    await Menus.add('drinks', { menu_id: id, ...drink })
+  }
+
+  // await Menus.add('starter', { menu_id: id, name: starter_name, description: starter_desc, allergen: starter_allg });
+  // await Menus.add('main', { menu_id: id, name: main_name, description: main_desc, allergen: main_allg });
+  // await Menus.add('desserts', { menu_id: id, name: desserts_name, description: desserts_desc, allergen: desserts_allg });
+  // await Menus.add('drinks', { menu_id: id, name: drinks_name, description: drinks_desc, allergen: drinks_allg });
+
+  res.send({id, success: true})
 });
 
 app.post('/create_event', bodyParser.json(), async(req, res) => {
@@ -137,24 +140,6 @@ app.post('/create_venue', bodyParser.json(), async(req, res) => {
 })
 
 app.get('/venues', async(req, res) => {
-  // let venues = [
-  //   { "id": "1", "name": "venue 1",
-  //     "description": "venue 1 description", "address_1": "address line 1",
-  //     "address_2": "address line 2", "city": "city 1",
-  //     "country": "country 1", "capacity": "100"
-  //   },
-  //   { "id": "2", "name": "venue 2",
-  //     "description": "venue 2 description", "address_1": "address line 1",
-  //     "address_2": "address line 2", "city": "city 2",
-  //     "country": "country 2", "capacity": "200"
-  //   },
-  //   { "id": "3", "name": "venue 3",
-  //     "description": "venue 3 description", "address_1": "address line 1",
-  //     "address_2": "address line 2", "city": "city 3",
-  //     "country": "country 3", "capacity": "300"
-  //   }
-  // ]
-  // res.json(venues);
   res.json(await Events.get('venues', {}, '*'))
 });
 

@@ -79,7 +79,6 @@ let set_pricing_model = (plan = 'package1') => {
 }
 
 let set_payment_method = (country, currency, method) => {
-  console.log(SET_PAYMENT_METHOD, country, currency, method)
   return request({
     url: SET_PAYMENT_METHOD,
     method: 'POST',
@@ -124,6 +123,7 @@ let create_event = async (name, description, venue_id, start, end, timezone, cur
   description = { html: description }
   start = { utc: format_date(start), timezone }
   end = { utc: format_date(end), timezone }
+
   let event = await request({
     url: CREATE_EVENT,
     method: 'POST',
@@ -141,24 +141,28 @@ let create_event = async (name, description, venue_id, start, end, timezone, cur
 
   let event_id = event.id;
   let url = CREATE_TICKET(event_id)
+  console.log("Creating Tickets");
   for(var ticket of tickets) {
-    console.log(await request({
+    await request({
       url,
       method: 'POST',
       body: {
         ticket_class: ticket
       }
-    }))
+    })
   }
 
   url = PUBLISH_EVENT(event_id);
 
 
-  console.log(await set_event_payment_method(event_id, checkout_id))
-  console.log(await request({
+  await set_event_payment_method(event_id, checkout_id)
+  console.log("Publishing event");
+  await request({
     url,
     method: 'POST'
-  }))
+  })
+
+  return event;
 }
 
 let create_ticket = (name, description, quantity_total, currency, cost, sales_channels) => {
@@ -171,13 +175,27 @@ let create_ticket = (name, description, quantity_total, currency, cost, sales_ch
   }
 }
 
-let create = async(event, tickets, venue) => {
+let Create_Event = async(event, tickets, venue) => {
   if(!token) {
-    console.warn("Eventbrite Not Setup")
+    console.warn("Eventbrite Not Enabled")
     return;
   }
+
+  let pm = await get_payment_method();
+
+  let checkout_id = null;
+
+  if(pm.checkout_settings.length === 0) {
+    console.log(await set_payment_method('IE', 'EUR', 'eventbrite'));
+  } else {
+    checkout_id = pm.checkout_settings[0].id
+  }
+
+  await set_pricing_model('package2');
+
   let event_tickets = [];
-  await create_venue(venue.name, venue.address_1, venue.address_2, venue.city, venue.country);
+  let venue_object = await create_venue(venue.name, venue.address_1, venue.address_2, venue.city, venue.country);
+  let venue_id = venue_object.id;
   for(var ticket of tickets) {
     let tick = await create_ticket(
       ticket.name,
@@ -191,48 +209,66 @@ let create = async(event, tickets, venue) => {
     event_tickets.push(tick);
   }
 
-  create_event(event.name, event.description, event.start, event.end, event.timezone, event.currency, checkout_id, event_tickets);
+  let { id, url } = await create_event(event.name, event.description, venue_id, event.start, event.end, event.timezone, event.currency, checkout_id, event_tickets);
+  return { id, url }
 }
 
 let test = async() => {
-  // console.log(await payment_methods('EUR', 'IE'));
-  // return;
-  let pm = await get_payment_method();
-
-  let checkout_id = null;
-
-  if(pm.checkout_settings.length === 0) {
-    console.log(await set_payment_method('IE', 'EUR', 'eventbrite'));
-  } else {
-    checkout_id = pm.checkout_settings[0].id
-  }
-
-  await set_pricing_model('package2');
-  let venue_id = await create_venue('test_venue', '42a Pearse St', '', 'Dublin', 'IE')
-  venue_id = venue_id.id
 
   let start = new Date();
   let end = new Date();
   start.setDate(start.getDate() + 30);
   end.setDate(end.getDate() + 31);
-
-  let single = await create_ticket("single", "A lonely person ticket", 100, 'EUR', 'EUR:100000', [ 'online' ])
-  let table_8 = await create_ticket("table of 8", "A lonely person with some friends", 10, 'EUR', 'EUR:800000', [ 'online' ])
-  let table_10 = await create_ticket("table of 10", "A group", 5, 'EUR', 'EUR:1000000', [ 'online' ])
+  let event = {
+    name: "Test Event",
+    description: "This is a test event",
+    start,
+    end,
+    timezone: 'Europe/Dublin',
+    currency: 'EUR',
+  }
 
   let tickets = [
-    single,
-    table_8,
-    table_10
+    {
+      name: "single",
+      description: "Single",
+      quantity_total: 100,
+      currency: "EUR",
+      cost: 'EUR:100000'
+    },
+    {
+      name: "table 8",
+      description: "table 8",
+      quantity_total: 10,
+      currency: "EUR",
+      cost: 'EUR:800000'
+    },
+    {
+      name: "table 10",
+      description: "table 10",
+      quantity_total: 5,
+      currency: "EUR",
+      cost: 'EUR:1000000'
+    }
   ]
 
-  await create_event("Test Event", "Just a test event", venue_id, start.getTime(), end.getTime(), 'Europe/Dublin', 'EUR', checkout_id, tickets)
+  let venue = {
+    name: "Test Venue",
+    address_1: "42a pearse st",
+    address_2: "",
+    city: "Dublin",
+    country: "IE"
+  }
+
+  return await Create_Event(event, tickets, venue);
 }
 
 
 
-let cleanup = async() => {
-
+let cleanup = async(r) => {
+  console.log(r);
 }
 
-test().then(cleanup);
+if(!module.parent) {
+  test().then(cleanup);
+}
