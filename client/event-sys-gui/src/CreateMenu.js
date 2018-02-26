@@ -147,7 +147,7 @@ class MenuForm extends React.Component {
   }
 
   render() {
-    return <form onSubmit={this.handleSubmit} autoComplete="off">
+    return <form onSubmit={this.createMenu} autoComplete="off">
       <FloatText name="menu_name" label="Menu Name:" />
       {this.render_sections('starters', 'mains', 'desserts', 'drinks')}
       <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
