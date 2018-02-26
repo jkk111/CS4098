@@ -247,14 +247,6 @@ app.post('/preview', bodyParser.json(), (req, res) => {
   res.send("ok");
 })
 
-// app.get('/events', (req, res) => {
-//   res.json({ success: false, error: 'UNIMPL' })
-// })
-
-// app.get('/events/:id', (req, res) => {
-//   res.json({ success: false, error: 'UNIMPL' })
-// })
-
 /**
  * User Modules
  * @level 1
