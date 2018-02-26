@@ -19,6 +19,30 @@ app.get('/info', async(req, res) => {
   res.json({ success: false, error: 'UNIMPL' })
 })
 
+app.post('/create_menu', bodyParser.json(), async(req, res) => {
+  let menu = req.body;
+  let menu_data = { name: menu.name };
+  let result = await Menus.add('menu', menu_data);
+  let id = result.lastID;
+
+  for(var main of menu.mains) {
+    await Menus.add('mains', { menu_id: id, ...main })
+  }
+
+  for(var starter of menu.starters) {
+    await Menus.add('starters', { menu_id: id, ...starter })
+  }
+
+  for(var dessert of menu.desserts) {
+    await Menus.add('desserts', { menu_id: id, ...dessert })
+  }
+
+  for(var drink of menu.drinks) {
+    await Menus.add('drinks', { menu_id: id, ...drink })
+  }
+  res.send({id, success: true})
+});
+
 app.get('/users', async(req, res) => {
   let users = await Users.get('user', {}, [ 'id', 'f_name', 'l_name', 'email', 'email_verified', 'subscribed', 'is_admin' ]);
   res.json(users);
@@ -118,5 +142,16 @@ app.get('/venues', async(req, res) => {
 app.get('/tickets', async(req, res) => {
   res.json(await Events.get('tickets', {}, '*'))
 });
+
+app.get('/menus', async(req, res) => {
+  let menus = await Menus.get('menu', {}, '*');
+  for(var menu of menus) {
+    menu.starters = await Menus.get('starters', { menu_id: menu.id }, '*');
+    menu.mains = await Menus.get('mains', { menu_id: menu.id }, '*');
+    menu.desserts = await Menus.get('desserts', { menu_id: menu.id }, '*');
+    menu.drinks = await Menus.get('drinks', { menu_id: menu.id }, '*');
+  }
+  res.json(menus);
+})
 
 module.exports = app;

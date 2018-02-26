@@ -9,9 +9,12 @@ class ViewMenus extends React.Component {
       menus: [],
       selected: false
     }
+
+    this.menu_selected = this.menu_selected.bind(this);
+    this.get_menus();
   }
 
-  get_menus() {
+  async get_menus() {
     let resp = await fetch('/admin/menus');
     let menus = await resp.json();
     this.setState({
@@ -19,8 +22,12 @@ class ViewMenus extends React.Component {
     });
   }
 
-  menu_selected() {
-
+  menu_selected(index) {
+    return (e) => {
+      this.setState({
+        selected: index
+      })
+    }
   }
 
   render() {
@@ -30,8 +37,9 @@ class ViewMenus extends React.Component {
       return <ViewMenu {...menus[selected]} />
     } else {
       menus = menus.map((menu, i) => {
-        return <div key={i}>{menu.name}</div>
+        return <div key={i} onClick={this.menu_selected(i)}>{menu.name}</div>
       });
+      console.log(menus);
       return menus;
     }
   }
