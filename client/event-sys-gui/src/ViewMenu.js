@@ -1,6 +1,6 @@
 import React from 'react'
 
-let ViewMenu = ({ name, starters, mains, desserts, drinks }) => {
+let ViewMenu = ({ name = '', starters = [], mains = [], desserts = [], drinks = [] }) => {
   starters = starters.map((starter, i) => {
     <div key={i}>
       {starter.name} {starter.description}
