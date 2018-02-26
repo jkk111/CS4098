@@ -210,7 +210,7 @@ let test_create_venue = async() => {
       address_1: "42a Pearse St",
       address_2: "",
       city: "Dublin",
-      country: "Ireland",
+      country: "IE",
       capacity: 100
     }
   })
@@ -235,6 +235,7 @@ let create_event = async() => {
     tickets: [
       { id: 1, count: 100 }
     ],
+    timezone: "Dublin/Europe"
     start_time: start.getTime(),
     end_time: end.getTime()
   }
