@@ -20,6 +20,8 @@ class CreateEvent extends React.Component {
     this.createEvent = this.createEvent.bind(this);
     this.handleVenueChange = this.handleVenueChange.bind(this);
     this.handleTicketsChange = this.handleTicketsChange.bind(this);
+    this.startChange = this.startChange.bind(this);
+    this.endChange = this.endChange.bind(this);
     this.setVenues();
     this.setTickets();
   }
@@ -31,6 +33,8 @@ class CreateEvent extends React.Component {
     let tickets = [];
     let start = form.start.value;
     let end = form.end.value;
+
+    console.log(start, end);
 
     for (var i=0; i<selectedTickets.length; i++){
       let id = selectedTickets[i].id;
@@ -44,8 +48,8 @@ class CreateEvent extends React.Component {
       venue_id: this.state.selectedVenue,
       max_attendees: form.capacity.value,
       timezone: form.timezone.value,
-      start_time: start,
-      end_time: end,
+      start_time: this.state.start_time,
+      end_time: this.state.end_time,
       tickets: tickets
     }
 
@@ -135,6 +139,18 @@ class CreateEvent extends React.Component {
     return theList;
   }
 
+  startChange(e) {
+    this.setState({
+      start_time: e.unix() * 1000
+    });
+  }
+
+  endChange(e) {
+    this.setState({
+      end_time: e.unix() * 1000
+    });
+  }
+
   render() {
     let venueOptions = this.buildVenueList();
     let ticketOptions = this.buildTicketsList();
@@ -152,8 +168,8 @@ class CreateEvent extends React.Component {
         </select>
         {ticketAmounts}
         <div className='event_form-input'>
-          <DateTime locale='en-ie' name="start" label="Start Date/Time: "/>
-          <DateTime locale='en-ie' name="end" label="End Date/Time: "/>
+          <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange}/>
+          <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} />
         </div>
         <input name="timezone" type='hidden' value='Europe/Dublin' />
         <div className='event_form-input'>

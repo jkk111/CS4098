@@ -124,6 +124,8 @@ let create_event = async (name, description, venue_id, start, end, timezone, cur
   start = { utc: format_date(start), timezone }
   end = { utc: format_date(end), timezone }
 
+  console.log(start, end);
+
   let event = await request({
     url: CREATE_EVENT,
     method: 'POST',
@@ -180,6 +182,8 @@ let Create_Event = async(event, tickets, venue) => {
     console.warn("Eventbrite Not Enabled")
     return;
   }
+
+  console.log(event, tickets, venue)
 
   let pm = await get_payment_method();
 
