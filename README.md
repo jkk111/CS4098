@@ -46,7 +46,9 @@ Repo to store source code for CS4098 - Group Design Project
 1. The ability to see a list of all events is available to admins and all other users.
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
-4. If you see a message saying there are no events, then there are no events in the system.
+5. If you see a message saying there are no events, then there are no events in the system.
+6. To see more information about an event, click on the event name.
+7. If you are logged in as an admin you will also see 2 more administrative pieces of information about an event.
 
 ## Tests
 Tests can be viewed by setting the url to /?tests=tests
