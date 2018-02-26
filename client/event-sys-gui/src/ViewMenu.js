@@ -3,17 +3,17 @@ import React from 'react'
 let ViewMenu = ({ name = '', starters = [], mains = [], desserts = [], drinks = [] }) => {
   starters = starters.map((starter, i) => {
     return <div key={i}>
-      {starter.name} {starter.description} {drink.allergens}
+      {starter.name} {starter.description} {starter.allergens}
     </div>
   })
   mains = mains.map((main, i) => {
     return <div key={i}>
-      {main.name} {main.description} {drink.allergens}
+      {main.name} {main.description} {main.allergens}
     </div>
   })
   desserts = desserts.map((dessert, i) => {
     return <div key={i}>
-      {dessert.name} {dessert.description} {drink.allergens}
+      {dessert.name} {dessert.description} {dessert.allergens}
     </div>
   })
   drinks = drinks.map((drink, i) => {
