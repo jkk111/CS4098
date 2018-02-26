@@ -4,7 +4,7 @@ const Database = require('../database')
 const Events = Database.Get('event')
 
 app.get('/events', async(req, res) => {
-  let events = await Events.get('event', {}, [ 'id','name' ]);
+  let events = await Events.get('event', {}, [ 'id','name', 'description', 'venue_id', 'start_time', 'end_time', 'timezone', 'max_attendees' ]);
   let venue_cache = {};
   let ticket_cache = {};
 
