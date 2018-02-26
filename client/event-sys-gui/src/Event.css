@@ -1,0 +1,58 @@
+.event {
+  background: purple;
+  color: white;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+
+.event-name-collapsed, .event-name-expanded {
+  padding: 1em;
+  cursor: pointer;
+}
+
+.event-content, .admin-content{
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 0fr 1fr;
+  grid-gap: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-content-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.event-content-key {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.event-name + .event-content {
+  background: orange;
+}
+
+.event-content-button {
+  margin: 0 1em;
+  border: 2px solid black;
+  cursor: pointer;
+  user-select: none;
+}
+
+.event-content-button:hover {
+  filter: brightness(80%);
+}
+
+.event-content-button:active {
+  filter: brightness(60%);
+}
+
+.event-content-key, .event-content-value, .event-content-button {
+  line-height: 1.5em;
+  padding: 0.2em;
+}

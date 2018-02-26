@@ -72,7 +72,22 @@ This can be the name of the event, or the type etc.
 1. The ability to see a list of all events is available to admins and all other users.
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
-4. If you see a message saying there are no events, then there are no events in the system.
+5. If you see a message saying there are no events, then there are no events in the system.
+6. To see more information about an event, click on the event name.
+7. If you are logged in as an admin you will also see 2 more administrative pieces of information about an event.
 
-## Tests
-Tests can be viewed by setting the url to /?tests=tests
+### Tests
+1. Server Test
+   1. To run server tests after cloning the repo, open your terminal and navigate to ```/cs4098/server/```.
+   2. Run commands ```npm install``` followed by ```sudo npm test```.
+   3. Enter your password and any other information if prompted to.
+   4. The test results should be displayed on screen.
+2. Client Tests
+   1. Navigate to ```/cs4098/client/event-sys-gui/``` in your terminal.
+   2. Run commands ```npm install``` followed by ```npm test```.
+   3. The tests should run and their results should be displayed on-screen.
+3. Tests In Browser
+   1. Once tests have been run their results can be viewed in the browser if you prefer.
+   2. Make sure the server is running by navigating to ```/cs4098/``` and running ```./setup.sh```.
+   3. Enter enter information as prompted.
+   4. Navigate to ```localhost:3000/?tests=tests``` in your browser to view.
