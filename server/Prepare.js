@@ -6,6 +6,13 @@ const nodemailer = require('nodemailer')
 const fs = require('fs')
 const { _send } = require('./email')
 
+let conf = {};
+try {
+  conf = require('./config.json')
+} catch(e) {
+  conf = {};
+}
+
 const bcrypt = require('bcrypt');
 const salt_iterations = 10;
 // Module to set up databases and stuff
@@ -35,7 +42,7 @@ let init = async() => {
     console.log('Database Already Setup\nSkipping.')
     return;
   }
-  let salt = await generate_salt();
+  let salt = conf.salt || (await generate_salt());
   console.log("First we will create an admin user");
   let f_name = await question("First Name");
   let l_name = await question("Last Name");
@@ -44,6 +51,12 @@ let init = async() => {
 
   while(!pass) {
     pass = await password("Password");
+  }
+
+  let eventbrite_key = await question("Eventbrite Token (enter no to disable)");
+
+  if(eventbrite_key.trim() === 'no') {
+    eventbrite_key = undefined;
   }
 
   pass = await hash_password(pass, salt)
@@ -89,7 +102,8 @@ let init = async() => {
     smtp_port: port,
     smtp_user: m_user,
     smtp_pass: m_pass,
-    salt: salt
+    salt: salt,
+    token: conf.token || eventbrite_key
   }
 
   _send(config, options, (err, info) => {

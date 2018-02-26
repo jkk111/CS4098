@@ -209,21 +209,21 @@ let Create_Event = async(event, tickets, venue) => {
     event_tickets.push(tick);
   }
 
-  let { id, url } = await create_event(event.name, event.description, venue_id, event.start, event.end, event.timezone, event.currency, checkout_id, event_tickets);
+  let { id, url } = await create_event(event.name, event.description, venue_id, event.start_time, event.end_time, event.timezone, event.currency, checkout_id, event_tickets);
   return { id, url }
 }
 
 let test = async() => {
 
-  let start = new Date();
-  let end = new Date();
-  start.setDate(start.getDate() + 30);
-  end.setDate(end.getDate() + 31);
+  let start_time = new Date();
+  let end_time = new Date();
+  start_time.setDate(start_time.getDate() + 30);
+  end_time.setDate(end_time.getDate() + 31);
   let event = {
     name: "Test Event",
     description: "This is a test event",
-    start,
-    end,
+    start_time,
+    end_time,
     timezone: 'Europe/Dublin',
     currency: 'EUR',
   }
@@ -272,3 +272,5 @@ let cleanup = async(r) => {
 if(!module.parent) {
   test().then(cleanup);
 }
+
+module.exports = Create_Event;

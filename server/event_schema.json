@@ -10,6 +10,7 @@
         "max_attendees": "INTEGER NOT NULL",
         "start_time": "INTEGER NOT NULL",
         "end_time": "INTEGER NOT NULL",
+        "timezone": "TEXT NOT NULL",
         "eventbrite_id": "TEXT",
         "eventbrite_rul": "TEXT"
       }
