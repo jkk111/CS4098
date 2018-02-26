@@ -51,7 +51,7 @@ app.post('/promote', bodyParser.json(), async(req, res) => {
   let users = await Users.update('user', { is_admin: 1 }, { id });
   res.json({ success: true })
 })
-
+/*
 app.post('/create_menu', bodyParser.json(), async(req, res) => {
   let menu = req.body;
 
@@ -83,7 +83,7 @@ app.post('/create_menu', bodyParser.json(), async(req, res) => {
 
   res.send({id, success: true})
 });
-
+*/
 app.post('/create_event', bodyParser.json(), async(req, res) => {
   let { name, description, venue_id, max_attendees, start_time, end_time } = req.body;
   let event = { name, description, venue_id, max_attendees, start_time, end_time };

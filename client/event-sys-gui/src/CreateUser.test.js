@@ -30,10 +30,3 @@ it('should be defined', () => {
     expect(CreateUser).toBeDefined();
 });
 
-////it('should have 1 button', () => {
-//  var div = document.createElement('div');
-//  ReactDOM.render(<CreateUser />, div);
-//  var DOM = TestUtils.renderIntoDocument(div);
-//  var buttons = TestUtils.scryRenderedDOMComponentsWithTag(DOM, 'save');
-//  expect(buttons.length).toEqual(1);
-//})

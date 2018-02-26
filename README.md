@@ -42,5 +42,11 @@ Repo to store source code for CS4098 - Group Design Project
 4. Once the data is correct, click the 'Create Event' button at the bottom of the screen.
 5. To check if your event was added to the system, navigate to the 'Events' screen in the menu. You should now see your newly created event listed.
 
+### Viewing Events
+1. The ability to see a list of all events is available to admins and all other users.
+2. To view all events, click on 'menu' and select the 'Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+
 ## Tests
 Tests can be viewed by setting the url to /?tests=tests
