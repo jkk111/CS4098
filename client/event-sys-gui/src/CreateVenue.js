@@ -52,7 +52,7 @@ class CreateVenue extends React.Component {
         <FloatText name="address_1" label="Address Line 1:" />
         <FloatText name="address_2" label="Address Line 2:" />
         <FloatText name="city" label="City:" />
-        <input type='hidden' value='IE' />
+        <input name="country" type='hidden' value='IE' />
         <FloatText name="capacity" label="Venue Capacity:" />
         <div className='venue_form-input'>
           <input type='submit' className='form-button' submit="create_venue" value='Create Venue'/>
