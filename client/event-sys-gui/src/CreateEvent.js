@@ -43,6 +43,7 @@ class CreateEvent extends React.Component {
       description: form.description.value,
       venue_id: this.state.selectedVenue,
       max_attendees: form.capacity.value,
+      timezone: form.timezone.value,
       start_time: start,
       end_time: end,
       tickets: tickets
@@ -154,6 +155,7 @@ class CreateEvent extends React.Component {
           <DateTime locale='en-ie' name="start" label="Start Date/Time: "/>
           <DateTime locale='en-ie' name="end" label="End Date/Time: "/>
         </div>
+        <input name="timezone" type='hidden' value='Europe/Dublin' />
         <div className='event_form-input'>
           <input type='submit' className='form-button' submit="create_event" value='Create Event'/>
         </div>
