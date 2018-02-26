@@ -9,13 +9,13 @@ Repo to store source code for CS4098 - Group Design Project
 5. Navigate to newly created folder - ```cd cs4098```
 6. Run setup script - ```./setup.sh```
 7. Follow the instructions on screen and enter your details. Keep a note of your login credentials for later. If needed, an example of input can be seen below.
-	1. First Name : "Sean"
-	2. Last Name : "Thomas"
-	3. Username : "SeanT"
+	1. First Name : "Adam"
+	2. Last Name : "Lane"
+	3. Username : "Lanead"
 	4. Password : "Password"
 	5. Confirm Password : "Password"
-	6. Eventbrite token : "no" (Note this must be a lower case "no" if not using an eventbrite token)
-	7. Email : "SeanT@Example.com"
+	6. Eventbrite token : "no" (Note: this must be a lower case "no" if not using an eventbrite token)
+	7. Email : "Lanead@tcd.ie" (Note: any email will do, fake or real)
 	8. SMTP Host : (This field can be left blank)
 	9. SMTP Port : (This field can be left blank)
 	10. Mail User : (This field can be left blank)
