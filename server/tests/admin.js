@@ -235,7 +235,7 @@ let create_event = async() => {
     tickets: [
       { id: 1, count: 100 }
     ],
-    timezone: "Dublin/Europe"
+    timezone: "Europe/Dublin",
     start_time: start.getTime(),
     end_time: end.getTime()
   }

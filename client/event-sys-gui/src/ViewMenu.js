@@ -21,7 +21,7 @@ let ViewMenu = ({ name, starters, mains, desserts, drinks }) => {
       {drink.name} {drink.description}
     </div>
   })
-  <div>
+  return <div>
     <h1>{name}</h1>
     <h2>Starters</h2>
     {starters}
