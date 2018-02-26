@@ -143,16 +143,12 @@ class CreateEvent extends React.Component {
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
         <FloatText name="capacity" label="Event Capacity:"/>
-        <label>
-          <select value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
-            {venueOptions}
-          </select>
-        </label>
-        <label>
-          <select value={this.state.tickets} onChange={this.handleTicketsChange} id="selectTickets">
-            {ticketOptions}
-          </select>
-        </label>
+        <select value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
+          {venueOptions}
+        </select>
+        <select value={this.state.tickets} onChange={this.handleTicketsChange} id="selectTickets">
+          {ticketOptions}
+        </select>
         {ticketAmounts}
         <div className='event_form-input'>
           <DateTime locale='en-ie' name="start" label="Start Date/Time: "/>
