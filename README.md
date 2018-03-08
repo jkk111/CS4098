@@ -1,6 +1,22 @@
 # CS4098
 Repo to store source code for CS4098 - Group Design Project
 
+### Eventbrite Setup.
+#### This assumes running from a clean install.
+To configure the app to use eventbrite you must provide an API key during setup.
+
+1. Go to [Eventbrite](https://eventbrite.com)
+2. Create an Account if you don't already have one.
+3. Login To your account
+4. Go to profile (Top Right Corner)
+5. Click Account Settings
+6. On the left side go to Developer > App Management
+7. Click Create A New App
+8. Fill in all appropriate details for application key request (Can Use Random Values).
+9. On the newly created application click Show Client Secret and OAuth Token.
+10. Take note of the section named "Your Personal Oauth Token".
+11. When prompted for an eventbrite API key during setup, use this key and eventbrite functionality will be enabled.
+
 ### Installation from a fresh ubuntu 16.04 LTS install
 1. Open a terminal - 'ctrl/⌘ + alt + t'
 2. Install git - ```sudo apt-get install -y git```
@@ -30,7 +46,7 @@ Repo to store source code for CS4098 - Group Design Project
 **Feature 74- I would like to buy a ticket to attend the event**.  
 **Feature 61 - I want to be able to purchase tickets througha simple online site, so I can attend the event**.  
 **Feature 62 - View tickets**.  
-### Eventebrite and SMTP set up
+### Eventebrite
 
 **Feature 1 - I want to be able to login (change password/details/create account)**.  
 **Feature 63 - Create an account/register**.  
