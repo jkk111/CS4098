@@ -23,17 +23,17 @@ Repo to store source code for CS4098 - Group Design Project
 	12. Mail Password Confirm :  "Password"
 8. Once complete, the script should open the webapp in a browser. If this fails, navigate to ```localhost:3000``` in your favorite browser.
 
-**Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction**.
-**Feature 32 - e-ticketing for users**.
-**Feature 36 - Online ticketing – keeping in mind that mostly repeat customers/attendees**.
-**Feature 42 - I want to be able to contact attendees easily e.g. group emails**.
-**Feature 74- I would like to buy a ticket to attend the event**.
-**Feature 61 - I want to be able to purchase tickets througha simple online site, so I can attend the event**.
-**Feature 62 - View tickets**.
+**Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction**.  
+**Feature 32 - e-ticketing for users**.  
+**Feature 36 - Online ticketing – keeping in mind that mostly repeat customers/attendees**.  
+**Feature 42 - I want to be able to contact attendees easily e.g. group emails**.  
+**Feature 74- I would like to buy a ticket to attend the event**.  
+**Feature 61 - I want to be able to purchase tickets througha simple online site, so I can attend the event**.  
+**Feature 62 - View tickets**.  
 ### Eventebrite and SMTP set up
 
-**Feature 1 - I want to be able to login (change password/details/create account)**.
-**Feature 63 - Create an account/register**.
+**Feature 1 - I want to be able to login (change password/details/create account)**.  
+**Feature 63 - Create an account/register**.  
 ### Signing Up
 1. Fill in your information in the sign-up and take note of your username and password for later.
 2. Currently, there is no minimum amount of characters required for any of the fields, and the email field does not require a real email address or the @ key.
@@ -54,13 +54,13 @@ Repo to store source code for CS4098 - Group Design Project
 ### Logging Out
 1. To log out, simply press the logout button in the menu. You should be redirected to the login/signup page.
 
-**Feature 4 - I would like to be able to create an event e.g. a dinner**.
-**Feature 34 - Send out emails automatically when an event is created**.
-**Feature 71 - View tickets**.
-**Feature 7 & 8 - I want to sent invitations to a mailing list, so that people know to come and that they are invited**.
-**Feature 16 - I want to be able to send automated invitations, with link to register for the event**.
-**Feature 40 - I would like to email (legitimately) subscribed users**.
-**Feature 87 - I want to be notified when new events are released**.
+**Feature 4 - I would like to be able to create an event e.g. a dinner**.  
+**Feature 34 - Send out emails automatically when an event is created**.  
+**Feature 71 - View tickets**.  
+**Feature 7 & 8 - I want to sent invitations to a mailing list, so that people know to come and that they are invited**.  
+**Feature 16 - I want to be able to send automated invitations, with link to register for the event**.  
+**Feature 40 - I would like to email (legitimately) subscribed users**.  
+**Feature 87 - I want to be notified when new events are released**.  
 ### Creating Venues
 Admin access only
 1. Before we can create events, we need to add venues for these events.
@@ -100,9 +100,9 @@ This can be the name of the event, or the type etc.
 10. Any event created will automatically sent out email invites to all users.
 11. Saved events should appear in the "event" section in the main menu, however events are not currently changing at the moment.
 
-**Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily**.
-**Feature 72 - I want to be able to easily see details fo the event – time, venue, etc**.
-**Feature 71 - I want to view event information so I can decide if I want to attend**.
+**Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily**.  
+**Feature 72 - I want to be able to easily see details fo the event – time, venue, etc**.  
+**Feature 71 - I want to view event information so I can decide if I want to attend**.  
 ### Viewing Events
 1. The ability to see a list of all events is available to admins and all other users.
 2. To view all events, click on 'menu' and select the 'Events' option.
@@ -111,14 +111,14 @@ This can be the name of the event, or the type etc.
 6. To see more information about an event, click on the event name.
 7. If you are logged in as an admin you will also see 2 more administrative pieces of information about an event.
 
-**Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event**.
+**Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event**.  
 ### Create User
 Admin Access Only
 1. Create user is for admins to create accounts for their customers. They should know the customers first name, last name,and email. 
 2. To create a user, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create User'
 3. Fill in the customers first name, last name and email address. Initials are accepted as there is no minimal character length. Additionally the email field is not currently required to have a real email. 
 
-**Feature 46 - I want to create menus**.
+**Feature 46 - I want to create menus**.  
 ### Create Menu
 Admin Access Only
 1. This is where the admin can create a menu for a certain event.
@@ -130,10 +130,10 @@ Admin Access Only
 7. When you have finished adding things to your menu, click "Create Menu".
 8. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
 
-**Feature 2 - I want to be able to give admin access to other people**.
-**Feature 6 - Keep track of possible/previous guests**.
-**Feature 10 - I want to see the invite list**.
-**Feature 9 - I want to see guests contact details**.
+**Feature 2 - I want to be able to give admin access to other people**.  
+**Feature 6 - Keep track of possible/previous guests**.  
+**Feature 10 - I want to see the invite list**.  
+**Feature 9 - I want to see guests contact details**.  
 ### View Users
 Admin Access Only
 1. This is where the admin can see the list of all the users.
@@ -142,7 +142,7 @@ Admin Access Only
 4. Subscribed applies to users who have subscribed to the mailing list. Verified applies to email verification.
 5. An Admin may grant a user admin status on this screen by clicking the grant admin button visible in the users details
 
-**Feature 73 - Look at dinner menu**.
+**Feature 73 - Look at dinner menu**.  
 ### View Menu
 1. This is where everyone can see the menu options.
 2. To view menus, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Menus'
