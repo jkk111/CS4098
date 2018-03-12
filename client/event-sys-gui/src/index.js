@@ -159,3 +159,6 @@ update_user_data().then(() => {
 })
 
 registerServiceWorker();
+
+
+console.clear = () => {}

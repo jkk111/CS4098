@@ -1,0 +1,41 @@
+{
+  "tables": [
+    {
+      "name": "raffles",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "description": "TEXT NOT NULL",
+        "ticket_count": "INT NOT NULL",
+        "ticket_price": "INT NOT NULL",
+        "end_date": "INT NOT NULL",
+        "ended": "BOOL NOT NULL DEFAULT 0"
+      }
+    },
+    {
+      "name": "tickets",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "user_id": "INT NOT NULL",
+        "raffle_id": "INT NOT NULL"
+      }
+    },
+    {
+      "name": "prizes",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "raffle_id": "TEXT NOT NULL",
+        "description": "INT NOT NULL",
+        "winning_value": "INT NOT NULL"
+      }
+    },
+    {
+      "name": "winners",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "user_id": "INT NOT NULL",
+        "raffle_id": "INT NOT NULL",
+        "prize_id": "INT NOT NULL"
+      }
+    }
+  ]
+}

@@ -7,6 +7,7 @@ let Database = require('../database');
 let Users = Database.Get('user')
 let Events = Database.Get('event');
 let Menus = Database.Get('menu');
+let Raffle = Database.Get('raffle')
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
@@ -84,7 +85,6 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
     })
   }
 
-
   let [ venue ] = await Events.get('venues', { id: venue_id }, '*')
 
   console.log(event_tickets, venue)
@@ -134,6 +134,22 @@ app.post('/create_venue', bodyParser.json(), async(req, res) => {
 
   res.json({ id, success: true })
 })
+
+app.post('/create_raffle', bodyParser.json(), async(req, res) => {
+  let { description, ticket_count, ticket_price, end_date, prizes = [] } = req.body;
+  let raffle = { description, ticket_count, ticket_price, end_date };
+  let insert = await Raffle.add('raffles', raffle);
+  let raffle_id = insert.lastID;
+
+  for(var prize of prizes) {
+    let winning_value = crypto.randomBytes(4).readUInt32LE(0);
+    prize.winning_value = winning_value;
+    prize.raffle_id = raffle_id;
+    await Raffle.add('prizes', prize, '*')
+  }
+
+  res.send({ id: raffle_id });
+});
 
 app.get('/venues', async(req, res) => {
   res.json(await Events.get('venues', {}, '*'))
