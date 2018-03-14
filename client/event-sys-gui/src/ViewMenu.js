@@ -3,22 +3,22 @@ import React from 'react'
 let ViewMenu = ({ name = '', starters = [], mains = [], desserts = [], drinks = [] }) => {
   starters = starters.map((starter, i) => {
     return <div key={i}>
-      {starter.name} {starter.description}
+      {starter.name} {starter.description} {starter.allergens}
     </div>
   })
   mains = mains.map((main, i) => {
     return <div key={i}>
-      {main.name} {main.description}
+      {main.name} {main.description} {main.allergens}
     </div>
   })
   desserts = desserts.map((dessert, i) => {
     return <div key={i}>
-      {dessert.name} {dessert.description}
+      {dessert.name} {dessert.description} {dessert.allergens}
     </div>
   })
   drinks = drinks.map((drink, i) => {
     return <div key={i}>
-      {drink.name} {drink.description}
+      {drink.name} {drink.description} {drink.allergens}
     </div>
   })
   return <div>

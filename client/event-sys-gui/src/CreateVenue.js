@@ -1,7 +1,7 @@
 import React from 'react';
 import './CreateVenue.css'
 import 'moment/locale/en-ie'
-import { Logger } from './Util'
+import { Logger, isNatural } from './Util'
 import FloatText from './FloatText'
 
 class CreateVenue extends React.Component {
@@ -22,6 +22,17 @@ class CreateVenue extends React.Component {
   async createVenue(e){
     e.preventDefault();
     let form = e.target;
+
+    if(!form.name.value){
+      alert('please give the venue a name');
+      return;
+    }
+
+    if(!isNatural(form.capacity.value)){
+      alert('venue capacity must be a number');
+      return;
+    }
+
     let body = {
       name: form.name.value,
       description: form.description.value,

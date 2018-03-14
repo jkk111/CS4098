@@ -1,7 +1,7 @@
 import React from 'react';
 import './CreateTicket.css'
 import 'moment/locale/en-ie'
-import { Logger } from './Util'
+import { Logger, isNatural } from './Util'
 import FloatText from './FloatText'
 
 class CreateTicket extends React.Component {
@@ -19,6 +19,17 @@ class CreateTicket extends React.Component {
   async createTicket(e){
     e.preventDefault();
     let form = e.target;
+
+    if (!form.name.value){
+      alert('please give the ticket a name');
+      return;
+    }
+
+    if (!isNatural(form.price.value)){
+      alert('please enter a number for the ticket price');
+      return;
+    }
+
     let body = {
       name: form.name.value,
       description: form.description.value,

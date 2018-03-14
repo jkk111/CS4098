@@ -20,7 +20,7 @@ app.get('/info', async(req, res) => {
 });
 
 app.get('/events', async(req, res) => {
-  let events = await Events.get('event', {}, [ 'id','name' ]);
+  let events = await Events.get('event', {}, [ 'id','name', 'venue_id', 'start_time', 'end_time', 'description', 'max_attendees' ]);
   let venue_cache = {};
   let ticket_cache = {};
 
