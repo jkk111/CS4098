@@ -12,7 +12,7 @@ let { hash_password, verify_password, send_confirmation_email } = require('../ut
 // Obtains user info
 app.get('/info', async(req, res) => {
   let id = req.user_id
-  let user = await Users.get('user', { id }, [ 'f_name', 'l_name', 'email', 'username', 'phone', 'subscribed' ]);
+  let user = await Users.get('user', { id }, [ 'f_name', 'l_name', 'email', 'username', 'phone', 'email_verified', 'subscribed' ]);
   if(user.length > 0) {
     res.json(user[0])
   } else {

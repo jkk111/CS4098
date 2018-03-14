@@ -8,18 +8,31 @@ import './Settings.css'
 let CheckBox = ({ name, label, value }) => {
   return <div className='checkbox'>
     <label className='checkbox-label'>{label}</label>
-    <input name={name} type='checkbox' checked={value} />
+    <input name={name} type='checkbox' defaultChecked={value} />
   </div>
+}
+
+let resend = () => {
+  fetch('/user/resend_confirmation', {})
 }
 
 let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, defaults = {} }) => {
   console.log(defaults)
+  let prompt = null;
+
+  if(!defaults.email_verified) {
+    prompt = <div onClick={resend} className='resend-confirmation'>
+      Resend Confirmation Email
+    </div>
+  }
+
   return <form ref={ref} onSubmit={onSubmit} className='form'>
     <FloatText name='f_name' label='First Name:' defaultValue={defaults.f_name} />
     <FloatText name='l_name' label='Last Name:' defaultValue={defaults.l_name} />
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
     <FloatText name='phone' label='Phone:' defaultValue={defaults.phone} />
     <CheckBox name='subscribed' label='Subscribe To Mailing List' value={defaults.subscribed} />
+    {prompt}
     <div className='form-button form-field' onClick={onChangePassword}>Change Password</div>
     <input className='form-button' type='submit' value='Save'/>
   </form>
