@@ -45,14 +45,14 @@ app.post('/create_menu', bodyParser.json(), async(req, res) => {
 });
 
 app.get('/users', async(req, res) => {
-  let users = await Users.get('user', {}, [ 'id', 'f_name', 'l_name', 'email', 'email_verified', 'subscribed', 'is_admin' ]);
+  let users = await Users.get('user', {}, [ 'id', 'username', 'f_name', 'l_name', 'registered', 'email', 'phone', 'email_verified', 'subscribed', 'is_admin' ]);
   res.json(users);
 });
 
 app.post('/create_user', bodyParser.json(), async(req, res) => {
   let token = create_registration_token();
   let { f_name, l_name, email } = req.body;
-  let result = await Users.add('user', { username: token, f_name, l_name, email, password: '' });
+  let result = await Users.add('user', { username: token, f_name, l_name, email, password: '', registered: 0 });
   let id = result.lastID;
   Users.add('pending', { id, f_name, l_name, email, token });
   sendTemplate('pending-user', { f_name, l_name, email, token })
@@ -150,6 +150,15 @@ app.post('/create_raffle', bodyParser.json(), async(req, res) => {
 
   res.send({ id: raffle_id });
 });
+
+app.post('/add_prize', bodyParser.json(), async(req, res) => {
+  let { raffle_id, prize } = req.body;
+  let winning_value = crypto.randomBytes(4).readUInt32LE(0);
+  prize.winning_value = winning_value;
+  prize.raffle_id = raffle_id;
+  await Raffle.add('prizes', prize, '*')
+  res.send('OK')
+})
 
 app.get('/venues', async(req, res) => {
   res.json(await Events.get('venues', {}, '*'))

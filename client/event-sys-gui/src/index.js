@@ -68,7 +68,7 @@ let reducers = {
 
 reducers = combineReducers(reducers);
 
-let store = createStore(reducers);
+let store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 let last = null
 
 let update_user_data = async() => {
@@ -136,7 +136,26 @@ let parse_query = () => {
   return result
 }
 
-update_user_data().then(() => {
+let check_verify = async() => {
+  if(window.location.pathname === '/verify') {
+    let { code, email } = parse_query();
+
+    if(code && email) {
+      let resp = await fetch('/user/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code, email })
+      })
+
+      console.log(resp);
+    }
+  }
+}
+
+update_user_data().then(async() => {
+  await check_verify();
   loading = false;
   if(store.getState().logged_in !== 'UNAUTH') {
     let qs = parse_query();
