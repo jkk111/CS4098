@@ -5,6 +5,7 @@ const Users = Database.Get('user');
 const nodemailer = require('nodemailer')
 const fs = require('fs')
 const { _send } = require('./email')
+const crypto = require('crypto')
 
 let conf = {};
 try {
@@ -83,7 +84,9 @@ let init = async() => {
     </div>`
   }
 
-  await Users.add('user', { username: user, password: pass, f_name, l_name, email: mail, is_admin: 1 })
+  let verification_code = crypto.randomBytes(8).toString('hex')
+
+  await Users.add('user', { username: user, password: pass, f_name, l_name, email: mail, is_admin: 1, verification_code })
   let hash_test = await hash_password('test', salt)
 
   for(var i = 0; i < 5; i++) {

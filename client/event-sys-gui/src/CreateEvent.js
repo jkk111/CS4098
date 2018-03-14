@@ -2,7 +2,7 @@ import React from 'react';
 import './CreateEvent.css'
 import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
-import { Logger, isNatural } from './Util'
+import { Logger } from './Util'
 import FloatText from './FloatText'
 
 class CreateEvent extends React.Component {
@@ -33,21 +33,6 @@ class CreateEvent extends React.Component {
     let tickets = [];
     let start = form.start.value;
     let end = form.end.value;
-
-    if(form.event_name.value === ''){
-      alert('please give the event a name')
-      return
-    }
-
-    if(!isNatural(form.capacity.value)){
-      alert('capacity must be a number');
-      return
-    }
-
-    if(!this.state.start_time || !this.state.end_time){
-      alert('please select start and end times');
-      return
-    }
 
     console.log(start, end);
 

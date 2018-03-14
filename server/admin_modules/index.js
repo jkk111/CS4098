@@ -7,6 +7,7 @@ let Database = require('../database');
 let Users = Database.Get('user')
 let Events = Database.Get('event');
 let Menus = Database.Get('menu');
+let Raffle = Database.Get('raffle')
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
@@ -44,14 +45,14 @@ app.post('/create_menu', bodyParser.json(), async(req, res) => {
 });
 
 app.get('/users', async(req, res) => {
-  let users = await Users.get('user', {}, [ 'id', 'f_name', 'l_name', 'email', 'email_verified', 'subscribed', 'is_admin' ]);
+  let users = await Users.get('user', {}, [ 'id', 'username', 'f_name', 'l_name', 'registered', 'email', 'phone', 'email_verified', 'subscribed', 'is_admin' ]);
   res.json(users);
 });
 
 app.post('/create_user', bodyParser.json(), async(req, res) => {
   let token = create_registration_token();
   let { f_name, l_name, email } = req.body;
-  let result = await Users.add('user', { username: token, f_name, l_name, email, password: '' });
+  let result = await Users.add('user', { username: token, f_name, l_name, email, password: '', registered: 0 });
   let id = result.lastID;
   Users.add('pending', { id, f_name, l_name, email, token });
   sendTemplate('pending-user', { f_name, l_name, email, token })
@@ -83,7 +84,6 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
       quantity_total: ticket.count
     })
   }
-
 
   let [ venue ] = await Events.get('venues', { id: venue_id }, '*')
 
@@ -133,6 +133,31 @@ app.post('/create_venue', bodyParser.json(), async(req, res) => {
   let id = venue.lastID;
 
   res.json({ id, success: true })
+})
+
+app.post('/create_raffle', bodyParser.json(), async(req, res) => {
+  let { description, ticket_count, ticket_price, end_date, prizes = [] } = req.body;
+  let raffle = { description, ticket_count, ticket_price, end_date };
+  let insert = await Raffle.add('raffles', raffle);
+  let raffle_id = insert.lastID;
+
+  for(var prize of prizes) {
+    let winning_value = crypto.randomBytes(4).readUInt32LE(0);
+    prize.winning_value = winning_value;
+    prize.raffle_id = raffle_id;
+    await Raffle.add('prizes', prize, '*')
+  }
+
+  res.send({ id: raffle_id });
+});
+
+app.post('/add_prize', bodyParser.json(), async(req, res) => {
+  let { raffle_id, prize } = req.body;
+  let winning_value = crypto.randomBytes(4).readUInt32LE(0);
+  prize.winning_value = winning_value;
+  prize.raffle_id = raffle_id;
+  await Raffle.add('prizes', prize, '*')
+  res.send('OK')
 })
 
 app.get('/venues', async(req, res) => {

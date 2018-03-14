@@ -3,18 +3,38 @@ import { connect } from 'react-redux'
 import { FloatPassword, FloatText } from './FloatText'
 import { Logger } from './Util'
 
+import './Settings.css'
+
+let CheckBox = ({ name, label, value }) => {
+  return <div className='checkbox'>
+    <label className='checkbox-label'>{label}</label>
+    <input name={name} type='checkbox' checked={value} />
+  </div>
+}
+
 let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, defaults = {} }) => {
   console.log(defaults)
   return <form ref={ref} onSubmit={onSubmit} className='form'>
     <FloatText name='f_name' label='First Name:' defaultValue={defaults.f_name} />
     <FloatText name='l_name' label='Last Name:' defaultValue={defaults.l_name} />
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
+    <FloatText name='phone' label='Phone:' defaultValue={defaults.phone} />
+    <CheckBox name='subscribed' label='Subscribe To Mailing List' value={defaults.subscribed} />
     <div className='form-button form-field' onClick={onChangePassword}>Change Password</div>
     <input className='form-button' type='submit' value='Save'/>
   </form>
 }
 
 let PasswordSettings = ({ onSubmit, onBack }) => {
+  let _onBack = (...args) => {
+    let e = args[0]
+    e.preventDefault() // We want to stop submitting the form
+    e.target.form.reset();
+    if(onBack) {
+      onBack(...args);
+    }
+  }
+
   return <form onSubmit={onSubmit} className='form' >
     <FloatPassword name='current' label="Current Password:" />
     <FloatPassword name='password' label="New Password:" />
@@ -22,6 +42,9 @@ let PasswordSettings = ({ onSubmit, onBack }) => {
 
     <div>
       <input type='submit' className='form-button' value='Save Changes' />
+    </div>
+    <div>
+      <input type='submit' className='form-button' value='Cancel' onClick={_onBack} />
     </div>
   </form>
 }
@@ -52,11 +75,17 @@ class Settings extends React.Component {
     let f_name = form.f_name.value;
     let l_name = form.l_name.value;
     let email = form.email.value;
+    let phone = form.phone.value;
+    let subscribed = form.subscribed.checked;
+
+    console.log(subscribed)
 
     let body = {
       f_name,
       l_name,
-      email
+      email,
+      phone,
+      subscribed
     }
 
     let resp = await fetch('/user/update_info', {
@@ -64,7 +93,7 @@ class Settings extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body
+      body: JSON.stringify(body)
     })
 
     resp = await resp.json();

@@ -21,6 +21,7 @@
     "request-promise": "^4.2.2",
     "sendmail": "^1.2.0",
     "sqlite3": "^3.1.13",
+    "stripe": "^5.5.0",
     "urlsafe-base64": "^1.0.0"
   }
 }
