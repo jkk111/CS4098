@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
+import Test from "./Test"
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
 import EventForm from './CreateEvent'
@@ -16,11 +17,6 @@ import CreateVenue from './CreateVenue'
 import CreateTicket from './CreateTicket'
 import Contact from './Contact'
 import ViewMenus from './ViewMenus'
-import Payment from './Payment'
-
-let instance = Payment.GetInstance();
-console.log(instance);
-
 
 let mapStateToProps = (state) => {
   return {
@@ -132,6 +128,30 @@ class App extends Component {
     }
   }
 
+// async CreateMenu(e) {
+//    e.preventDefault();
+//    let starter1 = e.target.starter1.value;
+//    let starter2 = e.target.starter2.value;
+//    let starter3 = e.target.starter3.value;
+//    let main1 = e.target.main1.value;
+//    let main2 = e.target.main2.value;
+//    let main3 = e.target.main3.value;
+//    let dessert1 = e.target.dessert1.value;
+//    let dessert2 = e.target.dessert2.value;
+//    let dessert3 = e.target.dessert3.value;
+//    let body = JSON.stringify({ starter1, starter2, starter3, main1, main2, main3, dessert1, dessert2, dessert3 });
+//    let resp = await fetch('/CreateMenu', {
+//      method: 'POST',
+//      credentials: 'same-origin',
+//      headers: {
+//        'Content-Type': 'application/json'
+//      },
+//      body
+//    })
+//    resp = await resp.json();
+//    set_cookie(resp.id)
+//  }
+
   async getTestResults() {
     let resp = await fetch('/tests')
     let data = await resp.json();
@@ -140,8 +160,13 @@ class App extends Component {
 
   render() {
     let { registerError, loginError } = this.state;
+    if(this.props.test_view) {
+      return <Test results={this.state.test_results} />
+    }
+
     if (this.props.logged_in !== 'UNAUTH'){
       let View = views[this.props.view] || views.HOME
+
       return <Fragment>
         <Nav />
         <View />
@@ -152,6 +177,10 @@ class App extends Component {
           <header className="App-header">
             <h1 className="App-title">Event-Management-System</h1>
           </header>
+          {/*<p className="App-intro">
+            <br />
+            Want to see the test results? <a href="?tests" >Click Here</a>
+          </p>*/}
           <LoginForm error={loginError} onSubmit={this.login} />
           <SignupForm error={registerError} onSubmit={this.register} />
         </div>

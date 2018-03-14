@@ -101,14 +101,10 @@ let construct_select_query = (table, keys = '*', params = {}, extra = '') => {
     WHERE = 'WHERE '
     let first = true;
     for(var key in params) {
-      let param = params[key];
-
-      param.comparator = param.comparator || '='
-
       if(!first)
         WHERE += ' AND ';
       first = false;
-      WHERE += `${key} ${param.comparator} $${key}`
+      WHERE += `${key} = $${key}`
     }
   }
 
@@ -151,7 +147,7 @@ let instances = {};
 let map_params = (params) => {
   let mapped = {};
   for(var param in params) {
-    mapped[`$${param}`] = params[param].value
+    mapped[`$${param}`] = params[param]
   }
   return mapped
 }
@@ -254,15 +250,6 @@ class Database {
   }
 
   get(table, params, keys, extra) {
-    for(var key in params) {
-      var param = params[key]
-      if(typeof param !== 'object') {
-        param = {
-          value: param
-        }
-      }
-      params[key] = param
-    }
     let query = construct_select_query(table, keys, params, extra);
     return this.query(query, map_params(params));
   }
