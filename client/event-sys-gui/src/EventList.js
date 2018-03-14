@@ -27,7 +27,7 @@ class EventList extends React.Component {
 
   render() {
     let { events } = this.state;
-
+    console.log(events)
     events = events.map((event, i) => <Event refresh={this.refresh} {...event} key={i} />)
     return events
 

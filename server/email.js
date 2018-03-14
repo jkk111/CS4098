@@ -69,7 +69,7 @@ let sendTemplate = (template, data) => {
       sendMail(m);
     })
   } catch(e) {
-
+    console.log(e);
   }
 }
 

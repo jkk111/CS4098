@@ -6,12 +6,13 @@ let Database = require('../database');
 let Users = Database.Get('user');
 let Events = Database.Get('event');
 let config = require('../config.json');
-let { hash_password, verify_password } = require('../util')
+let crypto = require('crypto')
+let { hash_password, verify_password, send_confirmation_email } = require('../util')
 
 // Obtains user info
 app.get('/info', async(req, res) => {
   let id = req.user_id
-  let user = await Users.get('user', { id }, [ 'f_name', 'l_name', 'email', 'username', 'subscribed' ]);
+  let user = await Users.get('user', { id }, [ 'f_name', 'l_name', 'email', 'username', 'phone', 'subscribed' ]);
   if(user.length > 0) {
     res.json(user[0])
   } else {
@@ -50,15 +51,28 @@ app.get('/events', async(req, res) => {
 });
 
 app.post('/update_info', bodyParser.json(), async(req, res) => {
-  let { f_name, l_name, email, subscribed } = req.body;
+  let { f_name, l_name, email, phone, subscribed } = req.body;
   let id = req.user_id;
-  let update = { f_name, l_name, email, subscribed };
+  let update = { f_name, l_name, email, phone, subscribed };
+
   for(var key in update) {
     if(update[key] === undefined) {
       delete update[key]
     }
   }
+
+  let current_email = await Users.get('user', { id }, 'email')
+
+  current_email = current_email[0].email;
+  if(current_email !== email) {
+    update.email_verified = false;
+    let verification_code = crypto.randomBytes(8).toString('hex');
+    update.verification_code = verification_code;
+    send_confirmation_email(email, verification_code);
+  }
+
   await Users.update('user', update, { id })
+
   res.send({ success: true })
 })
 
@@ -78,12 +92,24 @@ app.post('/change_password', bodyParser.json(), async(req, res) => {
   }
 });
 
-app.get('/resend_confirmation', (req, res) => {
+app.post('/verify', bodyParser.json(), async(req, res) => {
+  let { code, email } = req.body;
 
-})
+  let user = await Users.get('user', { email, verification_code: code }, 'id');
 
-app.get('/confirm', (req, res) => {
+  if(user.length > 0) {
+    await Users.update('user', { email_verified: true }, { id: user[0].id })
+    res.send({ success: true })
+  } else {
+    res.status(400).send({ success: false });
+  }
+});
 
+app.get('/resend_confirmation', async(req, res) => {
+  let user = await Users.get('user', { id: req.user_id }, '*');
+  user = user[0];
+  send_confirmation_email(user.email, user.verification_code);
+  res.send({ success: true })
 })
 
 module.exports = app;
