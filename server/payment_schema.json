@@ -1,0 +1,16 @@
+{
+  "tables": [
+    {
+      "name": "transactions",
+      "keys": {
+        "id": "TEXT PRIMARY KEY",
+        "user_id": "TEXT NOT NULL",
+        "data_id": "TEXT NOT NULL",
+        "description": "TEXT NOT NULL",
+        "amount": "INTEGER NOT NULL",
+        "type": "TEXT NOT NULL",
+        "finished": "BOOL"
+      }
+    }
+  ]
+}

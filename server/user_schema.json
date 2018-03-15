@@ -11,7 +11,8 @@
         "email": "TEXT NOT NULL",
         "phone": "TEXT NOT NULL DEFAULT \"\"",
         "email_verified": "BOOL NOT NULL DEFAULT 0",
-        "registered": "BOOL NOT NULL DEFAULT 0",
+        "verification_code": "TEXT",
+        "registered": "BOOL NOT NULL DEFAULT 1",
         "is_admin": "BOOL NOT NULL DEFAULT 0",
         "subscribed": "BOOL NOT NULL DEFAULT 0"
       }

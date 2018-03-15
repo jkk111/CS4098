@@ -2,6 +2,11 @@ const express = require('express');
 const app = express.Router();
 const Database = require('../database')
 const Events = Database.Get('event')
+const payments = require('./payments')
+const raffle = require('./raffle')
+
+app.use('/payments', payments.router)
+app.use('/raffle', raffle)
 
 app.get('/events', async(req, res) => {
   let events = await Events.get('event', {}, [ 'id','name', 'description', 'venue_id', 'start_time', 'end_time', 'timezone', 'max_attendees' ]);

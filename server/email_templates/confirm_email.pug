@@ -1,0 +1,7 @@
+extends header.pug
+block content
+  - var link = `http://localhost:3000/verify?code=${code}&email=${to}`
+  p
+    | Please follow the&nbsp;
+    a(href=link) Link&nbsp;
+    | to verify your email
