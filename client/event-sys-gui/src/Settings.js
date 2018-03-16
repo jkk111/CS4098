@@ -16,7 +16,7 @@ let resend = () => {
   fetch('/user/resend_confirmation', {})
 }
 
-let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, defaults = {} }) => {
+let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSelected, allergenNames, selectedAllergens, defaults = {} }) => {
   console.log(defaults)
   let prompt = null;
 
@@ -26,16 +26,42 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, defaults = {} }) 
     </div>
   }
 
+  let allergenOptions = buildAllergenList(allergenNames);
+  let selectedAllergensList = buildSelectedAllergensList(selectedAllergens, allergenNames);
+
   return <form ref={ref} onSubmit={onSubmit} className='form'>
     <FloatText name='f_name' label='First Name:' defaultValue={defaults.f_name} />
     <FloatText name='l_name' label='Last Name:' defaultValue={defaults.l_name} />
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
     <FloatText name='phone' label='Phone:' defaultValue={defaults.phone} />
+    <select value="0" onChange={handleAllergenSelected} id="selectVenue">
+      {allergenOptions}
+    </select>
+    <div>{selectedAllergensList}</div>
     <CheckBox name='subscribed' label='Subscribe To Mailing List' value={defaults.subscribed} />
     {prompt}
     <div className='form-button form-field' onClick={onChangePassword}>Change Password</div>
     <input className='form-button' type='submit' value='Save'/>
   </form>
+}
+
+let buildAllergenList = (allergenNames) => {
+  let allergenList = [<option key="0" value="0">-let us know if you have any allergies-</option>]
+    for (var i=0; i<allergenNames.length; i++){
+      let name = (i+1) + ". " + allergenNames[i];
+      let value = i+1;
+      allergenList.push(<option key={value} value={value}>{name}</option>);
+    }
+  return allergenList;
+}
+
+let buildSelectedAllergensList = (selectedAllergens, allergenNames) => {
+  let out = (selectedAllergens.length === 0) ? [<p>No Allergens Selected</p>] : [<p>Your Allergens</p>]
+  for (var i=0; i<selectedAllergens.length; i++){
+    let name = (selectedAllergens[i]+1) + ". " + allergenNames[selectedAllergens[i]];
+    out.push(<p>{name}</p>)
+  }
+  return out;
 }
 
 let PasswordSettings = ({ onSubmit, onBack }) => {
@@ -72,14 +98,33 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'INFO'
+      view: 'INFO',
+      selectedAllergens: [],
+      allergenNames: ["Gluten","Crustaceans","Eggs","Fish","Peanuts","Soybeans","Milk",
+                    "Nuts","Celery","Mustard","Sesame","Sulphur Dioxide","Lupin","Molluscs"],
     }
 
     this.change_password = this.change_password.bind(this);
     this.change_settings = this.change_settings.bind(this);
     this.reset = this.reset.bind(this);
     this.show_change_password = this.show_change_password.bind(this);
+    this.handleAllergenSelected = this.handleAllergenSelected.bind(this);
   }
+
+  handleAllergenSelected(event){
+    console.log("allergen ", event.target.value-1, " selected")
+    let allergen = event.target.value-1;
+    let selectedAllergens = this.state.selectedAllergens;
+    if (selectedAllergens.includes(allergen)){
+      let i = selectedAllergens.indexOf(allergen);
+        selectedAllergens.splice(i, 1);
+    } else {
+      selectedAllergens.push(allergen);
+    }
+    this.setState({selectedAllergens: selectedAllergens})
+    console.log("selected so far ", selectedAllergens);
+  }
+
 
   async change_settings(e) {
     e.preventDefault();
@@ -90,6 +135,7 @@ class Settings extends React.Component {
     let email = form.email.value;
     let phone = form.phone.value;
     let subscribed = form.subscribed.checked;
+    let allergens = this.state.selectedAllergens;
 
     console.log(subscribed)
 
@@ -98,8 +144,11 @@ class Settings extends React.Component {
       l_name,
       email,
       phone,
-      subscribed
+      subscribed,
+      allergens
     }
+
+    console.log(body);
 
     let resp = await fetch('/user/update_info', {
       method: 'POST',
@@ -120,8 +169,6 @@ class Settings extends React.Component {
     let password = form.password.value;
     let confirm = form.confirm.value;
     let current = form.current.value;
-
-
 
     if(password === confirm) {
       this.setState({
@@ -166,7 +213,7 @@ class Settings extends React.Component {
 
   render() {
     if(this.state.view === 'INFO') {
-      return <UserSettings onSubmit={this.change_settings} onBack={this.reset} defaults={this.props.info} onChangePassword={this.show_change_password} />
+      return <UserSettings onSubmit={this.change_settings} onBack={this.reset} defaults={this.props.info} onChangePassword={this.show_change_password} handleAllergenSelected={this.handleAllergenSelected} allergenNames={this.state.allergenNames} selectedAllergens={this.state.selectedAllergens}/>
     } else {
       return <PasswordSettings onSubmit={this.change_password} onBack={this.reset} />
     }
