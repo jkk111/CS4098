@@ -9,11 +9,35 @@ let config = require('../config.json');
 let crypto = require('crypto')
 let { hash_password, verify_password, send_confirmation_email } = require('../util')
 
+const Allergens = [
+  "Gluten",
+  "Crustaceans",
+  "Eggs",
+  "Fish",
+  "Peanuts",
+  "Soybeans",
+  "Milk",
+  "Nuts",
+  "Celery",
+  "Mustard",
+  "Sesame",
+  "Sulphur Dioxide",
+  "Lupin",
+  "Molluscs"
+]
+
 // Obtains user info
 app.get('/info', async(req, res) => {
   let id = req.user_id
   let user = await Users.get('user', { id }, [ 'f_name', 'l_name', 'email', 'username', 'phone', 'email_verified', 'subscribed' ]);
   if(user.length > 0) {
+
+    let user_id = id;
+
+    let allergens = await Users.get('allergens', { user_id }, 'allergen_id')
+    allergens = allergens.map(allergen => allergen.allergen_id);
+    user[0].allergens = allergens
+
     res.json(user[0])
   } else {
     res.json({ success: false, error: 'UNKNOWN_USER' })
@@ -51,9 +75,14 @@ app.get('/events', async(req, res) => {
 });
 
 app.post('/update_info', bodyParser.json(), async(req, res) => {
-  let { f_name, l_name, email, phone, subscribed } = req.body;
+  let { f_name, l_name, email, phone, subscribed, allergens = [] } = req.body;
   let id = req.user_id;
   let update = { f_name, l_name, email, phone, subscribed };
+
+  for(var allergen of allergens) {
+    let update_allergen = { user_id: id, allergen_id: allergen }
+    await Users.add("allergens", update_allergen)
+  }
 
   for(var key in update) {
     if(update[key] === undefined) {

@@ -18,6 +18,15 @@
       }
     },
     {
+      "name": "allergens",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "user_id": "INTEGER NOT NULL",
+        "allergen_id": "INTEGER NOT NULL",
+        "UNIQUE": "(user_id, allergen_id)"
+      }
+    },
+    {
       "name": "session",
       "keys": {
         "id": "TEXT PRIMARY KEY NOT NULL",
