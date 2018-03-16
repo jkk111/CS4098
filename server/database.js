@@ -61,7 +61,23 @@ let construct_update_query = (table, insert, select, extra = '') => {
   return `UPDATE user ${SET} ${WHERE} ${extra}`
 }
 
+let construct_delete_query = (table, select) => {
+  let WHERE = ''
+  let select_keys = Object.keys(select)
+  if(select_keys && select_keys.length) {
+    WHERE = 'WHERE '
+    let first = true;
+    for(var key in select) {
+      if(!first)
+        WHERE += ' AND '
+      first = false;
+      WHERE += `${key} = ?`
+    }
+  }
 
+
+  return `DELETE FROM ${table} ${WHERE}`
+}
 
 /**
  * Builds a query to insert rows into a table
@@ -265,6 +281,12 @@ class Database {
     }
     let query = construct_select_query(table, keys, params, extra);
     return this.query(query, map_params(params));
+  }
+
+  delete(table, params) {
+    let query = construct_delete_query(table, params);
+
+    return this.query(query, map_params(params))
   }
 
   add(table, params, extra) {

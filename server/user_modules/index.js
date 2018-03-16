@@ -79,6 +79,7 @@ app.post('/update_info', bodyParser.json(), async(req, res) => {
   let id = req.user_id;
   let update = { f_name, l_name, email, phone, subscribed };
 
+  await Users.delete('allergens', { user_id: id })
   for(var allergen of allergens) {
     let update_allergen = { user_id: id, allergen_id: allergen }
     await Users.add("allergens", update_allergen)
