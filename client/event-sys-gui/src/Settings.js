@@ -5,6 +5,24 @@ import { Logger } from './Util'
 
 import './Settings.css'
 
+
+const ALLERGEN_NAMES = [
+  "Gluten",
+  "Crustaceans",
+  "Eggs",
+  "Fish",
+  "Peanuts",
+  "Soybeans",
+  "Milk",
+  "Nuts",
+  "Celery",
+  "Mustard",
+  "Sesame",
+  "Sulphur Dioxide",
+  "Lupin",
+  "Molluscs"
+]
+
 let CheckBox = ({ name, label, value }) => {
   return <div className='checkbox'>
     <label className='checkbox-label'>{label}</label>
@@ -35,6 +53,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
     <FloatText name='phone' label='Phone:' defaultValue={defaults.phone} />
     <select value="0" onChange={handleAllergenSelected} id="selectVenue">
+      <option value="0">-let us know if you have any allergies-</option>
       {allergenOptions}
     </select>
     <div>{selectedAllergensList}</div>
@@ -46,12 +65,12 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
 }
 
 let buildAllergenList = () => {
-  let allergenList = [<option key="0" value="0">-let us know if you have any allergies-</option>]
-    for (var i=0; i<allergenNames.length; i++){
-      let name = (i+1) + ". " + allergenNames[i];
-      let value = i+1;
-      allergenList.push(<option key={value} value={value}>{name}</option>);
-    }
+  let allergenList = []
+  for (var i = 0; i < allergenNames.length; i++){
+    let name = (i + 1) + ". " + allergenNames[i];
+    let value = i + 1;
+    allergenList.push(<option key={value} value={value}>{name}</option>);
+  }
   return allergenList;
 }
 
@@ -63,7 +82,7 @@ let buildSelectedAllergensList = (selectedAllergens) => {
     out.push(<p>Your Allergens</p>)
   }
   for (var i=0; i<selectedAllergens.length; i++){
-    let name = (selectedAllergens[i]+1) + ". " + allergenNames[selectedAllergens[i]];
+    let name = (selectedAllergens[i] + 1) + ". " + allergenNames[selectedAllergens[i]];
     out.push(<p>{name}</p>)
   }
   return out;
@@ -98,9 +117,6 @@ let mapStateToProps = (state) => {
     info: state.info
   }
 }
-
-const allergenNames = ["Gluten","Crustaceans","Eggs","Fish","Peanuts","Soybeans","Milk",
-              "Nuts","Celery","Mustard","Sesame","Sulphur Dioxide","Lupin","Molluscs"]
 
 class Settings extends React.Component {
   constructor(props) {
