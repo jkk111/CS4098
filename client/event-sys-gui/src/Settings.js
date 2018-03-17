@@ -66,8 +66,8 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
 
 let buildAllergenList = () => {
   let allergenList = []
-  for (var i = 0; i < allergenNames.length; i++){
-    let name = (i + 1) + ". " + allergenNames[i];
+  for (var i = 0; i < ALLERGEN_NAMES.length; i++){
+    let name = `${(i + 1)}. ${ALLERGEN_NAMES[i]}`;
     let value = i + 1;
     allergenList.push(<option key={value} value={value}>{name}</option>);
   }
@@ -82,7 +82,7 @@ let buildSelectedAllergensList = (selectedAllergens) => {
     out.push(<p>Your Allergens</p>)
   }
   for (var i=0; i<selectedAllergens.length; i++){
-    let name = (selectedAllergens[i] + 1) + ". " + allergenNames[selectedAllergens[i]];
+    let name = `${(selectedAllergens[i] + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
     out.push(<p>{name}</p>)
   }
   return out;
