@@ -16,7 +16,7 @@ let resend = () => {
   fetch('/user/resend_confirmation', {})
 }
 
-let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSelected, allergenNames, selectedAllergens, defaults = {} }) => {
+let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSelected, selectedAllergens, defaults = {} }) => {
   console.log(defaults)
   let prompt = null;
 
@@ -26,8 +26,8 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
     </div>
   }
 
-  let allergenOptions = buildAllergenList(allergenNames);
-  let selectedAllergensList = buildSelectedAllergensList(selectedAllergens, allergenNames);
+  let allergenOptions = buildAllergenList();
+  let selectedAllergensList = buildSelectedAllergensList(selectedAllergens);
 
   return <form ref={ref} onSubmit={onSubmit} className='form'>
     <FloatText name='f_name' label='First Name:' defaultValue={defaults.f_name} />
@@ -45,7 +45,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
   </form>
 }
 
-let buildAllergenList = (allergenNames) => {
+let buildAllergenList = () => {
   let allergenList = [<option key="0" value="0">-let us know if you have any allergies-</option>]
     for (var i=0; i<allergenNames.length; i++){
       let name = (i+1) + ". " + allergenNames[i];
@@ -55,8 +55,13 @@ let buildAllergenList = (allergenNames) => {
   return allergenList;
 }
 
-let buildSelectedAllergensList = (selectedAllergens, allergenNames) => {
-  let out = (selectedAllergens.length === 0) ? [<p>No Allergens Selected</p>] : [<p>Your Allergens</p>]
+let buildSelectedAllergensList = (selectedAllergens) => {
+  let out = []
+  if (selectedAllergens.length === 0){
+    out.push(<p>No Allergens Selected</p>)
+  } else {
+    out.push(<p>Your Allergens</p>)
+  }
   for (var i=0; i<selectedAllergens.length; i++){
     let name = (selectedAllergens[i]+1) + ". " + allergenNames[selectedAllergens[i]];
     out.push(<p>{name}</p>)
@@ -94,18 +99,16 @@ let mapStateToProps = (state) => {
   }
 }
 
+const allergenNames = ["Gluten","Crustaceans","Eggs","Fish","Peanuts","Soybeans","Milk",
+              "Nuts","Celery","Mustard","Sesame","Sulphur Dioxide","Lupin","Molluscs"]
+
 class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: 'INFO',
-      selectedAllergens: [],
-      allergenNames: ["Gluten","Crustaceans","Eggs","Fish","Peanuts","Soybeans","Milk",
-                    "Nuts","Celery","Mustard","Sesame","Sulphur Dioxide","Lupin","Molluscs"],
+      selectedAllergens: this.props.info.allergens
     }
-
-    console.log(this.props);
-    this.state.selectedAllergens = this.props.info.allergens;
 
     this.change_password = this.change_password.bind(this);
     this.change_settings = this.change_settings.bind(this);
@@ -216,7 +219,7 @@ class Settings extends React.Component {
 
   render() {
     if(this.state.view === 'INFO') {
-      return <UserSettings onSubmit={this.change_settings} onBack={this.reset} defaults={this.props.info} onChangePassword={this.show_change_password} handleAllergenSelected={this.handleAllergenSelected} allergenNames={this.state.allergenNames} selectedAllergens={this.state.selectedAllergens}/>
+      return <UserSettings onSubmit={this.change_settings} onBack={this.reset} defaults={this.props.info} onChangePassword={this.show_change_password} handleAllergenSelected={this.handleAllergenSelected} selectedAllergens={this.state.selectedAllergens}/>
     } else {
       return <PasswordSettings onSubmit={this.change_password} onBack={this.reset} />
     }
