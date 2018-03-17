@@ -71,7 +71,7 @@ let construct_delete_query = (table, select) => {
       if(!first)
         WHERE += ' AND '
       first = false;
-      WHERE += `${key} = ?`
+      WHERE += `${key} = $${key}`
     }
   }
 
@@ -286,8 +286,17 @@ class Database {
 
   delete(table, params) {
     let query = construct_delete_query(table, params);
-
-    return this.query(query, map_params(params))
+    for(var key in params) {
+      var param = params[key]
+      if(typeof param !== 'object') {
+        param = {
+          value: param
+        }
+      }
+      params[key] = param
+    }
+    console.log("DELETE ALLERGENS", query, map_params(params), params)
+    return run_insert(this.db, query, map_params(params))
   }
 
   add(table, params, extra) {
