@@ -104,6 +104,9 @@ class Settings extends React.Component {
                     "Nuts","Celery","Mustard","Sesame","Sulphur Dioxide","Lupin","Molluscs"],
     }
 
+    console.log(this.props);
+    this.state.selectedAllergens = this.props.info.allergens;
+
     this.change_password = this.change_password.bind(this);
     this.change_settings = this.change_settings.bind(this);
     this.reset = this.reset.bind(this);
