@@ -142,7 +142,7 @@ let run_query = (db, q, params, method = 'all') => {
     db[method](q, params, function(err, result) {
       if(err) {
         console.log(err)
-        throw err;
+        // throw err;
       }
       else {
         resolve(result || this);
