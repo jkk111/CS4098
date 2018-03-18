@@ -1,7 +1,6 @@
 import React from 'react';
-import ViewMenu from './ViewMenu'
-
-
+//import ViewMenu from './ViewMenu'
+import Menu from './Menu'
 class ViewMenus extends React.Component {
   constructor(props) {
     super(props);
@@ -31,17 +30,21 @@ class ViewMenus extends React.Component {
   }
 
   render() {
-    let { selected, menus } = this.state;
+    // let { selected, menus } = this.state;
+    //
+    // if(selected !== false) {
+    //   return <ViewMenu {...menus[selected]} />
+    // } else {
+    //   menus = menus.map((menu, i) => {
+    //     return <div key={i} onClick={this.menu_selected(i)}>{menu.name}</div>
+    //   });
+    //   console.log(menus);
+    //   return menus;
+    // }
+    let { menus } = this.state;
 
-    if(selected !== false) {
-      return <ViewMenu {...menus[selected]} />
-    } else {
-      menus = menus.map((menu, i) => {
-        return <div key={i} onClick={this.menu_selected(i)}>{menu.name}</div>
-      });
-      console.log(menus);
-      return menus;
-    }
+    menus = menus.map((menu, i) => <Menu refresh={this.refresh} {...menu} key={i} />)
+    return menus
   }
 }
 

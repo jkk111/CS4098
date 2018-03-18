@@ -1,0 +1,59 @@
+.menu {
+  background: purple;
+  color: white;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+
+.menu-name-collapsed, .menu-name-expanded {
+  padding: 1em;
+  cursor: pointer;
+}
+
+.menu-content, .admin-content{
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 0fr 1fr;
+  grid-gap: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-content-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  font-style: italic;
+}
+
+.menu-content-key {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.menu-name + .menu-content {
+  background: orange;
+}
+
+.menu-content-button {
+  margin: 0 1em;
+  border: 2px solid black;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-content-button:hover {
+  filter: brightness(80%);
+}
+
+.menu-content-button:active {
+  filter: brightness(60%);
+}
+
+.menu-content-key, .menu-content-value, .menu-content-button {
+  line-height: 1.5em;
+  padding: 0.2em;
+}
