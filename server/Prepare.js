@@ -96,7 +96,6 @@ let init = async() => {
     subscribed: true,
     verification_code
   })
-  send_confirmation_email(mail, verification_code)
   let hash_test = await hash_password('test', salt)
 
   for(var i = 0; i < 5; i++) {
@@ -122,6 +121,7 @@ let init = async() => {
   _send(config, options, (err, info) => {
     if(!err) {
       fs.writeFileSync('./config.json', JSON.stringify(config, null, '  '));
+      send_confirmation_email(mail, verification_code)
     } else {
       config.noEmail = true;
       fs.writeFileSync('./config.json', JSON.stringify(config, null, '  '));

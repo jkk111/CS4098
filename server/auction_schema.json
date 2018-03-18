@@ -1,0 +1,29 @@
+{
+  "tables": [
+    {
+      "name": "auction",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "description": "TEXT"
+      }
+    },
+    {
+      "name": "auction_item",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "name": "TEXT NOT NULL",
+        "description": "TEXT NOT NULL",
+        "reserve": "INTEGER NOT NULL"
+      }
+    },
+    {
+      "name": "bid",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "user_id": "INTEGER NOT NULL",
+        "auction_item_id": "INTEGER NOT NULL",
+        "amount": "INTEGER NOT NULL"
+      }
+    }
+  ]
+}
