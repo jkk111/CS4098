@@ -59,7 +59,7 @@ let construct_update_query = (table, insert, select, extra = '') => {
     }
   }
 
-  return `UPDATE user ${SET} ${WHERE} ${extra}`
+  return `UPDATE ${table} ${SET} ${WHERE} ${extra}`
 }
 
 let construct_delete_query = (table, select) => {
@@ -144,7 +144,7 @@ let run_query = (db, q, params, method = 'all') => {
       if(err) {
         console.log('[ERROR]'.red, q, params, err)
         // throw err;
-        resolve(result || this);
+        resolve(result);
       }
       else {
         resolve(result || this);

@@ -16,10 +16,21 @@
     {
       "name": "event_tickets",
       "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
         "event_id": "INT NOT NULL",
         "ticket_id": "INT NOT NULL",
         "amount": "INT NOT NULL",
+        "available": "INT NOT NULL",
         "UNIQUE": "(event_id, ticket_id)"
+      }
+    },
+    {
+      "name": "user_tickets",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "event_id": "INT NOT NULL",
+        "ticket_id": "INT NOT NULL",
+        "user_id": "INT NOT NULL"
       }
     },
     {

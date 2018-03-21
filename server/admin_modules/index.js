@@ -67,14 +67,14 @@ app.post('/promote', bodyParser.json(), async(req, res) => {
 })
 
 app.post('/create_event', bodyParser.json(), async(req, res) => {
-  let { tickets, name, description, venue_id, max_attendees, start_time, end_time, timezone } = req.body;
-  let event = { name, description, venue_id, max_attendees, start_time, end_time, timezone };
+  let { tickets, name, description, venue_id, max_attendees, start_time, end_time } = req.body;
+  let event = { name, description, venue_id, max_attendees, start_time, end_time };
   let result = await Events.add('event', event)
   let id = result.lastID;
   let event_tickets = [];
 
   for(var ticket of tickets) {
-    await Events.add('event_tickets', { event_id: id, ticket_id: ticket.id, amount: ticket.count });
+    await Events.add('event_tickets', { event_id: id, ticket_id: ticket.id, amount: ticket.count, available: ticket.count });
 
     let [ details ] = await Events.get('tickets', { id: ticket.id }, '*')
     event_tickets.push({
@@ -106,7 +106,7 @@ app.post('/update_event', bodyParser.json(), async(req, res) => {
   await Events.update('event', event, { id: event_id });
 
   for(var ticket of tickets) {
-    await Events.add('event_tickets', { event_id: event_id, ticket_id: ticket.id, amount: ticket.count });
+    await Events.add('event_tickets', { event_id: event_id, ticket_id: ticket.id, amount: ticket.count, available: ticket.count });
   }
 })
 
@@ -159,27 +159,6 @@ app.post('/create_auction_item', bodyParser.json(), async(req, res) => {
   let id = await Auction.add('auction_item', { name, description, starting_price, auction_id });
   id = id.lastID;
   res.send({ id })
-});
-
-app.post('/bid', bodyParser.json(), async(req, res) => {
-  let user_id = req.user_id;
-  let { amount, auction_item_id } = req.body;
-  let base_price = await Auction.get('auction_item', { id: auction_item_id });
-  base_price = base_price[0].amount;
-  let high_bid = await Auction.get('bid', { auction_item_id }, 'amount', 'ORDER BY amount DESC LIMIT 1');
-
-  if(high_bid.length > 0) {
-    base_price = high_bid[0].amount;
-  } else {
-    base_price = base_price[0].amount
-  }
-
-  if(amount > base_price) {
-    await Auction.add('bid', { auction_item_id, user_id, amount });
-    res.send({ success: true });
-  } else {
-    res.send({ success: false, error: 'TOO_LOW' })
-  }
 });
 
 app.get('/auctions', async(req, res) => {

@@ -31,13 +31,14 @@ class Payment {
   static GetInstance() {
     if(!instance) {
       instance = window.instance = new Payment();
+      window.inst = instance
     }
     return instance
   }
 
-  static async CreateDonation(amount) {
+  static async CreateDonation(donation_amount) {
     let body = {
-      amount
+      amount: donation_amount
     }
     let resp = await fetch('/payments/create_donation', {
       method: 'POST',
@@ -47,11 +48,30 @@ class Payment {
       body: JSON.stringify(body)
     })
 
-    let { id } = await resp.json();
+    let { id, amount } = await resp.json();
     console.log(this, this.GetInstance());
     let inst = this.GetInstance()
     console.log(inst)
     inst.open(id, "Donation", amount)
+  }
+
+  static async CreateTicket(event_id, ticket_id) {
+    let body = {
+      event_id,
+      ticket_id
+    }
+
+    let resp = await fetch('/payments/create_ticket', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+
+    let { id, amount } = await resp.json();
+    let inst = this.GetInstance();
+    inst.open(id, 'Ticket', amount)
   }
 
   open(transaction_id, description, amount) {

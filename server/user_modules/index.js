@@ -8,6 +8,7 @@ let Events = Database.Get('event');
 let config = require('../config.json');
 let crypto = require('crypto')
 let { hash_password, verify_password, send_confirmation_email } = require('../util')
+let Payments = require('../auth_modules/payments')
 
 const Allergens = [
   "Gluten",
