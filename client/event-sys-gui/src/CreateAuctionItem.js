@@ -7,12 +7,6 @@ import FloatText from './FloatText'
 class CreateAuctionItem extends React.Component {
   constructor() {
     super();
-    this.state = {
-      name: '',
-      description: '',
-      price: '',
-      currency:''
-    };
     this.createAuctionItem = this.createAuctionItem.bind(this);
   }
 
@@ -33,8 +27,9 @@ class CreateAuctionItem extends React.Component {
     let body = {
       name: form.name.value,
       description: form.description.value,
-      price: form.price.value
+      starting_price: form.price.value
     }
+
     console.log('creating auction item', body);
     let resp = await fetch('/admin/create_auction_item', {
       method: 'POST',
