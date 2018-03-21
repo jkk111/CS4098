@@ -61,9 +61,14 @@ let sendMail = (mail) => {
   _send(conf, mail)
 };
 
+let render_template = (template, data) => {
+  let mail = pug.renderFile(`email_templates/${template}.pug`, data);
+  return mail;
+}
+
 let sendTemplate = (template, data) => {
   try {
-    let mail = pug.renderFile(`email_templates/${template}.pug`, data);
+    let mail = render_template(template, data)
     parse(mail, (_, mail) => {
       let m = new Email(data.from, data.to, data.subject, data.text, mail);
       sendMail(m);
@@ -77,5 +82,6 @@ module.exports = {
   _send,
   sendMail,
   Email,
-  sendTemplate
+  sendTemplate,
+  render_template
 };

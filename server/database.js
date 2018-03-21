@@ -4,7 +4,6 @@
  */
 const fs = require('fs');
 const sql = require('sqlite3').verbose();
-const config = require('./config');
 
 let create_table = (config) => {
   let { name, keys, extra = [] } = config;

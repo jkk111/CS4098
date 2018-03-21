@@ -72,7 +72,13 @@ app.post('/complete', bodyParser.json(), async(req, res) => {
   if(transaction.type === TICKET) {
     let user_ticket = await Events.get('user_tickets', { id: transaction.data_id });
     let ticket = await Events.get('event_tickets', { event_id: user_ticket[0].event_id, ticket_id: user_ticket[0].ticket_id });
-    await Events.update('event_tickets', { available: ticket[0].available - 1 }, { id: ticket[0].id })
+    ticket = ticket[0];
+
+    if(ticket.available <= 0) {
+      return res.send({ success: false, error: 'UNAVAIL' })
+    }
+
+    await Events.update('event_tickets', { available: ticket.available - 1 }, { id: ticket.id })
   }
 
   let charge_body = {
