@@ -17,6 +17,7 @@ import CreateTicket from './CreateTicket'
 import Contact from './Contact'
 import ViewMenus from './ViewMenus'
 import Payment from './Payment'
+import CreateAuctionItem from './CreateAuctionItem'
 
 let instance = Payment.GetInstance();
 console.log(instance);
@@ -60,7 +61,8 @@ const views = {
   CREATE_VENUE: CreateVenue,
   CREATE_TICKET: CreateTicket,
   CONTACT: Contact,
-  VIEW_MENUS: ViewMenus
+  VIEW_MENUS: ViewMenus,
+  CREATE_AUCTION_ITEM: CreateAuctionItem
 }
 
 class App extends Component {
