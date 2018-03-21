@@ -1,9 +1,12 @@
 import React from 'react';
 
-let SignupForm = ({ onSubmit }) => {
+let SignupForm = ({ onSubmit, registerError = null}) => {
   return <div className="signup-form">
     <h1>Sign Up / Create An Account</h1>
-    <form onSubmit={onSubmit}>
+    <form onSubmit = {onSubmit}>
+      <div>
+        {registerError}
+      </div>
       <div>
         <label>First Name:</label>
         <input type="text" name="f_name" />
@@ -33,6 +36,8 @@ let SignupForm = ({ onSubmit }) => {
       </div>
     </form>
   </div>
+
+  
 }
 
 export default SignupForm
