@@ -98,6 +98,13 @@ class App extends Component {
     })
     resp = await resp.json();
     this.props.set_logged_in(resp.auth_level);
+
+    if(resp.error === 'INVALID_AUTH') {
+      this.setState({
+        loginError: "Invalid Username/Password"
+      })
+    }
+
     set_cookie(resp.id)
   }
 
@@ -158,7 +165,7 @@ class App extends Component {
           <header className="App-header">
             <h1 className="App-title">Event-Management-System</h1>
           </header>
-          <LoginForm error={loginError} onSubmit={this.login} />
+          <LoginForm loginError={loginError} onSubmit={this.login} />
           <SignupForm registerError={registerError} onSubmit={this.register} />
         </div>
       );
