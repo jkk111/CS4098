@@ -53,7 +53,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
     <FloatText name='phone' label='Phone:' defaultValue={defaults.phone} />
     <select value="0" onChange={handleAllergenSelected} id="selectVenue">
-      <option value="0">-let us know if you have any allergies-</option>
+      <option value="0">-Let us know if you have any Allergies-</option>
       {allergenOptions}
     </select>
     <div>{selectedAllergensList}</div>
@@ -80,8 +80,9 @@ let buildSelectedAllergensList = (selectedAllergens) => {
   }
 
   let out = [
-    <p key={'00'}>Your Allergens</p>
+    <p key={'00'}>Your Allergens <h5> Reselect a selected Allergen from the dropdown to delete that allergen. </h5> </p>
   ]
+
 
   for (var i = 0; i<selectedAllergens.length; i++){
     let name = `${(selectedAllergens[i] + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
@@ -146,7 +147,7 @@ class Settings extends React.Component {
       selectedAllergens.push(allergen);
     }
     this.setState({selectedAllergens: selectedAllergens})
-    console.log("selected so far ", selectedAllergens);
+    console.log("selected so far", selectedAllergens);
   }
 
 
