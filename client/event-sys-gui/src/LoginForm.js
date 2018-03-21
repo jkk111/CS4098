@@ -4,7 +4,7 @@ let LoginForm = ({ onSubmit, loginError = null }) => {
   return <div className="login-form">
     <h1>Already Have An Account? / Log In</h1>
     <form onSubmit={onSubmit}>
-      <div>
+      <div className='error'>
         {loginError}
       </div>
       <div>
