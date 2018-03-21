@@ -8,6 +8,7 @@ let Users = Database.Get('user')
 let Events = Database.Get('event');
 let Menus = Database.Get('menu');
 let Raffle = Database.Get('raffle')
+let Auction = Database.Get('auction');
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
@@ -87,7 +88,6 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
 
   let [ venue ] = await Events.get('venues', { id: venue_id }, '*')
 
-  console.log(event_tickets, venue)
   // await eventbrite(event, event_tickets, venue)
   // Email All Users On Mailing List
   let users = await Users.get('user', { email_verified: true, subscribed: true }, 'email');
@@ -143,6 +143,46 @@ app.post('/create_venue', bodyParser.json(), async(req, res) => {
   let id = venue.lastID;
 
   res.json({ id, success: true })
+})
+
+app.post('/create_auction', bodyParser.json(), async(req, res) => {
+  let { name, description, start_time, end_time } = req.body;
+
+    let id = await Auction.add('auction', { name, description, start_time, end_time })
+
+    res.send({ id });
+});
+
+app.post('/create_auction_item', bodyParser.json(), async(req, res) => {
+  let { name, description, starting_price } = req.body;
+
+  let id = await Auction.add('auction_item', { name, description, starting_price });
+
+  res.send({ id })
+});
+
+app.get('/auctions', async(req, res) => {
+  let auctions = await Auction.get('auction', {});
+
+  for(var auction of auctions) {
+    let { id } = auction;
+    let items = await Auction.get('auction_item', { auction_id: id });
+
+    for(var item of items) {
+      let price = item.starting_price;
+      let high_bid = await Auction.get('bid', { auction_item_id: item.id }, 'amount', 'ORDER BY amount DESC LIMIT 1');
+
+      if(high_bid[0] && high_bid[0].price > price) {
+        price = high_bid[0].price
+      }
+
+      item.price = price;
+    }
+
+    auction.items = items;
+  }
+
+  res.send(auctions)
 })
 
 app.post('/create_raffle', bodyParser.json(), async(req, res) => {

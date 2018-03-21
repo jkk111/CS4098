@@ -4,16 +4,20 @@
       "name": "auction",
       "keys": {
         "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
-        "description": "TEXT"
+        "name": "TEXT NOT NULL",
+        "description": "TEXT NOT NULL",
+        "start_time": "INT NOT NULL",
+        "end_time": "INT NOT NULL"
       }
     },
     {
       "name": "auction_item",
       "keys": {
         "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "auction_id": "INTEGER NOT NULL",
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
-        "reserve": "INTEGER NOT NULL"
+        "starting_price": "INTEGER NOT NULL"
       }
     },
     {
