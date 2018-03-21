@@ -25,28 +25,36 @@ class Menu extends React.Component {
     let content = null;
     let admin_content = null;
 
-    let startersContent = [<h3>Starters</h3>,<h3></h3>]
+    let startersContent = []
     for (let starter of starters) {
-      startersContent.push(<span className='menu-content-key'>{starter.name}</span>)
-      startersContent.push(<span className='menu-content-value'>{starter.description}</span>)
+      startersContent.push(<div>
+        <span className='menu-content-key'>{starter.name}</span>
+        <span className='menu-content-value'>{starter.description}</span>
+      </div>)
     }
 
-    let mainsContent = [<h3>Mains</h3>,<h3></h3>]
+    let mainsContent = []
     for (let main of mains) {
-      mainsContent.push(<span className='menu-content-key'>{main.name}</span>)
-      mainsContent.push(<span className='menu-content-value'>{main.description}</span>)
+      mainsContent.push(<div>
+        <span className='menu-content-key'>{main.name}</span>
+        <span className='menu-content-value'>{main.description}</span>
+      </div>)
     }
 
-    let dessertsContent = [<h3>Desserts</h3>,<h3></h3>];
+    let dessertsContent = [];
     for (let dessert of desserts) {
-      dessertsContent.push(<span className='menu-content-key'>{dessert.name}</span>)
-      dessertsContent.push(<span className='menu-content-value'>{dessert.description}</span>)
+      dessertsContent.push(<div>
+        <span className='menu-content-key'>{dessert.name}</span>
+        <span className='menu-content-value'>{dessert.description}</span>
+      </div>)
     }
 
-    let drinksContent = [<h3>Drinks</h3>,<h3></h3>];
+    let drinksContent = [];
     for (let drink of drinks) {
-      drinksContent.push(<span className='menu-content-key'>{drink.name}</span>)
-      drinksContent.push(<span className='menu-content-value'>{drink.description}</span>)
+      drinksContent.push(<div>
+        <span className='menu-content-key'>{drink.name}</span>
+        <span className='menu-content-value'>{drink.description}</span>
+      </div>)
     }
 
     if(expanded) {
@@ -57,9 +65,13 @@ class Menu extends React.Component {
         </div>
       }
       content = <div className='menu-content'>
+        <h3>Starters</h3>
         {startersContent}
+        <h3>Mains</h3>
         {mainsContent}
+        <h3>Desserts</h3>
         {dessertsContent}
+        <h3>Drinks</h3>
         {drinksContent}
       </div>
     }

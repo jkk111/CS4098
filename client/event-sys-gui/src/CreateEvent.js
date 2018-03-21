@@ -4,6 +4,7 @@ import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
 import { Logger, isNatural } from './Util'
 import FloatText from './FloatText'
+import Dropdown from './Dropdown'
 
 class CreateEvent extends React.Component {
   constructor() {
@@ -35,23 +36,23 @@ class CreateEvent extends React.Component {
     let end = form.end.value;
 
     if(form.event_name.value === ''){
-      alert('please give the event a name')
+      // alert('please give the event a name')
       return
     }
 
     if(!isNatural(form.capacity.value)){
-      alert('capacity must be a number');
+      // alert('capacity must be a number');
       return
     }
 
     if(!this.state.start_time || !this.state.end_time){
-      alert('please select start and end times');
+      // alert('please select start and end times');
       return
     }
 
     console.log(start, end);
 
-    for (var i=0; i<selectedTickets.length; i++){
+    for (var i = 0; i < selectedTickets.length; i++){
       let id = selectedTickets[i].id;
       let count = form["ticketAmount" + id].value;
       tickets.push({ id: id, count: count})
@@ -115,9 +116,11 @@ class CreateEvent extends React.Component {
 
   buildVenueList(){
     let venues = this.state.venues;
-    let venueList = [<option key="0" value="0">-select venue-</option>]
+    let venueList = [
+      <option key="0" value="0">-select venue-</option>
+    ]
     if (venues.length !== 0){
-      for (var i=0; i<venues.length; i++){
+      for (var i = 0; i < venues.length; i++){
         let name = venues[i].name;
         let id = venues[i].id;
         venueList.push(<option key={id} value={id}>{name}</option>);
@@ -128,9 +131,11 @@ class CreateEvent extends React.Component {
 
   buildTicketsList(){
     let tickets = this.state.tickets;
-    let ticketsList = [<option key="0" value="0">-select tickets-</option>]
+    let ticketsList = [
+      <option key="0" value="0">-select tickets-</option>
+    ]
     if (tickets.length !== 0){
-      for (var i=0; i<tickets.length; i++){
+      for (var i = 0; i < tickets.length; i++){
         let name = tickets[i].name;
         let id = tickets[i].id;
         ticketsList.push(<option key={id} value={id}>{name}</option>);
@@ -143,7 +148,7 @@ class CreateEvent extends React.Component {
     let tickets = this.state.selectedTickets;
     let theList = []
     if (tickets.length !== 0){
-      for (var i=0; i<tickets.length; i++){
+      for (var i = 0; i < tickets.length; i++){
         let name = tickets[i].name;
         let id = tickets[i].id;
         let inputName = "amount of " + name + " tickets:";
@@ -175,9 +180,9 @@ class CreateEvent extends React.Component {
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
         <FloatText name="capacity" label="Event Capacity:"/>
-        <select value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
+        <Dropdown value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
           {venueOptions}
-        </select>
+        </Dropdown>
         <select value={this.state.tickets} onChange={this.handleTicketsChange} id="selectTickets">
           {ticketOptions}
         </select>

@@ -7,15 +7,16 @@ let logout = (onLogout) => async() => {
   onLogout();
 }
 
+let isNatural = (n) => {
+  n = `${n}` // force the value incase it is not
+  let n1 = Math.abs(n);
+  let n2 = parseInt(n, 10);
+  return !isNaN(n1) && n2 === n1 && n1.toString() === n;
+}
+
 export {
   logout,
   noop,
-  Logger
-}
-
-export function isNatural(n){
-  n = n.toString(); // force the value incase it is not
-  var n1 = Math.abs(n),
-      n2 = parseInt(n, 10);
-  return !isNaN(n1) && n2 === n1 && n1.toString() === n;
+  Logger,
+  isNatural
 }

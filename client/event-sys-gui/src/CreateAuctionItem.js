@@ -3,6 +3,7 @@ import './CreateAuctionItem.css'
 import 'moment/locale/en-ie'
 import { Logger, isNatural } from './Util'
 import FloatText from './FloatText'
+import Dropdown from './Dropdown'
 
 class CreateAuctionItem extends React.Component {
   constructor() {
@@ -29,9 +30,12 @@ class CreateAuctionItem extends React.Component {
 
   buildAuctionList(){
     let auctions = this.state.auctions;
-    let auctionList = [<option key="0" value="0">-select auction-</option>]
+    let auctionList = [
+      <option key="0" value="0">-select auction-</option>
+    ]
+
     if (auctions.length !== 0){
-      for (var i=0; i<auctions.length; i++){
+      for (var i = 0; i < auctions.length; i++){
         let name = auctions[i].name;
         let id = auctions[i].id;
         auctionList.push(<option key={id} value={id}>{name}</option>);
@@ -45,12 +49,13 @@ class CreateAuctionItem extends React.Component {
     let form = e.target;
 
     if (!form.name.value){
-      alert('please give the item a name');
+      // alert('please give the item a name');
+      // TODO (tompywell): Replace Alert
       return;
     }
 
     if (!isNatural(form.price.value)){
-      alert('please enter a starting price for the item');
+      // alert('please enter a starting price for the item');
       return;
     }
 
@@ -81,9 +86,9 @@ class CreateAuctionItem extends React.Component {
         <FloatText name="name" label="Item Name:" />
         <FloatText name="description" label="Item Description:" />
         <FloatText name="price" label="Starting Price:" />
-        <select value={this.state.auction} onChange={this.handleAuctionChange} id="selectAuction">
+        <Dropdown value={this.state.auction} onChange={this.handleAuctionChange}>
           {auctionOptions}
-        </select>
+        </Dropdown>
         <div className='item_form-input'>
           <input type='submit' className='form-button' submit="create_auction_item" value='Create Item'/>
         </div>

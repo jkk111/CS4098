@@ -30,18 +30,6 @@ class EventList extends React.Component {
     console.log(events)
     events = events.map((event, i) => <Event refresh={this.refresh} {...event} key={i} />)
     return events
-
-    // let events = this.state.events;
-    // console.log('events', events);
-    // let rows = []
-    // if (events.length === 0){
-    //   rows.push(<p>There are currently no events in the system</p>)
-    // } else {
-    //   for (var i=0; i<events.length; i++){
-    //     rows.push(<p>{events[i].name}</p>)
-    //   }
-    // }
-    // return rows
   }
 }
 

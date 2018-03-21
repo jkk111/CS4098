@@ -21,12 +21,12 @@ class CreateTicket extends React.Component {
     let form = e.target;
 
     if (!form.name.value){
-      alert('please give the ticket a name');
+      // alert('please give the ticket a name');
       return;
     }
 
     if (!isNatural(form.price.value)){
-      alert('please enter a number for the ticket price');
+      // alert('please enter a number for the ticket price');
       return;
     }
 

@@ -84,7 +84,7 @@ let buildSelectedAllergensList = (selectedAllergens) => {
   ]
 
 
-  for (var i = 0; i<selectedAllergens.length; i++){
+  for (var i = 0; i < selectedAllergens.length; i++){
     let name = `${(selectedAllergens[i] + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
     out.push(<p key={i}>{name}</p>)
   }

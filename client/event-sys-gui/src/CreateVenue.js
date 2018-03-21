@@ -24,12 +24,12 @@ class CreateVenue extends React.Component {
     let form = e.target;
 
     if(!form.name.value){
-      alert('please give the venue a name');
+      // alert('please give the venue a name');
       return;
     }
 
     if(!isNatural(form.capacity.value)){
-      alert('venue capacity must be a number');
+      // alert('venue capacity must be a number');
       return;
     }
 

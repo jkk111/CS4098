@@ -1,0 +1,11 @@
+.dropdown {
+  width: 100%;
+  background: green;
+  padding-bottom: 1em;
+}
+
+.dropdown-input {
+  width: 100%;
+  font-size: 1.5em;
+  padding: 0.5em;
+}

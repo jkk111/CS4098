@@ -10,7 +10,6 @@ import Nav from './Nav'
 import CreateUser from './CreateUser'
 import Settings from './Settings'
 import EventList from './EventList'
-import MenuList from './MenuList'
 import ViewUsers from './ViewUsers'
 import CreateVenue from './CreateVenue'
 import CreateTicket from './CreateTicket'
@@ -55,7 +54,6 @@ const views = {
   EVENT_LIST: EventList,
   CREATE_EVENT: EventForm,
   CREATE_MENU: CreateMenu,
-  MENU_LIST : MenuList,
   VIEW_USERS: ViewUsers,
   CREATE_VENUE: CreateVenue,
   CREATE_TICKET: CreateTicket,

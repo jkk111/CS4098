@@ -22,12 +22,12 @@ class CreateAuction extends React.Component {
     let form = e.target;
 
     if(form.auction_name.value === ''){
-      alert('please give the auction a name')
+      // alert('please give the auction a name')
       return
     }
 
     if(!this.state.start_time || !this.state.end_time){
-      alert('please select start and end times');
+      // alert('please select start and end times');
       return
     }
 

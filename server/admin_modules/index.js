@@ -96,6 +96,7 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
     user.name = `${user.f_name} ${user.l_name}`
     let email_data = {
       subject: 'Event Created',
+      from: 'no-reply@john-kevin.me',
       to: user.email,
       event_name: name,
       event_description: description,

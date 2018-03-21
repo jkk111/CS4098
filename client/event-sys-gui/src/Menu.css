@@ -5,16 +5,13 @@
   border-bottom: 2px solid black;
 }
 
-.menu-name-collapsed, .menu-name-expanded {
+.menu-collapsed, .menu-expanded {
   padding: 1em;
   cursor: pointer;
 }
 
 .menu-content, .admin-content{
   padding: 1em;
-  display: grid;
-  grid-template-columns: 0fr 1fr;
-  grid-gap: 4px;
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
