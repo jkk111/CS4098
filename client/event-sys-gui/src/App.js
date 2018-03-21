@@ -19,6 +19,7 @@ import ViewMenus from './ViewMenus'
 import Payment from './Payment'
 import CreateAuctionItem from './CreateAuctionItem'
 import CreateAuction from './CreateAuction'
+import ViewAuctions from './ViewAuctions'
 
 let instance = Payment.GetInstance();
 console.log(instance);
@@ -64,7 +65,8 @@ const views = {
   CONTACT: Contact,
   VIEW_MENUS: ViewMenus,
   CREATE_AUCTION_ITEM: CreateAuctionItem,
-  CREATE_AUCTION: CreateAuction
+  CREATE_AUCTION: CreateAuction,
+  VIEW_AUCTIONS: ViewAuctions
 }
 
 class App extends Component {
