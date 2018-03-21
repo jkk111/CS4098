@@ -75,15 +75,17 @@ let buildAllergenList = () => {
 }
 
 let buildSelectedAllergensList = (selectedAllergens) => {
-  let out = []
   if (selectedAllergens.length === 0){
-    out.push(<p>No Allergens Selected</p>)
-  } else {
-    out.push(<p>Your Allergens</p>)
+    return <p>No Allergens Selected</p>
   }
-  for (var i=0; i<selectedAllergens.length; i++){
+
+  let out = [
+    <p key={'00'}>Your Allergens</p>
+  ]
+
+  for (var i = 0; i<selectedAllergens.length; i++){
     let name = `${(selectedAllergens[i] + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
-    out.push(<p>{name}</p>)
+    out.push(<p key={i}>{name}</p>)
   }
   return out;
 }
