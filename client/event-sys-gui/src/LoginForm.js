@@ -1,9 +1,12 @@
 import React from 'react'
 
-let LoginForm = ({ onSubmit }) => {
+let LoginForm = ({ onSubmit, loginError = null }) => {
   return <div className="login-form">
     <h1>Already Have An Account? / Log In</h1>
     <form onSubmit={onSubmit}>
+      <div>
+        {loginError}
+      </div>
       <div>
         <label>Username:</label>
         <input type="text" name="username" />

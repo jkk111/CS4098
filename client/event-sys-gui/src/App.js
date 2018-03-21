@@ -87,6 +87,7 @@ class App extends Component {
     e.preventDefault();
     let username = e.target.username.value;
     let password = e.target.password.value
+    }
     let body = JSON.stringify({ username, password });
     let resp = await fetch('/login', {
       method: 'POST',
