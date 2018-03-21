@@ -157,7 +157,7 @@ class App extends Component {
             <h1 className="App-title">Event-Management-System</h1>
           </header>
           <LoginForm error={loginError} onSubmit={this.login} />
-          <SignupForm error={registerError} onSubmit={this.register} />
+          <SignupForm registerError={registerError} onSubmit={this.register} />
         </div>
       );
     }
