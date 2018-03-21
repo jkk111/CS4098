@@ -21,9 +21,6 @@ import CreateAuctionItem from './CreateAuctionItem'
 import CreateAuction from './CreateAuction'
 import ViewAuctions from './ViewAuctions'
 
-let instance = Payment.GetInstance();
-console.log(instance);
-
 
 let mapStateToProps = (state) => {
   return {
@@ -81,6 +78,10 @@ class App extends Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
 //    this.CreateMenu = this.CreateMenu.bind(this);
+  }
+
+  componentDidMount() {
+    Payment.Init();
   }
 
   async login(e) {

@@ -28,6 +28,10 @@ class Payment {
     })
   }
 
+  static Init() {
+    instance = new Payment();
+  }
+
   static GetInstance() {
     if(!instance) {
       instance = window.instance = new Payment();
