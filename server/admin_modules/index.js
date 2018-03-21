@@ -161,6 +161,11 @@ app.post('/create_auction_item', bodyParser.json(), async(req, res) => {
   res.send({ id })
 });
 
+app.post('/', bodyParser.json(), async(req, res) => {
+  let user_id = req.user_id;
+  let { amount } = req.body;
+});
+
 app.get('/auctions', async(req, res) => {
   let auctions = await Auction.get('auction', {});
 
