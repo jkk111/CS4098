@@ -67,9 +67,11 @@ let render_template = (template, data) => {
 }
 
 let sendTemplate = (template, data) => {
+  console.log('[EMAIL]'.blue, template, data)
   try {
     let mail = render_template(template, data)
     parse(mail, (_, mail) => {
+      if(_) { console.log(_) }
       let m = new Email(data.from, data.to, data.subject, data.text, mail);
       sendMail(m);
     })

@@ -1,0 +1,10 @@
+extends header.pug
+block content
+  - var link = `http://localhost:3000/event?id=${event_id}`
+  - console.log(link)
+  div.body.
+    Hi #{name}.
+    There is a new event you may be interested in.
+    #[div.centered #{event_name}]
+    #{event_description}
+    #[a(href!=link) Event Link]

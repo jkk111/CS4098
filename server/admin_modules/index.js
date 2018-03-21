@@ -90,12 +90,21 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
 
   // await eventbrite(event, event_tickets, venue)
   // Email All Users On Mailing List
-  let users = await Users.get('user', { email_verified: true, subscribed: true }, 'email');
-  users = users.map(user => user.email).join(', ');
+  let users = await Users.get('user', { email_verified: true, subscribed: true }, 'f_name, l_name, email');
 
-  let link = `/events/${id}`
-  console.log("If we had an active mail server, we would email all subscribed users")
-  sendTemplate('new-event', { name, description, link, users });
+  for(var user of users) {
+    user.name = `${user.f_name} ${user.l_name}`
+    let email_data = {
+      subject: 'Event Created',
+      to: user.email,
+      event_name: name,
+      event_description: description,
+      event_id: id,
+      ...user
+    };
+
+    sendTemplate('event_created', email_data);
+  }
 
   res.send({ id, success: true })
 });
@@ -108,6 +117,8 @@ app.post('/update_event', bodyParser.json(), async(req, res) => {
   for(var ticket of tickets) {
     await Events.add('event_tickets', { event_id: event_id, ticket_id: ticket.id, amount: ticket.count, available: ticket.count });
   }
+
+  res.send({ success: true })
 })
 
 app.post('/create_ticket', bodyParser.json(), async(req, res) => {

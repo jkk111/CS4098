@@ -1,0 +1,8 @@
+extends header.pug
+block content
+  - var link = `http://localhost:3000/event?id=${event_id}`
+  - console.log(link)
+  p.body.
+    Hi #{name}.
+    An event you're attending #{event_name} has been updated.
+    Click #[a(href!=link) here] to go to the event page.

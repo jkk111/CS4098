@@ -8,6 +8,7 @@ let Events = Database.Get('event');
 let config = require('../config.json');
 let crypto = require('crypto')
 let { hash_password, verify_password, send_confirmation_email } = require('../util')
+let { sendTemplate } = require('../email')
 let Payments = require('../auth_modules/payments')
 
 const Allergens = [
@@ -99,7 +100,9 @@ app.post('/update_info', bodyParser.json(), async(req, res) => {
     update.email_verified = false;
     let verification_code = crypto.randomBytes(8).toString('hex');
     update.verification_code = verification_code;
-    send_confirmation_email(email, verification_code);
+
+    let email_data = { name: `${f_name} ${l_name}`, to: email, from: 'no-reply@john-kevin.me', code: verification_code };
+    sendTemplate('confirm_email', { subject: 'Confirm Your Email', ...email_data })
   }
 
   await Users.update('user', update, { id })
@@ -139,7 +142,12 @@ app.post('/verify', bodyParser.json(), async(req, res) => {
 app.get('/resend_confirmation', async(req, res) => {
   let user = await Users.get('user', { id: req.user_id }, '*');
   user = user[0];
-  send_confirmation_email(user.email, user.verification_code);
+
+  let { f_name, l_name, email, verification_code } = user;
+
+  let email_data = { name: `${f_name} ${l_name}`, to: email, from: 'no-reply@john-kevin.me', code: verification_code };
+  sendTemplate('confirm_email', { subject: 'Confirm Your Email', ...email_data })
+
   res.send({ success: true })
 })
 

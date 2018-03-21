@@ -1,0 +1,7 @@
+extends header.pug
+block content
+  - var link = `http://localhost:3000/complete_registration?token=${token}`
+  - console.log(link)
+  p.body.
+    Hi #{name}.
+    An account has been made for you, you may access it by clicking the #[a(href!=link) following link]

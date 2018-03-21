@@ -1,6 +1,39 @@
+* {
+  font-family: monospace;
+}
+
 html, body. .test {
   background: red;
   height: 100%;
   width: 100%;
   font-style: monospace;
+}
+
+.heading {
+  text-align: center;
+  padding: 1em;
+  background: #455e86;
+  color: white;
+  margin: 0;
+}
+
+.body {
+  border-left: thick black solid;
+  border-right: thick black solid;
+  margin: 0;
+  padding: 1em;
+  white-space: pre;
+  font-weight: 700;
+  font-size: 1.25em;
+}
+
+.footer {
+  background: black;
+  color: white;
+  padding: 1em;
+  font-weight: 800;
+}
+
+.centered {
+  text-align: center;
 }

@@ -1,6 +1,8 @@
 extends header.pug
 block content
   - var link = `http://localhost:3000/verify?code=${code}&email=${to}`
+  - console.log(link)
   p.body.
     Hi #{name}.
-    Please Follow the #[a(href!=link) Link] To Verify Your Email
+    The host of an event you are attending #{event_name}, has sent you a message
+    #{message}

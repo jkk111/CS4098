@@ -126,7 +126,8 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
   } else if(user_email.length) {
     res.json({ success: false, error: 'EMAIL_EXISTS' });
   } else {
-    await Users.add('user', { username, password, email, f_name, l_name, registered: true, email_verified: false });
+    let verification_code = crypto.randomBytes(8).toString('hex');
+    await Users.add('user', { username, password, email, f_name, l_name, registered: true, email_verified: false, verification_code });
     user = await Users.get('user', { username }, 'id');
 
     let user_id = user[0].id;
@@ -139,9 +140,10 @@ app.post('/register', bodyParser.json(), async(req, res, next) => {
     res.json({ id, success: true })
 
     try {
-      let mail = new Email('no-reply@john-kevin.me', email, 'Registered', 'you registered');
-      sendMail(mail);
-    } catch(e) { /* */ }
+      let email_data = { name: `${f_name} ${l_name}`, to: email, from: 'no-reply@john-kevin.me', code: verification_code };
+      sendTemplate('registered', { subject: 'Registered', ...email_data })
+      sendTemplate('confirm_email', { subject: 'Confirm Your Email', email_data })
+    } catch(e) {  console.log(e); /* */ }
   }
 })
 
