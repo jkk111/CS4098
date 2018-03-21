@@ -4,6 +4,7 @@
  */
 const fs = require('fs');
 const sql = require('sqlite3').verbose();
+const config = require('./config');
 
 let create_table = (config) => {
   let { name, keys, extra = [] } = config;
@@ -141,7 +142,7 @@ let run_query = (db, q, params, method = 'all') => {
   return new Promise((resolve) => {
     db[method](q, params, function(err, result) {
       if(err) {
-        console.log(err)
+        console.log('[ERROR]'.red, q, params, err)
         // throw err;
         resolve(result || this);
       }
