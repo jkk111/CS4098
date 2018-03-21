@@ -156,7 +156,7 @@ app.post('/create_auction', bodyParser.json(), async(req, res) => {
 app.post('/create_auction_item', bodyParser.json(), async(req, res) => {
   let { name, description, auction_id, starting_price } = req.body;
 
-  let id = await Auction.add('auction_item', { name, description, starting_price });
+  let id = await Auction.add('auction_item', { name, description, starting_price, auction_id });
   id = id.lastID;
   res.send({ id })
 });

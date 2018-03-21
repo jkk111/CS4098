@@ -4,7 +4,7 @@ let SignupForm = ({ onSubmit, registerError = null}) => {
   return <div className="signup-form">
     <h1>Sign Up / Create An Account</h1>
     <form onSubmit = {onSubmit}>
-      <div>
+      <div className='error'>
         {registerError}
       </div>
       <div>
@@ -37,7 +37,7 @@ let SignupForm = ({ onSubmit, registerError = null}) => {
     </form>
   </div>
 
-  
+
 }
 
 export default SignupForm
