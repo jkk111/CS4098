@@ -3,7 +3,7 @@ import './CreateEvent.css'
 import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
 import { Logger, isNatural } from './Util'
-import FloatText from './FloatText'
+import { FloatText, FloatNumber } from './FloatText'
 import { NoFloatNumber } from './NoFloat'
 import Dropdown from './Dropdown'
 import MultiDropdown from './MultiDropdown'
@@ -195,7 +195,7 @@ class CreateEvent extends React.Component {
       <form onSubmit={this.createEvent} autoComplete="off">
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
-        <FloatText name="capacity" label="Event Capacity:"/>
+        <FloatNumber name="capacity" label="Event Capacity:"/>
         <Dropdown value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
           {venueOptions}
         </Dropdown>

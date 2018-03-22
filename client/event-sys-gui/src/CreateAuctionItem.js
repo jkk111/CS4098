@@ -2,7 +2,7 @@ import React from 'react';
 import './CreateAuctionItem.css'
 import 'moment/locale/en-ie'
 import { Logger, isNatural } from './Util'
-import FloatText from './FloatText'
+import { FloatText, FloatNumber } from './FloatText'
 import Dropdown from './Dropdown'
 
 class CreateAuctionItem extends React.Component {
@@ -85,7 +85,7 @@ class CreateAuctionItem extends React.Component {
       <form onSubmit={this.createAuctionItem} autoComplete="off">
         <FloatText name="name" label="Item Name:" />
         <FloatText name="description" label="Item Description:" />
-        <FloatText name="price" label="Starting Price:" />
+        <FloatNumber name="price" label="Starting Price:" />
         <Dropdown value={this.state.auction} onChange={this.handleAuctionChange}>
           {auctionOptions}
         </Dropdown>

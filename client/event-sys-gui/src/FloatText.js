@@ -16,16 +16,18 @@ let FloatText = ({ name, label, className = '', defaultValue = '', inputProps = 
 }
 
 let FloatNumber = (props = {}) => {
-  if(props.inputProps) {
-    props.inputProps.type = 'number';
-    props.inputProps.min = 1;
+  let mod_props = Object.assign({}, props)
+
+  if(mod_props.inputProps) {
+    mod_props.inputProps.type = 'number';
+    mod_props.inputProps.min = 1;
   } else {
-    props.inputProps = {
+    mod_props.inputProps = {
       type: 'number',
       min: 1
     }
   }
-  return <FloatText {...props} />
+  return <FloatText {...mod_props} />
 }
 
 let FloatPassword = ({ name, label, className, defaultValue }) => {
