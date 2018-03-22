@@ -49,7 +49,7 @@ class DateTimePickerTime extends React.Component {
 
 	decrease(type) {
 		let value = parseInt(this.state[type], 10) - this.timeConstraints[type].step;
-		if (value < this.timeConstraints[type].min) {
+		if(value < this.timeConstraints[type].min) {
 			value = this.timeConstraints[type].max + 1 - (this.timeConstraints[ type ].min - value);
 		}
 		return this.pad(type, value);
@@ -105,10 +105,10 @@ class DateTimePickerTime extends React.Component {
 	renderCounter(type, key) {
 		if(type !== 'daypart') {
 			let value = this.state[type];
-			if (type === 'hours' && this.props.timeFormat.toLowerCase().indexOf( ' a' ) !== -1) {
+			if(type === 'hours' && this.props.timeFormat.toLowerCase().indexOf( ' a' ) !== -1) {
 				value = (value - 1) % 12 + 1;
 
-				if (value === 0) {
+				if(value === 0) {
 					value = 12;
 				}
 			}
@@ -185,7 +185,7 @@ class DateTimePickerTime extends React.Component {
 	}
 
 	renderHeader() {
-		if (!this.props.dateFormat) {
+		if(!this.props.dateFormat) {
 			return null;
 		}
 

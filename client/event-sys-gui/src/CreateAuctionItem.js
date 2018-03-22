@@ -17,8 +17,8 @@ class CreateAuctionItem extends React.Component {
     this.setAuctions();
   }
 
-  handleAuctionChange(event){
-    this.setState({selectedAuction: event.target.value})
+  handleAuctionChange(value) {
+    this.setState({selectedAuction: value})
   }
 
   async setAuctions() {
@@ -28,14 +28,14 @@ class CreateAuctionItem extends React.Component {
     Logger.log("Loaded Auctions", response)
   }
 
-  buildAuctionList(){
+  buildAuctionList() {
     let auctions = this.state.auctions;
     let auctionList = [
       <option key="0" value="0">-select auction-</option>
     ]
 
-    if (auctions.length !== 0){
-      for (var i = 0; i < auctions.length; i++){
+    if(auctions.length !== 0) {
+      for (var i = 0; i < auctions.length; i++) {
         let name = auctions[i].name;
         let id = auctions[i].id;
         auctionList.push(<option key={id} value={id}>{name}</option>);
@@ -44,17 +44,17 @@ class CreateAuctionItem extends React.Component {
     return auctionList;
   }
 
-  async createAuctionItem(e){
+  async createAuctionItem(e) {
     e.preventDefault();
     let form = e.target;
 
-    if (!form.name.value){
+    if(!form.name.value) {
       // alert('please give the item a name');
       // TODO (tompywell): Replace Alert
       return;
     }
 
-    if (!isNatural(form.price.value)){
+    if(!isNatural(form.price.value)) {
       // alert('please enter a starting price for the item');
       return;
     }

@@ -22,7 +22,7 @@ class MenuForm extends React.Component {
     this.createMenu = this.createMenu.bind(this);
   }
 
-  async createMenu(e){
+  async createMenu(e) {
     e.preventDefault();
     let form = e.target;
     console.dir(form);
@@ -90,7 +90,6 @@ class MenuForm extends React.Component {
           [type]: [ ...before, updated, ...after ]
         })
       }
-
 
       let on_name_change = (e) => {
         let items = this.state[type];

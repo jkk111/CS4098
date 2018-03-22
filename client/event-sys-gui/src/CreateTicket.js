@@ -16,16 +16,16 @@ class CreateTicket extends React.Component {
     this.createTicket = this.createTicket.bind(this);
   }
 
-  async createTicket(e){
+  async createTicket(e) {
     e.preventDefault();
     let form = e.target;
 
-    if (!form.name.value){
+    if(!form.name.value) {
       // alert('please give the ticket a name');
       return;
     }
 
-    if (!isNatural(form.price.value)){
+    if(!isNatural(form.price.value)) {
       // alert('please enter a number for the ticket price');
       return;
     }

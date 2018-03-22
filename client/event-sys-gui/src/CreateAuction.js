@@ -17,16 +17,16 @@ class CreateAuction extends React.Component {
     this.endChange = this.endChange.bind(this);
   }
 
-  async createAuction(e){
+  async createAuction(e) {
     e.preventDefault();
     let form = e.target;
 
-    if(form.auction_name.value === ''){
+    if(form.auction_name.value === '') {
       // alert('please give the auction a name')
       return
     }
 
-    if(!this.state.start_time || !this.state.end_time){
+    if(!this.state.start_time || !this.state.end_time) {
       // alert('please select start and end times');
       return
     }
@@ -68,8 +68,8 @@ class CreateAuction extends React.Component {
         <FloatText name="auction_name" label="Auction Name:" />
         <FloatText name="description" label="Auction Description:" />
         <div className='event_form-input'>
-          <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange}/>
-          <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} />
+          <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true} />
+          <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true} />
         </div>
         <div className='event_form-input'>
           <input type='submit' className='form-button' submit="create_auction" value='Create Auction'/>

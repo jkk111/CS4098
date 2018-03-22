@@ -10,7 +10,6 @@ let capitalize = (str) => {
 class DateTimePickerMonths extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.renderMonths = this.renderMonths.bind(this);
 		this.updateSelectedMonth = this.updateSelectedMonth.bind(this);
 		this.renderMonth = this.renderMonth.bind(this);
@@ -60,7 +59,7 @@ class DateTimePickerMonths extends React.Component {
 				className: classes
 			};
 
-			if (!isDisabled) {
+			if(!isDisabled) {
 				if(this.props.updateOn === 'months') {
 					props.onClick = this.updateSelectedMonth
 				} else {
@@ -70,7 +69,7 @@ class DateTimePickerMonths extends React.Component {
 
 			months.push(renderer(props, i, year, date && date.clone()));
 
-			if (months.length === 4) {
+			if(months.length === 4) {
 				rows.push(React.createElement('tr', { key: month + '_' + rows.length }, months));
 				months = [];
 			}

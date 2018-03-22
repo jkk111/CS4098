@@ -58,7 +58,7 @@ class Menu extends React.Component {
     }
 
     if(expanded) {
-      if (is_admin){
+      if(is_admin) {
         admin_content = <div className='admin-content'>
           <span className='menu-content-key'>Menu ID</span>
           <span className='menu-content-value'>{id}</span>

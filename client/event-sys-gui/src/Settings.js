@@ -66,7 +66,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
 
 let buildAllergenList = () => {
   let allergenList = []
-  for (var i = 0; i < ALLERGEN_NAMES.length; i++){
+  for (var i = 0; i < ALLERGEN_NAMES.length; i++) {
     let name = `${(i + 1)}. ${ALLERGEN_NAMES[i]}`;
     let value = i + 1;
     allergenList.push(<option key={value} value={value}>{name}</option>);
@@ -75,7 +75,7 @@ let buildAllergenList = () => {
 }
 
 let buildSelectedAllergensList = (selectedAllergens) => {
-  if (selectedAllergens.length === 0){
+  if(selectedAllergens.length === 0) {
     return <p>No Allergens Selected</p>
   }
 
@@ -84,7 +84,7 @@ let buildSelectedAllergensList = (selectedAllergens) => {
   ]
 
 
-  for (var i = 0; i < selectedAllergens.length; i++){
+  for (var i = 0; i < selectedAllergens.length; i++) {
     let name = `${(selectedAllergens[i] + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
     out.push(<p key={i}>{name}</p>)
   }
@@ -136,11 +136,11 @@ class Settings extends React.Component {
     this.handleAllergenSelected = this.handleAllergenSelected.bind(this);
   }
 
-  handleAllergenSelected(event){
+  handleAllergenSelected(event) {
     console.log("allergen ", event.target.value-1, " selected")
     let allergen = event.target.value-1;
     let selectedAllergens = this.state.selectedAllergens;
-    if (selectedAllergens.includes(allergen)){
+    if(selectedAllergens.includes(allergen)) {
       let i = selectedAllergens.indexOf(allergen);
         selectedAllergens.splice(i, 1);
     } else {

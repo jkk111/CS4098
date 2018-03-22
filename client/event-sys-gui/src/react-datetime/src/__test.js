@@ -18,7 +18,7 @@ var DateTimePickerDays = onClickOutside( createClass({
       React.createElement('tbody', { key: 'tb' }, this.renderDays())
     ];
 
-    if ( footer )
+    if( footer )
       tableChildren.push( footer );
 
     return React.createElement('div', { className: 'rdtDays' },
@@ -66,19 +66,19 @@ var DateTimePickerDays = onClickOutside( createClass({
       classes = 'rdtDay';
       currentDate = prevMonth.clone();
 
-      if ( ( prevMonth.year() === currentYear && prevMonth.month() < currentMonth ) || ( prevMonth.year() < currentYear ) )
+      if( ( prevMonth.year() === currentYear && prevMonth.month() < currentMonth ) || ( prevMonth.year() < currentYear ) )
         classes += ' rdtOld';
-      else if ( ( prevMonth.year() === currentYear && prevMonth.month() > currentMonth ) || ( prevMonth.year() > currentYear ) )
+      else if( ( prevMonth.year() === currentYear && prevMonth.month() > currentMonth ) || ( prevMonth.year() > currentYear ) )
         classes += ' rdtNew';
 
-      if ( selected && prevMonth.isSame( selected, 'day' ) )
+      if( selected && prevMonth.isSame( selected, 'day' ) )
         classes += ' rdtActive';
 
-      if ( prevMonth.isSame( moment(), 'day' ) )
+      if( prevMonth.isSame( moment(), 'day' ) )
         classes += ' rdtToday';
 
       isDisabled = !isValid( currentDate, selected );
-      if ( isDisabled )
+      if( isDisabled )
         classes += ' rdtDisabled';
 
       dayProps = {
@@ -87,12 +87,12 @@ var DateTimePickerDays = onClickOutside( createClass({
         className: classes
       };
 
-      if ( !isDisabled )
+      if( !isDisabled )
         dayProps.onClick = this.updateSelectedDate;
 
       days.push( renderer( dayProps, currentDate, selected ) );
 
-      if ( days.length === 7 ) {
+      if( days.length === 7 ) {
         weeks.push( React.createElement('tr', { key: prevMonth.format( 'M_D' )}, days ) );
         days = [];
       }
@@ -112,7 +112,7 @@ var DateTimePickerDays = onClickOutside( createClass({
   },
 
   renderFooter: function() {
-    if ( !this.props.timeFormat )
+    if( !this.props.timeFormat )
       return '';
 
     var date = this.props.selectedDate || this.props.viewDate;

@@ -1,0 +1,19 @@
+.ticket-select-float-text {
+  width: 50%;
+  float: left;
+}
+
+.ticket-select-dropdown {
+  width: 50%!important;
+  float: left;
+}
+
+.ticket-select-input {
+  width: 50%;
+  float: left;
+  outline: none;
+  border: none;
+  font-size: 1.5em;
+  padding: .5em;
+  box-sizing: border-box;
+}

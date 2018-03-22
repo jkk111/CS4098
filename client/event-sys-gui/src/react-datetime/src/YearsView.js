@@ -45,11 +45,11 @@ class DateTimePickerYears extends React.Component {
 
 			let isDisabled = validDay === undefined;
 
-			if (isDisabled) {
+			if(isDisabled) {
 				classes += ' rdtDisabled';
 			}
 
-			if (selectedDate && selectedDate.year() === year) {
+			if(selectedDate && selectedDate.year() === year) {
 				classes += ' rdtActive';
 			}
 
@@ -69,7 +69,7 @@ class DateTimePickerYears extends React.Component {
 
 			years.push(renderer(props, year, selectedDate && selectedDate.clone()));
 
-			if (years.length === 4) {
+			if(years.length === 4) {
 				rows.push(<tr key={i}>{years}</tr>);
 				years = [];
 			}

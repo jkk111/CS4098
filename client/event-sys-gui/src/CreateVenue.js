@@ -19,16 +19,16 @@ class CreateVenue extends React.Component {
     this.createVenue = this.createVenue.bind(this);
   }
 
-  async createVenue(e){
+  async createVenue(e) {
     e.preventDefault();
     let form = e.target;
 
-    if(!form.name.value){
+    if(!form.name.value) {
       // alert('please give the venue a name');
       return;
     }
 
-    if(!isNatural(form.capacity.value)){
+    if(!isNatural(form.capacity.value)) {
       // alert('venue capacity must be a number');
       return;
     }

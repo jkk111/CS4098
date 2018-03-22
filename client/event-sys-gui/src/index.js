@@ -81,7 +81,7 @@ let update_user_data = async() => {
     store.dispatch({ type: 'USER_INFO_CHANGED', value: user_info })
   }
 
-  if (status.auth_level === 'ADMIN') {
+  if(status.auth_level === 'ADMIN') {
     let admin_info = await fetch('/admin/info');
     admin_info = await admin_info.json();
     store.dispatch({ type: 'ADMIN_INFO_CHANGED', value: admin_info })

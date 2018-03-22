@@ -95,11 +95,11 @@ Alternatively, if you need to render different content than an `<input />` eleme
 
 ```js
 var MyDTPicker = React.createClass({
-    render: function(){
+    render: function() {
         return <Datetime renderInput={ this.renderInput } />;
     },
-    renderInput: function( props, openCalendar, closeCalendar ){
-        function clear(){
+    renderInput: function( props, openCalendar, closeCalendar ) {
+        function clear() {
             props.onChange({target: {value: ''}});
         }
         return (
@@ -119,20 +119,20 @@ It is possible to customize the way that the datepicker display the days, months
 
 ```js
 var MyDTPicker = React.createClass({
-    render: function(){
+    render: function() {
         return <Datetime
             renderDay={ this.renderDay }
             renderMonth={ this.renderMonth }
             renderYear={ this.renderYear }
         />;
     },
-    renderDay: function( props, currentDate, selectedDate ){
+    renderDay: function( props, currentDate, selectedDate ) {
         return <td {...props}>{ '0' + currentDate.date() }</td>;
     },
-    renderMonth: function( props, month, year, selectedDate ){
+    renderMonth: function( props, month, year, selectedDate ) {
         return <td {...props}>{ month }</td>;
     },
-    renderYear: function( props, year, selectedDate ){
+    renderYear: function( props, year, selectedDate ) {
         return <td {...props}>{ year % 100 }</td>;
     }
 });
@@ -167,7 +167,7 @@ In the example below are *all dates before today* disabled.
 ```js
 // Let's use the static moment reference in the Datetime component
 var yesterday = Datetime.moment().subtract( 1, 'day' );
-var valid = function( current ){
+var valid = function( current ) {
     return current.isAfter( yesterday );
 };
 <Datetime isValidDate={ valid } />
@@ -176,7 +176,7 @@ var valid = function( current ){
 
 It's also possible to disable *the weekends*, as shown in the example below.
 ```js
-var valid = function( current ){
+var valid = function( current ) {
     return current.day() !== 0 && current.day() !== 6;
 };
 <Datetime isValidDate={ valid } />

@@ -34,7 +34,7 @@ class Event extends React.Component {
     let endString = endObject.toUTCString();
 
     if(expanded) {
-      if (is_admin){
+      if(is_admin) {
         admin_content = <div className='admin-content'>
           <span className='event-content-key'>Event ID</span>
           <span className='event-content-value'>{id}</span>

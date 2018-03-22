@@ -17,7 +17,7 @@ class DateTime extends React.Component {
 		super(props)
 		let state = this.getStateFromProps(props);
 
-		if (state.open === undefined) {
+		if(state.open === undefined) {
 			state.open = !props.input;
 		}
 
@@ -103,7 +103,7 @@ class DateTime extends React.Component {
 		props = props || this.props;
 		var momentFn = props.utc ? moment.utc : moment;
 		var m = momentFn(date, format, props.strictParsing);
-		if (props.locale) {
+		if(props.locale) {
 			m.locale(props.locale);
 		}
 		return m;
@@ -118,7 +118,7 @@ class DateTime extends React.Component {
 	}
 
 	openCalendar(e) {
-		if (!this.state.open) {
+		if(!this.state.open) {
 			this.setState({ open: true }, () => {
 				console.log(this.state, this.props.onFocus)
 				this.props.onFocus(e);
@@ -133,7 +133,7 @@ class DateTime extends React.Component {
 	}
 
 	handleClickOutside() {
-		if (this.props.input && this.state.open && !this.props.open && !this.props.disableOnClickOutside) {
+		if(this.props.input && this.state.open && !this.props.open && !this.props.disableOnClickOutside) {
 			this.setState({ open: false }, () => {
 				this.props.onBlur(this.state.selectedDate || this.state.inputValue);
 			});
@@ -289,7 +289,7 @@ class DateTime extends React.Component {
 			updatedState.viewDate = moment(nextProps.viewDate);
 		}
 		//we should only show a valid date if we are provided a isValidDate function. Removed in 2.10.3
-		/*if (this.props.isValidDate) {
+		/*if(this.props.isValidDate) {
 			updatedState.viewDate = updatedState.viewDate || this.state.viewDate;
 			while (!this.props.isValidDate(updatedState.viewDate)) {
 				updatedState.viewDate = updatedState.viewDate.add(1, 'day');
@@ -299,11 +299,11 @@ class DateTime extends React.Component {
 	}
 
 	getUpdateOn(formats) {
-		if (formats.date.match(/[lLD]/)) {
+		if(formats.date.match(/[lLD]/)) {
 			return viewModes.DAYS;
-		} else if (formats.date.indexOf('M') !== -1) {
+		} else if(formats.date.indexOf('M') !== -1) {
 			return viewModes.MONTHS;
-		} else if (formats.date.indexOf('Y') !== -1) {
+		} else if(formats.date.indexOf('Y') !== -1) {
 			return viewModes.YEARS;
 		}
 

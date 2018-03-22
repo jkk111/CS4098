@@ -107,7 +107,7 @@ class App extends Component {
     set_cookie(resp.id)
   }
 
-  async logout(){
+  async logout() {
     let resp = await fetch('/logout');
     resp = await resp.json();
 
@@ -152,7 +152,7 @@ class App extends Component {
 
   render() {
     let { registerError, loginError } = this.state;
-    if (this.props.logged_in !== 'UNAUTH'){
+    if(this.props.logged_in !== 'UNAUTH') {
       let View = views[this.props.view] || views.HOME
       return <Fragment>
         <Nav />

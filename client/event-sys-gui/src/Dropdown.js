@@ -1,9 +1,13 @@
 import React from 'react';
 import './Dropdown.css'
 
-let Dropdown = ({ value, onChange, children }) => {
-  return <div className='dropdown'>
-    <select className='dropdown-input' value={value} onChange={onChange}>
+let merge_classes = (base, added) => `${base} ${added}-${base}`
+
+let Dropdown = ({ value, onChange, children, className }) => {
+  let el_class = merge_classes('dropdown', className)
+  let input_class = merge_classes('dropdown-input', className)
+  return <div className={el_class}>
+    <select className={input_class} value={value} onChange={(e) => onChange(e.target.value)} placeholder='testing'>
       {children}
     </select>
   </div>
