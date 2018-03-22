@@ -1,4 +1,5 @@
 import React from 'react';
+import './Event.css'
 let {Component} = React;
 
 class Tracker extends Component {
@@ -37,8 +38,7 @@ class Tracker extends Component {
     let event_name_class = expanded ? 'event-name-expanded' : 'event-name-collapsed'
 
 
-    return 
-    <div className='event' >
+   return <div className='event' >
       <div className={event_name_class} onClick={this.toggle}>{name}</div>
       {content}
     </div>
