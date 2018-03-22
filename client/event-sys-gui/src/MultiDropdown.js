@@ -44,7 +44,7 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
 
     if(value.length > 1) {
       remove = <div onClick={_remove} className='remove-item remove-item-dropdown'>
-        (X)
+        X
       </div>
     }
 
