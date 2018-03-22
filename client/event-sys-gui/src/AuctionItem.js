@@ -49,7 +49,7 @@ class AuctionItem extends React.Component {
       content = <div>
         <p className="description">{description}</p>
         <p className="price">Current Bid: {price}</p>
-        <form onSubmit={this.bid} autoComplete="off">
+        <form onSubmit={this.bid} autoComplete="off" className="bid-form">
           <FloatNumber name="price" label="Enter Your Bid Here:" />
           <div className='bid-form-input'>
             <input type='submit' className='form-button' submit="bid" value='Bid!'/>

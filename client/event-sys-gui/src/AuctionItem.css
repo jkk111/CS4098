@@ -16,6 +16,10 @@
   text-align: justify;
 }
 
+.bid-form {
+  color: black;
+}
+
 .auction-item-content {
   padding: 1em;
   display: grid;
