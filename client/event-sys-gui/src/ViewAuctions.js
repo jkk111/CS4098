@@ -30,7 +30,6 @@ class ViewAuctions extends React.Component {
 
   render() {
     let { auctions } = this.state;
-
     auctions = auctions.map((auction, i) => <Auction refresh={this.refresh} {...auction} key={i} />)
     return auctions
   }
