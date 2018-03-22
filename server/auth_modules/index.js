@@ -49,6 +49,10 @@ app.get('/events', async(req, res) => {
 app.post('/counter', bodyParser.json(), async(req, res) => {
   let event_id = req.body.event_id;
 
+  if(!event_id) {
+    return res.send({ total: 0 })
+  }
+
   let event_tickets = await Events.get('event_tickets', { event_id }, 'ticket_id, available, amount');
   for(var ticket of event_tickets) {
     let ticket_info = await Events.get('tickets', { id: ticket.ticket_id }, 'price');

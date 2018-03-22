@@ -63,6 +63,13 @@ let reducers = {
       }
     }
     return state;
+  },
+
+  active_event: (state = null, action) => {
+    if(action.type === 'TRACK_EVENT') {
+      return action.value;
+    }
+    return state;
   }
 }
 
@@ -91,7 +98,7 @@ let update_user_data = async() => {
   store.dispatch({ type: 'LOGIN_STATE_CHANGED', value: status.auth_level });
 }
 
-let state_whitelist = [ 'active_view' ]
+let state_whitelist = [ 'active_view', 'active_event' ]
 
 let update_state = () => {
   let state = {};
@@ -169,6 +176,10 @@ update_user_data().then(async() => {
       if(state.active_view) {
         store.dispatch({ type: 'VIEW_CHANGED', value: state.active_view })
       }
+
+      if(state.active_event) {
+        store.dispatch({ type: 'TRACK_EVENT', value: state.active_event })
+      }
     }
   }
 
@@ -178,28 +189,5 @@ update_user_data().then(async() => {
 })
 
 registerServiceWorker();
-
-let rand_range = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-let rand_color = () => {
-  let r = rand_range(0, 255);
-  let g = rand_range(0, 255);
-  let b = rand_range(0, 255);
-
-  return `rgb(${r}, ${g}, ${b})`
-}
-
-setTimeout(() => {
-  setInterval(() => {
-    let els = document.querySelectorAll('*')
-    for(var el of els) {
-      el.style.backgroundColor = rand_color();
-      el.style.color = rand_color();
-    }
-  }, 1000);
-}, 120000);
-
 
 console.clear = () => {}

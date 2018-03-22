@@ -1,6 +1,15 @@
 import React from 'react';
 import './Event.css'
-//import { Logger } from './Util'
+import { connect } from 'react-redux'
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    show_tracker: (id) => {
+      dispatch({ type: 'VIEW_CHANGED', value: 'VIEW_DONATIONS' })
+      dispatch({ type: 'TRACK_EVENT', value: id })
+    }
+  }
+}
 
 class Event extends React.Component {
   constructor(props) {
@@ -10,12 +19,19 @@ class Event extends React.Component {
     }
 
     this.toggle = this.toggle.bind(this);
+    this.show_tracker = this.show_tracker.bind(this);
   }
 
   toggle() {
     this.setState({
       expanded: !this.state.expanded
     })
+  }
+
+  show_tracker() {
+    if(this.props.show_tracker) {
+      this.props.show_tracker(this.props.id)
+    }
   }
 
   render() {
@@ -42,17 +58,20 @@ class Event extends React.Component {
           <span className='event-content-value'>{venue_id}</span>
         </div>
       }
-      content = <div className='event-content'>
-        <span className='event-content-key'>Name</span>
-        <span className='event-content-value'>{name}</span>
-        <span className='event-content-key'>Description</span>
-        <span className='event-content-value'>{description}</span>
-        <span className='event-content-key'>Capacity</span>
-        <span className='event-content-value'>{max_attendees}</span>
-        <span className='event-content-key'>Starts</span>
-        <span className='event-content-value'>{startString}</span>
-        <span className='event-content-key'>Ends</span>
-        <span className='event-content-value'>{endString}</span>
+      content = <div>
+        <div className='event-content'>
+          <span className='event-content-key'>Name</span>
+          <span className='event-content-value'>{name}</span>
+          <span className='event-content-key'>Description</span>
+          <span className='event-content-value'>{description}</span>
+          <span className='event-content-key'>Capacity</span>
+          <span className='event-content-value'>{max_attendees}</span>
+          <span className='event-content-key'>Starts</span>
+          <span className='event-content-value'>{startString}</span>
+          <span className='event-content-key'>Ends</span>
+          <span className='event-content-value'>{endString}</span>
+        </div>
+        <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
       </div>
     }
 
@@ -66,4 +85,4 @@ class Event extends React.Component {
   }
 }
 
-export default Event;
+export default connect(null, mapDispatchToProps)(Event);

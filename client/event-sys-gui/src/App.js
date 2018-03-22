@@ -20,6 +20,7 @@ import Payment from './Payment'
 import CreateAuctionItem from './CreateAuctionItem'
 import CreateAuction from './CreateAuction'
 import ViewAuctions from './ViewAuctions'
+import DonationTracker from './DonationTracker'
 
 
 let mapStateToProps = (state) => {
@@ -52,6 +53,7 @@ const views = {
   HOME: Home,
   CREATE_USER: CreateUser,
   VIEW_TRACKER: Tracker,
+  VIEW_DONATIONS: DonationTracker,
   SETTINGS: Settings,
   EVENT_LIST: EventList,
   CREATE_EVENT: EventForm,
@@ -161,15 +163,13 @@ class App extends Component {
         <View />
       </Fragment>
     } else {
-      return (
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">Event-Management-System</h1>
-          </header>
-          <LoginForm loginError={loginError} onSubmit={this.login} />
-          <SignupForm registerError={registerError} onSubmit={this.register} />
-        </div>
-      );
+      return <div className="App">
+        <header className="App-header">
+          <h1 className="App-title">Event-Management-System</h1>
+        </header>
+        <LoginForm loginError={loginError} onSubmit={this.login} />
+        <SignupForm registerError={registerError} onSubmit={this.register} />
+      </div>
     }
   }
 }
