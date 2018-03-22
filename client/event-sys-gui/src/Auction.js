@@ -22,6 +22,12 @@ class Auction extends React.Component {
     let { expanded } = this.state;
     let { name, description, start_time, end_time, items} = this.props;
 
+    let startObject = new Date(start_time);
+    let startString = startObject.toUTCString();
+
+    let endObject = new Date(end_time);
+    let endString = endObject.toUTCString();
+
     let content = null;
 
     items = items.map((item, i) => <AuctionItem {...item} key={i} />)
@@ -33,9 +39,9 @@ class Auction extends React.Component {
         <span className='auction-content-key'>Description</span>
         <span className='auction-content-value'>{description}</span>
         <span className='auction-content-key'>Start</span>
-        <span className='auction-content-value'>{start_time}</span>
+        <span className='auction-content-value'>{startString}</span>
         <span className='auction-content-key'>End</span>
-        <span className='auction-content-value'>{end_time}</span>
+        <span className='auction-content-value'>{endString}</span>
       </div>
     }
 
