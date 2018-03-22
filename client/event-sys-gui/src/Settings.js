@@ -56,7 +56,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
   }
 
   let allergenOptions = buildAllergenList();
-  let selectedAllergensList = buildSelectedAllergensList(selectedAllergens);
+  // let selectedAllergensList = buildSelectedAllergensList(selectedAllergens);
 
   return <form ref={ref} onSubmit={onSubmit} className='form'>
     <FloatText name='f_name' label='First Name:' defaultValue={defaults.f_name} />
@@ -66,7 +66,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
     <MultiDropdown value={selectedAllergens} onChange={handleAllergenSelected} prompt='-Select Allergens-' addText='Add Allergen'>
       {allergenOptions}
     </MultiDropdown>
-    <div>{selectedAllergensList}</div>
+    <FloatText name='accessibility' label='Additional Accessiblity Requirements: ' defaultValue={defaults.accessibility} />
     <CheckBox name='subscribed' label='Subscribe To Mailing List' value={defaults.subscribed} />
     {prompt}
     <div className='form-button form-field' onClick={onChangePassword}>Change Password</div>
@@ -74,23 +74,23 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
   </form>
 }
 
-let buildSelectedAllergensList = (selectedAllergens) => {
-  if(selectedAllergens.length === 0) {
-    return <p>No Allergens Selected</p>
-  }
+// let buildSelectedAllergensList = (selectedAllergens) => {
+//   if(selectedAllergens.length === 0) {
+//     return <p>No Allergens Selected</p>
+//   }
 
-  let out = []
+//   let out = []
 
-  for (var i = 0; i < selectedAllergens.length; i++) {
-    let parsed = parseInt(selectedAllergens[i]);
-    console.log(parsed);
-    if(selectedAllergens[i] == -1 || (!parsed && parsed !== 0))
-      continue;
-    let name = `${((parsed) + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
-    out.push(<p key={i}>{name}</p>)
-  }
-  return out;
-}
+//   for (var i = 0; i < selectedAllergens.length; i++) {
+//     let parsed = parseInt(selectedAllergens[i]);
+//     console.log(parsed);
+//     if(selectedAllergens[i] == -1 || (!parsed && parsed !== 0))
+//       continue;
+//     let name = `${((parsed) + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
+//     out.push(<p key={i}>{name}</p>)
+//   }
+//   return out;
+// }
 
 let PasswordSettings = ({ onSubmit, onBack }) => {
   let _onBack = (...args) => {
@@ -161,6 +161,7 @@ class Settings extends React.Component {
     let phone = form.phone.value;
     let subscribed = form.subscribed.checked;
     let allergens = this.state.selectedAllergens.filter(v => v != -1);
+    let accessibility = form.accessibility.value;
 
     console.log(subscribed)
 
@@ -170,7 +171,8 @@ class Settings extends React.Component {
       email,
       phone,
       subscribed,
-      allergens
+      allergens,
+      accessibility
     }
 
     console.log(body);

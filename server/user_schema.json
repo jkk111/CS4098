@@ -10,6 +10,7 @@
         "password": "TEXT NOT NULL",
         "email": "TEXT NOT NULL",
         "phone": "TEXT NOT NULL DEFAULT \"\"",
+        "accessibility": "TEXT NOT NULL DEFAULT \"\"",
         "email_verified": "BOOL NOT NULL DEFAULT 0",
         "verification_code": "TEXT",
         "registered": "BOOL NOT NULL DEFAULT 1",

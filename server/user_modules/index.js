@@ -31,7 +31,7 @@ const Allergens = [
 // Obtains user info
 app.get('/info', async(req, res) => {
   let id = req.user_id
-  let user = await Users.get('user', { id }, [ 'f_name', 'l_name', 'email', 'username', 'phone', 'email_verified', 'subscribed' ]);
+  let user = await Users.get('user', { id }, [ 'f_name', 'l_name', 'email', 'username', 'phone', 'email_verified', 'subscribed', 'accessibility' ]);
   if(user.length > 0) {
 
     let user_id = id;
@@ -77,9 +77,9 @@ app.get('/events', async(req, res) => {
 });
 
 app.post('/update_info', bodyParser.json(), async(req, res) => {
-  let { f_name, l_name, email, phone, subscribed, allergens = [] } = req.body;
+  let { f_name, l_name, email, phone, subscribed, allergens = [], accessibility } = req.body;
   let id = req.user_id;
-  let update = { f_name, l_name, email, phone, subscribed };
+  let update = { f_name, l_name, email, phone, subscribed, accessibility };
 
   await Users.delete('allergens', { user_id: id })
   for(var allergen of allergens) {

@@ -3,13 +3,13 @@ const app = express.Router();
 const Database = require('../database')
 const Events = Database.Get('event')
 const Payment = require('./payments')
-const raffle = require('./raffle')
+// const raffle = require('./raffle')
 const bodyParser = require('body-parser')
 const Auction = Database.Get('auction')
 const Payments = Database.Get('payment')
 
 app.use('/payments', Payment.router)
-app.use('/raffle', raffle)
+// app.use('/raffle', raffle)
 
 app.get('/events', async(req, res) => {
   let events = await Events.get('event', {}, [ 'id','name', 'description', 'venue_id', 'start_time', 'end_time', 'max_attendees' ]);
