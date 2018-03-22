@@ -66,7 +66,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
     <MultiDropdown value={selectedAllergens} onChange={handleAllergenSelected} prompt='-Select Allergens-' addText='Add Allergen'>
       {allergenOptions}
     </MultiDropdown>
-    <FloatText name='accessibility' label='Additional Accessiblity Requirements: ' defaultValue={defaults.accessibility} />
+    <FloatText name='accessibility' label='Additional Dietary/Accessiblity Requirements: ' defaultValue={defaults.accessibility} />
     <CheckBox name='subscribed' label='Subscribe To Mailing List' value={defaults.subscribed} />
     {prompt}
     <div className='form-button form-field' onClick={onChangePassword}>Change Password</div>
