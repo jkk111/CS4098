@@ -199,7 +199,7 @@ class CreateEvent extends React.Component {
         <Dropdown value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
           {venueOptions}
         </Dropdown>
-        <MultiDropdown value={this.state.selectedTickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect}>
+        <MultiDropdown value={this.state.selectedTickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add Ticket Type'>
           {ticketOptions}
         </MultiDropdown>
         {/*{ticketAmounts}*/}

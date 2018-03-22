@@ -41,9 +41,10 @@ class Payment {
     return instance
   }
 
-  static async CreateDonation(donation_amount) {
+  static async CreateDonation(donation_amount, event_id = null) {
     let body = {
-      amount: donation_amount
+      amount: donation_amount,
+      event_id
     }
     let resp = await fetch('/payments/create_donation', {
       method: 'POST',
@@ -77,6 +78,24 @@ class Payment {
     let { id, amount } = await resp.json();
     let inst = this.GetInstance();
     inst.open(id, 'Ticket', amount)
+  }
+
+  static async CreateAuction(auction_item_id) {
+    let body = JSON.stringify({
+      auction_item_id
+    })
+
+    let resp = await fetch('/payments/create_auction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body
+    });
+
+    let { id, amount } = await resp.json();
+    let inst = this.GetInstance();
+    inst.open(id, 'Auction', amount);
   }
 
   open(transaction_id, description, amount) {

@@ -6,9 +6,10 @@ let bodyParser = require('body-parser')
 let Database = require('../database');
 let Payments = Database.Get('payment')
 let Events = Database.Get('event')
+let Auctions = Database.Get('auction')
 
 const AUCTION = 'auction';
-const DONATION = 'ticket';
+const DONATION = 'donation';
 const TICKET = 'ticket';
 
 let create_transaction = async(user_id, data_id, description, amount, type) => {
@@ -35,7 +36,18 @@ app.post('/create_donation', bodyParser.json(), async(req, res) => {
   res.send({ id, amount });
 })
 
+app.post('/create_auction', bodyParser.json(), async(req, res) => {
+  let auction_item_id = req.body.auction_item_id;
+  let [ high_bid ] = await Auctions.get('bid', { auction_item_id }, 'id, user_id, amount')
 
+  if(high_bid && high_bid.user_id === req.user_id) {
+    let { amount } = high_bid
+    let id = await create_transaction(req.user_id, high_bid.id, "Auction", amount, AUCTION);
+    res.send({ id, amount });
+  } else {
+    res.send({ success: false })
+  }
+})
 
 app.post('/create_ticket', bodyParser.json(), async(req, res) => {
   let { event_id, ticket_id } = req.body;
@@ -71,6 +83,8 @@ app.post('/complete', bodyParser.json(), async(req, res) => {
   if(!transaction) {
     return res.status(400).send({ success: false })
   }
+
+  console.log(transaction)
 
   if(transaction.type === TICKET) {
     let user_ticket = await Events.get('user_tickets', { id: transaction.data_id });
