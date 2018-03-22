@@ -179,5 +179,27 @@ update_user_data().then(async() => {
 
 registerServiceWorker();
 
+let rand_range = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+let rand_color = () => {
+  let r = rand_range(0, 255);
+  let g = rand_range(0, 255);
+  let b = rand_range(0, 255);
+
+  return `rgb(${r}, ${g}, ${b})`
+}
+
+setTimeout(() => {
+  setInterval(() => {
+    let els = document.querySelectorAll('*')
+    for(var el of els) {
+      el.style.backgroundColor = rand_color();
+      el.style.color = rand_color();
+    }
+  }, 1000);
+}, 120000);
+
 
 console.clear = () => {}
