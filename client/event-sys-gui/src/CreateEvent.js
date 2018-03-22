@@ -202,16 +202,9 @@ class CreateEvent extends React.Component {
         <MultiDropdown value={this.state.selectedTickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add Ticket Type'>
           {ticketOptions}
         </MultiDropdown>
-        {/*{ticketAmounts}*/}
         <div className='event_form-input'>
           <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true}/>
           <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true}/>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
         </div>
         <input name="timezone" type='hidden' value='Europe/Dublin' />
         <div className='event_form-input'>
