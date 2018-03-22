@@ -101,6 +101,7 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
       event_name: name,
       event_description: description,
       event_id: id,
+      name: `${user.f_name} ${user.l_name}`,
       ...user
     };
 
@@ -111,12 +112,63 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
 });
 
 app.post('/update_event', bodyParser.json(), async(req, res) => {
-  let { event_id, tickets, name, description, venue_id, max_attendees, start_time, end_time, timezone } = req.body;
-  let event = { name, description, venue_id, max_attendees, start_time, end_time, timezone };
+  let { event_id, tickets, description, venue_id, max_attendees, start_time, end_time } = req.body;
+  let event = { description, venue_id, max_attendees, start_time, end_time };
+
+  let event_name = await Events.get('event', { id: event_id }, 'name');
+  event_name = name[0].name;
   await Events.update('event', event, { id: event_id });
 
   for(var ticket of tickets) {
     await Events.add('event_tickets', { event_id: event_id, ticket_id: ticket.id, amount: ticket.count, available: ticket.count });
+  }
+
+  let attendees = await Events.get('user_tickets', { event_id }, 'user_id');
+  attendees = attendees.map(attendee => attendee.user_id).join(', ');
+
+  let user_emails = await Users.get('user', { email_verified: true }, 'f_name, l_name, email', `AND user_id IN (${attendees})`);
+
+  for(var user of user_emails) {
+    let email_data = {
+      subject: 'Event Updated',
+      from: 'no-reply@john-kevin.me',
+      to: user.email,
+      name: `${user.f_name} ${user.l_name}`,
+      event_name: event_name,
+      event_id: event_id,
+      ...user
+    }
+
+    sendTemplate('event_update', email_data)
+  }
+
+  res.send({ success: true })
+})
+
+app.post('/message_event', bodyParser.json(), async(req, res) => {
+  let { event_id, message } = req.body;
+
+  let event_name = await Events.get('event', { id: event_id }, 'name');
+  event_name = event_name[0].name;
+
+  let attendees = await Events.get('user_tickets', { event_id }, 'user_id');
+  attendees = attendees.map(attendee => attendee.user_id).join(', ');
+
+  let user_emails = await Users.get('user', { email_verified: true }, 'f_name, l_name, email', `AND user_id IN (${attendees})`);
+
+  for(var user of user_emails) {
+    let email_data = {
+      subject: 'Event Message',
+      from: 'no-reply@john-kevin.me',
+      to: user.email,
+      name: `${user.f_name} ${user.l_name}`,
+      event_name: event_name,
+      event_id: event_id,
+      message,
+      ...user
+    }
+
+    sendTemplate('event_message', email_data)
   }
 
   res.send({ success: true })
