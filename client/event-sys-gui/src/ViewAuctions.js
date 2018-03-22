@@ -18,7 +18,7 @@ class ViewAuctions extends React.Component {
   }
 
   async refresh() {
-    let resp = await fetch('/admin/auctions')
+    let resp = await fetch('/auctions')
     resp = await resp.json();
 
     this.setState({

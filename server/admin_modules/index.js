@@ -9,6 +9,7 @@ let Events = Database.Get('event');
 let Menus = Database.Get('menu');
 let Raffle = Database.Get('raffle')
 let Auction = Database.Get('auction');
+let Payments = Database.Get('payment')
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
@@ -16,6 +17,17 @@ let eventbrite = require('../eventbrite')
 let create_registration_token = () => {
   return encode(crypto.randomBytes(32));
 }
+
+app.post('/big_spenders', bodyParser.json(), async(req, res) => {
+  let { minimum } = req.body;
+
+  let amount = {
+    value: minimum,
+    comparator: ' >= '
+  }
+
+  let users = await Payments.get('transactions', { finished: true, amount }, 'SUM(amount) as amount', 'GROUP BY user_id')
+});
 
 app.get('/info', async(req, res) => {
   res.json({ success: false, error: 'UNIMPL' })
@@ -226,30 +238,6 @@ app.post('/create_auction_item', bodyParser.json(), async(req, res) => {
   id = id.lastID;
   res.send({ id })
 });
-
-app.get('/auctions', async(req, res) => {
-  let auctions = await Auction.get('auction', {});
-
-  for(var auction of auctions) {
-    let { id } = auction;
-    let items = await Auction.get('auction_item', { auction_id: id });
-
-    for(var item of items) {
-      let price = item.starting_price;
-      let high_bid = await Auction.get('bid', { auction_item_id: item.id }, 'amount', 'ORDER BY amount DESC LIMIT 1');
-
-      if(high_bid[0] && high_bid[0].price > price) {
-        price = high_bid[0].price
-      }
-
-      item.price = price;
-    }
-
-    auction.items = items;
-  }
-
-  res.send(auctions)
-})
 
 app.post('/create_raffle', bodyParser.json(), async(req, res) => {
   let { description, ticket_count, ticket_price, end_date, prizes = [] } = req.body;

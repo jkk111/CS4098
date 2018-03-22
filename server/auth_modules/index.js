@@ -5,6 +5,7 @@ const Events = Database.Get('event')
 const payments = require('./payments')
 const raffle = require('./raffle')
 const bodyParser = require('body-parser')
+const Auction = Database.Get('auction')
 
 app.use('/payments', payments.router)
 app.use('/raffle', raffle)
@@ -48,13 +49,13 @@ app.post('/bid', bodyParser.json(), async(req, res) => {
   let user_id = req.user_id;
   let { amount, auction_item_id } = req.body;
   let base_price = await Auction.get('auction_item', { id: auction_item_id });
-  base_price = base_price[0].amount;
+  base_price = base_price[0].starting_price;
   let high_bid = await Auction.get('bid', { auction_item_id }, 'amount', 'ORDER BY amount DESC LIMIT 1');
+
+  console.log(base_price, high_bid, amount)
 
   if(high_bid.length > 0) {
     base_price = high_bid[0].amount;
-  } else {
-    base_price = base_price[0].amount
   }
 
   if(amount > base_price) {
@@ -64,5 +65,29 @@ app.post('/bid', bodyParser.json(), async(req, res) => {
     res.send({ success: false, error: 'TOO_LOW' })
   }
 });
+
+app.get('/auctions', async(req, res) => {
+  let auctions = await Auction.get('auction', {});
+
+  for(var auction of auctions) {
+    let { id } = auction;
+    let items = await Auction.get('auction_item', { auction_id: id });
+
+    for(var item of items) {
+      let price = item.starting_price;
+      let high_bid = await Auction.get('bid', { auction_item_id: item.id }, 'amount', 'ORDER BY amount DESC LIMIT 1');
+
+      if(high_bid[0] && high_bid[0].amount > price) {
+        price = high_bid[0].amount
+      }
+
+      item.price = price;
+    }
+
+    auction.items = items;
+  }
+
+  res.send(auctions)
+})
 
 module.exports = app;

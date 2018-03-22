@@ -88,6 +88,10 @@ app.post('/complete', bodyParser.json(), async(req, res) => {
   }
 
   let charge = await stripe.charges.create(charge_body)
+
+  if(charge.status === 'succeeded') {
+    await Payments.update('transactions', { finished: 1 }, { id: transaction.id })
+  }
   res.send({ success: charge.status === 'succeeded' })
 })
 
