@@ -22,7 +22,8 @@ let TicketSelect = ({ children, value, onChange }) => {
   }
 
   let input_props = {
-    onChange: count_changed
+    onChange: count_changed,
+    value: value.count
   }
 
   return <div>

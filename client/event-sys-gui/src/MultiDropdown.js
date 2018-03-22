@@ -10,8 +10,7 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
 
   if(value.length < children.length) {
     let _add = () => {
-      let last = available_children.pop();
-      let last_value = { value: last.value };
+      let last_value = { };
 
       onChange([ ...value, last_value ]);
     }
@@ -34,11 +33,15 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
 
       let after = value.slice(i + 1);
 
+      console.log(i, value, before, after)
+
       onChange([ ...before, ...after ]);
     }
 
+    console.log(value);
+
     if(value.length > 1) {
-      <div onClick={_remove} className='remove-item remove-item-dropdown'>
+      remove = <div onClick={_remove} className='remove-item remove-item-dropdown'>
         (X)
       </div>
     }
