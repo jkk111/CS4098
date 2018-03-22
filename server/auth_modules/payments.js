@@ -7,8 +7,9 @@ let Database = require('../database');
 let Payments = Database.Get('payment')
 let Events = Database.Get('event')
 
-const TICKET = 'ticket';
+const AUCTION = 'auction';
 const DONATION = 'ticket';
+const TICKET = 'ticket';
 
 let create_transaction = async(user_id, data_id, description, amount, type) => {
   let id = crypto.randomBytes(8).toString('base64')

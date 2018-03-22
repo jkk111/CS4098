@@ -69,7 +69,8 @@ class ViewUsers extends React.Component {
   changeMode(mode) {
     return () => {
       this.setState({
-        mode
+        mode,
+        minimum: 0
       }, () => {
         this.refresh();
       })
@@ -89,7 +90,7 @@ class ViewUsers extends React.Component {
 
     users = users.map((user, i) => <User refresh={this.refresh} {...user} key={i} />)
 
-    let min_input = <input placeholder='Minimum' onChange={this.setMin} />
+    let min_input = <input type='number' min='0' placeholder='Minimum' onChange={this.setMin} value={this.state.minimum} />
 
     let modes = [
       {

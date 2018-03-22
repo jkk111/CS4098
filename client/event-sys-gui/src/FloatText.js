@@ -27,6 +27,9 @@ let FloatNumber = (props = {}) => {
       min: 1
     }
   }
+
+  console.log(mod_props);
+
   return <FloatText {...mod_props} />
 }
 

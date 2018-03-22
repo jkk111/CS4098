@@ -20,7 +20,7 @@ class Auction extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { name, description, start_time, end_time, items} = this.props;
+    let { name, description, start_time, end_time, items, refresh } = this.props;
 
     let startObject = new Date(start_time);
     let startString = startObject.toUTCString();
@@ -33,7 +33,7 @@ class Auction extends React.Component {
     if (items.length === 0){
       items = <p>There are currently no items listed for this auciton</p>
     } else {
-      items = items.map((item, i) => <AuctionItem {...item} key={i} />)
+      items = items.map((item, i) => <AuctionItem {...item} key={i} refresh={refresh} />)
     }
 
 

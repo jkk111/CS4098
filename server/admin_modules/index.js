@@ -13,9 +13,18 @@ let Payments = Database.Get('payment')
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
+const user_info_keys = [ 'id', 'username', 'f_name', 'l_name', 'registered', 'email', 'phone', 'email_verified', 'subscribed', 'is_admin' ]
 
 let create_registration_token = () => {
   return encode(crypto.randomBytes(32));
+}
+
+let user_info = async(id) => {
+  let [ user_data ] = await Users.get('user', { id }, user_info_keys);
+  let allergens = await Users.get('allergens', { user_id: id }, 'allergen_id');
+  allergens = allergens.map(allergen => allergen.allergen_id);
+  user_data.allergens = allergens;
+  return user_data;
 }
 
 app.post('/big_spenders', bodyParser.json(), async(req, res) => {
@@ -29,8 +38,8 @@ app.post('/big_spenders', bodyParser.json(), async(req, res) => {
   let users = await Payments.get('transactions', { finished: true, amount }, 'user_id, SUM(amount) as amount', 'GROUP BY user_id')
 
   for(var user of users) {
-    let user_data = await Users.get('user', { id: user.user_id }, 'username, f_name, l_name, email')
-    Object.assign(user, user_data[0]);
+    let user_data = await user_info(user.user_id);
+    Object.assign(user, user_data);
   }
 
   res.send(users);
@@ -44,8 +53,8 @@ app.post('/regular_spenders', bodyParser.json(), async(req, res) => {
   let users = await Payments.query(query, [ minimum ])
 
   for(var user of users) {
-    let user_data = await Users.get('user', { id: user.user_id }, 'username, f_name, l_name, email')
-    Object.assign(user, user_data[0]);
+    let user_data = await user_info(user.user_id);
+    Object.assign(user, user_data);
   }
 
   res.send(users);
@@ -80,7 +89,13 @@ app.post('/create_menu', bodyParser.json(), async(req, res) => {
 });
 
 app.get('/users', async(req, res) => {
-  let users = await Users.get('user', {}, [ 'id', 'username', 'f_name', 'l_name', 'registered', 'email', 'phone', 'email_verified', 'subscribed', 'is_admin' ]);
+  let users = await Users.get('user', {}, [ 'id' ]);
+
+  for(var user of users) {
+    let user_data = await user_info(user.id);
+    Object.assign(user, user_data)
+  }
+
   res.json(users);
 });
 

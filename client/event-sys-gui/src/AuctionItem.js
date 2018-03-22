@@ -1,6 +1,6 @@
 import React from 'react';
 import './AuctionItem.css'
-import FloatNumber from './FloatText'
+import { FloatNumber } from './FloatText'
 
 class AuctionItem extends React.Component {
   constructor(props) {
@@ -30,14 +30,19 @@ class AuctionItem extends React.Component {
       auction_item_id: id,
     }
     console.log('creating ticket', body);
-    let resp = await fetch('/bid', {
+    await fetch('/bid', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
     })
-    console.log(resp);
+
+    form.price.value = ''
+
+    if(this.props.refresh) {
+      this.props.refresh();
+    }
   }
 
   render() {

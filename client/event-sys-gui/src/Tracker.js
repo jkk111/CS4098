@@ -5,20 +5,18 @@ class Tracker extends Component {
   constructor(props){
     super(props);
     this.state = {
-      number: this.props.number || 0
+      count: this.props.count || 0
     }
   }
 
   render(){
-    let {number} = this.state;
-    return(
+    let { count } = this.state;
+    return
       <div>
-        <h2> Current amount raised = {number} </h2>
-        
+        <h1> Current amount raised = {number} </h1>
       </div>
-    );
   }
 }
-  
+
 
 export default Tracker
