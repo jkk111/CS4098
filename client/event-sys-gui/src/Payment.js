@@ -30,6 +30,7 @@ class Payment {
 
   static Init() {
     instance = new Payment();
+    window.inst = instance
   }
 
   static GetInstance() {

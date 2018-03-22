@@ -26,7 +26,29 @@ app.post('/big_spenders', bodyParser.json(), async(req, res) => {
     comparator: ' >= '
   }
 
-  let users = await Payments.get('transactions', { finished: true, amount }, 'SUM(amount) as amount', 'GROUP BY user_id')
+  let users = await Payments.get('transactions', { finished: true, amount }, 'user_id, SUM(amount) as amount', 'GROUP BY user_id')
+
+  for(var user of users) {
+    let user_data = await Users.get('user', { id: user.user_id }, 'username, f_name, l_name, email')
+    Object.assign(user, user_data[0]);
+  }
+
+  res.send(users);
+});
+
+app.post('/regular_spenders', bodyParser.json(), async(req, res) => {
+  let { minimum } = req.body;
+
+  let query = `SELECT user_id, SUM(amount) as amount, COUNT(id) as count FROM transactions WHERE finished = 1 GROUP BY user_id HAVING count >= ?`
+
+  let users = await Payments.query(query, [ minimum ])
+
+  for(var user of users) {
+    let user_data = await Users.get('user', { id: user.user_id }, 'username, f_name, l_name, email')
+    Object.assign(user, user_data[0]);
+  }
+
+  res.send(users);
 });
 
 app.get('/info', async(req, res) => {
