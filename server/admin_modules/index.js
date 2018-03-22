@@ -10,6 +10,7 @@ let Menus = Database.Get('menu');
 let Raffle = Database.Get('raffle')
 let Auction = Database.Get('auction');
 let Payments = Database.Get('payment')
+let Payment = require('../auth_modules/payments')
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
@@ -31,10 +32,23 @@ app.post('/event_income_breakdown', bodyParser.json(), async(req, res) => {
   let event_id = req.body.event_id;
 
   let event_tickets = await Events.get('event_tickets', { event_id }, 'ticket_id, available, amount');
+  let ticket_txs = [];
   for(var ticket of event_tickets) {
-    let ticket_info = await Events.get('tickets', { id: ticket.ticket_id }, 'price');
-    Object.assign(ticket, ticket_info[0]);
+    let ticket_info = await Events.get('user_tickets', { event_id, ticket_id: ticket.ticket_id }, 'id');
+    console.log(ticket_info)
+    for(var ticket2 of ticket_info) {
+      let id = ticket2.id;
+      console.log(id);
+      let [ tx ] = await Payments.get('transactions', { finished: 1, type: Payment.TICKET, data_id: id }, 'id, user_id, amount, type')
+      if(!tx) {
+        continue;
+      }
+      console.log(tx)
+      ticket_txs.push(tx);
+    }
   }
+
+  console.log(ticket_txs)
 
   event_tickets = event_tickets.reduce((cur, item) => cur + ((item.amount - item.available) * item.price), 0);
   let donations = await Payments.get('transactions', { finished: 1, type: Payment.DONATION, data_id: event_id }, 'id, user_id, amount, type');
@@ -55,12 +69,10 @@ app.post('/event_income_breakdown', bodyParser.json(), async(req, res) => {
     auction_item_txs = await Payment.get('transactions', { finished: 1, type: Payment.AUCTION, data_id }, 'id, user_id, amount, type');
   }
 
-
-  let total = donations + event_tickets + auction_item_txs_total;
-
   let all_income = [
     ...donations,
-    ...auction_item_txs
+    ...auction_item_txs,
+    ...ticket_txs
   ].sort((a, b) => a.id - b.id);
 
   res.send(all_income)
