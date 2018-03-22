@@ -2,12 +2,13 @@ const express = require('express');
 const app = express.Router();
 const Database = require('../database')
 const Events = Database.Get('event')
-const payments = require('./payments')
+const Payment = require('./payments')
 const raffle = require('./raffle')
 const bodyParser = require('body-parser')
 const Auction = Database.Get('auction')
+const Payments = Database.Get('payment')
 
-app.use('/payments', payments.router)
+app.use('/payments', Payment.router)
 app.use('/raffle', raffle)
 
 app.get('/events', async(req, res) => {
@@ -43,6 +44,23 @@ app.get('/events', async(req, res) => {
   }
 
   res.json(events);
+});
+
+app.post('/counter', bodyParser.json(), async(req, res) => {
+  let event_id = req.body.event_id;
+
+  let event_tickets = await Events.get('event_tickets', { event_id }, 'ticket_id, available, amount');
+  for(var ticket of event_tickets) {
+    let ticket_info = await Events.get('tickets', { id: ticket.ticket_id }, 'price');
+    Object.assign(ticket, ticket_info[0]);
+  }
+
+  event_tickets = event_tickets.reduce((cur, item) => cur + ((item.amount - item.available) * item.price), 0);
+  let donations = await Payments.get('transactions', { finished: 1, type: Payment.DONATION, data_id: event_id }, 'amount');
+  donations = donations.reduce((cur, item) =>  cur + item.amount, 0);
+
+  let total = donations + event_tickets;
+  res.send({ total })
 });
 
 app.post('/bid', bodyParser.json(), async(req, res) => {

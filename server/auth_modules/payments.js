@@ -8,6 +8,7 @@ let Payments = Database.Get('payment')
 let Events = Database.Get('event')
 
 const TICKET = 'ticket';
+const DONATION = 'ticket';
 
 let create_transaction = async(user_id, data_id, description, amount, type) => {
   let id = crypto.randomBytes(8).toString('base64')
@@ -28,7 +29,8 @@ let create_transaction = async(user_id, data_id, description, amount, type) => {
 
 app.post('/create_donation', bodyParser.json(), async(req, res) => {
   let amount = req.body.amount;
-  let id = await create_transaction(req.user_id, null, "Donation", amount, 'donation');
+  let data_id = req.body.event_id || null;
+  let id = await create_transaction(req.user_id, data_id, "Donation", amount, DONATION);
   res.send({ id, amount });
 })
 
@@ -98,5 +100,6 @@ app.post('/complete', bodyParser.json(), async(req, res) => {
 module.exports = {
   router: app,
   create_transaction: create_transaction,
-  TICKET
+  TICKET,
+  DONATION
 }

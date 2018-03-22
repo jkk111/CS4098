@@ -89,7 +89,7 @@ class ViewUsers extends React.Component {
 
     users = users.map((user, i) => <User refresh={this.refresh} {...user} key={i} />)
 
-    let min_input = <input onChange={this.setMin} />
+    let min_input = <input placeholder='Minimum' onChange={this.setMin} />
 
     let modes = [
       {
