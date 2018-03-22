@@ -26,12 +26,13 @@ class Tracker extends Component {
 
     let content = null;
 
+    
      if(expanded) {
       
       content = <div className='event-content'>
-        <span className='event-content-key'>Name</span>
         <span className='event-content-value'>{name}</span>
         <h1> Current amount raised = {count} </h1>
+      
       </div>
     }
 
