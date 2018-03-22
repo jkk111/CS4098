@@ -63,7 +63,7 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
     <FloatText name='l_name' label='Last Name:' defaultValue={defaults.l_name} />
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
     <FloatText name='phone' label='Phone:' defaultValue={defaults.phone} />
-    <MultiDropdown value={selectedAllergens} onChange={handleAllergenSelected} prompt='-Select Allergens-'>
+    <MultiDropdown value={selectedAllergens} onChange={handleAllergenSelected} prompt='-Select Allergens-' addText='Add Allergen'>
       {allergenOptions}
     </MultiDropdown>
     <div>{selectedAllergensList}</div>
@@ -160,7 +160,7 @@ class Settings extends React.Component {
     let email = form.email.value;
     let phone = form.phone.value;
     let subscribed = form.subscribed.checked;
-    let allergens = this.state.selectedAllergens;
+    let allergens = this.state.selectedAllergens.filter(v => v != -1);
 
     console.log(subscribed)
 
