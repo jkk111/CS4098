@@ -2,7 +2,9 @@ import React from 'react'
 import Dropdown from './Dropdown'
 import './MultiDropdown.css'
 
-let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onChange, prompt = '' }) => {
+const DEFAULT_ADD_TEXT = 'Add New Item'
+
+let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onChange, prompt = '', addText = DEFAULT_ADD_TEXT }) => {
   let available_children = [ ...children ]
 
   let add = null;
@@ -15,7 +17,7 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
       onChange([ ...value, last_value ]);
     }
     add = <div onClick={_add}>
-      (+) Add New Item
+      (+) {addText}
     </div>
   }
 

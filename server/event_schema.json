@@ -14,6 +14,14 @@
       }
     },
     {
+      "name": "event_updates",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "event_id": "INT NOT NULL",
+        "message": "TEXT NOT NULL"
+      }
+    },
+    {
       "name": "event_tickets",
       "keys": {
         "id": "INTEGER PRIMARY KEY AUTOINCREMENT",

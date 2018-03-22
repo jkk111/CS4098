@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { FloatPassword, FloatText } from './FloatText'
 import { Logger } from './Util'
+import MultiDropdown from './MultiDropdown'
 
 import './Settings.css'
 
@@ -34,6 +35,16 @@ let resend = () => {
   fetch('/user/resend_confirmation', {})
 }
 
+let buildAllergenList = () => {
+  let allergenList = []
+  for (var i = 0; i < ALLERGEN_NAMES.length; i++) {
+    let name = `${(i + 1)}. ${ALLERGEN_NAMES[i]}`;
+    let value = i;
+    allergenList.push(<option key={value} value={value}>{name}</option>);
+  }
+  return allergenList;
+}
+
 let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSelected, selectedAllergens, defaults = {} }) => {
   console.log(defaults)
   let prompt = null;
@@ -52,10 +63,9 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
     <FloatText name='l_name' label='Last Name:' defaultValue={defaults.l_name} />
     <FloatText name='email' label='Email:' defaultValue={defaults.email} />
     <FloatText name='phone' label='Phone:' defaultValue={defaults.phone} />
-    <select value="0" onChange={handleAllergenSelected} id="selectVenue">
-      <option value="0">-Let us know if you have any Allergies-</option>
+    <MultiDropdown value={selectedAllergens} onChange={handleAllergenSelected} prompt='-Select Allergens-' addText='Add Allergen'>
       {allergenOptions}
-    </select>
+    </MultiDropdown>
     <div>{selectedAllergensList}</div>
     <CheckBox name='subscribed' label='Subscribe To Mailing List' value={defaults.subscribed} />
     {prompt}
@@ -64,28 +74,19 @@ let UserSettings = ({ ref, onBack, onSubmit, onChangePassword, handleAllergenSel
   </form>
 }
 
-let buildAllergenList = () => {
-  let allergenList = []
-  for (var i = 0; i < ALLERGEN_NAMES.length; i++) {
-    let name = `${(i + 1)}. ${ALLERGEN_NAMES[i]}`;
-    let value = i + 1;
-    allergenList.push(<option key={value} value={value}>{name}</option>);
-  }
-  return allergenList;
-}
-
 let buildSelectedAllergensList = (selectedAllergens) => {
   if(selectedAllergens.length === 0) {
     return <p>No Allergens Selected</p>
   }
 
-  let out = [
-    <p key={'00'}>Your Allergens <h5> Reselect a selected Allergen from the dropdown to delete that allergen. </h5> </p>
-  ]
-
+  let out = []
 
   for (var i = 0; i < selectedAllergens.length; i++) {
-    let name = `${(selectedAllergens[i] + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
+    let parsed = parseInt(selectedAllergens[i]);
+    console.log(parsed);
+    if(selectedAllergens[i] == -1 || (!parsed && parsed !== 0))
+      continue;
+    let name = `${((parsed) + 1)}. ${ALLERGEN_NAMES[selectedAllergens[i]]}`;
     out.push(<p key={i}>{name}</p>)
   }
   return out;
@@ -136,18 +137,17 @@ class Settings extends React.Component {
     this.handleAllergenSelected = this.handleAllergenSelected.bind(this);
   }
 
-  handleAllergenSelected(event) {
-    console.log("allergen ", event.target.value-1, " selected")
-    let allergen = event.target.value-1;
-    let selectedAllergens = this.state.selectedAllergens;
-    if(selectedAllergens.includes(allergen)) {
-      let i = selectedAllergens.indexOf(allergen);
-        selectedAllergens.splice(i, 1);
-    } else {
-      selectedAllergens.push(allergen);
-    }
-    this.setState({selectedAllergens: selectedAllergens})
-    console.log("selected so far", selectedAllergens);
+  handleAllergenSelected(value) {
+    value = value.map(v => {
+      if(typeof v === 'object') {
+        return -1;
+      }
+      return v;
+    })
+    this.setState({
+      selectedAllergens: value
+    })
+    console.log("selected so far", value);
   }
 
 
@@ -160,7 +160,7 @@ class Settings extends React.Component {
     let email = form.email.value;
     let phone = form.phone.value;
     let subscribed = form.subscribed.checked;
-    let allergens = this.state.selectedAllergens;
+    let allergens = this.state.selectedAllergens.filter(v => v != -1);
 
     console.log(subscribed)
 
