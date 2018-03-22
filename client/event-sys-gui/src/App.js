@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import Home from './Home'
 import Nav from './Nav'
 import CreateUser from './CreateUser'
+import Tracker from './Tracker'
 import Settings from './Settings'
 import EventList from './EventList'
 import ViewUsers from './ViewUsers'
@@ -50,6 +51,7 @@ let set_cookie = (id) => {
 const views = {
   HOME: Home,
   CREATE_USER: CreateUser,
+  VIEW_TRACKER: Tracker,
   SETTINGS: Settings,
   EVENT_LIST: EventList,
   CREATE_EVENT: EventForm,
