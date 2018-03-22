@@ -30,7 +30,13 @@ class Auction extends React.Component {
 
     let content = null;
 
-    items = items.map((item, i) => <AuctionItem {...item} key={i} />)
+    if (items.length === 0){
+      items = <p>There are currently no items listed for this auciton</p>
+    } else {
+      items = items.map((item, i) => <AuctionItem {...item} key={i} />)
+    }
+
+
 
     if(expanded) {
       content = <div className='auction-content'>
