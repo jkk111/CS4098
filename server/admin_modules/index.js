@@ -156,6 +156,8 @@ app.post('/message_event', bodyParser.json(), async(req, res) => {
 
   let user_emails = await Users.get('user', { email_verified: true }, 'f_name, l_name, email', `AND user_id IN (${attendees})`);
 
+  await Events.add('event_updates', { event_id, message });
+
   for(var user of user_emails) {
     let email_data = {
       subject: 'Event Message',
