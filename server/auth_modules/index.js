@@ -59,7 +59,25 @@ app.post('/counter', bodyParser.json(), async(req, res) => {
   let donations = await Payments.get('transactions', { finished: 1, type: Payment.DONATION, data_id: event_id }, 'amount');
   donations = donations.reduce((cur, item) =>  cur + item.amount, 0);
 
-  let total = donations + event_tickets;
+  let event = await Events.get('event', { id: event_id }, '*');
+  let { auction_id } = event[0];
+  let auction_item_txs_total = 0;
+  if(auction_id) {
+    let auction_items = Auction.get('auction_item', { auction_id }, 'id');
+    auction_items = auction_items.map(item => item.id).join(', ');
+    auction_items = `(${auction_items})`
+
+    let data_id = {
+      value: auction_items,
+      comparator: ' IN '
+    }
+
+    let auction_item_txs = await Payment.get('transactions', { finished: 1, type: Payment.AUCTION, data_id }, 'amount');
+    auction_item_txs_total = auction_item_txs.reduce((cur, item) => cur + item.amount, 0)
+  }
+
+
+  let total = donations + event_tickets + auction_item_txs_total;
   res.send({ total })
 });
 

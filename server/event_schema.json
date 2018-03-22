@@ -7,6 +7,7 @@
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
         "venue_id": "INTEGER NOT NULL DEFAULT 0",
+        "auction_id": "INTEGER",
         "max_attendees": "INTEGER NOT NULL",
         "start_time": "INTEGER NOT NULL",
         "end_time": "INTEGER NOT NULL",
