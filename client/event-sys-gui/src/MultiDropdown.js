@@ -16,9 +16,9 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
 
       onChange([ ...value, last_value ]);
     }
-    add = <div onClick={_add}>
-      (+) {addText}
-    </div>
+    add = <button className="form-button" onClick={_add}>
+      {addText}
+    </button>
   }
 
   let inputs = value.map((v, i) => {
@@ -64,7 +64,7 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
 
   return <div className='multi-dropdown'>
     {inputs}
-    <div>{add}</div>
+    {add}
   </div>
 }
 
