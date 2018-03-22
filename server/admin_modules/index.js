@@ -27,6 +27,45 @@ let user_info = async(id) => {
   return user_data;
 }
 
+app.post('/event_income_breakdown', bodyParser.json(), async(req, res) => {
+  let event_id = req.body.event_id;
+
+  let event_tickets = await Events.get('event_tickets', { event_id }, 'ticket_id, available, amount');
+  for(var ticket of event_tickets) {
+    let ticket_info = await Events.get('tickets', { id: ticket.ticket_id }, 'price');
+    Object.assign(ticket, ticket_info[0]);
+  }
+
+  event_tickets = event_tickets.reduce((cur, item) => cur + ((item.amount - item.available) * item.price), 0);
+  let donations = await Payments.get('transactions', { finished: 1, type: Payment.DONATION, data_id: event_id }, 'id, user_id, amount, type');
+
+  let event = await Events.get('event', { id: event_id }, '*');
+  let { auction_id } = event[0];
+  let auction_item_txs = [];
+  if(auction_id) {
+    let auction_items = Auction.get('auction_item', { auction_id }, 'id');
+    auction_items = auction_items.map(item => item.id).join(', ');
+    auction_items = `(${auction_items})`
+
+    let data_id = {
+      value: auction_items,
+      comparator: ' IN '
+    }
+
+    auction_item_txs = await Payment.get('transactions', { finished: 1, type: Payment.AUCTION, data_id }, 'id, user_id, amount, type');
+  }
+
+
+  let total = donations + event_tickets + auction_item_txs_total;
+
+  let all_income = [
+    ...donations,
+    ...auction_item_txs
+  ].sort((a, b) => a.id - b.id);
+
+  res.send(all_income)
+});
+
 app.post('/big_spenders', bodyParser.json(), async(req, res) => {
   let { minimum } = req.body;
 
