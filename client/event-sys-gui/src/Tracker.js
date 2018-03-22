@@ -11,10 +11,9 @@ class Tracker extends Component {
 
   render(){
     let { count } = this.state;
-    return
-      <div>
-        <h1> Current amount raised = {number} </h1>
-      </div>
+    return <div>
+      <h1> Current amount raised = {number} </h1>
+    </div>
   }
 }
 
