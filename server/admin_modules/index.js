@@ -39,7 +39,7 @@ app.post('/big_spenders', bodyParser.json(), async(req, res) => {
 app.post('/regular_spenders', bodyParser.json(), async(req, res) => {
   let { minimum } = req.body;
 
-  let query = `SELECT user_id, SUM(amount) as amount, COUNT(id) as count FROM transactions WHERE finished = 1 GROUP BY user_id HAVING count >= ?`
+  let query = `SELECT user_id, SUM(amount) as amount, COUNT(id) as count FROM transactions WHERE finished = 1 GROUP BY user_id HAVING count >= ?`;
 
   let users = await Payments.query(query, [ minimum ])
 
