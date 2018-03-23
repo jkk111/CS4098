@@ -111,7 +111,6 @@ class CreateEvent extends React.Component {
     form.reset();
   }
 
-
   handleMenuChange(value) {
     this.setState({selectedMenu: value})
   }
@@ -148,7 +147,7 @@ class CreateEvent extends React.Component {
     response = await response.json();
     this.setState({tickets: response});
     Logger.log("Loaded Tickets", response)
-  }
+  }e
 
   buildMenuList(){
     let menus = this.state.menus;
