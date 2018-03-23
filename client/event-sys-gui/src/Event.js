@@ -1,6 +1,7 @@
 import React from 'react';
 import './Event.css'
 import { connect } from 'react-redux'
+import ViewTickets from './ViewTickets'
 
 let mapDispatchToProps = (dispatch) => {
   return {
@@ -36,7 +37,7 @@ class Event extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { id, name, description, venue_id, max_attendees, start_time, end_time, is_admin} = this.props;
+    let { id, name, description, tickets, venue_id, max_attendees, start_time, end_time, is_admin} = this.props;
 
     let content = null;
     let admin_content = null;
@@ -75,7 +76,9 @@ class Event extends React.Component {
           <span className='event-content-key'>Ends:</span>
           <span className='event-content-value'>{endString}</span>
         </div>
+        <ViewTickets tickets={tickets}/>
         <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+        <ViewTickets tickets={tickets}/>
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
         <span className='user-content-button' onClick={this.show_allergens}>Show Menu for this event</span>
       </div>
