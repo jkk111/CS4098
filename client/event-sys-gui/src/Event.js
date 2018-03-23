@@ -60,7 +60,7 @@ class Event extends React.Component {
           <span className='event-content-value'>{venue_id}</span>
           </div>
           <div>
-         <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+         <span className='user-admin_content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
          </div>
          <div>
          <span className='user-content-button' onClick={this.show_allergens}>Edit this Event</span>
@@ -88,7 +88,7 @@ class Event extends React.Component {
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
         </div>
         <div>
-        <span className='user-content-button' onClick={this.show_allergens}>Show Menu for this event</span>
+        <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
         </div>
       </div>
     }
