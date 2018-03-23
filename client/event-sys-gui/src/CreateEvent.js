@@ -85,8 +85,7 @@ class CreateEvent extends React.Component {
       name: form.event_name.value,
       description: form.description.value,
       menu_id: this.state.selectedMenu,
-      venue_id: this.state.selectedVenue,
-      timezone: form.timezone.value,
+      location: form.location.value,
       start_time: this.state.start_time,
       end_time: this.state.end_time,
       tickets: tickets
