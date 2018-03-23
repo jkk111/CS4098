@@ -25,6 +25,8 @@
 .float-text {
   display: flex;
   flex-flow: column-reverse;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   padding-bottom: 1em;
   background: green;
   flex-grow: 1;
