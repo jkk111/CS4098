@@ -3,6 +3,7 @@ const app = express.Router();
 const Database = require('../database')
 const Events = Database.Get('event')
 const Payment = require('./payments')
+const Users = Database.Get('user')
 // const raffle = require('./raffle')
 const bodyParser = require('body-parser')
 const Auction = Database.Get('auction')
@@ -37,6 +38,16 @@ app.get('/events', async(req, res) => {
       let venue = await Events.get('venues', { id: venue_id }, '*')
       venue_cache[venue_id] = venue[0];
       event.venue = venue_cache[venue_id];
+    }
+
+    if(req.is_admin) {
+      let attendees = await Events.get('user_tickets', { event_id: id }, 'user_id');
+      for(var attendee of attendees) {
+        let user_data = await Users.get('user', { id: attendee.user_id }, ['f_name', 'l_name', 'email', 'accessibility']);
+        let user_allergens = await Users.get('allergens', { user_id: attendee.id }, 'allergen_id');
+        Object.assign(attendee, user_data);
+        attendee.allergens = user_allergens.map(allergen => allergen.allergen_id);
+      }
     }
 
     event.tickets = tickets;
