@@ -8,9 +8,9 @@ class CreateTable extends React.Component {
     super(props);
 
     this.state = {
-      color: 'black',
+      color: 'brown',
       height: 100,
-      width: 50,
+      width: 100,
       children: [],
     };
   }
@@ -45,7 +45,7 @@ class CreateTable extends React.Component {
    return (
       <div>
         <div className='form-button form-field' onClick={this.handleClick}>Add Table</div>
-        <Stage width={window.innerWidth} height={window.innerHeight}
+        <Stage width={window.innerWidth-100} height={window.innerHeight-100}
         >
           <Layer ref='layer'>
             {this.state.children}
