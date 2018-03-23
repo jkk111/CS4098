@@ -2,7 +2,7 @@ import React from 'react';
 import './CreateEvent.css'
 import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
-import { Logger, isNatural } from './Util'
+import { Logger } from './Util'
 import { FloatText } from './FloatText'
 import { NoFloatNumber } from './NoFloat'
 import Dropdown from './Dropdown'
@@ -69,11 +69,6 @@ class CreateEvent extends React.Component {
       return
     }
 
-    if(!isNatural(form.capacity.value)) {
-      // alert('capacity must be a number');
-      return
-    }
-
     if(!this.state.start_time || !this.state.end_time) {
       // alert('please select start and end times');
       return
@@ -92,7 +87,6 @@ class CreateEvent extends React.Component {
       description: form.description.value,
       menu_id: this.state.selectedMenu,
       venue_id: this.state.selectedVenue,
-      max_attendees: form.capacity.value,
       timezone: form.timezone.value,
       start_time: this.state.start_time,
       end_time: this.state.end_time,
@@ -191,21 +185,6 @@ class CreateEvent extends React.Component {
     }
     return ticketsList;
   }
-
-  // buildTicketAmounts() {
-  //   let selected = this.state.selectedTickets;
-  //   let count = []
-  //   if(tickets.length !== 0) {
-  //     for (var i = 0; i < tickets.length; i++) {
-  //       let name = tickets[i].name;
-  //       let id = tickets[i].id;
-  //       let inputName = "amount of " + name + " tickets:";
-  //       let inputId = "ticketAmount" + id;
-  //       theList.push(<div key={i}><FloatText name={inputId} label={inputName}/></div>)
-  //     }
-  //   }
-  //   return theList;
-  // }
 
   startChange(e) {
     this.setState({
