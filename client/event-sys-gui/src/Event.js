@@ -3,6 +3,12 @@ import './Event.css'
 import { connect } from 'react-redux'
 import ViewTickets from './ViewTickets'
 
+let mapStateToProps = (state) => {
+  return {
+    is_admin: !state.admin_info.pending
+  }
+}
+
 let mapDispatchToProps = (dispatch) => {
   return {
     show_tracker: (id) => {
@@ -103,4 +109,4 @@ class Event extends React.Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Event);
+export default connect(mapStateToProps, mapDispatchToProps)(Event);
