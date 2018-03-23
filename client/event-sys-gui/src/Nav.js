@@ -64,7 +64,6 @@ class Nav extends React.Component {
         <div className={nav_item_class} onClick={set_view('CREATE_EVENT', this.toggle)}>Create Event</div>
         <div className={nav_item_class} onClick={set_view('CREATE_MENU', this.toggle)}>Create Menu</div>
         <div className={nav_item_class} onClick={set_view('VIEW_MENUS', this.toggle)}>View Menus</div>
-        <div className={nav_item_class} onClick={set_view('CREATE_VENUE', this.toggle)}>Create Venue</div>
         <div className={nav_item_class} onClick={set_view('CREATE_TICKET', this.toggle)}>Create Ticket</div>
         <div className={nav_item_class} onClick={set_view('VIEW_USERS', this.toggle)}>View Users</div>
         <div className={nav_item_class} onClick={set_view('CREATE_AUCTION_ITEM', this.toggle)}>Create Auction Item</div>
