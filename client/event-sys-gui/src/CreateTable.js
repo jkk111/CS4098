@@ -8,6 +8,7 @@ class CreateTable extends React.Component {
     super(props);
 
     this.state = {
+      addTable: false,
       color: 'brown',
       height: 100,
       width: 100,
@@ -33,7 +34,7 @@ class CreateTable extends React.Component {
 
   handleClick = (e) => {
 
-      if (!this.state.drawingMode) return;
+      if (!this.state.addTable) return;
 
       const { mouse } = this.state;
       
@@ -60,36 +61,34 @@ class CreateTable extends React.Component {
     }
 
   handleMouseMove= (e) => {
-    if (this.state.drawingMode) {
       // get cursor current position
-      this.setState({
-        mouse: {
-          ...this.state.mouse,
-          x: e.evt.layerX,
-          y: e.evt.layerY,
-        }
-      });
-    }
+    this.setState({
+      mouse: {
+        ...this.state.mouse,
+        x: e.evt.layerX,
+        y: e.evt.layerY,
+      }
+    });
   }
 
   handleStartAddTableClick = (e) => {
     this.setState({
-      drawingMode: true
+      addTable: true
     });
   }
 
   handleStopAddTableClick = (e) => {
     this.setState({
-      drawingMode: false
+      addTable: false
     });
   }
 
   render() {
    return (
       <div>
-        <div className='form-button form-field' onClick={this.handleStartAddTableClick}>Click to Start Adding Tables</div>
-        <div className='form-button form-field' onClick={this.handleStopAddTableClick}>Click to Stop Adding Tables</div>
-        <Stage width={window.innerWidth} height={window.innerHeight}  visible={true} onContentClick={this.handleClick} onContentMouseMove={this.handleMouseMove} drawBorder= {true}
+        <div className='form-button form-field' onClick={this.handleStartAddTableClick}>Start Adding Tables</div>
+        <div className='form-button form-field' onClick={this.handleStopAddTableClick}>Stop Adding Tables</div>
+        <Stage width={window.innerWidth} height={window.innerHeight}  visible={true} onContentClick={this.handleClick} onContentMouseMove={this.handleMouseMove} 
         >
           <Layer ref='layer'>
             <Rect
