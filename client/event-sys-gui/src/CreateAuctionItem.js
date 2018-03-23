@@ -22,7 +22,7 @@ class CreateAuctionItem extends React.Component {
   }
 
   async setAuctions() {
-    let response = await fetch('/admin/auctions')
+    let response = await fetch('/auctions')
     response = await response.json();
     this.setState({auctions: response});
     Logger.log("Loaded Auctions", response)

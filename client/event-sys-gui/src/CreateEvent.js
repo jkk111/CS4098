@@ -3,7 +3,7 @@ import './CreateEvent.css'
 import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
 import { Logger, isNatural } from './Util'
-import { FloatText, FloatNumber } from './FloatText'
+import { FloatText } from './FloatText'
 import { NoFloatNumber } from './NoFloat'
 import Dropdown from './Dropdown'
 import MultiDropdown from './MultiDropdown'
@@ -229,7 +229,10 @@ class CreateEvent extends React.Component {
       <form onSubmit={this.createEvent} autoComplete="off">
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
-        <FloatNumber name="capacity" label="Event Capacity:"/>
+        <div className='event_form-input'>
+          <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true}/>
+          <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true}/>
+        </div>
         <div className='padding-vert'>
           <Dropdown value={this.state.menu} onChange={this.handleMenuChange}>
             {menuOptions}
@@ -243,10 +246,6 @@ class CreateEvent extends React.Component {
         <MultiDropdown value={this.state.selectedTickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>
           {ticketOptions}
         </MultiDropdown>
-        <div className='event_form-input'>
-          <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true}/>
-          <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true}/>
-        </div>
         <input name="timezone" type='hidden' value='Europe/Dublin' />
         <div className='event_form-input'>
           <input type='submit' className='form-button' submit="create_event" value='Create Event'/>
