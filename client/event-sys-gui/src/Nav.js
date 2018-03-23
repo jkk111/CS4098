@@ -54,7 +54,6 @@ class Nav extends React.Component {
 
     user_nav_items = <div>
       <div className={nav_item_class} onClick={set_view('HOME', this.toggle)}>Home</div>
-      <div className={nav_item_class} onClick={set_view('SETTINGS', this.toggle)}>Settings</div>
       <div className={nav_item_class} onClick={set_view('EVENT_LIST', this.toggle)}>Events</div>
       <div className={nav_item_class} onClick={set_view('VIEW_AUCTIONS', this.toggle)}>View Auctions</div>
     </div>
@@ -76,6 +75,7 @@ class Nav extends React.Component {
     return <div className='nav'>
       {user_nav_items}
       {admin_nav_items}
+      <div className={nav_item_class} onClick={set_view('SETTINGS', this.toggle)}>Settings</div>
       <div className={nav_item_class} onClick={logout(onLogout)}>Logout</div>
       <div className={nav_toggle_class} onClick={this.toggle}>Menu</div>
     </div>

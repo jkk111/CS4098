@@ -230,12 +230,16 @@ class CreateEvent extends React.Component {
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
         <FloatNumber name="capacity" label="Event Capacity:"/>
-        <Dropdown value={this.state.menu} onChange={this.handleMenuChange} id="selectMenu">
-          {menuOptions}
-        </Dropdown>
-        <Dropdown value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
-          {venueOptions}
-        </Dropdown>
+        <div className='padding-vert'>
+          <Dropdown value={this.state.menu} onChange={this.handleMenuChange}>
+            {menuOptions}
+          </Dropdown>
+        </div>
+        <div className='padding-vert'>
+          <Dropdown value={this.state.venue} onChange={this.handleVenueChange}>
+            {venueOptions}
+          </Dropdown>
+        </div>
         <MultiDropdown value={this.state.selectedTickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>
           {ticketOptions}
         </MultiDropdown>

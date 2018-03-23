@@ -17,3 +17,7 @@
   padding: .5em;
   box-sizing: border-box;
 }
+
+.padding-vert {
+  padding: 1em 0;
+}
