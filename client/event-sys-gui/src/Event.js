@@ -59,8 +59,12 @@ class Event extends React.Component {
           <span className='event-content-key'>Venue ID</span>
           <span className='event-content-value'>{venue_id}</span>
           </div>
+          <div>
          <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+         </div>
+         <div>
          <span className='user-content-button' onClick={this.show_allergens}>Edit this Event</span>
+         </div>
         </div>
       }
       content = <div>
@@ -77,9 +81,15 @@ class Event extends React.Component {
           <span className='event-content-value'>{endString}</span>
         </div>
         <ViewTickets event_id={id} tickets={tickets}/>
+        <div>
         <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+        </div>
+        <div>
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
+        </div>
+        <div>
         <span className='user-content-button' onClick={this.show_allergens}>Show Menu for this event</span>
+        </div>
       </div>
     }
 
