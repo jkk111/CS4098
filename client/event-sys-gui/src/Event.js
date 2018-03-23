@@ -47,6 +47,8 @@ class Event extends React.Component {
 
     let content = null;
     let admin_content = null;
+    let buttons = null;
+    let menu = null;
 
     console.log("Start Time", start_time)
 
@@ -60,19 +62,23 @@ class Event extends React.Component {
       if(is_admin) {
         admin_content = <div>
           <div className='admin-content'>
-          <span className='event-content-key'>Event ID</span>
-          <span className='event-content-value'>{id}</span>
-          <span className='event-content-key'>Venue ID</span>
-          <span className='event-content-value'>{venue_id}</span>
+            <span className='event-content-key'>Event ID</span>
+            <span className='event-content-value'>{id}</span>
+            <span className='event-content-key'>Venue ID</span>
+            <span className='event-content-value'>{venue_id}</span>
           </div>
+<<<<<<< HEAD
           <div>
          <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
          </div>
          <div>
          <span className='user-content-button' onClick={this.show_allergens}>Edit this Event</span>
          </div>
+=======
+>>>>>>> 281834127f8246cc918a4f0f0e30a670001ca62e
         </div>
       }
+
       content = <div>
         <div className='event-content'>
           <span className='event-content-key'>Name:</span>
@@ -87,13 +93,31 @@ class Event extends React.Component {
           <span className='event-content-value'>{endString}</span>
         </div>
         <ViewTickets event_id={id} tickets={tickets}/>
+      </div>
+
+      menu = <div>
         <div>
+<<<<<<< HEAD
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
         </div>
         <div>
         <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
+=======
+          <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
+>>>>>>> 281834127f8246cc918a4f0f0e30a670001ca62e
         </div>
       </div>
+
+      if (is_admin) {
+        buttons = <div>
+          <div>
+            <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+          </div>
+          <div>
+            <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
+          </div>
+        </div>
+      }
     }
 
     let event_name_class = expanded ? 'event-name-expanded' : 'event-name-collapsed'
@@ -102,6 +126,8 @@ class Event extends React.Component {
       <div className={event_name_class} onClick={this.toggle}>{name}</div>
       {admin_content}
       {content}
+      {buttons}
+      {menu}
     </div>
   }
 }
