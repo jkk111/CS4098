@@ -54,20 +54,20 @@ class Nav extends React.Component {
 
     user_nav_items = <div>
       <div className={nav_item_class} onClick={set_view('HOME', this.toggle)}>Home</div>
-      <div className={nav_item_class} onClick={set_view('EVENT_LIST', this.toggle)}>Events</div>
+      <div className={nav_item_class} onClick={set_view('EVENT_LIST', this.toggle)}>View Events</div>
       <div className={nav_item_class} onClick={set_view('VIEW_AUCTIONS', this.toggle)}>View Auctions</div>
     </div>
 
     if(is_admin) {
       admin_nav_items = <div>
-        <div className={nav_item_class} onClick={set_view('CREATE_USER', this.toggle)}>Create User</div>
-        <div className={nav_item_class} onClick={set_view('CREATE_EVENT', this.toggle)}>Create Event</div>
-        <div className={nav_item_class} onClick={set_view('CREATE_MENU', this.toggle)}>Create Menu</div>
-        <div className={nav_item_class} onClick={set_view('VIEW_MENUS', this.toggle)}>View Menus</div>
-        <div className={nav_item_class} onClick={set_view('CREATE_TICKET', this.toggle)}>Create Ticket</div>
         <div className={nav_item_class} onClick={set_view('VIEW_USERS', this.toggle)}>View Users</div>
-        <div className={nav_item_class} onClick={set_view('CREATE_AUCTION_ITEM', this.toggle)}>Create Auction Item</div>
+        <div className={nav_item_class} onClick={set_view('VIEW_MENUS', this.toggle)}>View Menus</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_USER', this.toggle)}>Create Users</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_EVENT', this.toggle)}>Create Events</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_MENU', this.toggle)}>Create Menus</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_TICKET', this.toggle)}>Create Tickets</div>
         <div className={nav_item_class} onClick={set_view('CREATE_AUCTION', this.toggle)}>Create Auction</div>
+        <div className={nav_item_class} onClick={set_view('CREATE_AUCTION_ITEM', this.toggle)}>Create Items</div>
       </div>
     }
 

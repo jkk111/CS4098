@@ -45,9 +45,9 @@ class Event extends React.Component {
     let { expanded } = this.state;
     let { id, name, description, tickets, start_time, end_time, is_admin} = this.props;
 
-    let admin_content = null;
+    let admin_buttons = null;
     let content = null;
-    let menu = null;
+    let user_buttons = null;
 
     console.log("Start Time", start_time)
 
@@ -59,14 +59,15 @@ class Event extends React.Component {
 
     if(expanded) {
       if(is_admin) {
-        admin_content = <div>
+        admin_buttons = <div>
           <div>
-            <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+            <span className='user-content-button' onClick={this.show_allergens}>Export Attendee Allergen Information</span>
           </div>
           <div>
-            <span className='user-content-button' onClick={this.show_allergens}>Edit this Event</span>
+            <span className='user-content-button'>Edit this Event</span>
           </div>
         </div>
+
       }
 
       content = <div>
@@ -83,9 +84,12 @@ class Event extends React.Component {
         <ViewTickets event_id={id} tickets={tickets}/>
       </div>
 
-      menu = <div>
+      user_buttons = <div>
         <div>
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
+        </div>
+        <div>
+        <span className='user-content-button'>Donate</span>
         </div>
         <div>
         <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
@@ -98,8 +102,8 @@ class Event extends React.Component {
     return <div className='event' >
       <div className={event_name_class} onClick={this.toggle}>{name}</div>
       {content}
-      {admin_content}
-      {menu}
+      {admin_buttons}
+      {user_buttons}
     </div>
   }
 }
