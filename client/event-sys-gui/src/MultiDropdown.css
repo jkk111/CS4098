@@ -12,12 +12,5 @@
 
 .remove-item {
   margin-right: 1em;
-}
-
-.dropdown {
-  padding-right: 0.5em;
-}
-
-.float-text {
-  padding-left: 0.5em;
+  box-sizing: border-box;
 }

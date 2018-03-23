@@ -56,8 +56,6 @@ class Nav extends React.Component {
       <div className={nav_item_class} onClick={set_view('HOME', this.toggle)}>Home</div>
       <div className={nav_item_class} onClick={set_view('SETTINGS', this.toggle)}>Settings</div>
       <div className={nav_item_class} onClick={set_view('EVENT_LIST', this.toggle)}>Events</div>
-      <div className={nav_item_class} onClick={set_view('VIEW_MENUS', this.toggle)}>View Menus</div>
-      <div className={nav_item_class} onClick={set_view('VIEW_TRACKER', this.toggle)}>Donation Tracker</div>
       <div className={nav_item_class} onClick={set_view('VIEW_AUCTIONS', this.toggle)}>View Auctions</div>
     </div>
 
@@ -66,6 +64,7 @@ class Nav extends React.Component {
         <div className={nav_item_class} onClick={set_view('CREATE_USER', this.toggle)}>Create User</div>
         <div className={nav_item_class} onClick={set_view('CREATE_EVENT', this.toggle)}>Create Event</div>
         <div className={nav_item_class} onClick={set_view('CREATE_MENU', this.toggle)}>Create Menu</div>
+        <div className={nav_item_class} onClick={set_view('VIEW_MENUS', this.toggle)}>View Menus</div>
         <div className={nav_item_class} onClick={set_view('CREATE_VENUE', this.toggle)}>Create Venue</div>
         <div className={nav_item_class} onClick={set_view('CREATE_TICKET', this.toggle)}>Create Ticket</div>
         <div className={nav_item_class} onClick={set_view('VIEW_USERS', this.toggle)}>View Users</div>

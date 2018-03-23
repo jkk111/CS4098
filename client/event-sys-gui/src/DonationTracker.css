@@ -1,0 +1,9 @@
+.donation-tracker {
+  display: flex;
+  height: 100%;
+  font-size: 4em;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  /*letter-spacing: 1em;*/
+}

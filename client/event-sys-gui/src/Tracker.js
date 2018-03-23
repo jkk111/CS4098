@@ -12,6 +12,7 @@ class Tracker extends Component {
     this.toggle = this.toggle.bind(this);
   }
 
+
   toggle() {
     this.setState({
       expanded: !this.state.expanded

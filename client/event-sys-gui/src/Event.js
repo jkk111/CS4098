@@ -52,11 +52,14 @@ class Event extends React.Component {
 
     if(expanded) {
       if(is_admin) {
-        admin_content = <div className='admin-content'>
+        admin_content = <div>
+          <div className='admin-content'>
           <span className='event-content-key'>Event ID</span>
           <span className='event-content-value'>{id}</span>
           <span className='event-content-key'>Venue ID</span>
           <span className='event-content-value'>{venue_id}</span>
+          </div>
+         <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
         </div>
       }
       content = <div>
@@ -72,6 +75,8 @@ class Event extends React.Component {
           <span className='event-content-key'>Ends</span>
           <span className='event-content-value'>{endString}</span>
         </div>
+        <ViewTickets tickets={tickets}/>
+        <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
         <ViewTickets tickets={tickets}/>
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
       </div>
