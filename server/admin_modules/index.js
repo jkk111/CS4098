@@ -167,8 +167,8 @@ app.post('/promote', bodyParser.json(), async(req, res) => {
 })
 
 app.post('/create_event', bodyParser.json(), async(req, res) => {
-  let { tickets, name, description, venue_id, max_attendees, start_time, end_time } = req.body;
-  let event = { name, description, venue_id, max_attendees, start_time, end_time };
+  let { tickets, name, description, location, start_time, end_time } = req.body;
+  let event = { name, description, location, start_time, end_time };
   let result = await Events.add('event', event)
   let id = result.lastID;
   let event_tickets = [];
@@ -186,9 +186,6 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
     })
   }
 
-  let [ venue ] = await Events.get('venues', { id: venue_id }, '*')
-
-  // await eventbrite(event, event_tickets, venue)
   // Email All Users On Mailing List
   let users = await Users.get('user', { email_verified: true, subscribed: true }, 'f_name, l_name, email');
 
@@ -212,8 +209,8 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
 });
 
 app.post('/update_event', bodyParser.json(), async(req, res) => {
-  let { event_id, tickets, description, venue_id, max_attendees, start_time, end_time } = req.body;
-  let event = { description, venue_id, max_attendees, start_time, end_time };
+  let { event_id, tickets, description, location, start_time, end_time } = req.body;
+  let event = { description, location, start_time, end_time };
 
   let event_name = await Events.get('event', { id: event_id }, 'name');
   event_name = name[0].name;
@@ -292,25 +289,6 @@ app.post('/create_ticket', bodyParser.json(), async(req, res) => {
   res.json({ id, success: true });
 });
 
-app.post('/create_venue', bodyParser.json(), async(req, res) => {
-  let { name, description, address_1, address_2, city, country, capacity } = req.body;
-
-  let row = {
-    name,
-    description,
-    address_1,
-    address_2,
-    city,
-    country,
-    capacity
-  };
-
-  let venue = await Events.add('venues', row)
-  let id = venue.lastID;
-
-  res.json({ id, success: true })
-})
-
 app.post('/create_auction', bodyParser.json(), async(req, res) => {
   let { name, description, start_time, end_time } = req.body;
 
@@ -351,10 +329,6 @@ app.post('/add_prize', bodyParser.json(), async(req, res) => {
   await Raffle.add('prizes', prize, '*')
   res.send('OK')
 })
-
-app.get('/venues', async(req, res) => {
-  res.json(await Events.get('venues', {}, '*'))
-});
 
 app.get('/tickets', async(req, res) => {
   res.json(await Events.get('tickets', {}, '*'))

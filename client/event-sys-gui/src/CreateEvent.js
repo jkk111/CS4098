@@ -2,7 +2,7 @@ import React from 'react';
 import './CreateEvent.css'
 import 'moment/locale/en-ie'
 import DateTime from './react-datetime'
-import { Logger, isNatural } from './Util'
+import { Logger } from './Util'
 import { FloatText } from './FloatText'
 import { NoFloatNumber } from './NoFloat'
 import Dropdown from './Dropdown'
@@ -53,7 +53,6 @@ class CreateEvent extends React.Component {
     this.handleTicketsChange = this.handleTicketsChange.bind(this);
     this.startChange = this.startChange.bind(this);
     this.endChange = this.endChange.bind(this);
-    this.setVenues();
     this.setMenus();
     this.setTickets();
   }
@@ -66,11 +65,6 @@ class CreateEvent extends React.Component {
 
     if(form.event_name.value === '') {
       // alert('please give the event a name')
-      return
-    }
-
-    if(!isNatural(form.capacity.value)) {
-      // alert('capacity must be a number');
       return
     }
 
@@ -92,7 +86,6 @@ class CreateEvent extends React.Component {
       description: form.description.value,
       menu_id: this.state.selectedMenu,
       venue_id: this.state.selectedVenue,
-      max_attendees: form.capacity.value,
       timezone: form.timezone.value,
       start_time: this.state.start_time,
       end_time: this.state.end_time,
@@ -126,19 +119,10 @@ class CreateEvent extends React.Component {
 
 
   async setMenus() {
-    //console.log('setting venues');
     let response = await fetch('/admin/menus')
     response = await response.json();
     this.setState({menus: response});
     Logger.log("Loaded Menus", response)
-  }
-
-  async setVenues() {
-    //console.log('setting venues');
-    let response = await fetch('/admin/venues')
-    response = await response.json();
-    this.setState({venues: response});
-    Logger.log("Loaded Venues", response)
   }
 
   async setTickets() {
@@ -163,22 +147,6 @@ class CreateEvent extends React.Component {
     return menuList;
   }
 
-
-  buildVenueList() {
-    let venues = this.state.venues;
-    let venueList = [
-      <option key="0" value="0">-select venue-</option>
-    ]
-    if(venues.length !== 0) {
-      for (var i = 0; i < venues.length; i++) {
-        let name = venues[i].name;
-        let id = venues[i].id;
-        venueList.push(<option key={id} value={id}>{name}</option>);
-      }
-    }
-    return venueList;
-  }
-
   buildTicketsList() {
     let tickets = this.state.tickets;
     let ticketsList = []
@@ -191,21 +159,6 @@ class CreateEvent extends React.Component {
     }
     return ticketsList;
   }
-
-  // buildTicketAmounts() {
-  //   let selected = this.state.selectedTickets;
-  //   let count = []
-  //   if(tickets.length !== 0) {
-  //     for (var i = 0; i < tickets.length; i++) {
-  //       let name = tickets[i].name;
-  //       let id = tickets[i].id;
-  //       let inputName = "amount of " + name + " tickets:";
-  //       let inputId = "ticketAmount" + id;
-  //       theList.push(<div key={i}><FloatText name={inputId} label={inputName}/></div>)
-  //     }
-  //   }
-  //   return theList;
-  // }
 
   startChange(e) {
     this.setState({
@@ -221,13 +174,13 @@ class CreateEvent extends React.Component {
 
   render() {
     let menuOptions = this.buildMenuList();
-    let venueOptions = this.buildVenueList();
     let ticketOptions = this.buildTicketsList();
     // let ticketAmounts = this.buildTicketAmounts();
     return <div className='event_form'>
       <form onSubmit={this.createEvent} autoComplete="off">
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
+        <FloatText name="location" label="Event Location:" />
         <div className='event_form-input'>
           <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true}/>
           <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true}/>
@@ -235,11 +188,6 @@ class CreateEvent extends React.Component {
         <div className='padding-vert'>
           <Dropdown value={this.state.menu} onChange={this.handleMenuChange}>
             {menuOptions}
-          </Dropdown>
-        </div>
-        <div className='padding-vert'>
-          <Dropdown value={this.state.venue} onChange={this.handleVenueChange}>
-            {venueOptions}
           </Dropdown>
         </div>
         <MultiDropdown value={this.state.selectedTickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>

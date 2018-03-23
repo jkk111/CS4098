@@ -45,8 +45,8 @@ class Event extends React.Component {
     let { expanded } = this.state;
     let { id, name, description, tickets, start_time, end_time, is_admin} = this.props;
 
+    let admin_content = null;
     let content = null;
-    let buttons = null;
     let menu = null;
 
     console.log("Start Time", start_time)
@@ -58,6 +58,17 @@ class Event extends React.Component {
     let endString = endObject.toUTCString();
 
     if(expanded) {
+      if(is_admin) {
+        admin_content = <div>
+          <div>
+            <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+          </div>
+          <div>
+            <span className='user-content-button' onClick={this.show_allergens}>Edit this Event</span>
+          </div>
+        </div>
+      }
+
       content = <div>
         <div className='event-content'>
           <span className='event-content-key'>Name:</span>
@@ -74,20 +85,12 @@ class Event extends React.Component {
 
       menu = <div>
         <div>
-          <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
+        <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
+        </div>
+        <div>
+        <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
         </div>
       </div>
-
-      if (is_admin) {
-        buttons = <div>
-          <div>
-            <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
-          </div>
-          <div>
-            <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
-          </div>
-        </div>
-      }
     }
 
     let event_name_class = expanded ? 'event-name-expanded' : 'event-name-collapsed'
@@ -95,7 +98,7 @@ class Event extends React.Component {
     return <div className='event' >
       <div className={event_name_class} onClick={this.toggle}>{name}</div>
       {content}
-      {buttons}
+      {admin_content}
       {menu}
     </div>
   }
