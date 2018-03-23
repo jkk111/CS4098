@@ -13,16 +13,16 @@ class Ticket extends React.Component {
 
   buy(){
     let { event_id, id } = this.props;
-    Payment.CreateEvent(event_id, id);
+    console.log("Event:", event_id, "Ticket: ", id);
+    Payment.CreateTicket(event_id, id);
   }
 
   render() {
-    let { name, id, event_id, price } = this.props;
-    console.log(name, id, event_id);
+    let { name, price } = this.props;
     let content = null;
     content = <div>
-      <p>{name}: {price}</p>
-      <button onClick={this.buy}>Buy</button>
+      {name}
+      <button className="buy-button" onClick={this.buy}>Buy for {price}</button>
     </div>
 
     return <div className='ticket'>

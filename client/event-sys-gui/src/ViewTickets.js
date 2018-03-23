@@ -7,8 +7,8 @@ class ViewTickets extends React.Component {
   }
 
   render() {
-    let { tickets } = this.props;
-    tickets = tickets.map((ticket, i) => <Ticket refresh={this.refresh} {...ticket} key={i} />)
+    let { tickets, event_id } = this.props;
+    tickets = tickets.map((ticket, i) => <Ticket event_id = {event_id} refresh={this.refresh} {...ticket} key={i} />)
     return <div>
         {tickets}
     </div>

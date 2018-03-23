@@ -75,9 +75,8 @@ class Event extends React.Component {
           <span className='event-content-key'>Ends</span>
           <span className='event-content-value'>{endString}</span>
         </div>
-        <ViewTickets tickets={tickets}/>
+        <ViewTickets event_id={id} tickets={tickets}/>
         <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
-        <ViewTickets tickets={tickets}/>
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
       </div>
     }
