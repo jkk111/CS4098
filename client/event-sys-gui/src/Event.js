@@ -67,15 +67,12 @@ class Event extends React.Component {
             <span className='event-content-key'>Venue ID</span>
             <span className='event-content-value'>{venue_id}</span>
           </div>
-<<<<<<< HEAD
           <div>
          <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
          </div>
          <div>
          <span className='user-content-button' onClick={this.show_allergens}>Edit this Event</span>
          </div>
-=======
->>>>>>> 281834127f8246cc918a4f0f0e30a670001ca62e
         </div>
       }
 
@@ -97,14 +94,10 @@ class Event extends React.Component {
 
       menu = <div>
         <div>
-<<<<<<< HEAD
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
         </div>
         <div>
         <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
-=======
-          <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
->>>>>>> 281834127f8246cc918a4f0f0e30a670001ca62e
         </div>
       </div>
 
