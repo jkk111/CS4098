@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './DonationTracker.css'
 
 
-const REFRESH_FREQ = 5000;
+const REFRESH_FREQ = 1000;
 
 let mapStateToProps = (state) => {
   return { event_id: state.active_event }

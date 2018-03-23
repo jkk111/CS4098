@@ -54,6 +54,7 @@ class CreateEvent extends React.Component {
     this.startChange = this.startChange.bind(this);
     this.endChange = this.endChange.bind(this);
     this.setVenues();
+    this.setMenus();
     this.setTickets();
   }
 
