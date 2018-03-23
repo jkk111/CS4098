@@ -1,6 +1,8 @@
 .dropdown {
   width: 100%;
   background: green;
+  padding: 0 0.5em;
+  box-sizing: border-box;
 }
 
 .dropdown-input {
