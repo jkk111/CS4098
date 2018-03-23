@@ -60,24 +60,26 @@ class Event extends React.Component {
           <span className='event-content-value'>{venue_id}</span>
           </div>
          <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
+         <span className='user-content-button' onClick={this.show_allergens}>Edit this Event</span>
         </div>
       }
       content = <div>
         <div className='event-content'>
-          <span className='event-content-key'>Name</span>
+          <span className='event-content-key'>Name:</span>
           <span className='event-content-value'>{name}</span>
-          <span className='event-content-key'>Description</span>
+          <span className='event-content-key'>Description:</span>
           <span className='event-content-value'>{description}</span>
-          <span className='event-content-key'>Capacity</span>
+          <span className='event-content-key'>Capacity:</span>
           <span className='event-content-value'>{max_attendees}</span>
-          <span className='event-content-key'>Starts</span>
+          <span className='event-content-key'>Starts:</span>
           <span className='event-content-value'>{startString}</span>
-          <span className='event-content-key'>Ends</span>
+          <span className='event-content-key'>Ends:</span>
           <span className='event-content-value'>{endString}</span>
         </div>
         <ViewTickets event_id={id} tickets={tickets}/>
         <span className='user-content-button' onClick={this.show_allergens}>Show Guest Allergen Information</span>
         <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
+        <span className='user-content-button' onClick={this.show_allergens}>Show Menu for this event</span>
       </div>
     }
 

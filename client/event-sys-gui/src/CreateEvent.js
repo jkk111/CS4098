@@ -39,6 +39,7 @@ class CreateEvent extends React.Component {
     super();
     this.state = {
       selectedVenue:'',
+      menus: [],
       venues: [],
       startDateTime: 0,
       endDateTime: 0,
@@ -47,6 +48,7 @@ class CreateEvent extends React.Component {
       ticketAmounts: [],
     };
     this.createEvent = this.createEvent.bind(this);
+    this.handleMenuChange = this.handleVenueChange.bind(this);
     this.handleVenueChange = this.handleVenueChange.bind(this);
     this.handleTicketsChange = this.handleTicketsChange.bind(this);
     this.startChange = this.startChange.bind(this);
@@ -87,6 +89,7 @@ class CreateEvent extends React.Component {
     let body = {
       name: form.event_name.value,
       description: form.description.value,
+      menu_id: this.state.selectedMenu,
       venue_id: this.state.selectedVenue,
       max_attendees: form.capacity.value,
       timezone: form.timezone.value,
@@ -107,6 +110,11 @@ class CreateEvent extends React.Component {
     form.reset();
   }
 
+
+  handleMenuChange(value) {
+    this.setState({selectedMenu: value})
+  }
+
   handleVenueChange(value) {
     this.setState({selectedVenue: value})
   }
@@ -114,6 +122,15 @@ class CreateEvent extends React.Component {
   handleTicketsChange(value) {
     this.setState({selectedTickets: value})
     //console.log('selectedTickets', this.state.selectedTickets);
+  }
+
+
+  async setMenus() {
+    //console.log('setting venues');
+    let response = await fetch('/admin/menus')
+    response = await response.json();
+    this.setState({menus: response});
+    Logger.log("Loaded Menus", response)
   }
 
   async setVenues() {
@@ -131,6 +148,21 @@ class CreateEvent extends React.Component {
     this.setState({tickets: response});
     Logger.log("Loaded Tickets", response)
   }
+
+  buildMenuList(){
+    let menus = this.state.menus;
+    let menuList = [<option key="0" value="0">-select menu-</option>]
+
+     if(menus.length !== 0) {
+      for (var i = 0; i < menus.length; i++) {
+        let name = menus[i].name;
+        let id = menus[i].id;
+        menuList.push(<option key={id} value={id}>{name}</option>);
+      }
+    }
+    return menuList;
+  }
+
 
   buildVenueList() {
     let venues = this.state.venues;
@@ -188,6 +220,7 @@ class CreateEvent extends React.Component {
   }
 
   render() {
+    let menuOptions = this.buildMenuList();
     let venueOptions = this.buildVenueList();
     let ticketOptions = this.buildTicketsList();
     // let ticketAmounts = this.buildTicketAmounts();
@@ -196,6 +229,9 @@ class CreateEvent extends React.Component {
         <FloatText name="event_name" label="Event Name:" />
         <FloatText name="description" label="Event Description:" />
         <FloatNumber name="capacity" label="Event Capacity:"/>
+        <Dropdown value={this.state.menu} onChange={this.handleMenuChange} id="selectMenu">
+          {menuOptions}
+        </Dropdown>
         <Dropdown value={this.state.venue} onChange={this.handleVenueChange} id="selectVenue">
           {venueOptions}
         </Dropdown>

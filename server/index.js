@@ -235,9 +235,10 @@ app.get('/status', async(req, res) => {
 let identify = async(req, res, next) => {
   let id = req.cookies.id;
   let session = await Users.get('session', { id }, [ 'user_id' ]);
-
   if(session.length > 0) {
+    let user = await Users.get('user', { id: session[0].user_id }, 'is_admin')
     req.user_id = session[0].user_id;
+    req.is_admin = user[0].is_admin || false;
     next();
   } else {
     res.json({ success: false, error: "UNAUTH" });
