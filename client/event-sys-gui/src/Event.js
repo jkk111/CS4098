@@ -43,10 +43,9 @@ class Event extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { id, name, description, tickets, venue_id, max_attendees, start_time, end_time, is_admin} = this.props;
+    let { id, name, description, tickets, start_time, end_time, is_admin} = this.props;
 
     let content = null;
-    let admin_content = null;
     let buttons = null;
     let menu = null;
 
@@ -59,25 +58,12 @@ class Event extends React.Component {
     let endString = endObject.toUTCString();
 
     if(expanded) {
-      if(is_admin) {
-        admin_content = <div>
-          <div className='admin-content'>
-            <span className='event-content-key'>Event ID</span>
-            <span className='event-content-value'>{id}</span>
-            <span className='event-content-key'>Venue ID</span>
-            <span className='event-content-value'>{venue_id}</span>
-          </div>
-        </div>
-      }
-
       content = <div>
         <div className='event-content'>
           <span className='event-content-key'>Name:</span>
           <span className='event-content-value'>{name}</span>
           <span className='event-content-key'>Description:</span>
           <span className='event-content-value'>{description}</span>
-          <span className='event-content-key'>Capacity:</span>
-          <span className='event-content-value'>{max_attendees}</span>
           <span className='event-content-key'>Starts:</span>
           <span className='event-content-value'>{startString}</span>
           <span className='event-content-key'>Ends:</span>
@@ -108,7 +94,6 @@ class Event extends React.Component {
 
     return <div className='event' >
       <div className={event_name_class} onClick={this.toggle}>{name}</div>
-      {admin_content}
       {content}
       {buttons}
       {menu}
