@@ -20,6 +20,7 @@ import Payment from './Payment'
 import CreateAuctionItem from './CreateAuctionItem'
 import CreateAuction from './CreateAuction'
 import ViewAuctions from './ViewAuctions'
+import CreateTable from './CreateTable'
 import DonationTracker from './DonationTracker'
 
 
@@ -65,7 +66,8 @@ const views = {
   VIEW_MENUS: ViewMenus,
   CREATE_AUCTION_ITEM: CreateAuctionItem,
   CREATE_AUCTION: CreateAuction,
-  VIEW_AUCTIONS: ViewAuctions
+  VIEW_AUCTIONS: ViewAuctions,
+  CREATE_TABLE: CreateTable
 }
 
 class App extends Component {

@@ -1,22 +1,6 @@
 # CS4098
 Repo to store source code for CS4098 - Group Design Project
 
-### Eventbrite Setup.
-#### This assumes running from a clean install.
-To configure the app to use eventbrite you must provide an API key during setup.
-
-1. Go to [Eventbrite](https://eventbrite.com)
-2. Create an Account if you don't already have one.
-3. Login To your account
-4. Go to profile (Top Right Corner)
-5. Click Account Settings
-6. On the left side go to Developer > App Management
-7. Click Create A New App
-8. Fill in all appropriate details for application key request (Can Use Random Values).
-9. On the newly created application click Show Client Secret and OAuth Token.
-10. Take note of the section named "Your Personal Oauth Token".
-11. When prompted for an eventbrite API key during setup, use this key and eventbrite functionality will be enabled.
-
 ### Installation from a fresh ubuntu 16.04 LTS install
 1. Open a terminal - 'ctrl/⌘ + alt + t'
 2. Install git - ```sudo apt-get install -y git```
@@ -53,12 +37,13 @@ To configure the app to use eventbrite you must provide an API key during setup.
 ### Signing Up
 1. Fill in your information in the sign-up and take note of your username and password for later.
 2. Currently, there is no minimum amount of characters required for any of the fields, and the email field does not require a real email address or the @ key.
-3. To test if it works, try to log in to the account you just created, using what you entered into the username and password fields.
+3. If you are successful you should be automatically directed to the home page, with "Welcome Home" being displayed.
+4. If your password is not the same as your confirm password, you will be unable to sign up and "Passwords must match" will be displayed. Make your passwors the same to proceed.
 
 ### Logging In 
 1. Enter your username and password into the log in form. You may use the username and password you created during the installation steps(This will be an admin account), or one created during the signing up step(This will not be an admin account).
 2. A successful login will redirect you to the main landing page. (Welcome Home)
-3. If you are not directed to the Welcome Home screen when you click the log in button, your username or password is incorrect. Try again or create another account.
+3. If your credidentials do not match, have not been previously created, or incorrect in general, then you will be unable to log in and "Invalid Username/Password will be displayed.
 
 ### Settings
 1. To view settings, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Settings';
@@ -77,18 +62,6 @@ To configure the app to use eventbrite you must provide an API key during setup.
 **Feature 16 - I want to be able to send automated invitations, with link to register for the event**.  
 **Feature 40 - I would like to email (legitimately) subscribed users**.  
 **Feature 87 - I want to be notified when new events are released**.  
-### Creating Venues
-Admin access only
-1. Before we can create events, we need to add venues for these events.
-2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Venue';
-3. Enter the name of the venue. This can be the oficial name or a nickname, etc.
-4. Enter a description of the venue. Size, how to enter, anything you want your guests to know.
-5. Enter the address for the venue in address lines 1 and 2.
-6. Enter the city the venue is in.
-7. Enter how many people the venue can hold in the venue capacity field.
-8. None of these fields are mandetory. However, if you do not enter a name, when you try to select a previously created venue, the dropdown option will appear empty. 
-9. To save the venue, click on the create venue button at the bottom of the screen. The page should refresh and all fields cleared of what you entered.
-10. To check if your venue was added, click on the menu button again, and then select 'Create Event' on the dropdown menu. In the "Create Event" page, there is a small dropdown menu labeled "select venue". Selecting this should display the venue name of the venue you just created, and allow you to select it.
 
 ### Creating Tickets
 Admin access only
@@ -103,18 +76,18 @@ Admin access only
 
 ### Creating Events
 Admin access only
-1.  To begin adding events to the system, ensure you've already added venues and tickets.
-2.  Once tickets and venues have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event';
+1.  To begin adding events to the system, ensure you've already added menus and tickets.
+2.  Once tickets and dinner menus have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event';
 3. On the "create Event" page, enter the name of the event. 
 This can be the name of the event, or the type etc.
 4. Enter a description of the event. What charity its for, possible upgrades, anything you want your guests to know.
-5. Enter the capacity of the event. This can be in words or numbers.
-6. Select the venue and ticket for the event as shown in create ticket and create venue.
-7. After you select the ticket you want from the dropdown menu a "amount of tickets" field will appear. Enter the amount of tickets on sale. 
-8. Select the date and time of the venue using the appropiate fields. This is done by clicking on the calender that appears when you click on the field. (Note: there is occasionaly a problem with viewing this if you are running a virtual machine and parts of your are cut of due to the resolution you selected, if you are unable to see the full date box, use your arrow keys to scroll the page to bring it into view. additionaly note, this is due ).
+5. Enter the location for the event. An address, landmark, etc.
+6.Select the date and time of the venue using the appropiate fields. This is done by clicking on the calender that appears when you click on the field. The time can be selected at the bottom of the calender.
+7. Select the menu you want associated with the event, by selecting from all the menus you have created that can be seen in the dropdown menu.
+8. Click the "Add a ticket" button if you wish to add tickets to this event. Once you click this button you may select a ticket from the dropdown menu if you have already created it inthe "create ticket" page. You can then select the amount of tickets you want, either by typing in the number or by using the arrows to add more or less tickets.
 9. To save the event, click on the create event button at the bottom of the screen.
 10. Any event created will automatically sent out email invites to all users.
-11. Saved events should appear in the "event" section in the main menu, however events are not currently changing at the moment.
+11. Saved events should appear in the "event" section in the main menu.
 
 **Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily**.  
 **Feature 72 - I want to be able to easily see details fo the event – time, venue, etc**.  
@@ -137,14 +110,15 @@ Admin Access Only
 **Feature 46 - I want to create menus**.  
 ### Create Menu
 Admin Access Only
-1. This is where the admin can create a menu for a certain event.
-2. To create a menu, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create menu'
-3. First name the menu by using the "Menu Name" field. Any name is accepted.
-4. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolate to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "add starter" button. Then input the same information as detailed in this step.
-5. Repeat step 4 for the main course, desserts, and drinks.
-6. Currently not all fields are mandetory. However if you do not enter a name for your menu it will appear as an empty string in the "view menu" screen.
-7. When you have finished adding things to your menu, click "Create Menu".
-8. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
+1. Before we can create events, we need to create a menu for that event.
+2. This is where the admin can create a menu for a certain event.
+3. To create a menu, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create menu'
+4. First name the menu by using the "Menu Name" field. Any name is accepted.
+5. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolate to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "add starter" button. Then input the same information as detailed in this step.
+6. Repeat step 4 for the main course, desserts, and drinks.
+7. Currently not all fields are mandetory. However if you do not enter a name for your menu it will appear as an empty string in the "view menu" screen, as well as in the dropdown in create events.
+8. When you have finished adding things to your menu, click "Create Menu".
+9. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
 
 **Feature 2 - I want to be able to give admin access to other people**.  
 **Feature 6 - Keep track of possible/previous guests**.  
@@ -160,7 +134,8 @@ Admin Access Only
 
 **Feature 73 - Look at dinner menu**.  
 ### View Menu
-1. This is where everyone can see the menu options.
+Admin Access Only
+1. This is where admins can see the menu options they created.
 2. To view menus, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Menus'
 3. The list of menu names will appear. 
 4. Click on a Menu name for further information on the menu
