@@ -167,8 +167,8 @@ app.post('/promote', bodyParser.json(), async(req, res) => {
 })
 
 app.post('/create_event', bodyParser.json(), async(req, res) => {
-  let { tickets, name, description, location, start_time, end_time } = req.body;
-  let event = { name, description, location, start_time, end_time };
+  let { tickets, name, description, location, menu_id, start_time, end_time } = req.body;
+  let event = { name, description, location, menu_id, start_time, end_time };
   let result = await Events.add('event', event)
   let id = result.lastID;
   let event_tickets = [];

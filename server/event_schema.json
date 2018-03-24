@@ -7,6 +7,7 @@
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
         "location": "TEXT NOT NULL DEFAULT \"\"",
+        "menu_id": "INTEGER",
         "auction_id": "INTEGER",
         "start_time": "INTEGER NOT NULL",
         "end_time": "INTEGER NOT NULL",

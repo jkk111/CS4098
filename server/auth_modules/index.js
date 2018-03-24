@@ -4,6 +4,7 @@ const Database = require('../database')
 const Events = Database.Get('event')
 const Payment = require('./payments')
 const Users = Database.Get('user')
+const Menus = Database.Get('menu')
 // const raffle = require('./raffle')
 const bodyParser = require('body-parser')
 const Auction = Database.Get('auction')
@@ -13,7 +14,7 @@ app.use('/payments', Payment.router)
 // app.use('/raffle', raffle)
 
 app.get('/events', async(req, res) => {
-  let events = await Events.get('event', {}, [ 'id','name', 'description', 'location', 'start_time', 'end_time' ]);
+  let events = await Events.get('event', {}, [ 'id','name', 'description', 'location', 'menu_id', 'start_time', 'end_time' ]);
   let ticket_cache = {};
 
   for(var event of events) {
@@ -39,6 +40,15 @@ app.get('/events', async(req, res) => {
         Object.assign(attendee, user_data);
         attendee.allergens = user_allergens.map(allergen => allergen.allergen_id);
       }
+    }
+
+    if(event.menu_id != null) {
+      let menu = {};
+      menu.starters = await Menus.get('starters', { menu_id: event.menu_id })
+      menu.mains = await Menus.get('mains', { menu_id: event.menu_id })
+      menu.desserts = await Menus.get('desserts', { menu_id: event.menu_id })
+      menu.drinks = await Menus.get('drinks', { menu_id: event.menu_id })
+      event.menu = menu;
     }
 
     event.tickets = tickets;
