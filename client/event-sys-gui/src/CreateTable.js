@@ -136,7 +136,7 @@ class CreateTable extends React.Component {
     let { tables = [] } = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} />)
     return <div>
-      <div className='form-button form-field' onClick={this.addTable}>Start/Stop Adding Tables</div>
+      <div className='form-button form-field' onClick={this.addTable}>Click to Start/Stop Adding Tables(Click Anywhere to Add)</div>
       <Stage width={window.innerWidth-(window.innerWidth/60)} height={window.innerHeight-(window.innerHeight/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
@@ -153,7 +153,7 @@ class CreateTable extends React.Component {
           {children}
         </Layer>
       </Stage>
-      <div className='form-button form-field' onClick={this.deleteTable}>Start/Stop Deleting Tables</div>
+      <div className='form-button form-field' onClick={this.deleteTable}>Click to Start/Stop Deleting Tables(Drag and Drop Anywhere to Delete)</div>
     </div>
   }
 }
