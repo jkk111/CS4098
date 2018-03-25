@@ -11,7 +11,7 @@ console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 
 let Table = ({ x, y, updatePosition }) => {
   console.log(updatePosition)
-  return <Rect x={x} y={y} fill={FILL_COLOR} draggable={true} onDragEnd={updatePosition}
+  return <Rect x={x-(TABLE_WIDTH/2)} y={y-(TABLE_HEIGHT/2)} fill={FILL_COLOR} draggable={true} onDragEnd={updatePosition}
                width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} />
 }
 
@@ -34,8 +34,8 @@ class CreateTable extends React.Component {
 
   updatePosition(i) {
     return (e) => {
-      let x = e.evt.dragEndNode.attrs.x;
-      let y = e.evt.dragEndNode.attrs.y;
+      let x = e.evt.dragEndNode.attrs.x+(TABLE_WIDTH/2);
+      let y = e.evt.dragEndNode.attrs.y+(TABLE_HEIGHT/2);
       let { tables } = this.state;
       let before = tables.slice(0, i);
 
@@ -114,7 +114,7 @@ class CreateTable extends React.Component {
       <div className='form-button form-field' onClick={this.endAddTable}>Stop Adding Tables</div>
       <Stage width={window.innerWidth} height={window.innerHeight}
              visible={true} onContentClick={this.handleClick}
-             onContentMouseMove={this.mouseMove}>
+             onContentMouseMove={this.mouseMove} >
         <Layer ref='layer'>
           <Rect
             x={0}
