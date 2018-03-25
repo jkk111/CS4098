@@ -22,6 +22,8 @@ class CreateTable extends React.Component {
     this.state = {
       addTable: false,
       deleteTable: false,
+      windowWidthOld: window.innerWidth,
+      windowHeightOld: window.innerHeight,
       x: this.props.x,
       y: this.props.y
     };
@@ -31,6 +33,28 @@ class CreateTable extends React.Component {
     this.mouseMove = this.mouseMove.bind(this);
     this.addTable = this.addTable.bind(this);
     this.deleteTable = this.deleteTable.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
+  }
+
+  updateDimensions() {
+  	//let {windowWidthOld,windowHeightOld} = this.state;
+  	//let transformWidth =  Math.abs(windowWidthOld/window.innerWidth);
+	//let transformHeight = Math.abs(windowHeightOld/window.innerHeight);
+  	//let table = tables.map(x=> x);
+  	//let table = tables.map(y=> y);
+
+	this.setState({windowWidthOld: window.innerWidth, 
+				   windowHeightOld:window.innerHeight}); 
+	//			   tables :[table]});
+  }
+
+  componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   updatePosition(i) {
@@ -133,19 +157,19 @@ class CreateTable extends React.Component {
   }
 
   render() {
-    let { tables = [] } = this.state;
+    let { tables = [] , windowHeightOld, windowWidthOld} = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} />)
     return <div>
       <div className='form-button form-field' onClick={this.addTable}>Click to Start/Stop Adding Tables(Click Anywhere to Add)</div>
-      <Stage width={window.innerWidth-(window.innerWidth/60)} height={window.innerHeight-(window.innerHeight/8)}
+      <Stage width={windowWidthOld-(windowWidthOld/60)} height={windowHeightOld-(windowHeightOld/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
         <Layer ref='layer' batchDraw={true}>
           <Rect
-            x={window.innerWidth/120}
+            x={windowHeightOld/120}
             y={0}
-            width={window.innerWidth-(window.innerWidth/40)}
-            height={window.innerHeight-(window.innerHeight/8)}
+            width={windowWidthOld-(windowWidthOld/40)}
+            height={windowHeightOld-(windowHeightOld/8)}
             stroke={'black'}
             fill ={'grey'}
             perfectDrawEnabled={false}
