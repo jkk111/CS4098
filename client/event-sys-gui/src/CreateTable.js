@@ -12,7 +12,7 @@ console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 let Table = ({ x, y, updatePosition }) => {
   console.log(updatePosition)
   return <Rect x={x-(TABLE_WIDTH/2)} y={y-(TABLE_HEIGHT/2)} fill={FILL_COLOR} draggable={true} onDragEnd={updatePosition}
-               width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} perfectDrawEnabled={false}  />
+               width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} perfectDrawEnabled={false} />
 }
 
 class CreateTable extends React.Component {
@@ -37,7 +37,8 @@ class CreateTable extends React.Component {
     return (e) => {
       let x = e.evt.dragEndNode.attrs.x+(TABLE_WIDTH/2);
       let y = e.evt.dragEndNode.attrs.y+(TABLE_HEIGHT/2);
-      let { tables } = this.state;
+      let { tables,deleteTable } = this.state;
+
       let before = tables.slice(0, i);
 
       let after = tables.slice(i + 1);
@@ -46,6 +47,14 @@ class CreateTable extends React.Component {
       this.setState({
         tables: [ ...before, table, ...after ]
       })
+
+      if(deleteTable) {
+	    let before = tables.slice(0, i);
+	    let after = tables.slice(i + 1);
+	    this.setState({
+	      tables: [ ...before, ...after ]
+	    })
+	  }
     }
   }
 
