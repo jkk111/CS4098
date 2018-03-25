@@ -12,7 +12,7 @@ console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 let Table = ({ x, y, updatePosition }) => {
   console.log(updatePosition)
   return <Rect x={x-(TABLE_WIDTH/2)} y={y-(TABLE_HEIGHT/2)} fill={FILL_COLOR} draggable={true} onDragEnd={updatePosition}
-               width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} />
+               width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} perfectDrawEnabled={false}  />
 }
 
 class CreateTable extends React.Component {
@@ -21,6 +21,7 @@ class CreateTable extends React.Component {
 
     this.state = {
       addTable: false,
+      deleteTable: false,
       x: this.props.x,
       y: this.props.y
     };
@@ -28,8 +29,8 @@ class CreateTable extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.updatePosition = this.updatePosition.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
-    this.startAddTable = this.startAddTable.bind(this);
-    this.endAddTable = this.endAddTable.bind(this);
+    this.addTable = this.addTable.bind(this);
+    this.deleteTable = this.deleteTable.bind(this);
   }
 
   updatePosition(i) {
@@ -94,38 +95,56 @@ class CreateTable extends React.Component {
       // });
     // }
 
-  startAddTable(e) {
-    this.setState({
-      addTable: true
-    });
+  addTable(e) {
+  	let{addTable} =this.state
+    if(!addTable){
+	    this.setState({
+	      addTable: true
+	    });
+	}
+	else{
+		this.setState({
+	      addTable: false
+	    });
+	}
   }
 
-  endAddTable(e) {
-    this.setState({
-      addTable: false
-    });
+  deleteTable(e) {
+    let{deleteTable} =this.state
+    if(!deleteTable){
+	    this.setState({
+	      deleteTable: true
+	    });
+	}
+	else{
+		this.setState({
+	      deleteTable: false
+	    });
+	}
   }
 
   render() {
     let { tables = [] } = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} />)
     return <div>
-      <div className='form-button form-field' onClick={this.startAddTable}>Start Adding Tables</div>
-      <div className='form-button form-field' onClick={this.endAddTable}>Stop Adding Tables</div>
-      <Stage width={window.innerWidth} height={window.innerHeight}
-             visible={true} onContentClick={this.handleClick}
+      <div className='form-button form-field' onClick={this.addTable}>Start/Stop Adding Tables</div>
+      <Stage width={window.innerWidth-(window.innerWidth/60)} height={window.innerHeight-(window.innerHeight/8)}
+             visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
-        <Layer ref='layer'>
+        <Layer ref='layer' batchDraw={true}>
           <Rect
-            x={0}
+            x={window.innerWidth/120}
             y={0}
-            width={window.innerWidth}
-            height={window.innerHeight}
+            width={window.innerWidth-(window.innerWidth/40)}
+            height={window.innerHeight-(window.innerHeight/8)}
             stroke={'black'}
-            fill ={'grey'} />
+            fill ={'grey'}
+            perfectDrawEnabled={false}
+            listening={false} />
           {children}
         </Layer>
       </Stage>
+      <div className='form-button form-field' onClick={this.deleteTable}>Start/Stop Deleting Tables</div>
     </div>
   }
 }
