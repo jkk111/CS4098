@@ -10,11 +10,12 @@ const FOCUSED_STROKE_COLOR = 'blue'
 const TABLE_WIDTH = 100;
 const TABLE_HEIGHT = 100;
 const TABLE_OFFSET = 50;
-const FONT_SIZE = 32;
+const FONT_SIZE = 72;
 const FONT_STYLE = 'bold'
 const ALIGN = 'center'
-const TEXT_WIDTH = 25;
-const TEXT_HEIGHT = 25;
+const TEXT_WIDTH = 100;
+const TEXT_HEIGHT = 100;
+const TEXT_OFFSET = 40;
 
 console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 
@@ -42,7 +43,7 @@ let Table = ({ x, y, updatePosition, updateFocused, focused }) => {
 let TableText = ( {x, y, id} ) => {
 
 	return <Text x={x-(TABLE_OFFSET)}
-               y={y-(TABLE_OFFSET)}
+               y={y-(TEXT_OFFSET)}
 							 fontSize={FONT_SIZE}
 							 fontStyle={FONT_STYLE}
 							 align={ALIGN}
@@ -77,14 +78,14 @@ class CreateTable extends React.Component {
   updateDimensions() {
   	let {containerWidth,containerHeight, tables  = []} = this.state;
   	var xNew,yNew,table,before,after;
-  	let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(6)));
-		let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(6)));
+  	let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
+		let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
 		var before, after;
   	if (tables.length !== 0){
   		for(var i=0; i < tables.length; i++){
   			let {tables = []} = this.state;
-	      xNew = Number((tables[i].x*transformWidth).toFixed(2));
-	      yNew = Number((tables[i].y*transformHeight).toFixed(2));
+	      xNew = Number((tables[i].x*transformWidth).toFixed(4));
+	      yNew = Number((tables[i].y*transformHeight).toFixed(4));
 	  	  before = tables.slice(0, i);
 	  	  after = tables.slice(i + 1);
       	table = { x: xNew, y: yNew }
