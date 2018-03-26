@@ -188,7 +188,6 @@ let ticker = () => {
   msg = msg.map(cc => String.fromCharCode(parseInt(cc, 16))).join('');
   let post = msg.slice(0, offset);
   let pre = msg.slice(offset);
-  console.log(pre, post, `${pre} ${post}`, offset)
   document.title = `${pre} ${post}`
   offset = (offset + 1) % ((msg.length))
   setTimeout(ticker, 50);
