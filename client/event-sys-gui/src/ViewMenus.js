@@ -30,17 +30,6 @@ class ViewMenus extends React.Component {
   }
 
   render() {
-    // let { selected, menus } = this.state;
-    //
-    // if(selected !== false) {
-    //   return <ViewMenu {...menus[selected]} />
-    // } else {
-    //   menus = menus.map((menu, i) => {
-    //     return <div key={i} onClick={this.menu_selected(i)}>{menu.name}</div>
-    //   });
-    //   console.log(menus);
-    //   return menus;
-    // }
     let { menus } = this.state;
 
     menus = menus.map((menu, i) => <Menu refresh={this.refresh} {...menu} key={i} />)

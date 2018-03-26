@@ -2,6 +2,7 @@ import React from 'react';
 import './Event.css'
 import { connect } from 'react-redux'
 import ViewTickets from './ViewTickets'
+import Menu from './Menu'
 
 let mapStateToProps = (state) => {
   return {
@@ -43,11 +44,12 @@ class Event extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { id, name, description, tickets, start_time, end_time, is_admin} = this.props;
+    let { id, name, description, tickets, menu, start_time, end_time, is_admin} = this.props;
 
     let admin_buttons = null;
     let content = null;
     let user_buttons = null;
+    let menu_content = null;
 
     console.log("Start Time", start_time)
 
@@ -95,6 +97,12 @@ class Event extends React.Component {
         <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
         </div>
       </div>
+
+      if (!menu){
+        menu_content = <div>
+          <Menu {...menu}/>
+        </div>
+      }
     }
 
     let event_name_class = expanded ? 'event-name-expanded' : 'event-name-collapsed'
@@ -104,6 +112,7 @@ class Event extends React.Component {
       {content}
       {admin_buttons}
       {user_buttons}
+      {menu_content}
     </div>
   }
 }
