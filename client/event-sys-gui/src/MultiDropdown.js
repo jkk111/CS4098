@@ -4,7 +4,7 @@ import './MultiDropdown.css'
 
 const DEFAULT_ADD_TEXT = 'Add New Item'
 
-let MultiDropdown = ({ unique, children, removeable = [], value = [ 0 ], InputEl = Dropdown, onChange, prompt = '', addText = DEFAULT_ADD_TEXT }) => {
+let MultiDropdown = ({ unique, children, removable = [], value = [ 0 ], InputEl = Dropdown, onChange, prompt = '', addText = DEFAULT_ADD_TEXT }) => {
   let available_children = [ ...children ]
 
   let add = null;
@@ -42,7 +42,8 @@ let MultiDropdown = ({ unique, children, removeable = [], value = [ 0 ], InputEl
 
     console.log(value);
 
-    if(value.length > 1) {
+    if(value.length > 1 && removable[i] !== false) {
+      console.log(removable, i)
       remove = <div onClick={_remove} className='remove-item remove-item-dropdown'>
         X
       </div>
@@ -53,12 +54,14 @@ let MultiDropdown = ({ unique, children, removeable = [], value = [ 0 ], InputEl
       return item.props.value != v;
     })
 
-    if(removeable === false) {
-      remove = null;
+    let is_removable = removable[i];
+
+    if(!is_removable && is_removable !== false) {
+      is_removable = true;
     }
 
     return <div key={i} className='multidropdown-input-el'>
-      <InputEl value={v} key={i} onChange={_onChange}>
+      <InputEl value={v} key={i} onChange={_onChange} removable={is_removable}>
         <option value='-1'>{prompt}</option>
         {el_children}
       </InputEl>

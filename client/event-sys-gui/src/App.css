@@ -99,3 +99,12 @@
   font-weight: 700;
   padding: 0.5em;
 }
+
+.warning {
+  color: yellow;
+  background: rgba(0, 0, 0, .5);
+  font-weight: 700;
+  margin: 0.25em;
+  border: thin solid black;
+  padding: 0.25em;
+}
