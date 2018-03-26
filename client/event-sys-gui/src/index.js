@@ -70,6 +70,17 @@ let reducers = {
       return action.value;
     }
     return state;
+  },
+
+  event_data: (state = null, action) => {
+    if(action.type === 'SET_EVENT_DATA') {
+      return action.value;
+    } else if(action.type === 'VIEW_CHANGED') {
+      if(action.value !== 'CREATE_EVENT') {
+        return null;
+      }
+    }
+    return state;
   }
 }
 

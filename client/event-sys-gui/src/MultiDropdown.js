@@ -4,7 +4,7 @@ import './MultiDropdown.css'
 
 const DEFAULT_ADD_TEXT = 'Add New Item'
 
-let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onChange, prompt = '', addText = DEFAULT_ADD_TEXT }) => {
+let MultiDropdown = ({ unique, children, removeable = [], value = [ 0 ], InputEl = Dropdown, onChange, prompt = '', addText = DEFAULT_ADD_TEXT }) => {
   let available_children = [ ...children ]
 
   let add = null;
@@ -16,7 +16,7 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
 
       onChange([ ...value, last_value ]);
     }
-    add = <button className="form-button" onClick={_add}>
+    add = <button className="form-button" type="button" onClick={_add}>
       {addText}
     </button>
   }
@@ -52,6 +52,10 @@ let MultiDropdown = ({ unique, children, value = [ 0 ], InputEl = Dropdown, onCh
     available_children = available_children.filter((item, index) => {
       return item.props.value != v;
     })
+
+    if(removeable === false) {
+      remove = null;
+    }
 
     return <div key={i} className='multidropdown-input-el'>
       <InputEl value={v} key={i} onChange={_onChange}>

@@ -7,6 +7,17 @@ import { FloatText } from './FloatText'
 import { NoFloatNumber } from './NoFloat'
 import Dropdown from './Dropdown'
 import MultiDropdown from './MultiDropdown'
+import { connect } from 'react-redux'
+
+let mapStateToProps = (state) => {
+  if(state.event_data === null) {
+    return {};
+  }
+  return {
+    ...state.event_data,
+    editing: true
+  }
+}
 
 let TicketSelect = ({ children, value, onChange }) => {
   let ticket_changed = (e) => {
@@ -35,8 +46,11 @@ let TicketSelect = ({ children, value, onChange }) => {
 }
 
 class CreateEvent extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    console.log(props);
+
     this.state = {
       selectedVenue:'',
       menus: [],
@@ -48,6 +62,7 @@ class CreateEvent extends React.Component {
       ticketAmounts: [],
     };
     this.createEvent = this.createEvent.bind(this);
+    this.updateEvent = this.updateEvent.bind(this);
     this.handleMenuChange = this.handleMenuChange.bind(this);
     this.handleVenueChange = this.handleVenueChange.bind(this);
     this.handleTicketsChange = this.handleTicketsChange.bind(this);
@@ -57,9 +72,50 @@ class CreateEvent extends React.Component {
     this.setTickets();
   }
 
+  async updateEvent(e) {
+    let form = e.target;
+    let event_id = this.props.id
+    let tickets = this.state.selectedTickets.filter((t) => {
+      let ticket = this.props.tickets.find(ticket => t.ticket == ticket.id)
+      if(ticket) {
+        return false;
+      }
+      return true;
+    });
+    let description = form.description.value
+    let location = form.location.value;
+    let start_time = this.state.start_time || this.props.start_time
+    let end_time = this.state.end_time || this.props.end_time
+    let body = JSON.stringify({ event_id, tickets, description, location, start_time, end_time });
+    let resp = await fetch('/admin/update_event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body
+    })
+
+
+    console.log('update', resp);
+    form.reset();
+
+    this.setState({
+      start_time: new Date(),
+      end_time: new Date(),
+      selectedMenu: 0,
+      selectedTickets: []
+    })
+  }
+
   async createEvent(e) {
     e.preventDefault();
+    if(this.props.editing) {
+      return this.updateEvent(e);
+    }
     let form = e.target;
+    console.dir(form);
+    console.log(form.start);
+    console.log(form.end);
     let selectedTickets = this.state.selectedTickets;
     let tickets = [];
 
@@ -101,19 +157,26 @@ class CreateEvent extends React.Component {
     })
     Logger.log("Create Event Response", await resp.json())
     form.reset();
+
+    this.setState({
+      start_time: new Date(),
+      end_time: new Date(),
+      selectedMenu: 0,
+      selectedTickets: []
+    })
   }
 
   handleMenuChange(value) {
     console.log(value);
-    this.setState({selectedMenu: value})
+    this.setState({ selectedMenu: value })
   }
 
   handleVenueChange(value) {
-    this.setState({selectedVenue: value})
+    this.setState({ selectedVenue: value })
   }
 
   handleTicketsChange(value) {
-    this.setState({selectedTickets: value})
+    this.setState({ selectedTickets: value })
     //console.log('selectedTickets', this.state.selectedTickets);
   }
 
@@ -173,33 +236,61 @@ class CreateEvent extends React.Component {
   }
 
   render() {
+    let { name, description, location, start_time, end_time, menu_id, tickets = null } = this.props;
+    let removeable = [];
+
+    if(start_time && end_time) {
+      start_time = new Date(start_time)
+      end_time = new Date(end_time)
+    } else {
+      start_time = this.state.start_time || null;
+      end_time = this.state.end_time || null;
+    }
+
+    if(tickets !== null && tickets.length > 0) {
+      tickets = tickets.map(t => ({ ticket: t.ticket_id, count: t.amount }))
+
+
+      removeable = new Array(tickets.length)
+      removeable.fill(false);
+    }
+
+    if(this.state.selectedMenu) {
+      menu_id = this.state.selectedMenu
+    }
+
+    if(tickets === null || tickets.length < this.state.selectedTickets.length) {
+      tickets = this.state.selectedTickets;
+    }
+
+    console.log(menu_id)
+
     let menuOptions = this.buildMenuList();
     let ticketOptions = this.buildTicketsList();
     // let ticketAmounts = this.buildTicketAmounts();
     return <div className='event_form'>
       <form onSubmit={this.createEvent} autoComplete="off">
-        <FloatText name="event_name" label="Event Name:" />
-        <FloatText name="description" label="Event Description:" />
-        <FloatText name="location" label="Event Location:" />
+        <FloatText name="event_name" label="Event Name:" defaultValue={name} />
+        <FloatText name="description" label="Event Description:" defaultValue={description} />
+        <FloatText name="location" label="Event Location:" defaultValue={location} />
         <div className='event_form-input'>
-          <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true}/>
-          <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true}/>
+          <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true} value={start_time}/>
+          <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true} value={end_time} />
         </div>
         <div className='padding-vert'>
-          <Dropdown value={this.state.menu} onChange={this.handleMenuChange}>
+          <Dropdown value={menu_id} onChange={this.handleMenuChange}>
             {menuOptions}
           </Dropdown>
         </div>
-        <MultiDropdown value={this.state.selectedTickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>
+        <MultiDropdown value={tickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>
           {ticketOptions}
         </MultiDropdown>
-        <input name="timezone" type='hidden' value='Europe/Dublin' />
         <div className='event_form-input'>
-          <input type='submit' className='form-button' submit="create_event" value='Create Event'/>
+          <input type='submit' className='form-button' submit="create_event" value='Create Event' />
         </div>
       </form>
     </div>
   }
 }
 
-export default CreateEvent
+export default connect(mapStateToProps)(CreateEvent)
