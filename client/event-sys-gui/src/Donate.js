@@ -1,6 +1,7 @@
 import React from 'react';
 import Payment from './Payment'
 import './Donate.css'
+import Dropdown from './Dropdown'
 
 class Donate extends React.Component {
   constructor(props) {
@@ -10,12 +11,18 @@ class Donate extends React.Component {
     }
 
     this.toggle = this.toggle.bind(this);
-    this.donation = this.donation.bind(this);
+    this.donate = this.donate.bind(this);
+    this.buildAmountList = this.buildAmountList.bind(this);
+    this.handleAmountChange = this.handleAmountChange.bind(this);
   }
 
-  donation(amount){
-    //let { id } = this.props;
-    Payment.CreateDonation(amount);
+  donate(){
+    let { donationAmount } = this.state;
+    Payment.CreateDonation(donationAmount*100);
+  }
+
+  handleAmountChange(value) {
+    this.setState({donationAmount: value})
   }
 
   toggle() {
@@ -24,23 +31,38 @@ class Donate extends React.Component {
     })
   }
 
-  render() {
-    let { expanded } = this.state;
+  buildAmountList(){
+    let amounts = [1,2,5,10,20,50,100,500,1000];
+    let amountList = [<option key="0" value="0">-select amount-</option>]
+    for (var i = 0; i < amounts.length; i++){
+      let amount = amounts[i];
+      let key = i+1;
+      amountList.push(<option key={key} value={amount}>{amount}</option>)
+    }
+    return amountList;
+  }
 
+  render() {
+    let { expanded, donationAmount } = this.state;
     let content = null;
+    let amountList = this.buildAmountList();
+    let donateButton = null;
+
+    if (donationAmount > 0){
+      donateButton = <button className="buy-button" onClick={this.donate}>Donate {donationAmount} euro</button>
+    }
 
     if(expanded) {
       content = <div>
-      	<button className="buy-button" onClick={this.donation(1000)}>Donate 10 euro</button>
-      	<button className="buy-button" onClick={this.donation(2500)}>Donate 25 euro</button>
-      	<button className="buy-button" onClick={this.donation(5000)}>Donate 50 euro</button>
-      	<button className="buy-button" onClick={this.donation(10000)}>Donate 100 euro</button>
-      	<button className="buy-button" onClick={this.donation(50000)}>Donate 500 euro</button>
-    </div>
+        <Dropdown value={this.state.donationAmount} onChange={this.handleAmountChange}>
+          {amountList}
+        </Dropdown>
+        {donateButton}
+      </div>
     }
 
     return <div>
-      <button className ="buy-button" onClick={this.toggle}>Donate</button>
+      <button className="buy-button" onClick={this.toggle}>Make A Donation</button>
       {content}
     </div>
   }
