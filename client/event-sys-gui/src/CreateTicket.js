@@ -33,7 +33,7 @@ class CreateTicket extends React.Component {
     let body = {
       name: form.name.value,
       description: form.description.value,
-      price: form.price.value,
+      price: (form.price.value * 100),
       currency: 'EUR'
     }
     console.log('creating ticket', body);

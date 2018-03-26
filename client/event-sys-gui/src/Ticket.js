@@ -20,9 +20,10 @@ class Ticket extends React.Component {
   render() {
     let { name, price } = this.props;
     let content = null;
+    price = price/100;
     content = <div>
       {name}
-      <button className="buy-button" onClick={this.buy}>Buy for {price}</button>
+      <button className="buy-button" onClick={this.buy}>Buy for {price} euro </button>
     </div>
 
     return <div className='ticket'>
