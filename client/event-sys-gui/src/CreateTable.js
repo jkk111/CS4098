@@ -155,19 +155,6 @@ class CreateTable extends React.Component {
     this.setState({
       tables: [ ...before, ...after ]
     })
-
-
-    let{deleteTable} =this.state
-    if(!deleteTable){
-	    this.setState({
-	      deleteTable: true
-	    });
-	  }
-  	else{
-  		this.setState({
-	      deleteTable: false
-	    });
-  	}
   }
 
   render() {
