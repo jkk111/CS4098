@@ -12,7 +12,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
   return {
     close: () => {
-      dispatch({ type: 'SET_ACTIVE_VIEW', value: 'HOME' })
+      dispatch({ type: 'VIEW_CHANGED', value: 'HOME' })
     }
   }
 }
