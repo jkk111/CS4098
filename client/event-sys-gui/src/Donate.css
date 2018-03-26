@@ -1,0 +1,21 @@
+.menu {
+  background: purple;
+  color: white;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+
+.donate-content-button {
+  margin: 0 1em;
+  border: 2px solid black;
+  cursor: pointer;
+  user-select: none;
+}
+
+.donate-content-button:hover {
+  filter: brightness(80%);
+}
+
+.donate-content-button:active {
+  filter: brightness(60%);
+}
