@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Layer, Rect, Stage } from 'react-konva';
+import { Layer, Rect, Stage,Text } from 'react-konva';
 //import Dimensions from 'react-dimensions'
 
 
@@ -9,6 +9,12 @@ const STROKE_COLOR = 'black'
 const FOCUSED_STROKE_COLOR = 'blue'
 const TABLE_WIDTH = 100;
 const TABLE_HEIGHT = 100;
+const TABLE_OFFSET = 50;
+const FONT_SIZE = 32;
+const FONT_STYLE = 'bold'
+const ALIGN = 'center'
+const TEXT_WIDTH = 25;
+const TEXT_HEIGHT = 25;
 
 console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 
@@ -19,8 +25,8 @@ let Table = ({ x, y, updatePosition, updateFocused, focused }) => {
     stroke_color = FOCUSED_STROKE_COLOR;
   }
 
-  return <Rect x={x-(TABLE_WIDTH/2)}
-               y={y-(TABLE_HEIGHT/2)}
+  return <Rect x={x-(TABLE_OFFSET)}
+               y={y-(TABLE_OFFSET)}
                fill={FILL_COLOR}
                draggable={true}
                onDragStart={updateFocused}
@@ -32,6 +38,21 @@ let Table = ({ x, y, updatePosition, updateFocused, focused }) => {
                stroke={stroke_color}
                perfectDrawEnabled={false} />
 }
+
+let TableText = ( {x, y, id} ) => {
+
+	return <Text x={x-(TABLE_OFFSET)}
+               y={y-(TABLE_OFFSET)}
+							 fontSize={FONT_SIZE}
+							 fontStyle={FONT_STYLE}
+							 align={ALIGN}
+							 stroke={STROKE_COLOR}
+							 width={TEXT_WIDTH}
+               height={TEXT_HEIGHT}
+               text={id}/>
+
+}
+
 
 class CreateTable extends React.Component {
   constructor(props) {
@@ -105,8 +126,8 @@ class CreateTable extends React.Component {
       console.log(e.evt);
       let dragNode = e.evt.dragEndNode;
 
-      let x = dragNode.attrs.x+(TABLE_WIDTH/2);
-      let y = dragNode.attrs.y+(TABLE_HEIGHT/2);
+      let x = dragNode.attrs.x+(TABLE_OFFSET);
+      let y = dragNode.attrs.y+(TABLE_OFFSET);
       let { tables} = this.state;
 
       let before = tables.slice(0, i);
@@ -157,6 +178,7 @@ class CreateTable extends React.Component {
   render() {
     let { tables = [], containerWidth, containerHeight, focused } = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} />)
+    let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} />)
     return <div>
       <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
@@ -172,6 +194,7 @@ class CreateTable extends React.Component {
             perfectDrawEnabled={false}
             listening={false} />
           {children}
+          {children2}
         </Layer>
       </Stage>
       <div className='form-button form-field' onClick={this.deleteTable}>Click to Delete the Last Table You Interacted With</div>
