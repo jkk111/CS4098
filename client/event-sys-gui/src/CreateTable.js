@@ -53,23 +53,7 @@ class CreateTable extends React.Component {
     this.clearFocused = this.clearFocused.bind(this);
   }
 
-/*
-if (tables.length !== 0){
-  		for(var i=0; i < tables.length; i++){
-	  	  let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
-		  	let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
-	      xNew = Number((tables[i].x*transformWidth).toFixed(4));
-	      yNew = Number((tables[i].y*transformHeight).toFixed(4));
-	  	  let before = tables.slice(0, i);
-	  	  let after = tables.slice(i + 1);
-      	let table = { x: xNew, y: yNew }
-	  	  this.setState({tables: [ ...before, table, ...after ]})
-	  	  console.log(tables.length + "i: " + i)
-	  	}
-  	}
- */
   updateDimensions() {
-  	
   	let {containerWidth,containerHeight, tables  = []} = this.state;
   	var xNew,yNew,table,before,after;
   	let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(6)));
@@ -84,16 +68,13 @@ if (tables.length !== 0){
 	  	  after = tables.slice(i + 1);
       	table = { x: xNew, y: yNew }
 	  	  this.setState({tables: [ ...before, table, ...after ]})
-	  	  //console.log(tables.length + "i: " + i)
 	  	}
   	}
-  	
-  	//let {containerWidth, containerHeight} = Dimensions.get('screen')
+
   	this.setState({
       containerWidth: window.innerWidth,
       containerHeight: window.innerHeight
     });
-	//			   tables :[table]});
   }
 
   componentDidMount() {
@@ -137,17 +118,6 @@ if (tables.length !== 0){
         focused: i,
         tables: [ ...before, table, ...after ]
       })
-
-
-      //console.log(deleteTable)
-      // Rethink this
-     //  if(deleteTable) {
-  	  //   let before = tables.slice(0, i);
-  	  //   let after = tables.slice(i + 1);
-  	  //   this.setState({
-  	  //     tables: [ ...before, ...after ]
-  	  //   })
-  	  // }
     }
   }
 
@@ -168,22 +138,7 @@ if (tables.length !== 0){
       focused: tables.length
     })
   }
-/*
-  addTable(e) {
-  	let{addTable} =this.state
-    if(!addTable){
-	  this.setState({
-	    addTable: true
-	  });
-	}
-  	else{
-      this.setState({
-  	    addTable: false
-  	  });
-  	}
-  }
-  <div className='form-button form-field' onClick={this.addTable}>Click to Start/Stop Adding Tables(Click Anywhere to Add)</div>
-*/
+
   deleteTable(e) {
     let { focused, tables } = this.state;
 
@@ -198,8 +153,7 @@ if (tables.length !== 0){
       tables: [ ...before, ...after ]
     })
   }
-    	//{this.props.containerWidth}
-      //containerHeight={this.props.containerHeight}
+
   render() {
     let { tables = [], containerWidth, containerHeight, focused } = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} />)
