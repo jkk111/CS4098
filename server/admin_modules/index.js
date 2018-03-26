@@ -224,7 +224,7 @@ app.post('/update_event', bodyParser.json(), async(req, res) => {
   let attendees = await Events.get('user_tickets', { event_id }, 'user_id');
   attendees = attendees.map(attendee => attendee.user_id).join(', ');
 
-  let user_emails = await Users.get('user', { email_verified: true }, 'f_name, l_name, email', `AND user_id IN (${attendees})`);
+  let user_emails = await Users.get('user', { email_verified: true }, 'f_name, l_name, email', `AND id IN (${attendees})`);
 
   for(var user of user_emails) {
     let email_data = {

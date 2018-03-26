@@ -18,7 +18,7 @@ class CreateAuctionItem extends React.Component {
   }
 
   handleAuctionChange(value) {
-    this.setState({selectedAuction: value})
+    this.setState({ selectedAuction: value })
   }
 
   async setAuctions() {
@@ -49,20 +49,37 @@ class CreateAuctionItem extends React.Component {
     let form = e.target;
 
     if(!form.name.value) {
-      // alert('please give the item a name');
-      // TODO (tompywell): Replace Alert
+      this.setState({
+        name_error: 'Ticket Name Cannot Be Empty'
+      })
+      return;
+    }
+
+    if(!form.description.value) {
+      this.setState({
+        description_error: 'Ticket Description Cannot Be Empty'
+      })
       return;
     }
 
     if(!isNatural(form.price.value)) {
-      // alert('please enter a starting price for the item');
+      this.setState({
+        price_error: "Price Must Be A Valid Number"
+      })
       return;
+    }
+
+    if(!this.state.selectedAuction) {
+      this.setState({
+        auction_error: "Auction Item Must Have An Auction"
+      })
+      return
     }
 
     let body = {
       name: form.name.value,
       description: form.description.value,
-      starting_price: form.price.value,
+      starting_price: form.price.value * 1000,
       auction_id: this.state.selectedAuction
     }
 
@@ -77,16 +94,54 @@ class CreateAuctionItem extends React.Component {
     console.log(resp);
     Logger.log("Create Item Response", await resp.json())
     form.reset();
+
+    this.setState({
+      name_error: null,
+      description_error: null,
+      price_error: null,
+      auction_error: null,
+      selectedAuction: 0
+    })
   }
 
   render() {
+    let { name_error = null, description_error = null, price_error = null, auction_error = null } = this.state;
+
+    if(name_error) {
+      name_error = <div className='error'>
+        {name_error}
+      </div>
+    }
+
+    if(description_error) {
+      description_error = <div className='error'>
+        {description_error}
+      </div>
+    }
+
+    if(price_error) {
+      price_error = <div className='error'>
+        {price_error}
+      </div>
+    }
+
+    if(auction_error) {
+      auction_error = <div className='error'>
+        {auction_error}
+      </div>
+    }
+
     let auctionOptions = this.buildAuctionList();
     return <div className='auction_item_form'>
       <form onSubmit={this.createAuctionItem} autoComplete="off">
+        {name_error}
         <FloatText name="name" label="Item Name:" />
+        {description_error}
         <FloatText name="description" label="Item Description:" />
+        {price_error}
         <FloatNumber name="price" label="Starting Price:" />
-        <Dropdown value={this.state.auction} onChange={this.handleAuctionChange}>
+        {auction_error}
+        <Dropdown value={this.state.selectedAuction} onChange={this.handleAuctionChange}>
           {auctionOptions}
         </Dropdown>
         <div className='item_form-input'>

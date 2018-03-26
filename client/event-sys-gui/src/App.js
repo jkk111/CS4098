@@ -12,7 +12,6 @@ import Tracker from './Tracker'
 import Settings from './Settings'
 import EventList from './EventList'
 import ViewUsers from './ViewUsers'
-import CreateVenue from './CreateVenue'
 import CreateTicket from './CreateTicket'
 import Contact from './Contact'
 import ViewMenus from './ViewMenus'
@@ -22,6 +21,7 @@ import CreateAuction from './CreateAuction'
 import ViewAuctions from './ViewAuctions'
 import CreateTable from './CreateTable'
 import DonationTracker from './DonationTracker'
+import SingleEventView from './SingleEventView'
 
 
 let mapStateToProps = (state) => {
@@ -60,7 +60,6 @@ const views = {
   CREATE_EVENT: EventForm,
   CREATE_MENU: CreateMenu,
   VIEW_USERS: ViewUsers,
-  CREATE_VENUE: CreateVenue,
   CREATE_TICKET: CreateTicket,
   CONTACT: Contact,
   VIEW_MENUS: ViewMenus,
@@ -158,6 +157,10 @@ class App extends Component {
 
   render() {
     let { registerError, loginError } = this.state;
+    if(this.props.view === 'SINGLE_EVENT_VIEW') {
+      return <SingleEventView />
+    }
+
     if(this.props.logged_in !== 'UNAUTH') {
       let View = views[this.props.view] || views.HOME
       return <Fragment>

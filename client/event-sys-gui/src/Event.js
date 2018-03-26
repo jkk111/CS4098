@@ -54,7 +54,7 @@ class Event extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { id, name, description, tickets, menu, start_time, end_time, is_admin} = this.props;
+    let { single_view, logged_in, id, name, description, tickets, menu = null, start_time, end_time, is_admin} = this.props;
 
     let admin_buttons = null;
     let content = null;
@@ -70,8 +70,8 @@ class Event extends React.Component {
     let endObject = new Date(end_time);
     let endString = endObject.toUTCString();
 
-    if(expanded) {
-      if(is_admin) {
+    if(expanded || single_view) {
+      if(is_admin && !single_view) {
         admin_buttons = <div>
           <div>
             <span className='user-content-button' onClick={this.show_allergens}>Export Attendee Allergen Information</span>
@@ -101,18 +101,20 @@ class Event extends React.Component {
       </div>
 
       user_buttons = <div>
-        
+
       </div>
 
-      if (!(menu == null)){
+      if (menu !== null){
         menu_content = <div>
           <Menu {...menu}/>
         </div>
       }
 
-      donate_content = <div>
-        <Donate/>
-      </div>
+      if(logged_in && !single_view) {
+        donate_content = <div>
+          <Donate/>
+        </div>
+      }
     }
 
     let event_name_class = expanded ? 'event-name-expanded' : 'event-name-collapsed'

@@ -1,27 +1,22 @@
 # CS4098
 Repo to store source code for CS4098 - Group Design Project
 
-### Installation from a fresh ubuntu 16.04 LTS install
+## Installation
+### From a fresh ubuntu 16.04 LTS install
 1. Open a terminal - 'ctrl/⌘ + alt + t'
 2. Install git - ```sudo apt-get install -y git```
 3. Enter your password when prompted.
 4. Clone the repo - ```git clone https://github.com/jkk111/cs4098.git```
 5. Navigate to newly created folder - ```cd cs4098```
 6. Run setup script - ```./setup.sh```
-7. Follow the instructions on screen and enter your details. Keep a note of your login credentials for later. If needed, an example of input can be seen below.
-	1. First Name : "Adam"
-	2. Last Name : "Lane"
-	3. Username : "Lanead"
-	4. Password : "Password"
-	5. Confirm Password : "Password"
-	6. Eventbrite token : "no" (Note: this must be a lower case "no" if not using an eventbrite token)
-	7. Email : "Lanead@tcd.ie" (Note: any email will do, fake or real)
-	8. SMTP Host : (This field can be left blank)
-	9. SMTP Port : (This field can be left blank)
-	10. Mail User : (This field can be left blank)
-	11. Mail Password : "Password"
-	12. Mail Password Confirm :  "Password"
-8. Once complete, the script should open the webapp in a browser. If this fails, navigate to ```localhost:3000``` in your favorite browser.
+7. Follow the instructions on screen and enter your details. Keep a note of your login credentials for later.
+8. Tips
+ 	* Eventbrite token - this must be a lower case "no" if not using eventbrite
+	* Email / SMTP Host / SMTP Port - leave blank to not set up email
+	* Mail Password - You can't leave this blank. Enter something simple like 'password' if you don't want to use email.
+9. Once complete, the script should open the webapp in a browser. If this fails, navigate to ```localhost:3000``` in your favorite browser.
+
+## Release 1
 
 **Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction**.  
 **Feature 32 - e-ticketing for users**.  
@@ -30,7 +25,7 @@ Repo to store source code for CS4098 - Group Design Project
 **Feature 74- I would like to buy a ticket to attend the event**.  
 **Feature 61 - I want to be able to purchase tickets througha simple online site, so I can attend the event**.  
 **Feature 62 - View tickets**.  
-### Eventebrite
+### Eventbrite
 
 **Feature 1 - I want to be able to login (change password/details/create account)**.  
 **Feature 63 - Create an account/register**.  
@@ -40,7 +35,7 @@ Repo to store source code for CS4098 - Group Design Project
 3. If you are successful you should be automatically directed to the home page, with "Welcome Home" being displayed.
 4. If your password is not the same as your confirm password, you will be unable to sign up and "Passwords must match" will be displayed. Make your passwords the same to proceed.
 
-### Logging In 
+### Logging In
 1. Enter your username and password into the log in form. You may use the username and password you created during the installation steps(This will be an admin account), or one created during the signing up step(This will not be an admin account).
 2. A successful login will redirect you to the main landing page. (Welcome Home)
 3. If your credidentials do not match, have not been previously created, or incorrect in general, then you will be unable to log in and "Invalid Username/Password will be displayed.
@@ -70,7 +65,7 @@ Admin access only
 3. Enter the name of the ticket. This can be the name of the event, or the typee of ticket etc.
 4. Enter a description of the ticket. What it entitles guests to, possible upgrades, how to buy, anything you want your guests to know.
 5. Enter the price of the ticket. This can be in words or numbers.
-8. None of these fields are mandetory. However, if you do not enter a name, when you try to select a previously created ticket, the dropdown option will appear empty. 
+8. None of these fields are mandetory. However, if you do not enter a name, when you try to select a previously created ticket, the dropdown option will appear empty.
 5. To save the ticket, click on the create ticket button at the bottom of the screen. The page should refresh and all fields cleared of what you entered.
 6. To check if your ticket was added, click on the menu button again, and then select 'Create Event' on the dropdown menu. In the "Create Event" page, there is a small dropdown menu labeled "select tickets". Selecting this should display the ticket name of the ticket you just created, and allow you to select it.
 
@@ -78,7 +73,7 @@ Admin access only
 Admin access only
 1.  To begin adding events to the system, ensure you've already added menus and tickets.
 2.  Once tickets and dinner menus have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event';
-3. On the "create Event" page, enter the name of the event. 
+3. On the "create Event" page, enter the name of the event.
 This can be the name of the event, or the type etc.
 4. Enter a description of the event. What charity its for, possible upgrades, anything you want your guests to know.
 5. Enter the location for the event. An address, landmark, etc.
@@ -103,9 +98,9 @@ This can be the name of the event, or the type etc.
 **Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event**.  
 ### Create User
 Admin Access Only
-1. Create user is for admins to create accounts for their customers. They should know the customers first name, last name,and email. 
+1. Create user is for admins to create accounts for their customers. They should know the customers first name, last name,and email.
 2. To create a user, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create User'
-3. Fill in the customers first name, last name and email address. Initials are accepted as there is no minimal character length. Additionally the email field is not currently required to have a real email. 
+3. Fill in the customers first name, last name and email address. Initials are accepted as there is no minimal character length. Additionally the email field is not currently required to have a real email.
 
 **Feature 46 - I want to create menus**.  
 ### Create Menu
@@ -137,10 +132,36 @@ Admin Access Only
 Admin Access Only
 1. This is where admins can see the menu options they created.
 2. To view menus, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Menus'
-3. The list of menu names will appear. 
+3. The list of menu names will appear.
 4. Click on a Menu name for further information on the menu
 
-### Tests
+## Release 2
+
+### Feature 4 - I would like to be able to create an event, e.g. a dinner
+1. Each one of these features should have a detailed list of instruction on how to see the feature in action.
+2. It shouldn't include describing other features, except where absolutely necessary.
+
+### Feature 5 - I want to be able to update event information and submit event updates
+
+### Feature 30 - I want to see dietary requirements and access requirements of attendees so I can provide details to catering
+
+### Feature 31 - I want to be able to share special dietary requirements (including table info for guests) with the caterer
+
+### Feature 32 - I want to see the table layout and seating arrangements so the tables can be organised
+
+### Feature 49 - I want to be able to accept and see payments
+
+### Feature 53 - Have a live tracker that updates with donations throughout the event
+
+### Feature 54 - I want to track current amount raised
+
+### Feature 121 - I want to set up an auction
+
+### Feature 122 - I want a way to record payments on the night
+
+### Feature 132 - I want to be able to see auction information, including information on auction items
+
+## Tests
 1. Server Test
    1. To run server tests after cloning the repo, open your terminal and navigate to ```/cs4098/server/```.
    2. Run commands ```npm install``` followed by ```sudo npm test```.
@@ -150,4 +171,3 @@ Admin Access Only
    1. Navigate to ```/cs4098/client/event-sys-gui/``` in your terminal.
    2. Run commands ```npm install``` followed by ```npm test```.
    3. The tests should run and their results should be displayed on-screen.
-

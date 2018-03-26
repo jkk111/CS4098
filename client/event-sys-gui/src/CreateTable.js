@@ -1,21 +1,60 @@
 import React from 'react';
 
-import { Layer, Rect, Stage } from 'react-konva';
+import { Layer, Rect, Stage,Text } from 'react-konva';
 //import Dimensions from 'react-dimensions'
 
 
 const FILL_COLOR = 'brown'
 const STROKE_COLOR = 'black'
+const FOCUSED_STROKE_COLOR = 'blue'
 const TABLE_WIDTH = 100;
 const TABLE_HEIGHT = 100;
+const TABLE_OFFSET = 50;
+const FONT_SIZE = 48;
+const FONT_STYLE = 'bold'
+const ALIGN = 'center'
+const TEXT_WIDTH = 100;
+const TEXT_HEIGHT = 100;
+const TEXT_OFFSET = 30;
 
 console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 
-let Table = ({ x, y, updatePosition, updateFocused }) => {
-  console.log(updatePosition)
-  return <Rect x={x-(TABLE_WIDTH/2)} y={y-(TABLE_HEIGHT/2)} fill={FILL_COLOR} draggable={true} onDragStart={updateFocused} onDragEnd={updatePosition}
-               onTouchStart={updateFocused} onTouchEnd={updatePosition} width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} perfectDrawEnabled={false} />
+let Table = ({ x, y, updatePosition, updateFocused, focused }) => {
+  let stroke_color = STROKE_COLOR;
+
+  if(focused) {
+    stroke_color = FOCUSED_STROKE_COLOR;
+  }
+
+  return <Rect x={x-(TABLE_OFFSET)}
+               y={y-(TABLE_OFFSET)}
+               fill={FILL_COLOR}
+               draggable={true}
+               onDragStart={updateFocused}
+               onDragEnd={updatePosition}
+               onTouchStart={updateFocused}
+               onTouchEnd={updatePosition}
+               width={TABLE_WIDTH}
+               height={TABLE_HEIGHT}
+               stroke={stroke_color}
+               perfectDrawEnabled={false} />
 }
+
+let TableText = ( {x, y, id} ) => {
+
+	return <Text x={x-(TABLE_OFFSET)}
+               y={y-(TEXT_OFFSET)}
+							 fontSize={FONT_SIZE}
+							 fontStyle={FONT_STYLE}
+							 align={ALIGN}
+							 stroke={STROKE_COLOR}
+							 width={TEXT_WIDTH}
+               height={TEXT_HEIGHT}
+               text={id}
+               listening={false}/>
+
+}
+
 
 class CreateTable extends React.Component {
   constructor(props) {
@@ -38,23 +77,27 @@ class CreateTable extends React.Component {
   }
 
   updateDimensions() {
-  	/*
   	let {containerWidth,containerHeight, tables  = []} = this.state;
+  	var xNew,yNew,table,before,after;
+  	let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
+		let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
+		var before, after;
   	if (tables.length !== 0){
   		for(var i=0; i < tables.length; i++){
-	  	  let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
-		  	let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
-	      let table = tables.map(x => x*transformWidth);
-	  	  table = tables.map(y=> y*transformHeight);
-	  	  this.setState({tables :[table]});	
-  		}
+  			let {tables = []} = this.state;
+	      xNew = Number((tables[i].x*transformWidth).toFixed(4));
+	      yNew = Number((tables[i].y*transformHeight).toFixed(4));
+	  	  before = tables.slice(0, i);
+	  	  after = tables.slice(i + 1);
+      	table = { x: xNew, y: yNew }
+	  	  this.setState({tables: [ ...before, table, ...after ]})
+	  	}
   	}
-  	*/
-  	//let {containerWidth, containerHeight} = Dimensions.get('screen')
+
   	this.setState({
       containerWidth: window.innerWidth,
-      containerHeight: window.innerHeight});
-	//			   tables :[table]});
+      containerHeight: window.innerHeight
+    });
   }
 
   componentDidMount() {
@@ -85,8 +128,8 @@ class CreateTable extends React.Component {
       console.log(e.evt);
       let dragNode = e.evt.dragEndNode;
 
-      let x = dragNode.attrs.x+(TABLE_WIDTH/2);
-      let y = dragNode.attrs.y+(TABLE_HEIGHT/2);
+      let x = dragNode.attrs.x+(TABLE_OFFSET);
+      let y = dragNode.attrs.y+(TABLE_OFFSET);
       let { tables} = this.state;
 
       let before = tables.slice(0, i);
@@ -98,17 +141,6 @@ class CreateTable extends React.Component {
         focused: i,
         tables: [ ...before, table, ...after ]
       })
-
-
-      //console.log(deleteTable)
-      // Rethink this
-     //  if(deleteTable) {
-  	  //   let before = tables.slice(0, i);
-  	  //   let after = tables.slice(i + 1);
-  	  //   this.setState({
-  	  //     tables: [ ...before, ...after ]
-  	  //   })
-  	  // }
     }
   }
 
@@ -129,22 +161,7 @@ class CreateTable extends React.Component {
       focused: tables.length
     })
   }
-/*
-  addTable(e) {
-  	let{addTable} =this.state
-    if(!addTable){
-	  this.setState({
-	    addTable: true
-	  });
-	}
-  	else{
-      this.setState({
-  	    addTable: false
-  	  });
-  	}
-  }
-  <div className='form-button form-field' onClick={this.addTable}>Click to Start/Stop Adding Tables(Click Anywhere to Add)</div>
-*/
+
   deleteTable(e) {
     let { focused, tables } = this.state;
 
@@ -159,18 +176,18 @@ class CreateTable extends React.Component {
       tables: [ ...before, ...after ]
     })
   }
-    	//{this.props.containerWidth}
-      //containerHeight={this.props.containerHeight}
+
   render() {
-    let { tables = [],containerWidth,containerHeight } = this.state;
-    let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} />)
+    let { tables = [], containerWidth, containerHeight, focused } = this.state;
+    let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} />)
+    let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} />)
     return <div>
-      <Stage width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
+      <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
-        <Layer ref='layer' batchDraw={true}>
+        <Layer axisX={containerWidth/70} ref='layer' batchDraw={true}>
           <Rect
-            x={containerWidth/70}
+            x={containerWidth/120}
             y={containerHeight/120}
             width={containerWidth-(containerWidth/38)}
             height={containerHeight-(containerHeight/7)}
@@ -179,6 +196,7 @@ class CreateTable extends React.Component {
             perfectDrawEnabled={false}
             listening={false} />
           {children}
+          {children2}
         </Layer>
       </Stage>
       <div className='form-button form-field' onClick={this.deleteTable}>Click to Delete the Last Table You Interacted With</div>

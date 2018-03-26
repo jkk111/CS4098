@@ -21,12 +21,23 @@ class CreateTicket extends React.Component {
     let form = e.target;
 
     if(!form.name.value) {
-      // alert('please give the ticket a name');
+      this.setState({
+        name_error: 'Ticket Name Cannot Be Empty'
+      })
+      return;
+    }
+
+    if(!form.description.value) {
+      this.setState({
+        description_error: 'Ticket Description Cannot Be Empty'
+      })
       return;
     }
 
     if(!isNatural(form.price.value)) {
-      // alert('please enter a number for the ticket price');
+      this.setState({
+        price_error: "Price Must Be A Valid Number"
+      })
       return;
     }
 
@@ -46,14 +57,43 @@ class CreateTicket extends React.Component {
     })
     console.log(resp);
     Logger.log("Create Ticket Response", await resp.json())
+
+    this.setState({
+      name_error: null,
+      description_error: null,
+      price_error: null
+    })
     form.reset();
   }
 
   render() {
+    let { name_error = null, description_error = null, price_error = null } = this.state;
+
+    if(name_error) {
+      name_error = <div className='error'>
+        {name_error}
+      </div>
+    }
+
+    if(description_error) {
+      description_error = <div className='error'>
+        {description_error}
+      </div>
+    }
+
+    if(price_error) {
+      price_error = <div className='error'>
+        {price_error}
+      </div>
+    }
+
     return <div className='ticket_form'>
       <form onSubmit={this.createTicket} autoComplete="off">
+        {name_error}
         <FloatText name="name" label="Ticket Name:" />
+        {description_error}
         <FloatText name="description" label="Ticket Description:" />
+        {price_error}
         <FloatText name="price" label="Ticket Price:" />
         <div className='ticket_form-input'>
           <input type='submit' className='form-button' submit="create_ticket" value='Create Ticket'/>

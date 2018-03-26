@@ -57,14 +57,22 @@ class CreateEvent extends React.Component {
 
     console.log(props);
 
+    let { tickets } = props;
+
+    if(!tickets) {
+      tickets = [];
+    } else {
+      tickets = tickets.map(t => ({ ticket: t.id, count: t.amount }))
+    }
+
     this.state = {
       selectedVenue:'',
       menus: [],
       venues: [],
-      startDateTime: 0,
-      endDateTime: 0,
+      start_time: props.start_time || Date.now(),
+      end_time: props.end_time || Date.now(),
       tickets: [],
-      selectedTickets: [],
+      selectedTickets: tickets,
       ticketAmounts: [],
     };
     this.createEvent = this.createEvent.bind(this);
@@ -74,15 +82,60 @@ class CreateEvent extends React.Component {
     this.handleTicketsChange = this.handleTicketsChange.bind(this);
     this.startChange = this.startChange.bind(this);
     this.endChange = this.endChange.bind(this);
+    this.check = this.check.bind(this);
     this.setMenus();
     this.setTickets();
+  }
+
+  check(e) {
+    let form = e.target;
+
+    let selectedTickets = this.state.selectedTickets;
+    console.log(selectedTickets)
+    if(form.event_name.value === '') {
+      this.setState({
+        name_error: 'Event Name Cannot Be Empty'
+      })
+      return
+    }
+
+    if(!this.state.start_time) {
+      this.setState({
+        start_error: 'Event Must Have A Start Time'
+      })
+      return
+    }
+
+    if(!this.state.end_time) {
+      this.setState({
+        end_error: 'Event Must Have An End Time'
+      })
+      return
+    }
+
+    if(this.state.start_time > this.state.end_time) {
+      this.setState({
+        start_error: 'Woah Hold On There Time Traveller, The Beginning Must Come Before The End',
+        end_error: 'Woah Hold On There Time Traveller, The Beginning Must Come Before The End'
+      })
+      return
+    }
+
+    if(selectedTickets.length === 0) {
+      this.setState({
+        ticket_error: 'If Theres No Tickets No One Can Come And Wouldn\'t That Be Lonely'
+      })
+      return
+    }
+
+    return true;
   }
 
   async updateEvent(e) {
     let form = e.target;
     let event_id = this.props.id
     let tickets = this.state.selectedTickets.filter((t) => {
-      let ticket = this.props.tickets.find(ticket => t.ticket == ticket.id)
+      let ticket = this.props.tickets.find(ticket => parseInt(t.ticket, 10) === parseInt(ticket.id, 10))
       if(ticket) {
         return false;
       }
@@ -119,52 +172,17 @@ class CreateEvent extends React.Component {
 
   async createEvent(e) {
     e.preventDefault();
+    if(!this.check(e)) {
+      return;
+    }
     if(this.props.editing) {
       return this.updateEvent(e);
     }
-    let form = e.target;
-    console.dir(form);
-    console.log(form.start);
-    console.log(form.end);
+
     let selectedTickets = this.state.selectedTickets;
     let tickets = [];
 
-    if(form.event_name.value === '') {
-      this.setState({
-        name_error: 'Event Name Cannot Be Empty'
-      })
-      // alert('please give the event a name')
-      return
-    }
-
-    if(!this.state.start_time) {
-      this.setState({
-        start_error: 'Event Must Have A Start Time'
-      })
-      return
-    }
-
-    if(!this.state.end_time) {
-      this.setState({
-        end_error: 'Event Must Have An End Time'
-      })
-      return
-    }
-
-    if(this.state.start_time > this.state.end_time) {
-      this.setState({
-        start_error: 'Woah Hold On There Time Traveller, The Beginning Must Come Before The End',
-        end_error: 'Woah Hold On There Time Traveller, The Beginning Must Come Before The End'
-      })
-      return
-    }
-
-    if(selectedTickets.length === 0) {
-      this.setState({
-        ticket_error: 'If Theres No Tickets No One Can Come And Wouldn\'t That Be Lonely'
-      })
-      return
-    }
+    let form = e.target
 
     console.log(selectedTickets)
 
@@ -277,7 +295,7 @@ class CreateEvent extends React.Component {
   }
 
   render() {
-    let { editing, name, description, location, start_time, end_time, menu_id, tickets = null } = this.props;
+    let { editing, name, description, location, menu_id, tickets = null } = this.props;
     let removable = [];
 
     let { name_error = null, start_error = null, end_error = null, ticket_error = null } = this.state;
@@ -306,24 +324,32 @@ class CreateEvent extends React.Component {
       </div>
     }
 
+    let editing_warning_email = null;
     let editing_warning_name = null;
     let editing_warning_tickets = null;
 
     if(editing) {
+      editing_warning_email = <div className='warning'>
+        When An Event Is Updated All Attendees Are Emailed.
+      </div>
       editing_warning_name = <div className='warning'>
-        You Cannot Change The Name Of An Existing Event
+        You Cannot Change The Name Of An Existing Event.
       </div>
       editing_warning_tickets = <div className='warning'>
-        You Cannot Change Remove Tickets From An Existing Event
+        You Cannot Change Remove Tickets From An Existing Event.
       </div>
     }
 
-    if(start_time && end_time) {
+    let { start_time = 0, end_time = 0 } = this.state;
+    if(start_time) {
       start_time = new Date(start_time)
+    } else {
+      start_time = new Date();
+    }
+    if(end_time) {
       end_time = new Date(end_time)
     } else {
-      start_time = this.state.start_time || null;
-      end_time = this.state.end_time || null;
+      end_time = new Date();
     }
 
     if(tickets !== null && tickets.length > 0) {
@@ -342,8 +368,6 @@ class CreateEvent extends React.Component {
       tickets = this.state.selectedTickets;
     }
 
-    console.log('removable', removable)
-
     let menuOptions = this.buildMenuList();
     let ticketOptions = this.buildTicketsList();
 
@@ -353,8 +377,16 @@ class CreateEvent extends React.Component {
       name_props.disabled = 'disabled'
     }
     // let ticketAmounts = this.buildTicketAmounts();
+
+    let input_value = 'Create Event'
+
+    if(editing) {
+      input_value = "Update Event"
+    }
+
     return <div className='event_form'>
       <form onSubmit={this.createEvent} autoComplete="off">
+        {editing_warning_email}
         {editing_warning_name}
         {name_error}
         <FloatText name="event_name" label="Event Name:" defaultValue={name} inputProps={name_props} />
@@ -377,7 +409,7 @@ class CreateEvent extends React.Component {
           {ticketOptions}
         </MultiDropdown>
         <div className='event_form-input'>
-          <input type='submit' className='form-button' submit="create_event" value='Create Event' />
+          <input type='submit' className='form-button' submit="create_event" value={input_value} />
         </div>
       </form>
     </div>

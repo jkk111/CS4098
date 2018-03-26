@@ -9,6 +9,7 @@ const auth_modules = require('./auth_modules');
 const admin_modules = require('./admin_modules');
 const Database = require('./database');
 const Users = Database.Get('user');
+const Event = Database.Get('event')
 const { hash_password, verify_password } = require('./util')
 const config = require('./config.json')
 const crypto = require('crypto')
@@ -248,6 +249,13 @@ let identify = async(req, res, next) => {
 app.post('/preview/:template', bodyParser.json(), (req, res) => {
   let preview = render_template(req.params.template, { ...req.body })
   res.send(preview);
+})
+
+app.get('/event/:id', async(req, res) => {
+  let { id } = req.params;
+
+  let [ event ] = await Event.get('event', { id }, [ 'name', 'description', 'start_time', 'end_time' ])
+  res.send(event)
 })
 
 /**
