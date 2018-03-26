@@ -50,14 +50,14 @@ class CreateAuctionItem extends React.Component {
 
     if(!form.name.value) {
       this.setState({
-        name_error: 'Ticket Name Cannot Be Empty'
+        name_error: 'Item Name Cannot Be Empty'
       })
       return;
     }
 
     if(!form.description.value) {
       this.setState({
-        description_error: 'Ticket Description Cannot Be Empty'
+        description_error: 'Item Description Cannot Be Empty'
       })
       return;
     }
@@ -71,7 +71,7 @@ class CreateAuctionItem extends React.Component {
 
     if(!this.state.selectedAuction) {
       this.setState({
-        auction_error: "Auction Item Must Have An Auction"
+        auction_error: "Auction Item Must Have An Associated Auction"
       })
       return
     }
