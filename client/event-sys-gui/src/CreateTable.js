@@ -10,12 +10,12 @@ const FOCUSED_STROKE_COLOR = 'blue'
 const TABLE_WIDTH = 100;
 const TABLE_HEIGHT = 100;
 const TABLE_OFFSET = 50;
-const FONT_SIZE = 72;
+const FONT_SIZE = 48;
 const FONT_STYLE = 'bold'
 const ALIGN = 'center'
 const TEXT_WIDTH = 100;
 const TEXT_HEIGHT = 100;
-const TEXT_OFFSET = 40;
+const TEXT_OFFSET = 30;
 
 console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 
