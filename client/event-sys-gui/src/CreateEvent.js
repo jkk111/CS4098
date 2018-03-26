@@ -48,7 +48,7 @@ class CreateEvent extends React.Component {
       ticketAmounts: [],
     };
     this.createEvent = this.createEvent.bind(this);
-    this.handleMenuChange = this.handleVenueChange.bind(this);
+    this.handleMenuChange = this.handleMenuChange.bind(this);
     this.handleVenueChange = this.handleVenueChange.bind(this);
     this.handleTicketsChange = this.handleTicketsChange.bind(this);
     this.startChange = this.startChange.bind(this);
@@ -104,6 +104,7 @@ class CreateEvent extends React.Component {
   }
 
   handleMenuChange(value) {
+    console.log(value);
     this.setState({selectedMenu: value})
   }
 
