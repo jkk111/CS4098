@@ -68,6 +68,9 @@ class Event extends React.Component {
           <div>
             <span className='user-content-button'>Edit this Event</span>
           </div>
+          <div>
+            <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
+          </div>
         </div>
 
       }
@@ -87,18 +90,13 @@ class Event extends React.Component {
       </div>
 
       user_buttons = <div>
-        <div>
-        <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
-        </div>
+
         <div>
         <span className='user-content-button'>Donate</span>
         </div>
-        <div>
-        <span className='user-content-button' onClick={this.show_menu}>Show Menu for this event</span>
-        </div>
       </div>
 
-      if (!menu){
+      if (!(menu == null)){
         menu_content = <div>
           <Menu {...menu}/>
         </div>
