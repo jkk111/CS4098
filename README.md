@@ -136,30 +136,108 @@ Admin Access Only
 4. Click on a Menu name for further information on the menu
 
 ## Release 2
-
-### Feature 4 - I would like to be able to create an event, e.g. a dinner
 1. Each one of these features should have a detailed list of instruction on how to see the feature in action.
 2. It shouldn't include describing other features, except where absolutely necessary.
 
+### Feature 4 - I would like to be able to create an event, e.g. a dinner
+Admin Access Only
+1.  To begin adding events to the system, ensure you've already added menus and tickets.
+2.  Once tickets and dinner menus have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event';
+3. On the "create Event" page, enter the name of the event.
+This can be the name of the event, or the type etc.
+4. Enter a description of the event. What charity its for, possible upgrades, anything you want your guests to know.
+5. Enter the location for the event. An address, landmark, etc.
+6. Select the date and time of the venue using the appropiate fields. This is done by clicking on the calender that appears when you click on the field. The time can be selected at the bottom of the calender.
+7. Select the menu you want associated with the event, by selecting from all the menus you have created that can be seen in the dropdown menu.
+8. Click the "Add a ticket" button if you wish to add tickets to this event. Once you click this button you may select a ticket from the dropdown menu if you have already created it inthe "create ticket" page. You can then select the amount of tickets you want, either by typing in the number or by using the arrows to add more or less tickets.
+9. To save the event, click on the create event button at the bottom of the screen.
+10. Any event created will automatically sent out email invites to all users.
+11. Saved events should appear in the "event" section in the main menu.
+
+
+
 ### Feature 5 - I want to be able to update event information and submit event updates
+Admin Access only
+1. The ability to edit events can be used from the "View Events" page.
+2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
+3. In the view events page, you can see all the events you have created. Click on the event name you wish to edit and all the details of that event will appear.
+4.Click on "Edit this Event"
+5. You will be directed to the screen that allows you to change the eveent details.
+6. You can change the event description, location, start time and end time by filling in your required changes into the respective fields. You are not able to change the name of the event. You also cannot remove tickets that have already been added to an event, but you can add additional tickets.
+7. When you have finished, click the "Update Event" button. The event will be updated. This can be checked by returning to the view events page and viewing the changed event.
+8. When the event is updated, all attendees are automatically emailed with the updates.
+
 
 ### Feature 30 - I want to see dietary requirements and access requirements of attendees so I can provide details to catering
+Admin Access Only
+1. Users are able to enter dietary requirements and access requirements in the settings page.
+2. They do this by clicking on the menu button on the top of the screen. This will drop down all the menu options. They then click on 'Settings'.
+3. To add an allergen, the user clicks the "Add Allergen" button. A dropdown menu will then appear, where the user can select what allergens apply to them. They can also delete allergens by clicking the red X at the side of the dropdown.
+4. They can also type in any additional dietary information or accessibilty requirements by typing it in the textbox.
+5. Admins can then see this information by TODO
 
 ### Feature 31 - I want to be able to share special dietary requirements (including table info for guests) with the caterer
+Admin Access Only
+TODO
 
 ### Feature 32 - I want to see the table layout and seating arrangements so the tables can be organised
+Admin Access Only
+TODO
 
 ### Feature 49 - I want to be able to accept and see payments
+Admin Access Only
+TODO
 
 ### Feature 53 - Have a live tracker that updates with donations throughout the event
+1. Both users and admins can see a live tracker associated with each event.
+2. The live tracker can be accessed in the "View Events" page.
+3. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
+4. In the view events page, you can see all the events you have created. Click on the event name you wish to view and all the details of that event will appear.
+5. Click the "View Live Tracker" button. This will bring you to the donation tracker page.
+6. When someone makes a donation, the tracker will show the amount raised overall.
+7. To exit the live tracker, click on the menu button at the top of the page.
+
 
 ### Feature 54 - I want to track current amount raised
+1. Both users and admins can see a live tracker associated with each event.
+2. The live tracker can be accessed in the "View Events" page.
+3. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
+4. In the view events page, you can see all the events you have created. Click on the event name you wish to view and all the details of that event will appear.
+5. Click the "View Live Tracker" button. This will bring you to the donation tracker page.
+6. When someone makes a donation, the tracker will show the amount raised overall.
+7. To exit the live tracker, click on the menu button at the top of the page.
+8. At the end of the event, the live tracker will show the total amount raised on the night.
 
 ### Feature 121 - I want to set up an auction
+Admin Access Only
+1. To create an auction, you must go to the "Create Auction" page.
+2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Auction'.
+3. On the "Create Auction" page, enter the name of the auction.
+This can be the name of the auction, or the type etc.
+4. Enter a description of the auction. Who donated items, special pieces, anything you want your guests to know.
+5. Select the date and time of the auction using the appropiate fields. This is done by clicking on the calender that appears when you click on the field. The time can be selected at the bottom of the calender.
+6. All fields are mandetory, except for the description. There is no minimum amount of characters needed for the name. Trying to create an event without a name or start/end will display an error message. Additionally your start date/time must be before the end date/time, otherwise you will get a warning message.
+7. To save the auction, click on the "Create Auction" button at the bottom of the screen.
+8. Items can be added to a particular auction in the "Create Items" page. You must have previously created an auction first.
+9. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Items'.
+10. On the "Create Item" page, enter the name of the item.
+11. Enter a description of the auction. Who donated it, history, anything you want your guests to know.
+12. Enter the starting price of the item. This must be a number.
+13. Select the auction that the item is for by choosing it from the dropdown menu.
+14. To save this item, click the "Create Item" button. All fields are mandetory.
+15. To view a created auction and its associated items, go to the "View Auction" page (see feature 132)
+
 
 ### Feature 122 - I want a way to record payments on the night
 
 ### Feature 132 - I want to be able to see auction information, including information on auction items
+1. Users and Admins can see information on auctions in the "View Auctions" page.
+2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Auction'.
+3. On the view auctions page, all previously created auction names are displayed. Click on an auction page and a drop down will show all the information on that auction.
+4. In the dropdown, all the items saved to this auction will also be displayed. To view information on a particular item, click on its name and all its information will drop down. This can be done for all items in an auction.
+5. In the dropdown for each item, you can also place a bid. To do this, enter the amount you wish to bid in the text box and then click the "Bid!" button. This must be inputted as a number.
+6. The current bid will then be updated to how much you entered.
+
 
 ## Tests
 1. Server Test
