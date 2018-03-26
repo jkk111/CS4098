@@ -20,7 +20,6 @@ class CreateTable extends React.Component {
     super(props);
 
     this.state = {
-      addTable: false,
       deleteTable: false,
       windowWidthOld: window.innerWidth,
       windowHeightOld: window.innerHeight, // This isn't right we shouldn't be using the window size
@@ -32,7 +31,6 @@ class CreateTable extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.updatePosition = this.updatePosition.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
-    this.addTable = this.addTable.bind(this);
     this.deleteTable = this.deleteTable.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.updateFocused = this.updateFocused.bind(this);
@@ -116,32 +114,31 @@ class CreateTable extends React.Component {
   }
 
   handleClick(e) {
-    let { addTable, tables = [], x, y } = this.state;
-    if(addTable) {
-      console.log(e, tables);
-      let next = { x, y };
+    let {tables = [], x, y } = this.state;
+    console.log(e, tables);
+    let next = { x, y };
 
-      this.setState({
-        tables: [ ...tables, next ],
-        focused: tables.length
-      })
-    }
+    this.setState({
+      tables: [ ...tables, next ],
+      focused: tables.length
+    })
   }
-
+/*
   addTable(e) {
   	let{addTable} =this.state
     if(!addTable){
-	    this.setState({
-	      addTable: true
-	    });
-	  }
+	  this.setState({
+	    addTable: true
+	  });
+	}
   	else{
-  		this.setState({
-  	      addTable: false
+      this.setState({
+  	    addTable: false
   	  });
   	}
   }
-
+  <div className='form-button form-field' onClick={this.addTable}>Click to Start/Stop Adding Tables(Click Anywhere to Add)</div>
+*/
   deleteTable(e) {
     let { focused, tables } = this.state;
 
@@ -161,16 +158,15 @@ class CreateTable extends React.Component {
     let { tables = [] , windowHeightOld, windowWidthOld} = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} />)
     return <div>
-      <div className='form-button form-field' onClick={this.addTable}>Click to Start/Stop Adding Tables(Click Anywhere to Add)</div>
       <Stage width={windowWidthOld-(windowWidthOld/60)} height={windowHeightOld-(windowHeightOld/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
         <Layer ref='layer' batchDraw={true}>
           <Rect
-            x={windowHeightOld/120}
-            y={0}
-            width={windowWidthOld-(windowWidthOld/40)}
-            height={windowHeightOld-(windowHeightOld/8)}
+            x={windowHeightOld/70}
+            y={windowHeightOld/120}
+            width={windowWidthOld-(windowWidthOld/38)}
+            height={windowHeightOld-(windowHeightOld/7)}
             stroke={'black'}
             fill ={'grey'}
             perfectDrawEnabled={false}
