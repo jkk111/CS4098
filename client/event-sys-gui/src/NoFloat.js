@@ -16,6 +16,7 @@ let Text = ({ name, label, className = '', defaultValue = '', inputProps = {}, c
 let NoFloatNumber = (props = {}) => {
   let mod_props = Object.assign({}, props)
 
+  console.log('Props', props)
 
   if(mod_props.inputProps) {
     mod_props.inputProps.type = 'number';

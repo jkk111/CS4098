@@ -19,7 +19,7 @@ let mapStateToProps = (state) => {
   }
 }
 
-let TicketSelect = ({ children, value, onChange }) => {
+let TicketSelect = ({ children, value, onChange, removable }) => {
   let ticket_changed = (e) => {
     let next = { ...value }
     next.ticket = e;
@@ -32,13 +32,19 @@ let TicketSelect = ({ children, value, onChange }) => {
     onChange(next);
   }
 
+
+  let disabled = removable ? '' : 'disabled';
+
   let input_props = {
     onChange: count_changed,
-    value: value.count
+    value: value.count,
+    disabled
   }
 
+  console.log(input_props, removable, disabled)
+
   return <div>
-    <Dropdown className='ticket-select' value={value.ticket} onChange={ticket_changed}>
+    <Dropdown className='ticket-select' value={value.ticket} onChange={ticket_changed} disabled={disabled}>
       {children}
     </Dropdown>
     <NoFloatNumber className='ticket-select-input' value={value.count} label='Ticket Count' inputProps={input_props} />
@@ -237,7 +243,7 @@ class CreateEvent extends React.Component {
 
   render() {
     let { name, description, location, start_time, end_time, menu_id, tickets = null } = this.props;
-    let removeable = [];
+    let removable = [];
 
     if(start_time && end_time) {
       start_time = new Date(start_time)
@@ -251,8 +257,8 @@ class CreateEvent extends React.Component {
       tickets = tickets.map(t => ({ ticket: t.ticket_id, count: t.amount }))
 
 
-      removeable = new Array(tickets.length)
-      removeable.fill(false);
+      removable = new Array(tickets.length)
+      removable.fill(false);
     }
 
     if(this.state.selectedMenu) {
@@ -263,14 +269,20 @@ class CreateEvent extends React.Component {
       tickets = this.state.selectedTickets;
     }
 
-    console.log(menu_id)
+    console.log('removable', removable)
 
     let menuOptions = this.buildMenuList();
     let ticketOptions = this.buildTicketsList();
+
+    let name_props = {};
+
+    if(this.props.editing) {
+      name_props.disabled = 'disabled'
+    }
     // let ticketAmounts = this.buildTicketAmounts();
     return <div className='event_form'>
       <form onSubmit={this.createEvent} autoComplete="off">
-        <FloatText name="event_name" label="Event Name:" defaultValue={name} />
+        <FloatText name="event_name" label="Event Name:" defaultValue={name} inputProps={name_props} />
         <FloatText name="description" label="Event Description:" defaultValue={description} />
         <FloatText name="location" label="Event Location:" defaultValue={location} />
         <div className='event_form-input'>
@@ -282,7 +294,7 @@ class CreateEvent extends React.Component {
             {menuOptions}
           </Dropdown>
         </div>
-        <MultiDropdown value={tickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>
+        <MultiDropdown removable={removable} value={tickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>
           {ticketOptions}
         </MultiDropdown>
         <div className='event_form-input'>
