@@ -210,10 +210,11 @@ app.post('/create_event', bodyParser.json(), async(req, res) => {
 
 app.post('/update_event', bodyParser.json(), async(req, res) => {
   let { event_id, tickets, description, location, start_time, end_time } = req.body;
+  console.log(req.body)
   let event = { description, location, start_time, end_time };
 
   let event_name = await Events.get('event', { id: event_id }, 'name');
-  event_name = name[0].name;
+  event_name = event_name[0].name;
   await Events.update('event', event, { id: event_id });
 
   for(var ticket of tickets) {

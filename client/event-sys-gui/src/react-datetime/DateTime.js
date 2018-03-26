@@ -437,7 +437,7 @@ class DateTime extends React.Component {
 				</div>
 			} else {
 				console.log(finalInputProps)
-				input = <FloatText label={this.props.label} inputProps={finalInputProps} />
+				input = <FloatText label={this.props.label} name={this.props.name} inputProps={finalInputProps} />
 			}
 		} else {
 			className += ' react-date-time-static'

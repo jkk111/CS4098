@@ -19,7 +19,7 @@ app.get('/events', async(req, res) => {
 
   for(var event of events) {
     let { id } = event;
-    let tickets = await Events.get('event_tickets', { event_id: id }, 'ticket_id');
+    let tickets = await Events.get('event_tickets', { event_id: id }, 'ticket_id, available, amount');
     let updates = await Events.get('event_updates', { event_id: id }, '*');
     for(var ticket of tickets) {
       let { ticket_id } = ticket;

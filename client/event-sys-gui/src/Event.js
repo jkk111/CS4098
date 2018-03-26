@@ -15,6 +15,11 @@ let mapDispatchToProps = (dispatch) => {
     show_tracker: (id) => {
       dispatch({ type: 'VIEW_CHANGED', value: 'VIEW_DONATIONS' })
       dispatch({ type: 'TRACK_EVENT', value: id })
+    },
+
+    edit_event: (data) => {
+      dispatch({ type: 'VIEW_CHANGED', value: 'CREATE_EVENT' })
+      dispatch({ type: 'SET_EVENT_DATA', value: data })
     }
   }
 }
@@ -28,6 +33,7 @@ class Event extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.show_tracker = this.show_tracker.bind(this);
+    this.edit_event = this.edit_event.bind(this);
   }
 
   toggle() {
@@ -40,6 +46,10 @@ class Event extends React.Component {
     if(this.props.show_tracker) {
       this.props.show_tracker(this.props.id)
     }
+  }
+
+  edit_event() {
+    this.props.edit_event(this.props);
   }
 
   render() {
@@ -67,7 +77,7 @@ class Event extends React.Component {
             <span className='user-content-button' onClick={this.show_allergens}>Export Attendee Allergen Information</span>
           </div>
           <div>
-            <span className='user-content-button'>Edit this Event</span>
+            <span className='user-content-button' onClick={this.edit_event}>Edit this Event</span>
           </div>
           <div>
             <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
