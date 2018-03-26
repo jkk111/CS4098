@@ -38,7 +38,7 @@ Repo to store source code for CS4098 - Group Design Project
 1. Fill in your information in the sign-up and take note of your username and password for later.
 2. Currently, there is no minimum amount of characters required for any of the fields, and the email field does not require a real email address or the @ key.
 3. If you are successful you should be automatically directed to the home page, with "Welcome Home" being displayed.
-4. If your password is not the same as your confirm password, you will be unable to sign up and "Passwords must match" will be displayed. Make your passwors the same to proceed.
+4. If your password is not the same as your confirm password, you will be unable to sign up and "Passwords must match" will be displayed. Make your passwords the same to proceed.
 
 ### Logging In 
 1. Enter your username and password into the log in form. You may use the username and password you created during the installation steps(This will be an admin account), or one created during the signing up step(This will not be an admin account).
