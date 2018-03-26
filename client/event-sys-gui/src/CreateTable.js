@@ -6,15 +6,31 @@ import { Layer, Rect, Stage } from 'react-konva';
 
 const FILL_COLOR = 'brown'
 const STROKE_COLOR = 'black'
+const FOCUSED_STROKE_COLOR = 'blue'
 const TABLE_WIDTH = 100;
 const TABLE_HEIGHT = 100;
 
 console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 
-let Table = ({ x, y, updatePosition, updateFocused }) => {
-  console.log(updatePosition)
-  return <Rect x={x-(TABLE_WIDTH/2)} y={y-(TABLE_HEIGHT/2)} fill={FILL_COLOR} draggable={true} onDragStart={updateFocused} onDragEnd={updatePosition}
-               onTouchStart={updateFocused} onTouchEnd={updatePosition} width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} perfectDrawEnabled={false} />
+let Table = ({ x, y, updatePosition, updateFocused, focused }) => {
+  let stroke_color = STROKE_COLOR;
+
+  if(focused) {
+    stroke_color = FOCUSED_STROKE_COLOR;
+  }
+
+  return <Rect x={x-(TABLE_WIDTH/2)}
+               y={y-(TABLE_HEIGHT/2)}
+               fill={FILL_COLOR}
+               draggable={true}
+               onDragStart={updateFocused}
+               onDragEnd={updatePosition}
+               onTouchStart={updateFocused}
+               onTouchEnd={updatePosition}
+               width={TABLE_WIDTH}
+               height={TABLE_HEIGHT}
+               stroke={stroke_color}
+               perfectDrawEnabled={false} />
 }
 
 class CreateTable extends React.Component {
@@ -46,14 +62,15 @@ class CreateTable extends React.Component {
 		  	let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
 	      let table = tables.map(x => x*transformWidth);
 	  	  table = tables.map(y=> y*transformHeight);
-	  	  this.setState({tables :[table]});	
+	  	  this.setState({tables :[table]});
   		}
   	}
   	*/
   	//let {containerWidth, containerHeight} = Dimensions.get('screen')
   	this.setState({
       containerWidth: window.innerWidth,
-      containerHeight: window.innerHeight});
+      containerHeight: window.innerHeight
+    });
 	//			   tables :[table]});
   }
 
@@ -162,8 +179,8 @@ class CreateTable extends React.Component {
     	//{this.props.containerWidth}
       //containerHeight={this.props.containerHeight}
   render() {
-    let { tables = [],containerWidth,containerHeight } = this.state;
-    let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} />)
+    let { tables = [], containerWidth, containerHeight, focused } = this.state;
+    let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} />)
     return <div>
       <Stage width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
