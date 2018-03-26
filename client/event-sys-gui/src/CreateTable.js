@@ -50,7 +50,8 @@ let TableText = ( {x, y, id} ) => {
 							 stroke={STROKE_COLOR}
 							 width={TEXT_WIDTH}
                height={TEXT_HEIGHT}
-               text={id}/>
+               text={id}
+               listening={false}/>
 
 }
 
