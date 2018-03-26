@@ -3,7 +3,7 @@ import './Event.css'
 import { connect } from 'react-redux'
 import ViewTickets from './ViewTickets'
 import Menu from './Menu'
-
+import Donate from './Donate'
 let mapStateToProps = (state) => {
   return {
     is_admin: !state.admin_info.pending
@@ -60,6 +60,7 @@ class Event extends React.Component {
     let content = null;
     let user_buttons = null;
     let menu_content = null;
+    let donate_content = null;
 
     console.log("Start Time", start_time)
 
@@ -100,10 +101,7 @@ class Event extends React.Component {
       </div>
 
       user_buttons = <div>
-
-        <div>
-        <span className='user-content-button'>Donate</span>
-        </div>
+        
       </div>
 
       if (!(menu == null)){
@@ -111,6 +109,10 @@ class Event extends React.Component {
           <Menu {...menu}/>
         </div>
       }
+
+      donate_content = <div>
+        <Donate/>
+      </div>
     }
 
     let event_name_class = expanded ? 'event-name-expanded' : 'event-name-collapsed'
@@ -120,6 +122,7 @@ class Event extends React.Component {
       {content}
       {admin_buttons}
       {user_buttons}
+      {donate_content}
       {menu_content}
     </div>
   }
