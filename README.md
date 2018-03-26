@@ -1,29 +1,22 @@
 # CS4098
 Repo to store source code for CS4098 - Group Design Project
 
-### Installation from a fresh ubuntu 16.04 LTS install
+## Installation
+### From a fresh ubuntu 16.04 LTS install
 1. Open a terminal - 'ctrl/⌘ + alt + t'
 2. Install git - ```sudo apt-get install -y git```
 3. Enter your password when prompted.
 4. Clone the repo - ```git clone https://github.com/jkk111/cs4098.git```
 5. Navigate to newly created folder - ```cd cs4098```
 6. Run setup script - ```./setup.sh```
-7. Follow the instructions on screen and enter your details. Keep a note of your login credentials for later. If needed, an example of input can be seen below.
-	1. First Name : "Adam"
-	2. Last Name : "Lane"
-	3. Username : "Lanead"
-	4. Password : "Password"
-	5. Confirm Password : "Password"
-	6. Eventbrite token : "no" (Note: this must be a lower case "no" if not using an eventbrite token)
-	7. Email : "Lanead@tcd.ie" (Note: any email will do, fake or real)
-	8. SMTP Host : (This field can be left blank)
-	9. SMTP Port : (This field can be left blank)
-	10. Mail User : (This field can be left blank)
-	11. Mail Password : "Password"
-	12. Mail Password Confirm :  "Password"
-8. Once complete, the script should open the webapp in a browser. If this fails, navigate to ```localhost:3000``` in your favorite browser.
+7. Follow the instructions on screen and enter your details. Keep a note of your login credentials for later.
+8. Tips
+ 	* Eventbrite token - this must be a lower case "no" if not using eventbrite
+	* Email / SMTP Host / SMTP Port - leave blank to not set up email
+	* Mail Password - You can't leave this blank. Enter something simple like 'password' if you don't want to use email.
+9. Once complete, the script should open the webapp in a browser. If this fails, navigate to ```localhost:3000``` in your favorite browser.
 
-# Release 1
+## Release 1
 
 **Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction**.  
 **Feature 32 - e-ticketing for users**.  
@@ -142,9 +135,11 @@ Admin Access Only
 3. The list of menu names will appear.
 4. Click on a Menu name for further information on the menu
 
-## RELEASE 2
+## Release 2
 
 ### Feature 4 - I would like to be able to create an event, e.g. a dinner
+1. Each one of these features should have a detailed list of instruction on how to see the feature in action.
+2. It shouldn't include describing other features, except where absolutely necessary.
 
 ### Feature 5 - I want to be able to update event information and submit event updates
 
