@@ -53,19 +53,41 @@ class CreateTable extends React.Component {
     this.clearFocused = this.clearFocused.bind(this);
   }
 
-  updateDimensions() {
-  	/*
-  	let {containerWidth,containerHeight, tables  = []} = this.state;
-  	if (tables.length !== 0){
+/*
+if (tables.length !== 0){
   		for(var i=0; i < tables.length; i++){
 	  	  let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
 		  	let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
-	      let table = tables.map(x => x*transformWidth);
-	  	  table = tables.map(y=> y*transformHeight);
-	  	  this.setState({tables :[table]});
-  		}
+	      xNew = Number((tables[i].x*transformWidth).toFixed(4));
+	      yNew = Number((tables[i].y*transformHeight).toFixed(4));
+	  	  let before = tables.slice(0, i);
+	  	  let after = tables.slice(i + 1);
+      	let table = { x: xNew, y: yNew }
+	  	  this.setState({tables: [ ...before, table, ...after ]})
+	  	  console.log(tables.length + "i: " + i)
+	  	}
   	}
-  	*/
+ */
+  updateDimensions() {
+  	
+  	let {containerWidth,containerHeight, tables  = []} = this.state;
+  	var xNew,yNew,table,before,after;
+  	let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(6)));
+		let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(6)));
+		var before, after;
+  	if (tables.length !== 0){
+  		for(var i=0; i < tables.length; i++){
+  			let {tables = []} = this.state;
+	      xNew = Number((tables[i].x*transformWidth).toFixed(2));
+	      yNew = Number((tables[i].y*transformHeight).toFixed(2));
+	  	  before = tables.slice(0, i);
+	  	  after = tables.slice(i + 1);
+      	table = { x: xNew, y: yNew }
+	  	  this.setState({tables: [ ...before, table, ...after ]})
+	  	  //console.log(tables.length + "i: " + i)
+	  	}
+  	}
+  	
   	//let {containerWidth, containerHeight} = Dimensions.get('screen')
   	this.setState({
       containerWidth: window.innerWidth,
@@ -182,12 +204,12 @@ class CreateTable extends React.Component {
     let { tables = [], containerWidth, containerHeight, focused } = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} />)
     return <div>
-      <Stage width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
+      <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
-        <Layer ref='layer' batchDraw={true}>
+        <Layer axisX={containerWidth/70} ref='layer' batchDraw={true}>
           <Rect
-            x={containerWidth/70}
+            x={containerWidth/120}
             y={containerHeight/120}
             width={containerWidth-(containerWidth/38)}
             height={containerHeight-(containerHeight/7)}
