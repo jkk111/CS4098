@@ -9,10 +9,10 @@ const TABLE_HEIGHT = 100;
 
 console.log(FILL_COLOR, TABLE_HEIGHT, TABLE_WIDTH)
 
-let Table = ({ x, y, updatePosition }) => {
+let Table = ({ x, y, updatePosition, updateFocused }) => {
   console.log(updatePosition)
-  return <Rect x={x-(TABLE_WIDTH/2)} y={y-(TABLE_HEIGHT/2)} fill={FILL_COLOR} draggable={true} onDragEnd={updatePosition}
-               width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} perfectDrawEnabled={false} />
+  return <Rect x={x-(TABLE_WIDTH/2)} y={y-(TABLE_HEIGHT/2)} fill={FILL_COLOR} draggable={true} onDragStart={updateFocused} onDragEnd={updatePosition}
+               onTouchStart={updateFocused} onTouchEnd={updatePosition} width={TABLE_WIDTH} height={TABLE_HEIGHT} stroke={STROKE_COLOR} perfectDrawEnabled={false} />
 }
 
 class CreateTable extends React.Component {
@@ -23,7 +23,8 @@ class CreateTable extends React.Component {
       addTable: false,
       deleteTable: false,
       windowWidthOld: window.innerWidth,
-      windowHeightOld: window.innerHeight,
+      windowHeightOld: window.innerHeight, // This isn't right we shouldn't be using the window size
+      last_touched: null,
       x: this.props.x,
       y: this.props.y
     };
@@ -34,6 +35,8 @@ class CreateTable extends React.Component {
     this.addTable = this.addTable.bind(this);
     this.deleteTable = this.deleteTable.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
+    this.updateFocused = this.updateFocused.bind(this);
+    this.clearFocused = this.clearFocused.bind(this);
   }
 
   updateDimensions() {
@@ -43,8 +46,10 @@ class CreateTable extends React.Component {
   	//let table = tables.map(x=> x);
   	//let table = tables.map(y=> y);
 
-	this.setState({windowWidthOld: window.innerWidth, 
-				   windowHeightOld:window.innerHeight}); 
+  	this.setState({
+      windowWidthOld: window.innerWidth,
+      windowHeightOld: window.innerHeight
+    });
 	//			   tables :[table]});
   }
 
@@ -57,11 +62,28 @@ class CreateTable extends React.Component {
     window.removeEventListener("resize", this.updateDimensions);
   }
 
+  updateFocused(i) {
+    return (e) => {
+      this.setState({
+        focused: i
+      })
+    }
+  }
+
+  clearFocused() {
+    this.setState({
+      focused: null
+    })
+  }
+
   updatePosition(i) {
     return (e) => {
-      let x = e.evt.dragEndNode.attrs.x+(TABLE_WIDTH/2);
-      let y = e.evt.dragEndNode.attrs.y+(TABLE_HEIGHT/2);
-      let { tables,deleteTable } = this.state;
+      console.log(e.evt);
+      let dragNode = e.evt.dragEndNode;
+
+      let x = dragNode.attrs.x+(TABLE_WIDTH/2);
+      let y = dragNode.attrs.y+(TABLE_HEIGHT/2);
+      let { tables, deleteTable } = this.state;
 
       let before = tables.slice(0, i);
 
@@ -69,16 +91,20 @@ class CreateTable extends React.Component {
       let table = { x: x, y: y }
 
       this.setState({
+        focused: i,
         tables: [ ...before, table, ...after ]
       })
 
-      if(deleteTable) {
-	    let before = tables.slice(0, i);
-	    let after = tables.slice(i + 1);
-	    this.setState({
-	      tables: [ ...before, ...after ]
-	    })
-	  }
+
+      console.log(deleteTable)
+      // Rethink this
+     //  if(deleteTable) {
+  	  //   let before = tables.slice(0, i);
+  	  //   let after = tables.slice(i + 1);
+  	  //   this.setState({
+  	  //     tables: [ ...before, ...after ]
+  	  //   })
+  	  // }
     }
   }
 
@@ -96,37 +122,11 @@ class CreateTable extends React.Component {
       let next = { x, y };
 
       this.setState({
-        tables: [ ...tables, next ]
+        tables: [ ...tables, next ],
+        focused: tables.length
       })
     }
   }
-
-  // handleClick = (e) => {
-
-      // if (!this.state.addTable) return;
-
-      // const { mouse } = this.state;
-
-      // let drawingShape = <Rect
-      //   x={mouse.x-50}
-      //   y={mouse.y-50}
-      //   width={TABLE_WIDTH}
-      //   height={TABLE_HEIGHT  }
-      //   stroke={'black'}
-      //   fill={FILL_COLOR}
-      //   key={this.state.children.length}
-      //   name={`shape${this.state.children.length}`}
-      //   draggable={true}
-      //   onDragEnd={this.updatePosition}
-      // />
-
-      // const { children } = this.state;
-      // newChildren.push(drawingShape);
-
-      // this.setState({
-      //   children: newChildren,
-      // });
-    // }
 
   addTable(e) {
   	let{addTable} =this.state
@@ -134,31 +134,32 @@ class CreateTable extends React.Component {
 	    this.setState({
 	      addTable: true
 	    });
-	}
-	else{
-		this.setState({
-	      addTable: false
-	    });
-	}
+	  }
+  	else{
+  		this.setState({
+  	      addTable: false
+  	  });
+  	}
   }
 
   deleteTable(e) {
-    let{deleteTable} =this.state
-    if(!deleteTable){
-	    this.setState({
-	      deleteTable: true
-	    });
-	}
-	else{
-		this.setState({
-	      deleteTable: false
-	    });
-	}
+    let { focused, tables } = this.state;
+
+    if(focused === null) {
+      return;
+    }
+
+    let before = [ ...tables.slice(0, focused) ];
+    let after = [ ...tables.slice(focused + 1) ];
+
+    this.setState({
+      tables: [ ...before, ...after ]
+    })
   }
 
   render() {
     let { tables = [] , windowHeightOld, windowWidthOld} = this.state;
-    let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} />)
+    let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} />)
     return <div>
       <div className='form-button form-field' onClick={this.addTable}>Click to Start/Stop Adding Tables(Click Anywhere to Add)</div>
       <Stage width={windowWidthOld-(windowWidthOld/60)} height={windowHeightOld-(windowHeightOld/8)}
