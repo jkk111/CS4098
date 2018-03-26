@@ -12,7 +12,6 @@ import Tracker from './Tracker'
 import Settings from './Settings'
 import EventList from './EventList'
 import ViewUsers from './ViewUsers'
-import CreateVenue from './CreateVenue'
 import CreateTicket from './CreateTicket'
 import Contact from './Contact'
 import ViewMenus from './ViewMenus'
@@ -61,7 +60,6 @@ const views = {
   CREATE_EVENT: EventForm,
   CREATE_MENU: CreateMenu,
   VIEW_USERS: ViewUsers,
-  CREATE_VENUE: CreateVenue,
   CREATE_TICKET: CreateTicket,
   CONTACT: Contact,
   VIEW_MENUS: ViewMenus,

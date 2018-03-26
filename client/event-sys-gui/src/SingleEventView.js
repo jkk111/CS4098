@@ -52,7 +52,7 @@ class SingleEventView extends React.Component {
   render() {
     let { data } = this.state;
     return <div>
-      <Event { ...data} logged_in={this.props.logged_in} />
+      <Event { ...data} logged_in={this.props.logged_in} single_view={true} />
       <div className='form-button' onClick={this.close}>Back</div>
     </div>
   }
