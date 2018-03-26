@@ -109,7 +109,11 @@ class CreateEvent extends React.Component {
       start_time: new Date(),
       end_time: new Date(),
       selectedMenu: 0,
-      selectedTickets: []
+      selectedTickets: [],
+      name_error: null,
+      start_error: null,
+      end_error: null,
+      ticket_error: null
     })
   }
 
@@ -126,12 +130,39 @@ class CreateEvent extends React.Component {
     let tickets = [];
 
     if(form.event_name.value === '') {
+      this.setState({
+        name_error: 'Event Name Cannot Be Empty'
+      })
       // alert('please give the event a name')
       return
     }
 
-    if(!this.state.start_time || !this.state.end_time) {
-      // alert('please select start and end times');
+    if(!this.state.start_time) {
+      this.setState({
+        start_error: 'Event Must Have A Start Time'
+      })
+      return
+    }
+
+    if(!this.state.end_time) {
+      this.setState({
+        end_error: 'Event Must Have An End Time'
+      })
+      return
+    }
+
+    if(this.state.start_time > this.state.end_time) {
+      this.setState({
+        start_error: 'Woah Hold On There Time Traveller, The Beginning Must Come Before The End',
+        end_error: 'Woah Hold On There Time Traveller, The Beginning Must Come Before The End'
+      })
+      return
+    }
+
+    if(selectedTickets.length === 0) {
+      this.setState({
+        ticket_error: 'If Theres No Tickets No One Can Come And Wouldn\'t That Be Lonely'
+      })
       return
     }
 
@@ -168,7 +199,11 @@ class CreateEvent extends React.Component {
       start_time: new Date(),
       end_time: new Date(),
       selectedMenu: 0,
-      selectedTickets: []
+      selectedTickets: [],
+      name_error: null,
+      start_error: null,
+      end_error: null,
+      ticket_error: null
     })
   }
 
@@ -242,8 +277,46 @@ class CreateEvent extends React.Component {
   }
 
   render() {
-    let { name, description, location, start_time, end_time, menu_id, tickets = null } = this.props;
+    let { editing, name, description, location, start_time, end_time, menu_id, tickets = null } = this.props;
     let removable = [];
+
+    let { name_error = null, start_error = null, end_error = null, ticket_error = null } = this.state;
+
+    if(name_error) {
+      name_error = <div className='error'>
+        {name_error}
+      </div>
+    }
+
+    if(start_error) {
+      start_error = <div className='error'>
+        {start_error}
+      </div>
+    }
+
+    if(end_error) {
+      end_error = <div className='error'>
+        {end_error}
+      </div>
+    }
+
+    if(ticket_error) {
+      ticket_error = <div className='error'>
+        {ticket_error}
+      </div>
+    }
+
+    let editing_warning_name = null;
+    let editing_warning_tickets = null;
+
+    if(editing) {
+      editing_warning_name = <div className='warning'>
+        You Cannot Change The Name Of An Existing Event
+      </div>
+      editing_warning_tickets = <div className='warning'>
+        You Cannot Change Remove Tickets From An Existing Event
+      </div>
+    }
 
     if(start_time && end_time) {
       start_time = new Date(start_time)
@@ -282,11 +355,15 @@ class CreateEvent extends React.Component {
     // let ticketAmounts = this.buildTicketAmounts();
     return <div className='event_form'>
       <form onSubmit={this.createEvent} autoComplete="off">
+        {editing_warning_name}
+        {name_error}
         <FloatText name="event_name" label="Event Name:" defaultValue={name} inputProps={name_props} />
         <FloatText name="description" label="Event Description:" defaultValue={description} />
         <FloatText name="location" label="Event Location:" defaultValue={location} />
         <div className='event_form-input'>
+          {start_error}
           <DateTime locale='en-ie' name="start" label="Start Date/Time: " onChange={this.startChange} closeOnSelect={true} value={start_time}/>
+          {end_error}
           <DateTime locale='en-ie' name="end" label="End Date/Time: " onChange={this.endChange} closeOnSelect={true} value={end_time} />
         </div>
         <div className='padding-vert'>
@@ -294,6 +371,8 @@ class CreateEvent extends React.Component {
             {menuOptions}
           </Dropdown>
         </div>
+        {editing_warning_tickets}
+        {ticket_error}
         <MultiDropdown removable={removable} value={tickets} onChange={this.handleTicketsChange} prompt='-Select Ticket-' InputEl={TicketSelect} addText='Add A Ticket'>
           {ticketOptions}
         </MultiDropdown>
