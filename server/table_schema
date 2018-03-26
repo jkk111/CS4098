@@ -1,0 +1,20 @@
+{
+  "tables": [
+    {
+      "name": "layouts",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "name": "TEXT NOT NULL"
+      }
+    },
+    {
+      "name": "table_positions",
+      "keys": {
+        "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+        "layout_id": "INTEGER NOT NULL",
+        "x": "INTEGER NOT NULL",
+        "y": "INTEGER NOT NULL"
+      }
+    }
+  ]
+}
