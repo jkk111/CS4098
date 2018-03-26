@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Layer, Rect, Stage } from 'react-konva';
+//import Dimensions from 'react-dimensions'
 
 
 const FILL_COLOR = 'brown'
@@ -20,10 +22,8 @@ class CreateTable extends React.Component {
     super(props);
 
     this.state = {
-      deleteTable: false,
-      windowWidthOld: window.innerWidth,
-      windowHeightOld: window.innerHeight, // This isn't right we shouldn't be using the window size
-      last_touched: null,
+      containerWidth: window.innerWidth,
+      containerHeight: window.innerHeight, // This isn't right we shouldn't be using the window size
       x: this.props.x,
       y: this.props.y
     };
@@ -38,16 +38,22 @@ class CreateTable extends React.Component {
   }
 
   updateDimensions() {
-  	//let {windowWidthOld,windowHeightOld} = this.state;
-  	//let transformWidth =  Math.abs(windowWidthOld/window.innerWidth);
-	//let transformHeight = Math.abs(windowHeightOld/window.innerHeight);
-  	//let table = tables.map(x=> x);
-  	//let table = tables.map(y=> y);
-
+  	/*
+  	let {containerWidth,containerHeight, tables  = []} = this.state;
+  	if (tables.length !== 0){
+  		for(var i=0; i < tables.length; i++){
+	  	  let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
+		  	let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
+	      let table = tables.map(x => x*transformWidth);
+	  	  table = tables.map(y=> y*transformHeight);
+	  	  this.setState({tables :[table]});	
+  		}
+  	}
+  	*/
+  	//let {containerWidth, containerHeight} = Dimensions.get('screen')
   	this.setState({
-      windowWidthOld: window.innerWidth,
-      windowHeightOld: window.innerHeight
-    });
+      containerWidth: window.innerWidth,
+      containerHeight: window.innerHeight});
 	//			   tables :[table]});
   }
 
@@ -81,7 +87,7 @@ class CreateTable extends React.Component {
 
       let x = dragNode.attrs.x+(TABLE_WIDTH/2);
       let y = dragNode.attrs.y+(TABLE_HEIGHT/2);
-      let { tables, deleteTable } = this.state;
+      let { tables} = this.state;
 
       let before = tables.slice(0, i);
 
@@ -94,7 +100,7 @@ class CreateTable extends React.Component {
       })
 
 
-      console.log(deleteTable)
+      //console.log(deleteTable)
       // Rethink this
      //  if(deleteTable) {
   	  //   let before = tables.slice(0, i);
@@ -153,20 +159,21 @@ class CreateTable extends React.Component {
       tables: [ ...before, ...after ]
     })
   }
-
+    	//{this.props.containerWidth}
+      //containerHeight={this.props.containerHeight}
   render() {
-    let { tables = [] , windowHeightOld, windowWidthOld} = this.state;
+    let { tables = [],containerWidth,containerHeight } = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} />)
     return <div>
-      <Stage width={windowWidthOld-(windowWidthOld/60)} height={windowHeightOld-(windowHeightOld/8)}
+      <Stage width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
              visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
         <Layer ref='layer' batchDraw={true}>
           <Rect
-            x={windowHeightOld/70}
-            y={windowHeightOld/120}
-            width={windowWidthOld-(windowWidthOld/38)}
-            height={windowHeightOld-(windowHeightOld/7)}
+            x={containerWidth/70}
+            y={containerHeight/120}
+            width={containerWidth-(containerWidth/38)}
+            height={containerHeight-(containerHeight/7)}
             stroke={'black'}
             fill ={'grey'}
             perfectDrawEnabled={false}
@@ -174,7 +181,7 @@ class CreateTable extends React.Component {
           {children}
         </Layer>
       </Stage>
-      <div className='form-button form-field' onClick={this.deleteTable}>Click to Start/Stop Deleting Tables(Drag and Drop Anywhere to Delete)</div>
+      <div className='form-button form-field' onClick={this.deleteTable}>Click to Delete the Last Table You Interacted With</div>
     </div>
   }
 }
