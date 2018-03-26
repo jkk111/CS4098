@@ -172,8 +172,19 @@ let check_verify = async() => {
   }
 }
 
+let check_view_event = () => {
+  if(window.location.pathname === '/event') {
+    let { id } = parse_query();
+    if(parse_query) {
+      store.dispatch({ type: 'TRACK_EVENT', value: id })
+      store.dispatch({ type: 'VIEW_CHANGED', value: 'SINGLE_EVENT_VIEW' })
+    }
+  }
+}
+
 update_user_data().then(async() => {
   await check_verify();
+  await check_view_event();
   loading = false;
   if(store.getState().logged_in !== 'UNAUTH') {
     let qs = parse_query();

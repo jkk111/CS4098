@@ -22,6 +22,7 @@ import CreateAuction from './CreateAuction'
 import ViewAuctions from './ViewAuctions'
 import CreateTable from './CreateTable'
 import DonationTracker from './DonationTracker'
+import SingleEventView from './SingleEventView'
 
 
 let mapStateToProps = (state) => {
@@ -158,6 +159,10 @@ class App extends Component {
 
   render() {
     let { registerError, loginError } = this.state;
+    if(this.props.view === 'SINGLE_EVENT_VIEW') {
+      return <SingleEventView />
+    }
+
     if(this.props.logged_in !== 'UNAUTH') {
       let View = views[this.props.view] || views.HOME
       return <Fragment>
