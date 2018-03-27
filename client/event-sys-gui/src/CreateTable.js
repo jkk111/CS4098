@@ -40,8 +40,12 @@ let Table = ({ x, y, updatePosition, updateFocused, focused }) => {
                perfectDrawEnabled={false} />
 }
 
-let TableText = ( {x, y, id} ) => {
+let TableText = ( {x, y, id, dragging, focused} ) => {
+	let visBool= true;
 
+  if(dragging && focused) {
+    visBool = false;
+  }
 	return <Text x={x-(TABLE_OFFSET)}
                y={y-(TEXT_OFFSET)}
 							 fontSize={FONT_SIZE}
@@ -51,7 +55,8 @@ let TableText = ( {x, y, id} ) => {
 							 width={TEXT_WIDTH}
                height={TEXT_HEIGHT}
                text={id}
-               listening={false}/>
+               listening={false}
+               visible={visBool}/>
 
 }
 
@@ -112,7 +117,7 @@ class CreateTable extends React.Component {
   updateFocused(i) {
     return (e) => {
       this.setState({
-        focused: i
+        focused: i, dragging: true
       })
     }
   }
@@ -139,6 +144,7 @@ class CreateTable extends React.Component {
 
       this.setState({
         focused: i,
+        dragging: false,
         tables: [ ...before, table, ...after ]
       })
     }
@@ -178,12 +184,12 @@ class CreateTable extends React.Component {
   }
 
   render() {
-    let { tables = [], containerWidth, containerHeight, focused } = this.state;
+    let { tables = [], containerWidth, containerHeight, focused, dragging } = this.state;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} />)
-    let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} />)
+    let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i}/>)
     return <div>
       <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
-             visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
+             visible={true} onContentClick={this.handleClick} onTouch={this.handleClick}
              onContentMouseMove={this.mouseMove} >
         <Layer axisX={containerWidth/70} ref='layer' batchDraw={true}>
           <Rect
