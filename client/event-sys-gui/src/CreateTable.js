@@ -169,9 +169,9 @@ class CreateTable extends React.Component {
   }
 
   deleteTable(e) {
-    let { focused, tables } = this.state;
+    let { focused, tables = [] } = this.state;
 
-    if(focused === null) {
+    if(focused === null || tables.length == 0) {
       return;
     }
 
@@ -189,7 +189,7 @@ class CreateTable extends React.Component {
     let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i}/>)
     return <div>
       <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
-             visible={true} onContentClick={this.handleClick} onTouch={this.handleClick}
+             visible={true} onContentClick={this.handleClick} onTap={this.handleClick}
              onContentMouseMove={this.mouseMove} >
         <Layer axisX={containerWidth/70} ref='layer' batchDraw={true}>
           <Rect
