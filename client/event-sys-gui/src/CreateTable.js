@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { FloatText } from './FloatText'
 import { Layer, Rect, Stage,Text } from 'react-konva';
 //import Dimensions from 'react-dimensions'
 
@@ -193,6 +193,12 @@ class CreateTable extends React.Component {
 
 
   mouseMove(e) {
+    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+      this.setState({mobileView: true})
+    }
+    else{
+      this.setState({mobileView: false})
+    }
     this.setState({
       x: e.evt.layerX,
       y: e.evt.layerY
@@ -229,27 +235,42 @@ class CreateTable extends React.Component {
   }
 
   render() {
-    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView } = this.state;
+    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, name_error = null } = this.state;
+    let {name} = this.props;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} mobileView={mobileView} />)
     let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i} mobileView={mobileView} />)
+    if(name_error) {
+      name_error = <div className='error'>
+        {name_error}
+      </div>
+    }
+    let name_props = {};
+    let input_value = 'Create Table Layout'
     return <div>
-      <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
-             visible={true} onContentClick={this.handleClick} onTap={this.tapped}
-             onContentMouseMove={this.mouseMove} >
-        <Layer axisX={containerWidth/70} ref='layer' batchDraw={true}>
-          <Rect
-            x={containerWidth/120}
-            y={containerHeight/120}
-            width={containerWidth-(containerWidth/38)}
-            height={containerHeight-(containerHeight/7)}
-            stroke={'black'}
-            fill ={'grey'}
-            perfectDrawEnabled={false}
-            listening={false} />
-          {children}
-          {children2}
-        </Layer>
-      </Stage>
+      <form onSubmit={this.createTable} autoComplete="off">
+        {name_error}
+        <FloatText name="layout_name" label="Table Layout Name:" defaultValue={name} inputProps={name_props} />
+        <div className='layout_form-input'>
+          <input type='submit' className='form-button' submit="create_table_layout" value={input_value} />
+        </div>
+      </form>
+        <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
+               visible={true} onContentClick={this.handleClick} onTap={this.tapped}
+               onContentMouseMove={this.mouseMove} >
+          <Layer axisX={containerWidth/70} ref='layer' batchDraw={true}>
+            <Rect
+              x={containerWidth/120}
+              y={containerHeight/120}
+              width={containerWidth-(containerWidth/38)}
+              height={containerHeight-(containerHeight/7)}
+              stroke={'black'}
+              fill ={'grey'}
+              perfectDrawEnabled={false}
+              listening={false} />
+            {children}
+            {children2}
+          </Layer>
+        </Stage>
       <div className='form-button form-field' onClick={this.deleteTable}>Click to Delete the Last Table You Interacted With</div>
     </div>
   }
