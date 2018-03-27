@@ -48,8 +48,6 @@ let Table = ({ x, y, updatePosition, updateFocused, focused, mobileView}) => {
                draggable={true}
                onDragStart={updateFocused}
                onDragEnd={updatePosition}
-               onTouchStart={updateFocused}
-               onTouchEnd={updatePosition}
                width={table_width}
                height={table_height}
                stroke={stroke_color}
@@ -163,7 +161,7 @@ class CreateTable extends React.Component {
     return (e) => {
       console.log(e.evt);
       let dragNode = e.evt.dragEndNode;
-      if(dragNode != 'undefined'){
+      if(dragNode !== 'undefined'){
         let x = dragNode.attrs.x+(TABLE_OFFSET);
         let y = dragNode.attrs.y+(TABLE_OFFSET);
         let { tables} = this.state;
@@ -183,9 +181,6 @@ class CreateTable extends React.Component {
   }
 
   tapped(e){
-    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
-      this.setState({mobileView: true})
-    }
     this.setState({
       x: e.evt.changedTouches[0].clientX,
       y: e.evt.changedTouches[0].clientY
@@ -205,6 +200,9 @@ class CreateTable extends React.Component {
   }
 
   handleClick(e) {
+    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+      this.setState({mobileView: true})
+    }
     let {tables = [], x, y } = this.state;
     console.log(e, tables);
     let next = { x, y };
