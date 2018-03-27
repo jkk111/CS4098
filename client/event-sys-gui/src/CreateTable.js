@@ -153,9 +153,12 @@ class CreateTable extends React.Component {
 
   tapped(e){
     this.setState({
-      x: e.evt.layerX,
-      y: e.evt.layerY
+      x: e.evt.changedTouches[0].clientX,
+      y: e.evt.changedTouches[0].clientY
     })
+    let {x,y} = this.state;
+    console.log("X:" + x + " Y:" + y)
+
   }
 
 
@@ -198,7 +201,7 @@ class CreateTable extends React.Component {
     let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i}/>)
     return <div>
       <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
-             visible={true} onContentClick={this.handleClick} onTap={this.handleClick} onTouch={this.tapped}
+             visible={true} onContentClick={this.handleClick} onTap={this.handleClick} onTouchStart={this.tapped}
              onContentMouseMove={this.mouseMove} >
         <Layer axisX={containerWidth/70} ref='layer' batchDraw={true}>
           <Rect
