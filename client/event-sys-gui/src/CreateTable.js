@@ -41,18 +41,18 @@ let Table = ({ x, y, updatePosition, updateFocused, focused }) => {
 }
 
 let TableText = ( {x, y, id, dragging, focused} ) => {
-	let visBool= true;
+  let visBool= true;
 
   if(dragging && focused) {
     visBool = false;
   }
-	return <Text x={x-(TABLE_OFFSET)}
+  return <Text x={x-(TABLE_OFFSET)}
                y={y-(TEXT_OFFSET)}
-							 fontSize={FONT_SIZE}
-							 fontStyle={FONT_STYLE}
-							 align={ALIGN}
-							 stroke={STROKE_COLOR}
-							 width={TEXT_WIDTH}
+               fontSize={FONT_SIZE}
+               fontStyle={FONT_STYLE}
+               align={ALIGN}
+               stroke={STROKE_COLOR}
+               width={TEXT_WIDTH}
                height={TEXT_HEIGHT}
                text={id}
                listening={false}
@@ -83,24 +83,24 @@ class CreateTable extends React.Component {
   }
 
   updateDimensions() {
-  	let {containerWidth,containerHeight, tables  = []} = this.state;
-  	var xNew,yNew,table,before,after;
-  	let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
-		let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
-		var before, after;
-  	if (tables.length !== 0){
-  		for(var i=0; i < tables.length; i++){
-  			let {tables = []} = this.state;
-	      xNew = Number((tables[i].x*transformWidth).toFixed(4));
-	      yNew = Number((tables[i].y*transformHeight).toFixed(4));
-	  	  before = tables.slice(0, i);
-	  	  after = tables.slice(i + 1);
-      	table = { x: xNew, y: yNew }
-	  	  this.setState({tables: [ ...before, table, ...after ]})
-	  	}
-  	}
+    let {containerWidth,containerHeight, tables  = []} = this.state;
+    var xNew,yNew,table,before,after;
+    let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
+    let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
+    var before, after;
+    if (tables.length !== 0){
+      for(var i=0; i < tables.length; i++){
+        let {tables = []} = this.state;
+        xNew = Number((tables[i].x*transformWidth).toFixed(4));
+        yNew = Number((tables[i].y*transformHeight).toFixed(4));
+        before = tables.slice(0, i);
+        after = tables.slice(i + 1);
+        table = { x: xNew, y: yNew }
+        this.setState({tables: [ ...before, table, ...after ]})
+      }
+    }
 
-  	this.setState({
+    this.setState({
       containerWidth: window.innerWidth,
       containerHeight: window.innerHeight
     });
@@ -152,7 +152,7 @@ class CreateTable extends React.Component {
   }
 
   tapped(e){
-  	this.setState({
+    this.setState({
       x: e.evt.layerX,
       y: e.evt.layerY
     })
