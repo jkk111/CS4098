@@ -18,7 +18,7 @@ class Donate extends React.Component {
 
   donate(){
     let { donationAmount } = this.state;
-    Payment.CreateDonation(donationAmount * 100);
+    Payment.CreateDonation(donationAmount * 100, this.props.id);
   }
 
   handleAmountChange(value) {
@@ -34,7 +34,7 @@ class Donate extends React.Component {
   buildAmountList(){
     let amounts = [ 1, 2, 5, 10, 20, 50, 100, 500, 1000 ];
     amounts = amounts.map((amount, i) => {
-      return <option key={i} value={amount} />
+      return <option key={i} value={amount}>{amount}</option>
     });
 
     let amountList = [
