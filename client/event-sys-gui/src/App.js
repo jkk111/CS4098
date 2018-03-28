@@ -28,7 +28,7 @@ import ViewTransactions from './ViewTransactions'
 let mapStateToProps = (state) => {
   return {
     logged_in: state.logged_in,
-    view: state.active_view
+    view: state.active_view.current
   }
 }
 

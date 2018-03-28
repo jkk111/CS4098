@@ -16,7 +16,7 @@ let Payment = require('../auth_modules/payments')
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
-const user_info_keys = [ 'id', 'username', 'f_name', 'l_name', 'registered', 'email', 'phone', 'email_verified', 'subscribed', 'is_admin' ]
+const user_info_keys = [ 'id', 'username', 'f_name', 'l_name', 'registered', 'email', 'phone', 'email_verified', 'subscribed', 'accessibility', 'is_admin' ]
 
 let create_registration_token = () => {
   return encode(crypto.randomBytes(32));
