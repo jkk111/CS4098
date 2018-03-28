@@ -116,7 +116,8 @@ class CreateTable extends React.Component {
     this.createTable = this.createTable.bind(this);
     this.check = this.check.bind(this);
     this.handleLayoutChange = this.handleLayoutChange.bind(this);
-    this.setLayouts();
+    this.refresh = this.refresh.bind(this);
+    this.refresh();
   }
 
   check(e) {
@@ -202,6 +203,8 @@ class CreateTable extends React.Component {
       description_error: null,
       tables: [],
       selectedLayout: 0
+    }, () => {
+      this.refresh()
     })
   }
 
@@ -221,10 +224,12 @@ class CreateTable extends React.Component {
     }
   }
 
-  async setLayouts() {
+  async refresh() {
     let response = await fetch('/admin/layouts')
     response = await response.json();
-    this.setState({layouts: response});
+    this.setState({
+      layouts: response
+    });
     Logger.log("Loaded Layouts", response)
   }
 
