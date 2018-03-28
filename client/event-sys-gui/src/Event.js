@@ -5,6 +5,9 @@ import ViewTickets from './ViewTickets'
 import Menu from './Menu'
 import Donate from './Donate'
 
+const TABLE_SIZE = 10;
+console.log(TABLE_SIZE)
+
 let mapStateToProps = (state) => {
   return {
     is_admin: !state.admin_info.pending,
@@ -42,6 +45,7 @@ class Event extends React.Component {
     this.show_tracker = this.show_tracker.bind(this);
     this.view_transactions = this.view_transactions.bind(this);
     this.edit_event = this.edit_event.bind(this);
+    this.export_allergens = this.export_allergens.bind(this);
   }
 
   toggle() {
@@ -66,6 +70,34 @@ class Event extends React.Component {
     this.props.edit_event(this.props);
   }
 
+  export_allergens() {
+    let { attendees = [] } = this.props;
+
+    let filtered = attendees.filter(attendee => {
+      return (attendee.accessibility || '').trim() !== '' || attendee.allergens.length > 0
+    })
+
+    filtered = filtered.map((attendee, i) => {
+      let table = (Math.floor(i / TABLE_SIZE)) + 1;
+      let seat = (i % TABLE_SIZE) + 1;
+      let { allergens = [], accessibility = '' } = attendee;
+      allergens = allergens.length > 0 ? allergens.join(' ') : 'None';
+      accessibility = accessibility.trim() === '' ? 'None' : accessibility.trim();
+      return `Table: ${table}, Seat: ${seat}, Allergens: ${allergens}, Access/Other Dietary: ${accessibility}`
+    })
+
+    filtered = filtered.join('\r\n');
+
+    let link = document.createElement('a');
+    link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(filtered);
+    link.download = 'AllergensAndAccessibilty.txt'
+
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click();
+    document.body.removeChild(link);
+  }
+
   render() {
     let { expanded } = this.state;
     let { single_view, logged_in, id, name, description, tickets, menu = null, start_time, end_time, is_admin} = this.props;
@@ -88,7 +120,7 @@ class Event extends React.Component {
       if(is_admin && !single_view) {
         admin_buttons = <div>
           <div>
-            <span className='user-content-button' onClick={this.show_allergens}>Export Attendee Allergen Information</span>
+            <span className='user-content-button' onClick={this.export_allergens}>Export Attendee Allergen / Access Information</span>
           </div>
           <div>
             <span className='user-content-button' onClick={this.edit_event}>Edit this Event</span>

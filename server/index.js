@@ -288,7 +288,7 @@ app.post('/item_info', bodyParser.json(), async(req, res) => {
 
   let [ item ] = await Auction.get('auction_item', { id: item_id });
   let [ price ] = await Auction.get('bid', { auction_item_id: item_id }, '*', 'ORDER BY amount desc LIMIT 1');
-  let [ transaction ] = await Payment.get('transactions', { data_id: item_id, type: Payment.AUCTION }, 'id, finished');
+  let [ transaction ] = await Payment.get('transactions', { data_id: item_id, type: Payments.AUCTION }, 'id, finished');
 
   transaction = transaction || {};
   let { finished } = transaction;
@@ -305,6 +305,7 @@ app.post('/item_info', bodyParser.json(), async(req, res) => {
 
   resp.transaction_id = transaction_id;
   resp.finished = finished
+  resp.price = price.amount;
   res.send(resp);
 })
 
