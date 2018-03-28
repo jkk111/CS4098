@@ -107,9 +107,7 @@ app.post('/create_layout', bodyParser.json(), async(req, res) => {
 })
 
 app.post('/update_layout', bodyParser.json(), async(req, res) => {
-  let { layout_id, description, tables = [] } = req.body;
-
-  let insert = await Tables.update('layouts', { description }, { id: layout_id });
+  let { layout_id, tables = [] } = req.body;
 
   await Tables.delete('table_positions', { layout_id });
   for(var table of tables) {
