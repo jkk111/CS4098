@@ -1,14 +1,15 @@
 import React from 'react';
-import ViewUsers from './ViewUsers.js';
+import Menu from './Menu.js';
 import ReactDOM from 'react-dom';
 
-describe('ViewUsers', () => {
+describe('Menu', () => {
   it('should be defined', () => {
-    expect(ViewUsers).toBeDefined();
+    expect(Menu).toBeDefined();
   });
+
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ViewUsers />, div);
+    ReactDOM.render(<Menu starters={[]} mains={[]} desserts={[]} drinks={[]}/>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

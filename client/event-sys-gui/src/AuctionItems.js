@@ -11,7 +11,7 @@ class AuctionItems extends React.Component {
     let { auctionItems } = this.props;
 
     auctionItems = auctionItems.map((auctionItem, i) => <AuctionItem {...auctionItem} key={i} />)
-    return auctionsItems
+    return auctionItems
   }
 }
 
