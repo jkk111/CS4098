@@ -83,7 +83,6 @@ class CreateAuctionItem extends React.Component {
       auction_id: this.state.selectedAuction
     }
 
-    console.log('creating auction item', body);
     let resp = await fetch('/admin/create_auction_item', {
       method: 'POST',
       headers: {
@@ -91,7 +90,6 @@ class CreateAuctionItem extends React.Component {
       },
       body: JSON.stringify(body)
     })
-    console.log(resp);
     Logger.log("Create Item Response", await resp.json())
     form.reset();
 

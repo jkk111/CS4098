@@ -23,7 +23,7 @@ import CreateTable from './CreateTable'
 import DonationTracker from './DonationTracker'
 import SingleEventView from './SingleEventView'
 import ViewTransactions from './ViewTransactions'
-
+import PayBid from './PayBid'
 
 let mapStateToProps = (state) => {
   return {
@@ -68,7 +68,8 @@ const views = {
   CREATE_AUCTION: CreateAuction,
   VIEW_AUCTIONS: ViewAuctions,
   CREATE_TABLE: CreateTable,
-  VIEW_TRANSACTIONS: ViewTransactions
+  VIEW_TRANSACTIONS: ViewTransactions,
+  PAY_BID: PayBid
 }
 
 class App extends Component {
@@ -115,11 +116,8 @@ class App extends Component {
   }
 
   async logout() {
-    let resp = await fetch('/logout');
-    resp = await resp.json();
-
-    console.log(resp);
-
+    await fetch('/logout');
+    window.location.href = '/';
     this.props.set_logged_in('UNAUTH');
   }
 

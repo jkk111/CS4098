@@ -3,6 +3,8 @@ import { FloatText } from './FloatText'
 import { Layer, Rect, Stage,Text } from 'react-konva';
 import { Logger } from './Util'
 import './CreateTable.css'
+import Dropdown from './Dropdown'
+//import MultiDropdown from './MultiDropdown'
 //import Dimensions from 'react-dimensions'
 
 
@@ -97,7 +99,8 @@ class CreateTable extends React.Component {
 
     this.state = {
       containerWidth: window.innerWidth,
-      containerHeight: window.innerHeight, // This isn't right we shouldn't be using the window size
+      containerHeight: window.innerHeight,
+      layouts: [], // This isn't right we shouldn't be using the window size
       x: this.props.x,
       y: this.props.y
     };
@@ -112,6 +115,11 @@ class CreateTable extends React.Component {
     this.tapped = this.tapped.bind(this);
     this.createTable = this.createTable.bind(this);
     this.check = this.check.bind(this);
+    this.handleLayoutChange = this.handleLayoutChange.bind(this);
+    this.refresh = this.refresh.bind(this);
+    this.updateTable = this.updateTable.bind(this);
+    this.buildLayoutList = this.buildLayoutList.bind(this);
+    this.refresh();
   }
 
   check(e) {
@@ -125,10 +133,47 @@ class CreateTable extends React.Component {
     return true;
   }
 
+  async updateTable(e){
+    let {tables = [], layouts, selectedLayout} = this.state;
+    let table_positions = [];
+    let form = e.target
+
+    for (var i = 0; i < tables.length; i++) {
+      let x = tables[i].x;
+      let y = tables[i].y;
+      table_positions.push({x: x, y: y})
+    }
+
+    let body = {
+      description: layouts[selectedLayout].description,
+      tables : table_positions
+    }
+
+    Logger.log('updating table', body);
+    let resp = await fetch('/admin/update_layout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    Logger.log("Update Table Response", await resp.json())
+    form.reset();
+
+    this.setState({
+      description_error: null,
+      tables: [],
+      selectedLayout: 0
+    })
+  }
+
   async createTable(e){
     e.preventDefault();
     if(!this.check(e)) {
       return;
+    }
+    if(this.state.editing) {
+      return this.updateTable(e);
     }
     let {tables = []} = this.state;
     let table_positions = [];
@@ -158,10 +203,51 @@ class CreateTable extends React.Component {
 
     this.setState({
       description_error: null,
-      tables: []
+      tables: [],
+      selectedLayout: 0
+    }, () => {
+      this.refresh()
     })
   }
 
+  handleLayoutChange(value){
+    let layouts = this.state.layouts;
+    if(value != 0){
+      this.setState({editing: true,
+                    selectedLayout: value,
+                    tables: layouts[(value-1)].tables
+                    })
+    }
+    else{
+      this.setState({editing: false,
+                    selectedLayout: value,
+                    tables: []
+                    })
+    }
+  }
+
+  async refresh() {
+    let response = await fetch('/admin/layouts')
+    response = await response.json();
+    this.setState({
+      layouts: response
+    });
+    Logger.log("Loaded Layouts", response)
+  }
+
+  buildLayoutList(){
+    let layouts = this.state.layouts;
+    let layoutList = [<option key="0" value="0">-select layout to edit-</option>]
+
+     if(layouts.length !== 0) {
+      for (var i = 0; i < layouts.length; i++) {
+        let name = layouts[i].description;
+        let id = layouts[i].id;
+        layoutList.push(<option key={id} value={id}>{name}</option>);
+      }
+    }
+    return layoutList;
+  }
 
   updateDimensions() {
     let {containerWidth,containerHeight, tables  = []} = this.state;
@@ -291,8 +377,8 @@ class CreateTable extends React.Component {
   }
 
   render() {
-    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, description_error = null } = this.state;
-    let {description} = this.props;
+    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, description_error = null, editing } = this.state;
+    let {description, layout_id} = this.props;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} mobileView={mobileView} />)
     let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i} mobileView={mobileView} />)
     if(description_error) {
@@ -300,11 +386,33 @@ class CreateTable extends React.Component {
         {description_error}
       </div>
     }
+    let editing_warning_description = null;
+    if(editing) {
+      editing_warning_description = <div className='warning'>
+        You Cannot Change The Description Of An Existing Layout.
+      </div>
+    }
+    if(this.state.selectedLayout) {
+      layout_id = this.state.selectedLayout
+    }
+    let layoutOptions = this.buildLayoutList();
     let description_props = {};
+    if(editing) {
+      description_props.disabled = 'disabled'
+    }
     let input_value = 'Create Table Layout'
+    if(editing) {
+      input_value = "Update Table Layout"
+    }
     return <div>
       <form onSubmit={this.createTable} autoComplete="off">
+        {editing_warning_description}
         {description_error}
+        <div className='padding-vert'>
+          <Dropdown value={layout_id} onChange={this.handleLayoutChange}>
+            {layoutOptions}
+          </Dropdown>
+        </div>
         <FloatText name="layout_description" label="Table Layout Description:" defaultValue={description} inputProps={description_props} />
         <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
                visible={true} onContentClick={this.handleClick} onTap={this.tapped}

@@ -31,8 +31,6 @@ class AuctionItem extends React.Component {
       auction_item_id: id,
     }
 
-    console.log('creating ticket', body);
-
     let resp = await fetch('/bid', {
       method: 'POST',
       headers: {
@@ -66,11 +64,11 @@ class AuctionItem extends React.Component {
 
     if(expanded){
       content = <div>
-        <p className="description">{description}</p>
-        <p className="price">Current Bid: {price}</p>
-        {bidError}
+        <p className="description"> Description: {description}</p>
         <form onSubmit={this.bid} autoComplete="off" className="bid-form">
           <FloatNumber name="price" label="Enter Your Bid Here:" />
+          <p className="price"> Current Bid: {price} Euro</p>
+        {bidError}
           <div className='bid-form-input'>
             <input type='submit' className='form-button' submit="bid" value='Bid!'/>
           </div>

@@ -38,7 +38,7 @@ class User extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { id, f_name, l_name, email, phone = '', accessibility = 'None', registered, subscribed, email_verified, is_admin } = this.props;
+    let { id, f_name, l_name, email, phone, accessibility = '', registered, subscribed, email_verified, is_admin } = this.props;
 
     let content = null;
 
