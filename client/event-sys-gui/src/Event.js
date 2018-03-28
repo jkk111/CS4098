@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ViewTickets from './ViewTickets'
 import Menu from './Menu'
 import Donate from './Donate'
+
 let mapStateToProps = (state) => {
   return {
     is_admin: !state.admin_info.pending,
@@ -15,6 +16,11 @@ let mapDispatchToProps = (dispatch) => {
   return {
     show_tracker: (id) => {
       dispatch({ type: 'VIEW_CHANGED', value: 'VIEW_DONATIONS' })
+      dispatch({ type: 'TRACK_EVENT', value: id })
+    },
+
+    view_transactions: (id) => {
+      dispatch({ type: 'VIEW_CHANGED', value: 'VIEW_TRANSACTIONS' })
       dispatch({ type: 'TRACK_EVENT', value: id })
     },
 
@@ -34,6 +40,7 @@ class Event extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.show_tracker = this.show_tracker.bind(this);
+    this.view_transactions = this.view_transactions.bind(this);
     this.edit_event = this.edit_event.bind(this);
   }
 
@@ -46,6 +53,12 @@ class Event extends React.Component {
   show_tracker() {
     if(this.props.show_tracker) {
       this.props.show_tracker(this.props.id)
+    }
+  }
+
+  view_transactions(){
+    if(this.props.view_transactions){
+      this.props.view_transactions(this.props.id)
     }
   }
 
@@ -82,6 +95,9 @@ class Event extends React.Component {
           </div>
           <div>
             <span className='user-content-button' onClick={this.show_tracker}>View Live Tracker</span>
+          </div>
+          <div>
+            <span className="user-content-button" onClick={this.view_transactions}>View Transactions</span>
           </div>
         </div>
 

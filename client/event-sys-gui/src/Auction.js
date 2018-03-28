@@ -38,14 +38,14 @@ class Auction extends React.Component {
 
     if(expanded) {
       content = <div className='auction-content'>
-        <span className='auction-content-key'>Name</span>
+        <span className='auction-content-key'>Name:</span>
         <span className='auction-content-value'>{name}</span>
-        <span className='auction-content-key'>Description</span>
+        <span className='auction-content-key'>Description:</span>
         <span className='auction-content-value'>{description}</span>
-        <span className='auction-content-key'>Start</span>
+        <span className='auction-content-key'>Start:</span>
         <span className='auction-content-value'>{startString}</span>
-        <span className='auction-content-key'>End</span>
-        <span className='auction-content-value'>{endString}</span>
+        <span className='auction-content-key'>End:</span>
+        <span className='auction-content-value'>{endString}</span> 
       </div>
     }
 
