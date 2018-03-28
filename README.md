@@ -141,92 +141,118 @@ Admin Access Only
 8. Users can select "Remember me" to securely store their payment information, so regular customers can quickly checkout. For verification purposes the customer must provide their mobile number.
 
 
-###Feature 40 - I would like to email (legitimately) subscribed users.    
-###Feature 42 - I want to be able to contact attendees easily e.g. group emails.  
+###Feature 40 - I would like to email (legitimately) subscribed users.
+Admin Access Only
+1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
+   
+###Feature 42 - I want to be able to contact attendees easily e.g. group emails.
+Admin Access Only
+1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
+
+
 ###Feature 46 - I want to create menus.
-###Feature 61 - I want to be able to purchase tickets througha simple online site, so I can attend the event.  
-###Feature 62 - View tickets. 
+Admin Access Only
+1. This is where the admin can create a menu for a certain event.
+2. To create a menu, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create menu'
+3. First name the menu by using the "Menu Name" field. Any name is accepted.
+4. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolates to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "Add Starter" button. Then input the same information as detailed in this step.
+5. Repeat step 4 for the main course, desserts, and drinks.
+6. Not all fields are mandetory. However if you do not enter a name for your menu it will appear as an empty string in the "view menu" screen, as well as in the dropdown in create events.
+8. When you have finished adding things to your menu, click "Create Menu".
+9. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
+
+
+###Feature 61 - I want to be able to purchase tickets through a simple online site, so I can attend the event.
+1. The ability to buy a ticket online can be used on the "View Events" page.
+2. To view all events, click on 'menu' and select the 'View Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+6. To see more information about an event, click on the event name.
+7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
+ 
+###Feature 62 - View tickets.
+1. An admin can see tickets they have created on the "Create Event" page. This is done by clicking the "Add Ticket" button, and then selected the required ticket from the dropdown.
+2. A guest can view a ticket in "View Events". This is done by clicking on the event you want to attend. The ticket name will appear, along with the option to buy it.
+ 
 ###Feature 63 - Create an account/register.
+1. If you are already logged in, log out (See logging out).
+1. To create an account, go to the "Sign Up/Create An Account" screen. If you have not been previously logged in your will be automatically be sent to this page on startup.
+2. Enter your first name in the "First Name" field.
+3. Enter your Surname in the "Last Name" field.
+4. Enter whatever username you want to use in the app into 	  	   the "Username" field.
+5. Enter your email in the "email" field.
+6. Create a password for your account and enter it into the 	   "Password" field.
+7. Confirm the password you just entered.
+8. If your username and password are acceptable, you will be  	   automatically logged into the system, being directed to 	  	   the home page, with "Welcome Home" being displayed. You 	 	   can then use this same username and password to login in  	   future. If your username is already in use, or your 	 	   password and confirm password are not the same, then you 	   will not be able to sign up and an error message will be 	   displayed. Make sure your username is unique and your 		   passwords the same to proceed.
+(Note: There is no minimum amount of characters required for 	 any of these fields, and the email field does not require a 	 real email address or the @ key. However if you do not 	 	 enter a valid email, and verify your email, you will not be 	 able to recieve any email updates.)
+
 ###Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily.
+1. The ability to check all deatils about an event is availaible on the "View Events" page. 
+2. To view all events, click on 'menu' and select the 'Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+5. To see more information about an event, click on the event name.
+
+
 ###Feature 71 - I want to view event information so I can decide if I want to attend.  
-###Feature 72 - I want to be able to easily see details fo the event – time, venue, etc. 
-###Feature 73 - Look at dinner menu.  
-###Feature 74- I would like to buy a ticket to attend the event.  
-###Feature 87 - I want to be notified when new events are released.   
+1. The ability to check all information about an event is availaible on the "View Events" page. 
+2. To view all events, click on 'menu' and select the 'Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+5. To see more information about an event, click on the event name. If you decide you want to atttend, you can buy a ticket on that page by clciking the "Buy for..." button.
+
+###Feature 72 - I want to be able to easily see details fo the event - time, venue, etc.
+1. The ability to check all information about an event is availaible on the "View Events" page. 
+2. To view all events, click on 'menu' and select the 'Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+5. To see more information about an event, click on the event name. 
+
+###Feature 73 - Look at dinner menu.
+Admin Access Only
+1. This is where admins can see the menu options they created.
+2. To view menus, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Menus'.
+3. The list of menu names will appear.
+4. Click on a Menu name for further information on the menu.
+5. Guests can see the menu for an event on the "View Events" page. On the "View Events" page, click on the event you are interested. The dropdown will show a "View Menu" option. Click on it to see the menu for the event.
+
+  
+###Feature 74- I would like to buy a ticket to attend the event.
+1. The ability to buy a ticket can be used on the "View Events" page.
+2. To view all events, click on 'menu' and select the 'View Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+6. To see more information about an event, click on the event name.
+7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
+
+  
+###Feature 87 - I want to be notified when new events are released. 
+1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
+  
 
 ### Logging Out
 1. To log out, simply press the logout button in the menu. You should be redirected to the login/signup page.
 
 
 
-### Creating Events
-Admin access only
-1.  To begin adding events to the system, ensure you've already added menus and tickets.
-2.  Once tickets and dinner menus have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event';
-3. On the "create Event" page, enter the name of the event.
-This can be the name of the event, or the type etc.
-4. Enter a description of the event. What charity its for, possible upgrades, anything you want your guests to know.
-5. Enter the location for the event. An address, landmark, etc.
-6.Select the date and time of the venue using the appropiate fields. This is done by clicking on the calender that appears when you click on the field. The time can be selected at the bottom of the calender.
-7. Select the menu you want associated with the event, by selecting from all the menus you have created that can be seen in the dropdown menu.
-8. Click the "Add a ticket" button if you wish to add tickets to this event. Once you click this button you may select a ticket from the dropdown menu if you have already created it inthe "create ticket" page. You can then select the amount of tickets you want, either by typing in the number or by using the arrows to add more or less tickets.
-9. To save the event, click on the create event button at the bottom of the screen.
-10. Any event created will automatically sent out email invites to all users.
-11. Saved events should appear in the "event" section in the main menu.
-
-### Viewing Events
-1. The ability to see a list of all events is available to admins and all other users.
-2. To view all events, click on 'menu' and select the 'Events' option.
-3. You should now see a list of all events in the system.
-4. If you see a message saying there are no events, then there are no events in the system.
-6. To see more information about an event, click on the event name.
-7. If you are logged in as an admin you will also see 2 more administrative pieces of information about an event.
-
-
-### Create User
-Admin Access Only
-1. Create user is for admins to create accounts for their customers. They should know the customers first name, last name,and email.
-2. To create a user, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create User'
-3. Fill in the customers first name, last name and email address. Initials are accepted as there is no minimal character length. Additionally the email field is not currently required to have a real email.
-
-
-### Create Menu
-Admin Access Only
-1. Before we can create events, we need to create a menu for that event.
-2. This is where the admin can create a menu for a certain event.
-3. To create a menu, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create menu'
-4. First name the menu by using the "Menu Name" field. Any name is accepted.
-5. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolate to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "add starter" button. Then input the same information as detailed in this step.
-6. Repeat step 4 for the main course, desserts, and drinks.
-7. Currently not all fields are mandetory. However if you do not enter a name for your menu it will appear as an empty string in the "view menu" screen, as well as in the dropdown in create events.
-8. When you have finished adding things to your menu, click "Create Menu".
-9. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
-
-
-
-### View Menu
-Admin Access Only
-1. This is where admins can see the menu options they created.
-2. To view menus, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Menus'
-3. The list of menu names will appear.
-4. Click on a Menu name for further information on the menu
 
 ## Release 2
 
 ### Feature 4 - I would like to be able to create an event, e.g. a dinner
-Admin Access Only
-1.  To begin adding events to the system, ensure you've already added menus and tickets.
-2.  Once tickets and dinner menus have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event';
-3. On the "create Event" page, enter the name of the event.
+Admin access only
+1.  To begin adding events to the system, ensure you've already added tickets. (See "Creating Tickets")
+2.  Once tickets and have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event'.
+3. On the "Create Event" page, enter the name of the event.
 This can be the name of the event, or the type etc.
 4. Enter a description of the event. What charity its for, possible upgrades, anything you want your guests to know.
 5. Enter the location for the event. An address, landmark, etc.
-6. Select the date and time of the venue using the appropiate fields. This is done by clicking on the calender that appears when you click on the field. The time can be selected at the bottom of the calender.
-7. Select the menu you want associated with the event, by selecting from all the menus you have created that can be seen in the dropdown menu.
-8. Click the "Add a ticket" button if you wish to add tickets to this event. Once you click this button you may select a ticket from the dropdown menu if you have already created it inthe "create ticket" page. You can then select the amount of tickets you want, either by typing in the number or by using the arrows to add more or less tickets.
-9. To save the event, click on the create event button at the bottom of the screen.
-10. Any event created will automatically sent out email invites to all users.
-11. Saved events should appear in the "event" section in the main menu.
+6. Select the date and time of the venue using the appropiate fields. This is done by clicking on the calender that appears when you click on the field. The time can be selected at the bottom of the calender. If your start time occurs after the end time, you will see an warning message if you attempt to create an event.
+7. Select the menu you want associated with the event, by selecting from all the menus you have created (see feature 46) that can be seen in the dropdown menu. Having a menu for an event is not mandetory.
+8. Select the auction you want associated with the event, by selecting from all the auctions you have created (see feature 121) that can be seen in the dropdown menu. Having an auction for an event is not mandetory.
+9. Click the "Add a ticket" button to add tickets to this event. Once you click this button you may select a ticket from the dropdown menu if you have already created it in the "Create Ticket" page. You can then select the amount of tickets you want, either by typing in the number or by using the arrows to add more or less tickets. If you do not have any tickets for your event and try to click "Create Event" you will be preseted with a warning message.
+10. To save the event, click on the create event button at the bottom of the screen. If you have not named your event you will be presented with a warning message and be unable to create your event. Name your event to continue.
+11. Any event created will automatically sent out email invites to all users.
+12. Saved events appear in the "View Events" section in the main menu.
 
 
 ### Feature 5 - I want to be able to update event information and submit event updates
@@ -234,9 +260,9 @@ Admin Access only
 1. The ability to edit events can be used from the "View Events" page.
 2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
 3. In the view events page, you can see all the events you have created. Click on the event name you wish to edit and all the details of that event will appear.
-4.Click on "Edit this Event"
-5. You will be directed to the screen that allows you to change the eveent details.
-6. You can change the event description, location, start time and end time by filling in your required changes into the respective fields. You are not able to change the name of the event. You also cannot remove tickets that have already been added to an event, but you can add additional tickets.
+4. Click on "Edit this Event"
+5. You will be directed to the screen that allows you to change the event details.
+6. You can change the event description, location, start time and end time by filling in your required changes into the respective fields. You are not able to change the name of the event. You also cannot remove tickets that have already been added to an event, but you can add additional ticket types.
 7. When you have finished, click the "Update Event" button. The event will be updated. This can be checked by returning to the view events page and viewing the changed event.
 8. When the event is updated, all attendees are automatically emailed with the updates.
 
@@ -247,7 +273,8 @@ Admin Access Only
 2. They do this by clicking on the menu button on the top of the screen. This will drop down all the menu options. They then click on 'Settings'.
 3. To add an allergen, the user clicks the "Add Allergen" button. A dropdown menu will then appear, where the user can select what allergens apply to them. They can also delete allergens by clicking the red X at the side of the dropdown.
 4. They can also type in any additional dietary information or accessibilty requirements by typing it in the textbox.
-5. Admins can then see this information by TODO
+5. Admins can then see this information on the "View Users" page. If they click on a users name, that users details will appear, including dietary and accessability requirements.
+6. If an Admin wants to 
 
 ### Feature 31 - I want to be able to share special dietary requirements (including table info for guests) with the caterer
 Admin Access Only
