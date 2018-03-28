@@ -100,8 +100,7 @@ class CreateTable extends React.Component {
     this.state = {
       containerWidth: window.innerWidth,
       containerHeight: window.innerHeight,
-      layouts: [],
-      tapped: false,
+      layouts: [], // This isn't right we shouldn't be using the window size
       x: this.props.x,
       y: this.props.y
     };
@@ -117,7 +116,10 @@ class CreateTable extends React.Component {
     this.createTable = this.createTable.bind(this);
     this.check = this.check.bind(this);
     this.handleLayoutChange = this.handleLayoutChange.bind(this);
-    this.setLayouts();
+    this.refresh = this.refresh.bind(this);
+    this.updateTable = this.updateTable.bind(this);
+    this.buildLayoutList = this.buildLayoutList.bind(this);
+    this.refresh();
   }
 
   check(e) {
@@ -131,7 +133,7 @@ class CreateTable extends React.Component {
     return true;
   }
 
-  async updateEvent(e){
+  async updateTable(e){
     let {tables = [], layouts, selectedLayout} = this.state;
     let table_positions = [];
     let form = e.target
@@ -171,7 +173,7 @@ class CreateTable extends React.Component {
       return;
     }
     if(this.state.editing) {
-      return this.updateEvent(e);
+      return this.updateTable(e);
     }
     let {tables = []} = this.state;
     let table_positions = [];
@@ -203,6 +205,8 @@ class CreateTable extends React.Component {
       description_error: null,
       tables: [],
       selectedLayout: 0
+    }, () => {
+      this.refresh()
     })
   }
 
@@ -222,10 +226,12 @@ class CreateTable extends React.Component {
     }
   }
 
-  async setLayouts() {
+  async refresh() {
     let response = await fetch('/admin/layouts')
     response = await response.json();
-    this.setState({layouts: response});
+    this.setState({
+      layouts: response
+    });
     Logger.log("Loaded Layouts", response)
   }
 
@@ -315,9 +321,10 @@ class CreateTable extends React.Component {
   tapped(e){
     this.setState({
       x: e.evt.changedTouches[0].clientX,
-      y: e.evt.changedTouches[0].clientY,
-      tapped: true
+      y: e.evt.changedTouches[0].clientY
     })
+    let {x,y} = this.state;
+    console.log("X:" + x + " Y:" + y)
     this.handleClick(e);
 
   }
@@ -340,33 +347,24 @@ class CreateTable extends React.Component {
     if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
       this.setState({mobileView: true})
     }
-    let {tables = [], x, y,tapped } = this.state;
-    if(tapped){
-      this.setState({
-      tables: [ ...tables, next ],
-      focused: tables.length,
-      tapped : false
-      })
-      return;
-    }
     this.setState({
       x: e.evt.layerX,
       y: e.evt.layerY
     })
+    let {tables = [], x, y } = this.state;
     console.log(e, tables);
     let next = { x, y };
 
     this.setState({
       tables: [ ...tables, next ],
-      focused: tables.length,
-      tapped : false
+      focused: tables.length
     })
   }
 
   deleteTable(e) {
     let { focused, tables = [] } = this.state;
 
-    if(focused === null || tables.length === 0) {
+    if(focused === null || tables.length == 0) {
       return;
     }
 

@@ -1,0 +1,9 @@
+extends header.pug
+block content
+  - var link = `http://localhost:3000/auction_pay?id=${item_id}`
+  p.body.
+    Hi #{name}.
+    You have won an item you have bid on "#{item_name}".
+    Click the link below to pay for the item.
+    Price: #{item_value}
+    #[a(href!=link) Item Link]

@@ -116,5 +116,6 @@ module.exports = {
   router: app,
   create_transaction: create_transaction,
   TICKET,
-  DONATION
+  DONATION,
+  AUCTION
 }
