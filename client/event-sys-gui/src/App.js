@@ -68,8 +68,7 @@ const views = {
   CREATE_AUCTION: CreateAuction,
   VIEW_AUCTIONS: ViewAuctions,
   CREATE_TABLE: CreateTable,
-  VIEW_TRANSACTIONS: ViewTransactions,
-  PAY_BID: PayBid
+  VIEW_TRANSACTIONS: ViewTransactions
 }
 
 class App extends Component {
@@ -159,6 +158,10 @@ class App extends Component {
     let { registerError, loginError } = this.state;
     if(this.props.view === 'SINGLE_EVENT_VIEW') {
       return <SingleEventView />
+    }
+
+    if(this.props.view === 'PAY_BID') {
+      return <PayBid />
     }
 
     if(this.props.logged_in !== 'UNAUTH') {

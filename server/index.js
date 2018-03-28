@@ -10,7 +10,8 @@ const admin_modules = require('./admin_modules');
 const Database = require('./database');
 const Auction = Database.Get('auction');
 const Users = Database.Get('user');
-const Event = Database.Get('event')
+const Event = Database.Get('event');
+const Payment = Database.Get('payment')
 const Payments = require('./auth_modules/payments');
 const { hash_password, verify_password } = require('./util')
 const config = require('./config.json')
@@ -26,7 +27,7 @@ process.on('unhandledRejection', (reason, p) => {
 
 let prune_events = async() => {
   let end_time = { comparator: '<=', value: Date.now() }
-  let ended = await Auction.get('auction', { end_time })
+  let ended = await Auction.get('auction', { end_time, ended: false })
 
   console.log(end_time, ended)
 
@@ -281,6 +282,32 @@ app.get('/status', async(req, res) => {
     auth_level: AUTH_LEVELS[level]
   })
 })
+
+app.post('/item_info', bodyParser.json(), async(req, res) => {
+  let { item_id } = req.body;
+
+  let [ item ] = await Auction.get('auction_item', { id: item_id });
+  let [ price ] = await Auction.get('bid', { auction_item_id: item_id }, '*', 'ORDER BY amount desc LIMIT 1');
+  let [ transaction ] = await Payment.get('transactions', { data_id: item_id, type: Payment.AUCTION }, 'id, finished');
+
+  transaction = transaction || {};
+  let { finished } = transaction;
+  let transaction_id = transaction.id
+
+  console.log(item, price, transaction)
+
+  if(!transaction_id) {
+    return res.send({ success: false, error: 'TRANSACTION_NOT_EXIST' });
+  }
+
+  let resp = {};
+  Object.assign(resp, item)
+
+  resp.transaction_id = transaction_id;
+  resp.finished = finished
+  res.send(resp);
+})
+
 
 let identify = async(req, res, next) => {
   let id = req.cookies.id;
