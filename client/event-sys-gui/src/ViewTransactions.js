@@ -46,32 +46,38 @@ class ViewTransactions extends React.Component {
     let { transactions } = this.state;
     let { id } = this.props;
 
-    transactions = transactions.map((transaction, i) => {
-      let { id, user_id, amount, type } = transaction
-      return <tr key={i}>
-        <td>{id}</td>
-        <td>{user_id}</td>
-        <td>{amount}</td>
-        <td>{type}</td>
-      </tr>
-    })
-
-    return <div>
-      <h3>Transactions for event {id}</h3>
-      <table className="transactions">
-      <thead>
-        <tr className="titles">
-          <td>ID</td>
-          <td>USER ID</td>
-          <td>AMOUNT</td>
-          <td>TYPE</td>
+    if (transactions.length != 0){
+      transactions = transactions.map((transaction, i) => {
+        let { id, user_id, amount, type } = transaction
+        return <tr key={i}>
+          <td>{id}</td>
+          <td>{user_id}</td>
+          <td>{amount}</td>
+          <td>{type}</td>
         </tr>
-      </thead>
-      <tbody>
-        {transactions}
-      </tbody>
-    </table>
-    </div>
+      })
+
+      return <div>
+        <h3>Transactions for event {id}</h3>
+        <table className="transactions">
+        <thead>
+          <tr className="titles">
+            <td>ID</td>
+            <td>USER ID</td>
+            <td>AMOUNT</td>
+            <td>TYPE</td>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions}
+        </tbody>
+      </table>
+      </div>
+    } else {
+      return <div>
+        There are currently no transactions for the selected event
+      </div>
+    }
   }
 }
 
