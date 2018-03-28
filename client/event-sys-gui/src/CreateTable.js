@@ -240,7 +240,7 @@ class CreateTable extends React.Component {
 
   buildLayoutList(){
     let layouts = this.state.layouts;
-    let layoutList = [<option key="0" value="0">-select layout to edit-</option>]
+    let layoutList = [<option key="0" value="0">-select a layout to edit or leave as is to a create new layout-</option>]
 
      if(layouts.length !== 0) {
       for (var i = 0; i < layouts.length; i++) {
