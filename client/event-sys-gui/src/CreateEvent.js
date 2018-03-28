@@ -68,6 +68,7 @@ class CreateEvent extends React.Component {
     this.state = {
       selectedVenue:'',
       menus: [],
+      auctions: [],
       venues: [],
       start_time: props.start_time || Date.now(),
       end_time: props.end_time || Date.now(),
@@ -78,12 +79,14 @@ class CreateEvent extends React.Component {
     this.createEvent = this.createEvent.bind(this);
     this.updateEvent = this.updateEvent.bind(this);
     this.handleMenuChange = this.handleMenuChange.bind(this);
+    this.handleAuctionChange = this.handleAuctionChange.bind(this);
     this.handleVenueChange = this.handleVenueChange.bind(this);
     this.handleTicketsChange = this.handleTicketsChange.bind(this);
     this.startChange = this.startChange.bind(this);
     this.endChange = this.endChange.bind(this);
     this.check = this.check.bind(this);
     this.setMenus();
+    this.setAuctions();
     this.setTickets();
   }
 
@@ -162,6 +165,7 @@ class CreateEvent extends React.Component {
       start_time: new Date(),
       end_time: new Date(),
       selectedMenu: 0,
+      selectedAuction: 0,
       selectedTickets: [],
       name_error: null,
       start_error: null,
@@ -196,6 +200,7 @@ class CreateEvent extends React.Component {
       name: form.event_name.value,
       description: form.description.value,
       menu_id: this.state.selectedMenu,
+      auction_id: this.state.selectedAuction,
       location: form.location.value,
       start_time: this.state.start_time,
       end_time: this.state.end_time,
@@ -217,6 +222,7 @@ class CreateEvent extends React.Component {
       start_time: new Date(),
       end_time: new Date(),
       selectedMenu: 0,
+      selectedAuction: [],
       selectedTickets: [],
       name_error: null,
       start_error: null,
@@ -228,6 +234,11 @@ class CreateEvent extends React.Component {
   handleMenuChange(value) {
     console.log(value);
     this.setState({ selectedMenu: value })
+  }
+
+  handleAuctionChange(value){
+    console.log(value);
+    this.setState({ selectedAuction: value })
   }
 
   handleVenueChange(value) {
@@ -245,6 +256,13 @@ class CreateEvent extends React.Component {
     response = await response.json();
     this.setState({menus: response});
     Logger.log("Loaded Menus", response)
+  }
+
+  async setAuctions() {
+    let response = await fetch('/auctions')
+    response = await response.json();
+    this.setState({auctions: response});
+    Logger.log("Loaded Auctions", response)
   }
 
   async setTickets() {
@@ -267,6 +285,20 @@ class CreateEvent extends React.Component {
       }
     }
     return menuList;
+  }
+
+  buildAuctionList(){
+    let auctions = this.state.auctions;
+    let auctionList = [<option key="0" value="0">-select Auction-</option>]
+
+    if(auctions.length !== 0){
+      for (var i = 0; i < auctions.length; i++) {
+        let name = auctions[i].name;
+        let id = auctions[i].id;
+        auctionList.push(<option key={id} value={id}>{name}</option>);
+      }
+    }
+    return auctionList
   }
 
   buildTicketsList() {
@@ -295,7 +327,7 @@ class CreateEvent extends React.Component {
   }
 
   render() {
-    let { editing, name, description, location, menu_id, tickets = null } = this.props;
+    let { editing, name, description, location, menu_id, auction_id, tickets = null } = this.props;
     let removable = [];
 
     let { name_error = null, start_error = null, end_error = null, ticket_error = null } = this.state;
@@ -364,11 +396,16 @@ class CreateEvent extends React.Component {
       menu_id = this.state.selectedMenu
     }
 
+    if(this.state.selectedAuction){
+      auction_id = this.state.selectedAuction
+    }
+
     if(tickets === null || tickets.length < this.state.selectedTickets.length) {
       tickets = this.state.selectedTickets;
     }
 
     let menuOptions = this.buildMenuList();
+    let auctionOptions = this.buildAuctionList();
     let ticketOptions = this.buildTicketsList();
 
     let name_props = {};
@@ -401,6 +438,11 @@ class CreateEvent extends React.Component {
         <div className='padding-vert'>
           <Dropdown value={menu_id} onChange={this.handleMenuChange}>
             {menuOptions}
+          </Dropdown>
+        </div>
+        <div className='padding-vert'>
+          <Dropdown value={auction_id} onChange={this.handleAuctionChange}>
+            {auctionOptions}
           </Dropdown>
         </div>
         {editing_warning_tickets}
