@@ -160,7 +160,7 @@ class Settings extends React.Component {
     let email = form.email.value;
     let phone = form.phone.value;
     let subscribed = form.subscribed.checked;
-    let allergens = this.state.selectedAllergens.filter(v => v != -1);
+    let allergens = this.state.selectedAllergens.filter(v => v !== -1);
     let accessibility = form.accessibility.value;
 
     console.log(subscribed)
