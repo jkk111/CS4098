@@ -146,6 +146,10 @@ class App extends Component {
     if(resp.success) {
       this.props.set_logged_in('USER')
     }
+    else{
+      this.setState({ registerError2: 'Username or Email already exists' });
+      return;
+    }
   }
 
   async getTestResults() {
@@ -155,7 +159,7 @@ class App extends Component {
   }
 
   render() {
-    let { registerError, loginError } = this.state;
+    let { registerError,registerError2, loginError } = this.state;
     if(this.props.view === 'SINGLE_EVENT_VIEW') {
       return <SingleEventView />
     }
@@ -176,7 +180,7 @@ class App extends Component {
           <h1 className="App-title">Event-Management-System</h1>
         </header>
         <LoginForm loginError={loginError} onSubmit={this.login} />
-        <SignupForm registerError={registerError} onSubmit={this.register} />
+        <SignupForm registerError={registerError} registerError2={registerError2} onSubmit={this.register} />
       </div>
     }
   }
