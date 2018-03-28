@@ -342,6 +342,11 @@ class CreateTable extends React.Component {
     }
     let {tables = [], x, y,tapped } = this.state;
     if(tapped){
+      this.setState({
+      tables: [ ...tables, next ],
+      focused: tables.length,
+      tapped : false
+      })
       return;
     }
     this.setState({
