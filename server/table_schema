@@ -4,7 +4,7 @@
       "name": "layouts",
       "keys": {
         "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
-        "description": "TEXT NOT NULL"
+        "name": "TEXT NOT NULL"
       }
     },
     {

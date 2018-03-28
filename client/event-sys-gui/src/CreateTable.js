@@ -140,7 +140,7 @@ class CreateTable extends React.Component {
     }
 
     let body = {
-      description: form.description.value,
+      name: form.description.value,
       tables : table_positions
     }
 
