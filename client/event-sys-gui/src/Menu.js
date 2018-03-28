@@ -28,7 +28,7 @@ class Menu extends React.Component {
     let startersContent = []
     for (let starter of starters) {
       startersContent.push(<div>
-        <div> <span className='menu-content-key'>{starter.name}</span> </div>
+        <div> <b> <span className='menu-content-key'>{starter.name}</span> </b> </div>
         <span className='menu-content-value'>{starter.description}</span>
         <div> Allergen Information:
         <span className='menu-allergen-value'>{starter.allergens}</span>
@@ -39,7 +39,7 @@ class Menu extends React.Component {
     let mainsContent = []
     for (let main of mains) {
       mainsContent.push(<div>
-        <div> <span className='menu-content-key'>{main.name}</span> </div>
+        <div> <b> <span className='menu-content-key'>{main.name}</span> </b> </div>
         <span className='menu-content-value'>{main.description}</span>
         <div> Allergen Information:
         <span className='menu-allergen-value'>{main.allergens}</span>
@@ -50,7 +50,7 @@ class Menu extends React.Component {
     let dessertsContent = [];
     for (let dessert of desserts) {
       dessertsContent.push(<div>
-        <div> <span className='menu-content-key'>{dessert.name}</span> </div>
+        <div> <b> <span className='menu-content-key'>{dessert.name}</span> </b> </div>
         <span className='menu-content-value'>{dessert.description}</span>
         <div> Allergen Information:
         <span className='menu-allergen-value'>{dessert.allergens}</span>
@@ -61,7 +61,7 @@ class Menu extends React.Component {
     let drinksContent = [];
     for (let drink of drinks) {
       drinksContent.push(<div>
-        <div> <span className='menu-content-key'>{drink.name}</span> </div>
+        <div> <b> <span className='menu-content-key'>{drink.name}</span> </b> </div>
         <span className='menu-content-value'>{drink.description}</span>
         <div> Allergen Information:
         <span className='menu-allergen-value'>{drink.allergens}</span>

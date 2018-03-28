@@ -59,17 +59,17 @@ class User extends React.Component {
       registered = registered ? "Registered" : "Not Registered"
 
       content = <div className='user-content'>
-        <span className='user-content-key'>Email</span>
+        <span className='user-content-key'>Email:</span>
         <span className='user-content-value'>{email}</span>
-        <span className='user-content-key'>Phone</span>
+        <span className='user-content-key'>Phone:</span>
         <span className='user-content-value'>{phone}</span>
-        <span className='user-content-key'>Registration Status</span>
+        <span className='user-content-key'>Registration Status:</span>
         <span className='user-content-value'>{registered}</span>
-        <span className='user-content-key'>Subscribed</span>
+        <span className='user-content-key'>Subscribed:</span>
         <span className='user-content-value'>{subscribed}</span>
-        <span className='user-content-key'>Email Verified</span>
+        <span className='user-content-key'>Email Verified:</span>
         <span className='user-content-value'>{email_verified}</span>
-        <span className='user-content-key'>Admin Status</span>
+        <span className='user-content-key'>Admin Status:</span>
         <span className='user-content-value'>
           <span>{is_admin}</span>
           {grant_admin}
