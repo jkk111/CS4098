@@ -6,7 +6,8 @@ class AuctionItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false
+      expanded: false,
+      bid_error: null
     }
 
     this.toggle = this.toggle.bind(this);
@@ -26,16 +27,24 @@ class AuctionItem extends React.Component {
     let { id } = this.props;
 
     let body = {
-      amount: form.price.value,
+      amount: form.price.value * 100,
       auction_item_id: id,
     }
+
     console.log('creating ticket', body);
-    await fetch('/bid', {
+
+    let resp = await fetch('/bid', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
+    })
+
+    resp = await resp.json();
+
+    this.setState({
+      bid_error: (resp.success) ? null : 'Bid too low, enter an amount higher than the current bid'
     })
 
     form.price.value = ''
@@ -46,14 +55,20 @@ class AuctionItem extends React.Component {
   }
 
   render() {
-    let { expanded } = this.state;
+    let { expanded, bid_error } = this.state;
     let { name, description, price} = this.props;
+    price = price / 100;
     let content = null
+    let bidError = null;
+    if (bid_error){
+      bidError = <div className="error">{bid_error}</div>
+    }
 
     if(expanded){
       content = <div>
         <p className="description">{description}</p>
         <p className="price">Current Bid: {price}</p>
+        {bidError}
         <form onSubmit={this.bid} autoComplete="off" className="bid-form">
           <FloatNumber name="price" label="Enter Your Bid Here:" />
           <div className='bid-form-input'>

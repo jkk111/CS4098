@@ -90,7 +90,10 @@ class Menu extends React.Component {
     }
 
     let menu_class = expanded ? 'menu-expanded' : 'menu-collapsed'
-    let clickable = (name!=null) ? name : <div className="user-content-button">View the Menu</div>
+    let clickable = name;
+    if(!name) {
+      clickable = <div className="user-content-button">View the Menu</div>
+    }
 
     return <div className='menu' >
       <div className={menu_class} onClick={this.toggle}>{clickable}</div>
