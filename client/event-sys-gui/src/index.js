@@ -111,9 +111,11 @@ let update_user_data = async() => {
 
 let state_whitelist = [ 'active_view', 'active_event' ]
 
-let update_state = () => {
+let update_state = (currentState) => {
+  if(!currentState) {
+    return
+  }
   let state = {};
-  let currentState = store.getState();
 
   for(var key of state_whitelist) {
     state[key] = currentState[key];
@@ -124,10 +126,19 @@ let update_state = () => {
   window.history.pushState(state_obj, 'Current State', `/?state=${state}`);
 }
 
+window.addEventListener('popstate', (pop) => {
+  console.log(pop);
+  let { state } = pop;
+  console.log(state);
+  store.dispatch({ type: 'VIEW_CHANGED', value: state.active_view })
+  store.dispatch({ type: 'TRACK_EVENT', value: state.active_event })
+})
+
 store.subscribe(async() => {
   if(loading) {
     return
   }
+  update_state(last);
   let state = store.getState();
   let due_update = false;
   if(last !== null) {
@@ -137,7 +148,6 @@ store.subscribe(async() => {
     last = state;
     await update_user_data();
   }
-  update_state();
   last = state;
 })
 
