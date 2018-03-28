@@ -110,6 +110,12 @@ class App extends Component {
         loginError: "Invalid Username/Password"
       })
     }
+    else {
+      this.setState({
+        loginError: null,
+        registerError: null
+      })
+    }
 
     set_cookie(resp.id)
   }
@@ -144,10 +150,11 @@ class App extends Component {
     resp = await resp.json();
     set_cookie(resp.id);
     if(resp.success) {
+      this.setState({ registerError: null, loginError: null });
       this.props.set_logged_in('USER')
     }
     else{
-      this.setState({ registerError2: 'Username or Email already exists' });
+      this.setState({ registerError: 'Username or Email already exists' });
       return;
     }
   }
@@ -159,7 +166,7 @@ class App extends Component {
   }
 
   render() {
-    let { registerError,registerError2, loginError } = this.state;
+    let { registerError, loginError } = this.state;
     if(this.props.view === 'SINGLE_EVENT_VIEW') {
       return <SingleEventView />
     }
@@ -180,7 +187,7 @@ class App extends Component {
           <h1 className="App-title">Event-Management-System</h1>
         </header>
         <LoginForm loginError={loginError} onSubmit={this.login} />
-        <SignupForm registerError={registerError} registerError2={registerError2} onSubmit={this.register} />
+        <SignupForm registerError={registerError} onSubmit={this.register} />
       </div>
     }
   }

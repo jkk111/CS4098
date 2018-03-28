@@ -1,14 +1,11 @@
 import React from 'react';
 
-let SignupForm = ({ onSubmit, registerError = null,registerError2 = null}) => {
+let SignupForm = ({ onSubmit, registerError = null}) => {
   return <div className="signup-form">
     <h1>Sign Up / Create An Account</h1>
     <form onSubmit = {onSubmit}>
       <div className='error'>
         {registerError}
-      </div>
-      <div className='error'>
-        {registerError2}
       </div>
       <div>
         <label>First Name:</label>
