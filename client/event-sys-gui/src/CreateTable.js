@@ -1,6 +1,8 @@
 import React from 'react';
 import { FloatText } from './FloatText'
 import { Layer, Rect, Stage,Text } from 'react-konva';
+import { Logger } from './Util'
+import './CreateTable.css'
 //import Dimensions from 'react-dimensions'
 
 
@@ -108,14 +110,61 @@ class CreateTable extends React.Component {
     this.updateFocused = this.updateFocused.bind(this);
     this.clearFocused = this.clearFocused.bind(this);
     this.tapped = this.tapped.bind(this);
+    this.createTable = this.createTable.bind(this);
+    this.check = this.check.bind(this);
   }
+
+  check(e) {
+    let form = e.target;
+    if(form.event_name.value === '') {
+      this.setState({
+        name_error: 'Event Name Cannot Be Empty'
+      })
+      return
+    }
+  }
+
+  async createTable(e){
+    e.preventDefault();
+    if(!this.check(e)) {
+      return;
+    }
+    let {tables = []} = this.state;
+    let table_positions = [];
+    let form = e.target
+
+    for (var i = 0; i < tables.length; i++) {
+      let x = tables[i].x;
+      let y = tables[i].y;
+      table_positions.push({x: x, y: y})
+    }
+
+    let body = {
+      description: form.description.value,
+      tables : table_positions
+    }
+
+    Logger.log('creating table', body);
+    let resp = await fetch('/admin/create_layout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    Logger.log("Create Table Response", await resp.json())
+    form.reset();
+    this.setState({
+      name_error: null
+    })
+  }
+
 
   updateDimensions() {
     let {containerWidth,containerHeight, tables  = []} = this.state;
     var xNew,yNew,table,before,after;
     let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
     let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
-    var before, after;
     if (tables.length !== 0){
       for(var i=0; i < tables.length; i++){
         let {tables = []} = this.state;
@@ -235,25 +284,21 @@ class CreateTable extends React.Component {
   }
 
   render() {
-    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, name_error = null } = this.state;
-    let {name} = this.props;
+    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, description_error = null } = this.state;
+    let {description} = this.props;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} mobileView={mobileView} />)
     let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i} mobileView={mobileView} />)
-    if(name_error) {
-      name_error = <div className='error'>
-        {name_error}
+    if(description_error) {
+      description_error = <div className='error'>
+        {description_error}
       </div>
     }
-    let name_props = {};
+    let description_props = {};
     let input_value = 'Create Table Layout'
     return <div>
       <form onSubmit={this.createTable} autoComplete="off">
-        {name_error}
-        <FloatText name="layout_name" label="Table Layout Name:" defaultValue={name} inputProps={name_props} />
-        <div className='layout_form-input'>
-          <input type='submit' className='form-button' submit="create_table_layout" value={input_value} />
-        </div>
-      </form>
+        {description_error}
+        <FloatText description="layout_description" label="Table Layout Description:" defaultValue={description} inputProps={description_props} />
         <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
                visible={true} onContentClick={this.handleClick} onTap={this.tapped}
                onContentMouseMove={this.mouseMove} >
@@ -271,7 +316,11 @@ class CreateTable extends React.Component {
             {children2}
           </Layer>
         </Stage>
-      <div className='form-button form-field' onClick={this.deleteTable}>Click to Delete the Last Table You Interacted With</div>
+        <div className='form-button form-field' onClick={this.deleteTable}>Click to Delete the Last Table You Interacted With</div>
+        <div className='layout_form-input'>
+          <input type='submit' className='form-button' submit="create_table_layout" value={input_value} />
+        </div>
+      </form>
     </div>
   }
 }
