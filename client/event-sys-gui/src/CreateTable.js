@@ -117,6 +117,8 @@ class CreateTable extends React.Component {
     this.check = this.check.bind(this);
     this.handleLayoutChange = this.handleLayoutChange.bind(this);
     this.refresh = this.refresh.bind(this);
+    this.updateTable = this.updateTable.bind(this);
+    this.buildLayoutList = this.buildLayoutList.bind(this);
     this.refresh();
   }
 
@@ -131,7 +133,7 @@ class CreateTable extends React.Component {
     return true;
   }
 
-  async updateEvent(e){
+  async updateTable(e){
     let {tables = [], layouts, selectedLayout} = this.state;
     let table_positions = [];
     let form = e.target
@@ -171,7 +173,7 @@ class CreateTable extends React.Component {
       return;
     }
     if(this.state.editing) {
-      return this.updateEvent(e);
+      return this.updateTable(e);
     }
     let {tables = []} = this.state;
     let table_positions = [];
