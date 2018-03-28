@@ -22,8 +22,68 @@ class MenuForm extends React.Component {
     this.createMenu = this.createMenu.bind(this);
   }
 
+  check(e) {
+    let form = e.target;
+    let starters = this.state.starters;
+    let mains = this.state.mains;
+    let desserts = this.state.desserts;
+    let drinks = this.state.drinks;
+    if(form.menu_name.value === '') {
+      this.setState({
+        name_error: 'Menu Name Cannot Be Empty'
+      })
+      return
+    }
+    /*
+    if(typeof starters == "undefined" || typeof mains == "undefined" || typeof desserts == "undefined" || typeof drinks == "undefined"){
+      this.setState({
+            course_error: 'Name/Description Fields Cannot Be Empty'
+      })
+      return
+    }
+    */
+    for (var i = 0; i <starters.length; i++){
+      if(starters[i].name === '' || starters[i].description === ''){
+        this.setState({
+          course_error: 'Name/Description Fields Cannot Be Empty'
+        })
+      }
+    }
+
+    for (var i = 0; i <mains.length; i++){
+      if(mains[i].name === '' || mains[i].description === ''){
+        this.setState({
+          course_error: 'Name/Description Fields Cannot Be Empty'
+        })
+        return
+      }
+    }
+
+    for (var i = 0; i <desserts.length; i++){
+      if(desserts[i].name === '' || desserts[i].description === ''){
+        this.setState({
+          course_error: 'Name/Description Fields Cannot Be Empty'
+        })
+        return
+      }
+    }
+
+    for (var i = 0; i <drinks.length; i++){
+      if(drinks[i].name === '' || drinks[i].description === ''){
+        this.setState({
+          course_error: 'Name/Description Fields Cannot Be Empty'
+        })
+        return
+      }
+    }
+    return true;
+  }
+
   async createMenu(e) {
     e.preventDefault();
+    if(!this.check(e)) {
+      return;
+    }
     let form = e.target;
     console.dir(form);
     let menu = {
@@ -54,7 +114,9 @@ class MenuForm extends React.Component {
       ],
       drinks: [
         { name: '' , description: '', allergens: ''}
-      ]
+      ],
+      name_error: null,
+      course_error: null
     })
 
     form.reset();
@@ -146,8 +208,21 @@ class MenuForm extends React.Component {
   }
 
   render() {
+    let{name_error = null, course_error = null} = this.state
+     if(name_error) {
+      name_error = <div className='error'>
+        {name_error}
+      </div>
+    }
+     if(course_error) {
+      course_error = <div className='error'>
+        {course_error}
+      </div>
+    }
     return <form onSubmit={this.createMenu} autoComplete="off">
+      {name_error}
       <FloatText name="menu_name" label="Menu Name:" />
+      {course_error}
       {this.render_sections('starters', 'mains', 'desserts', 'drinks')}
       <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
     </form>
