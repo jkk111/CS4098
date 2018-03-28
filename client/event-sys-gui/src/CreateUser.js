@@ -1,5 +1,4 @@
 import React from 'react';
-//TODO Remove this
 import 'moment/locale/en-ie'
 import { Logger } from './Util'
 import FloatText from './FloatText'
