@@ -31,8 +31,6 @@ class AuctionItem extends React.Component {
       auction_item_id: id,
     }
 
-    console.log('creating ticket', body);
-
     let resp = await fetch('/bid', {
       method: 'POST',
       headers: {

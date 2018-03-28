@@ -116,11 +116,8 @@ class App extends Component {
   }
 
   async logout() {
-    let resp = await fetch('/logout');
-    resp = await resp.json();
-
-    console.log(resp);
-
+    await fetch('/logout');
+    window.location.href = '/';
     this.props.set_logged_in('UNAUTH');
   }
 
