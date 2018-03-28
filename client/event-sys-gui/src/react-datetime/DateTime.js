@@ -201,6 +201,8 @@ class DateTime extends React.Component {
 	onInputKey(e) {
 		if(e.which === 9 && this.props.closeOnTab) {
 			this.closeCalendar()
+		} else {
+			e.preventDefault();
 		}
 	}
 
