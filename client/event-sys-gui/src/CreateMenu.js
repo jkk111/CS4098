@@ -191,7 +191,13 @@ class MenuForm extends React.Component {
   }
 
   render_sections(...sections) {
+    let {course_error = null} = this.state
     let rendered = [];
+    if(course_error) {
+      course_error = <div className='error'>
+        {course_error}
+      </div>
+    }
     for(var section of sections) {
       console.log(section, sections)
       let str = section.slice(0, 1).toUpperCase() + section.slice(1, section.length - 1);
@@ -199,6 +205,7 @@ class MenuForm extends React.Component {
       contents = contents.map(this.build_list(section));
       let section_name = section.slice(0, 1).toUpperCase() + section.slice(1);;
       rendered.push(<React.Fragment key={section}>
+        {course_error}
         <h1 className='menu-section'>{section_name}</h1>
         {contents}
         <button type='button' onClick={this.add_entry(section)} className='form-button'>Add {str}</button>
@@ -208,21 +215,15 @@ class MenuForm extends React.Component {
   }
 
   render() {
-    let{name_error = null, course_error = null} = this.state
+    let{name_error = null} = this.state
      if(name_error) {
       name_error = <div className='error'>
         {name_error}
       </div>
     }
-     if(course_error) {
-      course_error = <div className='error'>
-        {course_error}
-      </div>
-    }
     return <form onSubmit={this.createMenu} autoComplete="off">
       {name_error}
       <FloatText name="menu_name" label="Menu Name:" />
-      {course_error}
       {this.render_sections('starters', 'mains', 'desserts', 'drinks')}
       <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
     </form>
