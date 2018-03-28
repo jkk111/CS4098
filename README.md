@@ -274,19 +274,31 @@ Admin Access Only
 3. To add an allergen, the user clicks the "Add Allergen" button. A dropdown menu will then appear, where the user can select what allergens apply to them. They can also delete allergens by clicking the red X at the side of the dropdown.
 4. They can also type in any additional dietary information or accessibilty requirements by typing it in the textbox.
 5. Admins can then see this information on the "View Users" page. If they click on a users name, that users details will appear, including dietary and accessability requirements.
-6. If an Admin wants to 
+6. If an Admin wants to share dietary/accessability information with staff, they can do so by going to the "View Events" page. If they click on the event they are involved in, they can see an "Export Attendee Allergen/Access Information" button. Clicking this will download a text file, listing each table number and seat number, and which seat number has what needs.
 
 ### Feature 31 - I want to be able to share special dietary requirements (including table info for guests) with the caterer
 Admin Access Only
-TODO
+1. If an Admin wants to share dietary/accessability information with staff, they can do so by going to the "View Events" page. If they click on the event they are involved in, they can see an "Export Attendee Allergen/Access Information" button. Clicking this will download a text file, listing each table number and seat number, and which seat number has what needs.
+2. Additionally the admin can view individual guests needs by navigating to the "View Users" page. They can see the dietary and access requirements that the users have previously entered in "Settings".
 
 ### Feature 32 - I want to see the table layout and seating arrangements so the tables can be organised
 Admin Access Only
-TODO
+1. Admins can edit and see the seating layout on the "Create Tables" page.
+2. To do this, click on the menu button on the top of the screen. This will drop down all the menu options. Then click on "Create Tables".
+3. If it is the first table layout, leave the dropdown as is, and name your layout. This can be a description of the layout, or the room it is designed for etc.
+4. To add a table, click anywhere on the grey canvas. You can then click and drag your table anywhere on the canvas. To add another table, just click anywhere on the canvas again.
+5. If you accidentally add a table you don't want, you can get rid of it by clicking the "Click to delete the last table you interacted with". The last table you interacted with is either the last table you added, or the last one you dragged. This table is indicated by a blue border around it.
+6. When you are finished your layout, click "Update Table Layout". If you try to create a layout without giving it a name/description you will be presented with a warning message. Name the layout to save it.
+7. If you want to view/edit your layout, simply select it from the dropdown. You can then see where the tables are and move them/ add or delete if necessary. You cannot change the layout name/description. 
 
 ### Feature 49 - I want to be able to accept and see payments
 Admin Access Only
-TODO
+1. When a user buys a ticket, donates or pays for an item in an auction, the payment is accepted automatically through stripe.
+2. An admin can see the payments that have been made on the "View Events" page.
+3. To do this, click on the menu button on the top of the screen. This will drop down all the menu options. Then click on "View Events".
+4. Click on the desired event name, and the dropdown will include a "View Transactions" button.
+5. If you click on this button, it will show you a list of all the payments that haave been made, including donations, and completed bids for the selected event.
+6. If there are no transactions, the screen will tell you "There are currently no transactions for the selected event".
 
 ### Feature 53 - Have a live tracker that updates with donations throughout the event
 1. Both users and admins can see a live tracker associated with each event.
@@ -294,8 +306,10 @@ TODO
 3. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
 4. In the view events page, you can see all the events you have created. Click on the event name you wish to view and all the details of that event will appear.
 5. Click the "View Live Tracker" button. This will bring you to the donation tracker page.
-6. When someone makes a donation, the tracker will show the amount raised overall.
-7. To exit the live tracker, click on the menu button at the top of the page.
+6. When someone makes a donation, the tracker will refresh to show the amount.
+7. When someone donates, the tracker will refresh to show the amount.
+8. Throughout the event, the live tracker will reflect the current amount raised through donations and bids.
+9. To exit the live tracker, click on the menu button at the top of the page.
 
 
 ### Feature 54 - I want to track current amount raised
@@ -304,9 +318,11 @@ TODO
 3. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
 4. In the view events page, you can see all the events you have created. Click on the event name you wish to view and all the details of that event will appear.
 5. Click the "View Live Tracker" button. This will bring you to the donation tracker page.
-6. When someone makes a donation, the tracker will show the amount raised overall.
-7. To exit the live tracker, click on the menu button at the top of the page.
-8. At the end of the event, the live tracker will show the total amount raised on the night.
+6. When someone makes a donation, the tracker will refresh to show the amount.
+7. When someone donates, the tracker will refresh to show the amount.
+8. Throughout the event, the live tracker will reflect the current amount raised through donations and bids.
+9. To exit the live tracker, click on the menu button at the top of the page.
+10. At the end of the event, the live tracker will show the total amount that has been raised on the night.
 
 ### Feature 121 - I want to set up an auction
 Admin Access Only
@@ -327,7 +343,13 @@ This can be the name of the auction, or the type etc.
 14. To save this item, click the "Create Item" button. All fields are mandetory.
 15. To view a created auction and its associated items, go to the "View Auction" page (see feature 132)
 
-### Feature 122 - I want a way to record payments on the night
+### Feature 122 - I want a way to record payments on the night.
+1. An admin can see the payments that have been made on the night on the "View Events" page.
+2. To do this, click on the menu button on the top of the screen. This will drop down all the menu options. Then click on "View Events".
+3. Click on the event taking place on the night, and the dropdown will include a "View Transactions" button.
+4. If you click on this button, it will show you a list of all the payments that haave been made, including donations, and completed bids for the selected event.
+5. If there are no transactions, the screen will tell you "There are currently no transactions for the selected event".
+
 
 ### Feature 132 - I want to be able to see auction information, including information on auction items
 1. Users and Admins can see information on auctions in the "View Auctions" page.
