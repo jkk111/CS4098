@@ -124,7 +124,8 @@ class CreateTable extends React.Component {
 
   check(e) {
     let form = e.target;
-    if(form.layout_description.value === '') {
+    let {editing} = this.state;
+    if(form.layout_description.value === '' && !editing) {
       this.setState({
         description_error: 'Table Description Cannot Be Empty'
       })
@@ -145,7 +146,7 @@ class CreateTable extends React.Component {
     }
 
     let body = {
-      id: selectedLayout,
+      layout_id: selectedLayout,
       tables : table_positions
     }
 
@@ -164,6 +165,8 @@ class CreateTable extends React.Component {
       description_error: null,
       tables: [],
       selectedLayout: 0
+    }, () => {
+      this.refresh()
     })
   }
 
@@ -377,7 +380,7 @@ class CreateTable extends React.Component {
   }
 
   render() {
-    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, description_error = null, editing } = this.state;
+    let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, description_error = null, editing} = this.state;
     let {description, layout_id} = this.props;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} mobileView={mobileView} />)
     let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i} mobileView={mobileView} />)
