@@ -89,7 +89,7 @@ app.post('/create_layout', bodyParser.json(), async(req, res) => {
 
   let insert = await Tables.add('layouts', { description });
 
-  let table_id = isnert.lastID;
+  let table_id = insert.lastID;
 
   for(var table of tables) {
     await Tables.add('layouts', { layout_id, ...table });
