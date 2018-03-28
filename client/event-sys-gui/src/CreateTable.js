@@ -100,7 +100,8 @@ class CreateTable extends React.Component {
     this.state = {
       containerWidth: window.innerWidth,
       containerHeight: window.innerHeight,
-      layouts: [], // This isn't right we shouldn't be using the window size
+      layouts: [],
+      tapped: false,
       x: this.props.x,
       y: this.props.y
     };
@@ -314,10 +315,9 @@ class CreateTable extends React.Component {
   tapped(e){
     this.setState({
       x: e.evt.changedTouches[0].clientX,
-      y: e.evt.changedTouches[0].clientY
+      y: e.evt.changedTouches[0].clientY,
+      tapped: true
     })
-    let {x,y} = this.state;
-    console.log("X:" + x + " Y:" + y)
     this.handleClick(e);
 
   }
@@ -340,17 +340,21 @@ class CreateTable extends React.Component {
     if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
       this.setState({mobileView: true})
     }
+    let {tables = [], x, y,tapped } = this.state;
+    if(!tapped){
+      return;
+    }
     this.setState({
       x: e.evt.layerX,
       y: e.evt.layerY
     })
-    let {tables = [], x, y } = this.state;
     console.log(e, tables);
     let next = { x, y };
 
     this.setState({
       tables: [ ...tables, next ],
-      focused: tables.length
+      focused: tables.length,
+      tapped : false
     })
   }
 
