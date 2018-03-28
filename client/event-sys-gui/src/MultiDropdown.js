@@ -51,7 +51,7 @@ let MultiDropdown = ({ unique, children, removable = [], value = [ 0 ], InputEl 
 
     let el_children = [ ...available_children ];
     available_children = available_children.filter((item, index) => {
-      return item.props.value != v;
+      return item.props.value !== v;
     })
 
     let is_removable = removable[i];

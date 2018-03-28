@@ -315,7 +315,7 @@ class CreateTable extends React.Component {
   deleteTable(e) {
     let { focused, tables = [] } = this.state;
 
-    if(focused === null || tables.length == 0) {
+    if(focused === null || tables.length === 0) {
       return;
     }
 
