@@ -1,5 +1,12 @@
 import React from 'react';
 import Payment from './Payment'
+import { connect } from 'react-redux'
+
+let mapStateToProps = (state) => {
+  return {
+    id: state.active_item
+  }
+}
 
 class PayBid extends React.Component {
   constructor(props) {
@@ -9,9 +16,11 @@ class PayBid extends React.Component {
     });
 
     this.pay = this.pay.bind(this)
+    this.refresh = this.refresh.bind(this);
+    this.refresh();
   }
 
-  async fetchItemDetails() {
+  async refresh() {
     let { id } = this.props;
 
     let body = {
@@ -29,7 +38,7 @@ class PayBid extends React.Component {
     resp = await resp.json();
 
     this.setState({
-      payed: resp.finished,
+      paid: resp.finished,
       name: resp.name,
       price: resp.price
     })
@@ -41,14 +50,13 @@ class PayBid extends React.Component {
   }
 
   render() {
-    let { payed, name, price } = this.state;
-    price /= 100;
+    let { paid, name, price } = this.state;
     let content = null;
 
-    if (payed){
+    if (paid) {
       content = <div>
         <h3>{name}</h3>
-        <div>This item has already been payed for</div>
+        <div>This item has already been paid for</div>
       </div>
     } else {
       content = <div>
@@ -63,4 +71,4 @@ class PayBid extends React.Component {
   }
 }
 
-export default PayBid
+export default connect(mapStateToProps)(PayBid)

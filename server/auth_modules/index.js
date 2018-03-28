@@ -35,11 +35,12 @@ app.get('/events', async(req, res) => {
     if(req.is_admin) {
       let attendees = await Events.get('user_tickets', { event_id: id }, 'user_id');
       for(var attendee of attendees) {
-        let user_data = await Users.get('user', { id: attendee.user_id }, ['f_name', 'l_name', 'email', 'accessibility']);
-        let user_allergens = await Users.get('allergens', { user_id: attendee.id }, 'allergen_id');
+        let [ user_data ] = await Users.get('user', { id: attendee.user_id }, ['f_name', 'l_name', 'email', 'accessibility']);
+        let user_allergens = await Users.get('allergens', { user_id: attendee.user_id }, 'allergen_id');
         Object.assign(attendee, user_data);
-        attendee.allergens = user_allergens.map(allergen => allergen.allergen_id);
+        attendee.allergens = user_allergens.map(allergen => allergen.allergen_id + 1);
       }
+      event.attendees = attendees
     }
 
     if(event.menu_id != null) {
@@ -117,26 +118,6 @@ app.post('/bid', bodyParser.json(), async(req, res) => {
     res.send({ success: false, error: 'TOO_LOW' })
   }
 });
-
-app.post('/item_info', bodyParser.json(), async(req, res) => {
-  let { item_id } = req.body;
-
-  let [ item ] = await Auction.get('auction', { id: item_id });
-  let price = await Auction.get('bid', { auction_item_bid: id }, '*', 'ORDER BY amount desc LIMIT 1');
-  let [ transaction ] = await Payment.get('transactions', { data_id: id, type: AUCTION }, 'id, finished');
-  let { transaction_id, finished } = transaction || {};
-
-  if(!transaction_id) {
-    res.send({ success: false, error: 'TRANSACTION_NOT_EXIST' });
-  }
-
-  let resp = {};
-  Object.assign(resp, item)
-
-  resp.transaction_id = transaction_id;
-  resp.finished = finished
-  res.send(resp);
-})
 
 app.get('/auctions', async(req, res) => {
   let auctions = await Auction.get('auction', {});
