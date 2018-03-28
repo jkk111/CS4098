@@ -341,7 +341,7 @@ class CreateTable extends React.Component {
       this.setState({mobileView: true})
     }
     let {tables = [], x, y,tapped } = this.state;
-    if(!tapped){
+    if(tapped){
       return;
     }
     this.setState({
