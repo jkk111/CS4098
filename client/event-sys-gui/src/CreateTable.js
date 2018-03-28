@@ -141,7 +141,7 @@ class CreateTable extends React.Component {
     }
 
     let body = {
-      name: form.layout_description.value,
+      description: form.layout_description.value,
       tables : table_positions
     }
 
