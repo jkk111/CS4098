@@ -38,7 +38,7 @@ class User extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { id, f_name, l_name, email, phone = '', registered, subscribed, email_verified, is_admin } = this.props;
+    let { id, f_name, l_name, email, phone = '', accessibility = 'None', registered, subscribed, email_verified, is_admin } = this.props;
 
     let content = null;
 
@@ -63,6 +63,8 @@ class User extends React.Component {
         <span className='user-content-value'>{email}</span>
         <span className='user-content-key'>Phone:</span>
         <span className='user-content-value'>{phone}</span>
+        <span className='user-content-key'>Accessibility Requirements/Dietary Preference:</span>
+        <span className='user-content-value'>{accessibility}</span>
         <span className='user-content-key'>Registration Status:</span>
         <span className='user-content-value'>{registered}</span>
         <span className='user-content-key'>Subscribed:</span>

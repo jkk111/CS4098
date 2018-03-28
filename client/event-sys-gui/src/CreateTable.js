@@ -3,6 +3,8 @@ import { FloatText } from './FloatText'
 import { Layer, Rect, Stage,Text } from 'react-konva';
 import { Logger } from './Util'
 import './CreateTable.css'
+import Dropdown from './Dropdown'
+//import MultiDropdown from './MultiDropdown'
 //import Dimensions from 'react-dimensions'
 
 
@@ -97,7 +99,8 @@ class CreateTable extends React.Component {
 
     this.state = {
       containerWidth: window.innerWidth,
-      containerHeight: window.innerHeight, // This isn't right we shouldn't be using the window size
+      containerHeight: window.innerHeight,
+      layouts: [], // This isn't right we shouldn't be using the window size
       x: this.props.x,
       y: this.props.y
     };
@@ -112,6 +115,8 @@ class CreateTable extends React.Component {
     this.tapped = this.tapped.bind(this);
     this.createTable = this.createTable.bind(this);
     this.check = this.check.bind(this);
+    this.handleLayoutChange = this.handleLayoutChange.bind(this);
+    this.setLayouts();
   }
 
   check(e) {
@@ -158,9 +163,42 @@ class CreateTable extends React.Component {
 
     this.setState({
       description_error: null,
+      tables: []
     })
   }
 
+  handleLayoutChange(value){
+    let layouts = this.state.layouts;
+    this.setState({ selectedLayout: value,
+                    tables: layouts[value].tables
+                   })
+  }
+
+  async setLayouts() {
+    let response = await fetch('/admin/layouts')
+    response = await response.json();
+    this.setState({layouts: response});
+    Logger.log("Loaded Layouts", response)
+  }
+
+  buildLayoutList(){
+    let layouts = this.state.layouts;
+    let layoutList = [<option key="0" value="0">-select layout-</option>]
+
+     if(layouts.length !== 0) {
+      for (var i = 0; i <= layouts.length; i++) {
+        if(i !== layouts.length){
+          let name = layouts[i].description;
+          let id = layouts[i].id;
+          layoutList.push(<option key={id} value={id}>{name}</option>);
+        }
+        else{
+          layoutList.push(<option key={i+1} value={i+1}>-new layout-</option>);
+        }
+      }
+    }
+    return layoutList;
+  }
 
   updateDimensions() {
     let {containerWidth,containerHeight, tables  = []} = this.state;
@@ -291,7 +329,7 @@ class CreateTable extends React.Component {
 
   render() {
     let { tables = [], containerWidth, containerHeight, focused, dragging, mobileView, description_error = null } = this.state;
-    let {description} = this.props;
+    let {description, layout_id} = this.props;
     let children = tables.map((table, i) => <Table key={i} {...table} updatePosition={this.updatePosition(i)} updateFocused={this.updateFocused(i)} focused={focused === i} mobileView={mobileView} />)
     let children2 = tables.map((table, i) => <TableText key={i} {...table} id={i+1} dragging={dragging} focused={focused === i} mobileView={mobileView} />)
     if(description_error) {
@@ -299,11 +337,20 @@ class CreateTable extends React.Component {
         {description_error}
       </div>
     }
+    if(this.state.selectedLayout) {
+      layout_id = this.state.selectedLayout
+    }
+    let layoutOptions = this.buildLayoutList();
     let description_props = {};
     let input_value = 'Create Table Layout'
     return <div>
       <form onSubmit={this.createTable} autoComplete="off">
         {description_error}
+        <div className='padding-vert'>
+          <Dropdown value={layout_id} onChange={this.handleLayoutChange}>
+            {layoutOptions}
+          </Dropdown>
+        </div>
         <FloatText name="layout_description" label="Table Layout Description:" defaultValue={description} inputProps={description_props} />
         <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
                visible={true} onContentClick={this.handleClick} onTap={this.tapped}

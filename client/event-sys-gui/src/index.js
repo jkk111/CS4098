@@ -54,20 +54,35 @@ let reducers = {
     return state;
   },
 
-  active_view: (state = 'HOME', action) => {
+  active_view: (state = {}, action) => {
+    let { past = [], current = 'HOME' } = state;
     if(action.type === 'VIEW_CHANGED') {
-      return action.value;
+      let next = action.value;
+      past = [ ...past, current ];
+      return { past, current: next }
     } else if(action.type === 'LOGIN_STATE_CHANGED') {
       if(action.value === 'UNAUTH') {
-        return 'HOME'
+        return { past: [], current: 'HOME' }
       }
+    } else if(action.type === 'BACK') {
+      let next_past = past.slice();
+      let prev = next_past.pop();
+      return { past: next_past, current: prev || 'HOME' }
     }
+
     return state;
   },
 
-  active_event: (state = null, action) => {
+  active_event: (state = {}, action) => {
+    let { past = [], current = null } = state;
     if(action.type === 'TRACK_EVENT') {
-      return action.value;
+      let next = action.value
+      past = [ ...past, current ];
+      return { past, current: next }
+    } else if(action.type === 'BACK') {
+      let next_past = past.slice();
+      let prev = next_past.pop();
+      return { past: next_past, current: prev }
     }
     return state;
   },
@@ -130,16 +145,16 @@ window.addEventListener('popstate', (pop) => {
   console.log(pop);
   let { state } = pop;
   console.log(state);
-  store.dispatch({ type: 'VIEW_CHANGED', value: state.active_view })
-  store.dispatch({ type: 'TRACK_EVENT', value: state.active_event })
+  store.dispatch({ type: 'BACK' })
 })
 
 store.subscribe(async() => {
   if(loading) {
     return
   }
-  update_state(last);
+
   let state = store.getState();
+  update_state(state);
   let due_update = false;
   if(last !== null) {
     due_update = state.logged_in !== 'UNAUTH' && state.logged_in !== last.logged_in && state.info.pending;
