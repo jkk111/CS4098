@@ -145,7 +145,7 @@ class CreateTable extends React.Component {
     }
 
     let body = {
-      description: layouts[selectedLayout].description,
+      description: layouts[(selectedLayout-1)].description,
       tables : table_positions
     }
 
