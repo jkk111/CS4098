@@ -38,7 +38,13 @@ class User extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { id, f_name, l_name, email, phone, accessibility = '', registered, subscribed, email_verified, is_admin } = this.props;
+    let { id, f_name, l_name, email, phone, allergens = [], accessibility = '', registered, subscribed, email_verified, is_admin } = this.props;
+
+    allergens = allergens.map(a => a + 1).join(' ').trim();
+
+    if(allergens === '') {
+      allergens = 'None'
+    }
 
     let content = null;
 
@@ -63,6 +69,8 @@ class User extends React.Component {
         <span className='user-content-value'>{email}</span>
         <span className='user-content-key'>Phone:</span>
         <span className='user-content-value'>{phone}</span>
+        <span className='user-content-key'>Allergens:</span>
+        <span className='user-content-value'>{allergens}</span>
         <span className='user-content-key'>Accessibility Requirements/Dietary Preference:</span>
         <span className='user-content-value'>{accessibility}</span>
         <span className='user-content-key'>Registration Status:</span>
