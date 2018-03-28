@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './ViewTransactions.css'
 
 let mapStateToProps = (state) => {
-  return { id: state.active_event }
+  return { id: state.active_event.current }
 }
 
 class ViewTransactions extends React.Component {
@@ -12,11 +12,11 @@ class ViewTransactions extends React.Component {
     this.state = ({
       transactions: []
     });
-    this.fetchTransactions = this.fetchTransactions.bind(this);
-    this.fetchTransactions();
+    this.refresh = this.refresh.bind(this);
+    this.refresh();
   }
 
-  async fetchTransactions(){
+  async refresh(){
     let { id } = this.props;
 
     console.log('event_id: ', id);
