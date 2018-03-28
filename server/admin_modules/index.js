@@ -106,6 +106,17 @@ app.post('/create_layout', bodyParser.json(), async(req, res) => {
   res.send({ id: layout_id })
 })
 
+app.post('/update_layout', bodyParser.json(), async(req, res) => {
+  let { layout_id, tables = [] } = req.body;
+
+  await Tables.delete('table_positions', { layout_id });
+  for(var table of tables) {
+    await Tables.add('table_positions', { layout_id, ...table });
+  }
+
+  res.send({ id: layout_id })
+})
+
 app.post('/big_spenders', bodyParser.json(), async(req, res) => {
   let { minimum } = req.body;
 

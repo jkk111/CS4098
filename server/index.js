@@ -8,8 +8,11 @@ const user_modules = require('./user_modules');
 const auth_modules = require('./auth_modules');
 const admin_modules = require('./admin_modules');
 const Database = require('./database');
+const Auction = Database.Get('auction');
 const Users = Database.Get('user');
-const Event = Database.Get('event')
+const Event = Database.Get('event');
+const Payment = Database.Get('payment')
+const Payments = require('./auth_modules/payments');
 const { hash_password, verify_password } = require('./util')
 const config = require('./config.json')
 const crypto = require('crypto')
@@ -21,6 +24,53 @@ process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise', p, 'reason:', reason, Error.stack);
   // application specific logging, throwing an error, or other logic here
 });
+
+let prune_events = async() => {
+  let end_time = { comparator: '<=', value: Date.now() }
+  let ended = await Auction.get('auction', { end_time, ended: false })
+
+  console.log(end_time, ended)
+
+  if(ended.length === 0) {
+    return
+  }
+
+  for(var auction of ended) {
+    await Auction.update('auction', { ended: true }, { id: auction.id });
+  }
+
+  let auction_ids = ended.map(auction => auction.id).join(', ');
+
+
+  let ended_items = await Auction.get('auction_item', { }, '*', `WHERE auction_id IN (${auction_ids})`);
+
+  console.log(ended_items);
+
+  for(var item of ended_items) {
+    let auction_item_id = item.id;
+    let high_bid = await Auction.get('bid', { auction_item_id }, '*', 'ORDER BY amount DESC LIMIT 1');
+    if(high_bid.length > 0) {
+      high_bid = high_bid[0];
+      let { user_id } = high_bid;
+      let [ user_info ] = await Users.get('user', { id: user_id });
+
+      let { f_name, l_name, email } = user_info;
+
+      Payments.create_transaction(user_id, auction_item_id, "Auction Item", high_bid.amount, Payments.AUCTION)
+
+      let item_value = `€${(high_bid.amount / 100).toFixed(2)}`;
+      let item_name = item.name;
+      let item_id = auction_item_id
+      let name = `${f_name} ${l_name}`;
+
+      sendTemplate('win_bid', { to: email, subject: 'You\'ve Just got a letter', item_value, item_name, name, item_id });
+    }
+  }
+}
+
+setInterval(prune_events, 60 * 1000);
+
+prune_events();
 
 
 global.Promise = require('bluebird')
@@ -232,6 +282,33 @@ app.get('/status', async(req, res) => {
     auth_level: AUTH_LEVELS[level]
   })
 })
+
+app.post('/item_info', bodyParser.json(), async(req, res) => {
+  let { item_id } = req.body;
+
+  let [ item ] = await Auction.get('auction_item', { id: item_id });
+  let [ price ] = await Auction.get('bid', { auction_item_id: item_id }, '*', 'ORDER BY amount desc LIMIT 1');
+  let [ transaction ] = await Payment.get('transactions', { data_id: item_id, type: Payments.AUCTION }, 'id, finished');
+
+  transaction = transaction || {};
+  let { finished } = transaction;
+  let transaction_id = transaction.id
+
+  console.log(item, price, transaction)
+
+  if(!transaction_id) {
+    return res.send({ success: false, error: 'TRANSACTION_NOT_EXIST' });
+  }
+
+  let resp = {};
+  Object.assign(resp, item)
+
+  resp.transaction_id = transaction_id;
+  resp.finished = finished
+  resp.price = price.amount;
+  res.send(resp);
+})
+
 
 let identify = async(req, res, next) => {
   let id = req.cookies.id;

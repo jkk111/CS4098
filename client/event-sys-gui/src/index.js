@@ -96,6 +96,13 @@ let reducers = {
       }
     }
     return state;
+  },
+
+  active_item: (state = null, action) => {
+    if(action.type === 'VIEW_BID') {
+      return action.value;
+    }
+    return state;
   }
 }
 
@@ -133,7 +140,7 @@ let update_state = (currentState) => {
   let state = {};
 
   for(var key of state_whitelist) {
-    state[key] = currentState[key];
+    state[key] = currentState[key].current;
   }
   let state_obj = state;
   state = btoa(JSON.stringify(state));
@@ -200,9 +207,19 @@ let check_verify = async() => {
 let check_view_event = () => {
   if(window.location.pathname === '/event') {
     let { id } = parse_query();
-    if(parse_query) {
+    if(id) {
       store.dispatch({ type: 'TRACK_EVENT', value: id })
       store.dispatch({ type: 'VIEW_CHANGED', value: 'SINGLE_EVENT_VIEW' })
+    }
+  }
+}
+
+let check_view_item = () => {
+  if(window.location.pathname === '/auction_pay') {
+    let { id } = parse_query();
+    if(id) {
+      store.dispatch({ type: 'VIEW_CHANGED', value: 'PAY_BID' });
+      store.dispatch({ type: 'VIEW_BID', value: id })
     }
   }
 }
@@ -223,6 +240,7 @@ ticker();
 update_user_data().then(async() => {
   await check_verify();
   await check_view_event();
+  await check_view_item();
   loading = false;
   if(store.getState().logged_in !== 'UNAUTH') {
     let qs = parse_query();

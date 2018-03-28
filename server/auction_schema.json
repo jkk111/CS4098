@@ -7,7 +7,8 @@
         "name": "TEXT NOT NULL",
         "description": "TEXT NOT NULL",
         "start_time": "INT NOT NULL",
-        "end_time": "INT NOT NULL"
+        "end_time": "INT NOT NULL",
+        "ended": "BOOL NOT NULL DEFAULT 0"
       }
     },
     {

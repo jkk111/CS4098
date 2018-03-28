@@ -35,11 +35,12 @@ app.get('/events', async(req, res) => {
     if(req.is_admin) {
       let attendees = await Events.get('user_tickets', { event_id: id }, 'user_id');
       for(var attendee of attendees) {
-        let user_data = await Users.get('user', { id: attendee.user_id }, ['f_name', 'l_name', 'email', 'accessibility']);
-        let user_allergens = await Users.get('allergens', { user_id: attendee.id }, 'allergen_id');
+        let [ user_data ] = await Users.get('user', { id: attendee.user_id }, ['f_name', 'l_name', 'email', 'accessibility']);
+        let user_allergens = await Users.get('allergens', { user_id: attendee.user_id }, 'allergen_id');
         Object.assign(attendee, user_data);
-        attendee.allergens = user_allergens.map(allergen => allergen.allergen_id);
+        attendee.allergens = user_allergens.map(allergen => allergen.allergen_id + 1);
       }
+      event.attendees = attendees
     }
 
     if(event.menu_id != null) {

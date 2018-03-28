@@ -6,7 +6,7 @@ import './DonationTracker.css'
 const REFRESH_FREQ = 1000;
 
 let mapStateToProps = (state) => {
-  return { event_id: state.active_event }
+  return { event_id: state.active_event.current }
 }
 
 class DonationTracker extends React.Component {
