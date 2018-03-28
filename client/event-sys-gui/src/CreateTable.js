@@ -158,6 +158,7 @@ class CreateTable extends React.Component {
 
     this.setState({
       description_error: null,
+      tables: []
     })
   }
 

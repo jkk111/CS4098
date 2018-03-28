@@ -81,7 +81,15 @@ app.post('/event_income_breakdown', bodyParser.json(), async(req, res) => {
 });
 
 app.get('/layouts', async(req, res) => {
-  // let layouts = await Tables.get('')
+  let layouts = await Tables.get('layouts', {}, '*');
+
+  for(var layout of layouts) {
+    let tables = await Tables.get('table_positions', { layout_id: layout.id }, '*')
+    Object.assign(layout, { tables });
+    console.log(tables);
+  }
+
+  res.send(layouts)
 });
 
 app.post('/create_layout', bodyParser.json(), async(req, res) => {
@@ -89,13 +97,13 @@ app.post('/create_layout', bodyParser.json(), async(req, res) => {
 
   let insert = await Tables.add('layouts', { description });
 
-  let table_id = insert.lastID;
+  let layout_id = insert.lastID;
 
   for(var table of tables) {
-    await Tables.add('layouts', { layout_id, ...table });
+    await Tables.add('table_positions', { layout_id, ...table });
   }
 
-  res.send({ id: table_id })
+  res.send({ id: layout_id })
 })
 
 app.post('/big_spenders', bodyParser.json(), async(req, res) => {
