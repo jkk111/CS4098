@@ -134,7 +134,7 @@ class CreateTable extends React.Component {
   }
 
   async updateTable(e){
-    let {tables = [], layouts, selectedLayout} = this.state;
+    let {tables = [], selectedLayout} = this.state;
     let table_positions = [];
     let form = e.target
 
@@ -145,7 +145,7 @@ class CreateTable extends React.Component {
     }
 
     let body = {
-      description: layouts[(selectedLayout-1)].description,
+      id: selectedLayout,
       tables : table_positions
     }
 
