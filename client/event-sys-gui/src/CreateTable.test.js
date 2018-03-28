@@ -6,4 +6,14 @@ describe('CreateTable', () => {
   it('should be defined', () => {
     expect(CreateTable).toBeDefined();
   });
+  /*
+  it('Renders App Without Crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(
+      <CreateTable/>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
+  });
+  */
 });
