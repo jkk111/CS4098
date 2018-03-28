@@ -10,10 +10,8 @@ Repo to store source code for CS4098 - Group Design Project
 5. Navigate to newly created folder - ```cd cs4098```
 6. Run setup script - ```./setup.sh```
 7. Follow the instructions on screen and enter your details. Keep a note of your login credentials for later.
-8. Tips
- 	* Eventbrite token - this must be a lower case "no" if not using eventbrite
-	* Email / SMTP Host / SMTP Port - leave blank to not set up email
-	* Mail Password - You can't leave this blank. Enter something simple like 'password' if you don't want to use email.
+8. Email / SMTP Host / SMTP Port - leave blank to not set up email. Otherwise enter your email in the email field, and your SMTP Host and Port. (Exaample: A domain name and 587)
+Mail Password - You can't leave this blank. Enter something simple like 'password' if you don't want to use email.
 9. Once complete, the script should open the webapp in a browser. If this fails, navigate to ```localhost:3000``` in your favorite browser.
 
 ## Release 1
