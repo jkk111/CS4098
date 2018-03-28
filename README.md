@@ -19,7 +19,7 @@ Repo to store source code for CS4098 - Group Design Project
 ## Release 1
 
 **Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction**.  
-**Feature 32 - e-ticketing for users**.  
+**Feature 32 - e-ticketing for users**.
 **Feature 36 - Online ticketing – keeping in mind that mostly repeat customers/attendees**.  
 **Feature 42 - I want to be able to contact attendees easily e.g. group emails**.  
 **Feature 74- I would like to buy a ticket to attend the event**.  
@@ -136,8 +136,6 @@ Admin Access Only
 4. Click on a Menu name for further information on the menu
 
 ## Release 2
-1. Each one of these features should have a detailed list of instruction on how to see the feature in action.
-2. It shouldn't include describing other features, except where absolutely necessary.
 
 ### Feature 4 - I would like to be able to create an event, e.g. a dinner
 Admin Access Only
@@ -153,7 +151,6 @@ This can be the name of the event, or the type etc.
 9. To save the event, click on the create event button at the bottom of the screen.
 10. Any event created will automatically sent out email invites to all users.
 11. Saved events should appear in the "event" section in the main menu.
-
 
 
 ### Feature 5 - I want to be able to update event information and submit event updates
@@ -226,7 +223,6 @@ This can be the name of the auction, or the type etc.
 13. Select the auction that the item is for by choosing it from the dropdown menu.
 14. To save this item, click the "Create Item" button. All fields are mandetory.
 15. To view a created auction and its associated items, go to the "View Auction" page (see feature 132)
-
 
 ### Feature 122 - I want a way to record payments on the night
 

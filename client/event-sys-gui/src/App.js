@@ -22,6 +22,7 @@ import ViewAuctions from './ViewAuctions'
 import CreateTable from './CreateTable'
 import DonationTracker from './DonationTracker'
 import SingleEventView from './SingleEventView'
+import ViewTransactions from './ViewTransactions'
 
 
 let mapStateToProps = (state) => {
@@ -66,7 +67,8 @@ const views = {
   CREATE_AUCTION_ITEM: CreateAuctionItem,
   CREATE_AUCTION: CreateAuction,
   VIEW_AUCTIONS: ViewAuctions,
-  CREATE_TABLE: CreateTable
+  CREATE_TABLE: CreateTable,
+  VIEW_TRANSACTIONS: ViewTransactions
 }
 
 class App extends Component {

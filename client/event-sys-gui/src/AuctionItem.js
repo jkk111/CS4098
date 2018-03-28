@@ -78,10 +78,10 @@ class AuctionItem extends React.Component {
       </div>
     }
 
-    let auction_item_name_class = expanded ? 'auction-item-name-expanded' : 'auction-item-name-collapsed'
+    //let auction_item_name_class = expanded ? 'auction-item-name-expanded' : 'auction-item-name-collapsed'
 
     return <div className='auction-item' >
-      <button className={auction_item_name_class} onClick={this.toggle}>{name}</button>
+      <button className="form-button" onClick={this.toggle}>{name}</button>
       {content}
     </div>
   }
