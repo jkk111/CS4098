@@ -28,32 +28,44 @@ class Menu extends React.Component {
     let startersContent = []
     for (let starter of starters) {
       startersContent.push(<div>
-        <span className='menu-content-key'>{starter.name}</span>
+        <div> <b> <span className='menu-content-key'>{starter.name}</span> </b> </div>
         <span className='menu-content-value'>{starter.description}</span>
+        <div> Allergen Information:
+        <span className='menu-allergen-value'>{starter.allergens}</span>
+        </div>
       </div>)
     }
 
     let mainsContent = []
     for (let main of mains) {
       mainsContent.push(<div>
-        <span className='menu-content-key'>{main.name}</span>
+        <div> <b> <span className='menu-content-key'>{main.name}</span> </b> </div>
         <span className='menu-content-value'>{main.description}</span>
+        <div> Allergen Information:
+        <span className='menu-allergen-value'>{main.allergens}</span>
+        </div>
       </div>)
     }
 
     let dessertsContent = [];
     for (let dessert of desserts) {
       dessertsContent.push(<div>
-        <span className='menu-content-key'>{dessert.name}</span>
+        <div> <b> <span className='menu-content-key'>{dessert.name}</span> </b> </div>
         <span className='menu-content-value'>{dessert.description}</span>
+        <div> Allergen Information:
+        <span className='menu-allergen-value'>{dessert.allergens}</span>
+        </div>
       </div>)
     }
 
     let drinksContent = [];
     for (let drink of drinks) {
       drinksContent.push(<div>
-        <span className='menu-content-key'>{drink.name}</span>
+        <div> <b> <span className='menu-content-key'>{drink.name}</span> </b> </div>
         <span className='menu-content-value'>{drink.description}</span>
+        <div> Allergen Information:
+        <span className='menu-allergen-value'>{drink.allergens}</span>
+        </div>
       </div>)
     }
 
@@ -62,6 +74,7 @@ class Menu extends React.Component {
         admin_content = <div className='admin-content'>
           <span className='menu-content-key'>Menu ID</span>
           <span className='menu-content-value'>{id}</span>
+          <span className='menu-allergen-value'>{id}</span>
         </div>
       }
       content = <div className='menu-content'>
