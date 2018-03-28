@@ -275,7 +275,7 @@ class CreateEvent extends React.Component {
 
   buildMenuList(){
     let menus = this.state.menus;
-    let menuList = [<option key="0" value="0">-select menu-</option>]
+    let menuList = [<option key="0" value="0">-Select Menu-</option>]
 
      if(menus.length !== 0) {
       for (var i = 0; i < menus.length; i++) {
@@ -289,7 +289,7 @@ class CreateEvent extends React.Component {
 
   buildAuctionList(){
     let auctions = this.state.auctions;
-    let auctionList = [<option key="0" value="0">-select Auction-</option>]
+    let auctionList = [<option key="0" value="0">-Select Auction-</option>]
 
     if(auctions.length !== 0){
       for (var i = 0; i < auctions.length; i++) {
@@ -362,13 +362,13 @@ class CreateEvent extends React.Component {
 
     if(editing) {
       editing_warning_email = <div className='warning'>
-        When An Event Is Updated All Attendees Are Emailed.
+        When an event is updated all attendees are emailed.
       </div>
       editing_warning_name = <div className='warning'>
-        You Cannot Change The Name Of An Existing Event.
+        You cannot change the name of an existing event.
       </div>
       editing_warning_tickets = <div className='warning'>
-        You Cannot Change Remove Tickets From An Existing Event.
+        You cannot change or remove tickets from an existing event. If you wish to add more tickets you must create a new ticket type.
       </div>
     }
 

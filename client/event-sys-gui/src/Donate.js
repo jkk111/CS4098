@@ -18,7 +18,7 @@ class Donate extends React.Component {
 
   donate(){
     let { donationAmount } = this.state;
-    Payment.CreateDonation(donationAmount*100);
+    Payment.CreateDonation(donationAmount * 100, this.props.id);
   }
 
   handleAmountChange(value) {
@@ -32,13 +32,16 @@ class Donate extends React.Component {
   }
 
   buildAmountList(){
-    let amounts = [1,2,5,10,20,50,100,500,1000];
-    let amountList = [<option key="0" value="0">-select amount-</option>]
-    for (var i = 0; i < amounts.length; i++){
-      let amount = amounts[i];
-      let key = i+1;
-      amountList.push(<option key={key} value={amount}>{amount}</option>)
-    }
+    let amounts = [ 1, 2, 5, 10, 20, 50, 100, 500, 1000 ];
+    amounts = amounts.map((amount, i) => {
+      return <option key={i} value={amount}>{amount}</option>
+    });
+
+    let amountList = [
+      <option key="-1" value="-1">-select amount-</option>,
+      ...amounts
+    ]
+
     return amountList;
   }
 
@@ -49,7 +52,7 @@ class Donate extends React.Component {
     let donateButton = null;
 
     if (donationAmount > 0){
-      donateButton = <button className="buy-button" onClick={this.donate}>Donate {donationAmount} euro</button>
+      donateButton = <button className="buy-button" onClick={this.donate}>Donate €{donationAmount}</button>
     }
 
     if(expanded) {

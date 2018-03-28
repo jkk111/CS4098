@@ -10,7 +10,9 @@ let Menus = Database.Get('menu');
 let Raffle = Database.Get('raffle')
 let Auction = Database.Get('auction');
 let Payments = Database.Get('payment')
+let Tables = Database.Get('table')
 let Payment = require('../auth_modules/payments')
+
 let { sendTemplate } = require('../email')
 let eventbrite = require('../eventbrite')
 
@@ -77,6 +79,24 @@ app.post('/event_income_breakdown', bodyParser.json(), async(req, res) => {
 
   res.send(all_income)
 });
+
+app.get('/layouts', async(req, res) => {
+  // let layouts = await Tables.get('')
+});
+
+app.post('/create_layout', bodyParser.json(), async(req, res) => {
+  let { description, tables = [] } = req.body;
+
+  let insert = await Tables.add('layouts', { description });
+
+  let table_id = isnert.lastID;
+
+  for(var table of tables) {
+    await Tables.add('layouts', { layout_id, ...table });
+  }
+
+  res.send({ id: table_id })
+})
 
 app.post('/big_spenders', bodyParser.json(), async(req, res) => {
   let { minimum } = req.body;

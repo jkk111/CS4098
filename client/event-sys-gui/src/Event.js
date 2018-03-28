@@ -115,7 +115,7 @@ class Event extends React.Component {
 
       if(logged_in && !single_view) {
         donate_content = <div>
-          <Donate/>
+          <Donate id={id} />
         </div>
       }
     }

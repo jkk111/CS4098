@@ -20,7 +20,7 @@ let NoFloatNumber = (props = {}) => {
 
   if(mod_props.inputProps) {
     mod_props.inputProps.type = 'number';
-    mod_props.inputProps.step = 0.01
+    mod_props.inputProps.step = '0.01'
     mod_props.inputProps.min = 1;
   } else {
     mod_props.inputProps = {
