@@ -27,7 +27,7 @@ class ViewUsers extends React.Component {
     if(minimum.trim() === '') {
       minimum = 0;
     } else {
-      minimum = parseInt(minimum);
+      minimum = parseInt(minimum, 10);
     }
 
     let resp = null;
@@ -110,10 +110,10 @@ class ViewUsers extends React.Component {
     ]
 
     let modeItem = modes.find(m => {
-      return m.value == mode
+      return m.value === mode
     })
 
-    let avail_modes = modes.filter(m => m.value != mode).map(m => {
+    let avail_modes = modes.filter(m => m.value !== mode).map(m => {
       return <button key={m.name} onClick={this.changeMode(m.value)}>{m.name}</button>
     });
 
