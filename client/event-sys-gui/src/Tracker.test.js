@@ -1,14 +1,15 @@
 import React from 'react';
-import ViewUsers from './ViewUsers.js';
+import Tracker from './Tracker.js';
 import ReactDOM from 'react-dom';
 
-describe('ViewUsers', () => {
+describe('Tracker', () => {
   it('should be defined', () => {
-    expect(ViewUsers).toBeDefined();
+    expect(Tracker).toBeDefined();
   });
+
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ViewUsers />, div);
+    ReactDOM.render(<Tracker />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

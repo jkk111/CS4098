@@ -1,5 +1,4 @@
 import React from 'react';
-//import ViewMenu from './ViewMenu'
 import Menu from './Menu'
 class ViewMenus extends React.Component {
   constructor(props) {

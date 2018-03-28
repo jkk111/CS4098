@@ -6,4 +6,10 @@ describe('EventList', () => {
   it('should be defined', () => {
     expect(EventList).toBeDefined();
   });
+
+  it('Renders App Without Crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<EventList/>, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
 });

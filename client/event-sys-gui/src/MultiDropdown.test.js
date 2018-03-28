@@ -1,14 +1,15 @@
 import React from 'react';
-import ViewUsers from './ViewUsers.js';
+import MultiDropdown from './MultiDropdown.js';
 import ReactDOM from 'react-dom';
 
-describe('ViewUsers', () => {
+describe('MultiDropdown', () => {
   it('should be defined', () => {
-    expect(ViewUsers).toBeDefined();
+    expect(MultiDropdown).toBeDefined();
   });
+
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ViewUsers />, div);
+    ReactDOM.render(<MultiDropdown children={[]}/>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

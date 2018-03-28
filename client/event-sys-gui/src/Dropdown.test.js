@@ -1,14 +1,15 @@
 import React from 'react';
-import ViewUsers from './ViewUsers.js';
+import Dropdown from './Dropdown.js';
 import ReactDOM from 'react-dom';
 
-describe('ViewUsers', () => {
+describe('Dropdown', () => {
   it('should be defined', () => {
-    expect(ViewUsers).toBeDefined();
+    expect(Dropdown).toBeDefined();
   });
+
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ViewUsers />, div);
+    ReactDOM.render(<Dropdown/>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });
