@@ -12,8 +12,8 @@
       "keys": {
         "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
         "layout_id": "INTEGER NOT NULL",
-        "x": "INTEGER NOT NULL",
-        "y": "INTEGER NOT NULL"
+        "x": "FLOAT NOT NULL",
+        "y": "FLOAT NOT NULL"
       }
     }
   ]
