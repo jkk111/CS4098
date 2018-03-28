@@ -6,7 +6,8 @@ import Menu from './Menu'
 import Donate from './Donate'
 let mapStateToProps = (state) => {
   return {
-    is_admin: !state.admin_info.pending
+    is_admin: !state.admin_info.pending,
+    logged_in: state.logged_in
   }
 }
 
@@ -109,6 +110,8 @@ class Event extends React.Component {
           <Menu {...menu}/>
         </div>
       }
+
+      console.log(logged_in, single_view)
 
       if(logged_in && !single_view) {
         donate_content = <div>
