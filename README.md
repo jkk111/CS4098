@@ -76,16 +76,71 @@ Admin access only
 6. To check if your ticket was added, click on the menu button again, and then select 'Create Event' on the dropdown menu. In the "Create Event" page, there is a button called "Add Ticket" Selecting this should a dropdown with the ticket name of the ticket you just created, and allow you to select it. 
 
 
-###Feature 6 - Keep track of possible/previous guests.  
+###Feature 6 - Keep track of possible/previous guests.
+Admin Access Only
+1. To keep track of all the users on the app, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'
+2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
+  
 ###Feature 7 & 8 - I want to sent invitations to a mailing list, so that people know to come and that they are invited.
-###Feature 9 - I want to see guests contact details. 
+Admin Access Only
+1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket.
+ 
+###Feature 9 - I want to see guests contact details.
+Admin Access Only
+1. To see guests contact details, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'.
+2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
+3. When you click on a name, you will be able to see the users email address, as well as their phone number if they have provided one.
+
 ###Feature 10 - I want to see the invite list.
-###Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event.    
-###Feature 16 - I want to be able to send automated invitations, with link to register for the event.  
-###Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction.  
+1. All users who have verified their emails with the app are automatically invited to all events created.
+2. To see the users, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'.
+3. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
+
+ 
+
+###Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event.
+Admin Access Only
+1. To register a guest, an Admin can make them an account in "Create User". They should know the guests first name, last name,and email.
+2. To create a user, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create User'
+3. Fill in the customers first name, last name and email address. Initials are accepted as there is no minimal character length. If you enter the correct email for the guest, they will be sent a link that will allow them to create their account and fill in their details.
+
+    
+###Feature 16 - I want to be able to send automated invitations, with link to register for the event.
+Admin Access Only
+1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, with links to the app for them to buy tickets.
+  
+###Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction.
+1. The ability to buy a ticket online can be used on the "View Events" page.
+2. To view all events, click on 'menu' and select the 'View Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+6. To see more information about an event, click on the event name.
+7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
+
+  
 ###Feature 32 - e-ticketing for users.
-###Feature 34 - Send out emails automatically when an event is created.  
-###Feature 36 - Online ticketing – keeping in mind that mostly repeat customers/attendees.
+1. The e-ticketing system can be seen on the "View Events" page.
+2. To view all events, click on 'menu' and select the 'View Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+6. To see more information about an event, click on the event name.
+7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
+
+
+###Feature 34 - Send out emails automatically when an event is created.
+Admin Access Only
+1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
+ 
+###Feature 36 - Online ticketing - keeping in mind that mostly repeat customers/attendees.
+1. The ability to buy a ticket online can be used on the "View Events" page.
+2. To view all events, click on 'menu' and select the 'View Events' option.
+3. You should now see a list of all events in the system.
+4. If you see a message saying there are no events, then there are no events in the system.
+6. To see more information about an event, click on the event name.
+7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
+8. Users can select "Remember me" to securely store their payment information, so regular customers can quickly checkout. For verification purposes the customer must provide their mobile number.
+
+
 ###Feature 40 - I would like to email (legitimately) subscribed users.    
 ###Feature 42 - I want to be able to contact attendees easily e.g. group emails.  
 ###Feature 46 - I want to create menus.
