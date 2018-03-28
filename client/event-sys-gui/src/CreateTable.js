@@ -116,12 +116,13 @@ class CreateTable extends React.Component {
 
   check(e) {
     let form = e.target;
-    if(form.event_name.value === '') {
+    if(form.layout_description.value === '') {
       this.setState({
-        name_error: 'Event Name Cannot Be Empty'
+        description_error: 'Table Description Cannot Be Empty'
       })
       return
     }
+    return true;
   }
 
   async createTable(e){
@@ -140,7 +141,7 @@ class CreateTable extends React.Component {
     }
 
     let body = {
-      name: form.description.value,
+      name: form.layout_description.value,
       tables : table_positions
     }
 
@@ -154,8 +155,9 @@ class CreateTable extends React.Component {
     })
     Logger.log("Create Table Response", await resp.json())
     form.reset();
+
     this.setState({
-      name_error: null
+      description_error: null,
     })
   }
 
@@ -298,7 +300,7 @@ class CreateTable extends React.Component {
     return <div>
       <form onSubmit={this.createTable} autoComplete="off">
         {description_error}
-        <FloatText description="layout_description" label="Table Layout Description:" defaultValue={description} inputProps={description_props} />
+        <FloatText name="layout_description" label="Table Layout Description:" defaultValue={description} inputProps={description_props} />
         <Stage axisX={containerWidth/70} width={containerWidth-(containerWidth/60)} height={containerHeight-(containerHeight/8)}
                visible={true} onContentClick={this.handleClick} onTap={this.tapped}
                onContentMouseMove={this.mouseMove} >
