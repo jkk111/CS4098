@@ -141,7 +141,7 @@ class CreateTable extends React.Component {
     }
 
     let body = {
-      name: form.layout_description.value,
+      description: form.layout_description.value,
       tables : table_positions
     }
 
@@ -158,6 +158,7 @@ class CreateTable extends React.Component {
 
     this.setState({
       description_error: null,
+      tables: []
     })
   }
 
@@ -260,6 +261,10 @@ class CreateTable extends React.Component {
     if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
       this.setState({mobileView: true})
     }
+    this.setState({
+      x: e.evt.layerX,
+      y: e.evt.layerY
+    })
     let {tables = [], x, y } = this.state;
     console.log(e, tables);
     let next = { x, y };
