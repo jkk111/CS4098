@@ -150,7 +150,7 @@ class App extends Component {
     resp = await resp.json();
     set_cookie(resp.id);
     if(resp.success) {
-      this.setState({ registerError: null });
+      this.setState({ registerError: null, loginError: null });
       this.props.set_logged_in('USER')
     }
     else{
