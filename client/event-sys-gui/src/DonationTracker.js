@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux'
 import './DonationTracker.css'
 
-
 const REFRESH_FREQ = 1000;
 
 let mapStateToProps = (state) => {

@@ -1,14 +1,15 @@
 import React from 'react';
-import ViewUsers from './ViewUsers.js';
+import ViewTickets from './ViewTickets.js';
 import ReactDOM from 'react-dom';
 
-describe('ViewUsers', () => {
+describe('ViewTickets', () => {
   it('should be defined', () => {
-    expect(ViewUsers).toBeDefined();
+    expect(ViewTickets).toBeDefined();
   });
+
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ViewUsers />, div);
+    ReactDOM.render(<ViewTickets />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

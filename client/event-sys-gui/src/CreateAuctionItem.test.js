@@ -1,14 +1,18 @@
 import React from 'react';
-import ViewUsers from './ViewUsers.js';
+import CreateAuctionItem from './CreateAuctionItem.js';
 import ReactDOM from 'react-dom';
 
-describe('ViewUsers', () => {
+describe('CreateAuctionItem', () => {
   it('should be defined', () => {
-    expect(ViewUsers).toBeDefined();
+    expect(CreateAuctionItem).toBeDefined();
   });
+
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ViewUsers />, div);
+    ReactDOM.render(
+      <CreateAuctionItem/>,
+      div
+    );
     ReactDOM.unmountComponentAtNode(div);
   });
 });
