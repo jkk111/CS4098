@@ -110,6 +110,11 @@ class App extends Component {
         loginError: "Invalid Username/Password"
       })
     }
+    else{
+      this.setState({
+        loginError: null
+      })
+    }
 
     set_cookie(resp.id)
   }
@@ -144,6 +149,7 @@ class App extends Component {
     resp = await resp.json();
     set_cookie(resp.id);
     if(resp.success) {
+      this.setState({ registerError: null});
       this.props.set_logged_in('USER')
     }
     else{
