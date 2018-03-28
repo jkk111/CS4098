@@ -30,10 +30,10 @@ class Auction extends React.Component {
 
     let content = null;
 
-    if (items.length === 0 && !ended){
-      items = <p>There are currently no items listed for this auction</p>
-    } else if (!ended) {
+    if (ended){
       items = <p>This auction has ended</p>
+    } else if (items.length === 0){
+      items = <p>There are currently no items listed for this auction</p>
     } else {
       items = items.map((item, i) => <AuctionItem {...item} key={i} refresh={refresh} />)
     }
