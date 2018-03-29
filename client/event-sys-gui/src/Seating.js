@@ -1,4 +1,5 @@
 import React from 'react';
+import './Seating.css'
 
 class Seating extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class Seating extends React.Component {
             <thead>
               <tr className="titles">
                 <td>USER ID</td>
-                <td>USER NAME</td>
+                <td>NAME</td>
                 <td>TABLE NUMBER</td>
                 <td>SEAT NUMBER</td>
               </tr>
