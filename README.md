@@ -1,6 +1,11 @@
 # CS4098
 Repo to store source code for CS4098 - Group Design Project
 
+### [Installation](#installation)
+### [Release 1](#release-1)
+### [Release 2](#release-2)
+### [Tests](#tests)
+
 ## Installation
 ### From a fresh ubuntu 16.04 LTS install
 1. Open a terminal - 'ctrl/⌘ + alt + t'
