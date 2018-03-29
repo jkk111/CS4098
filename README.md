@@ -177,12 +177,12 @@ Admin Access Only
 1. To create an account, go to the "Sign Up/Create An Account" screen. If you have not been previously logged in your will be automatically be sent to this page on startup.
 2. Enter your first name in the "First Name" field.
 3. Enter your Surname in the "Last Name" field.
-4. Enter whatever username you want to use in the app into 	  	   the "Username" field.
+4. Enter whatever username you want to use in the app into the "Username" field.
 5. Enter your email in the "email" field.
-6. Create a password for your account and enter it into the 	   "Password" field.
+6. Create a password for your account and enter it into the "Password" field.
 7. Confirm the password you just entered.
-8. If your username and password are acceptable, you will be  	   automatically logged into the system, being directed to 	  	   the home page, with "Welcome Home" being displayed. You 	 	   can then use this same username and password to login in  	   future. If your username is already in use, or your 	 	   password and confirm password are not the same, then you 	   will not be able to sign up and an error message will be 	   displayed. Make sure your username is unique and your 		   passwords the same to proceed.
-(Note: There is no minimum amount of characters required for 	 any of these fields, and the email field does not require a 	 real email address or the @ key. However if you do not 	 	 enter a valid email, and verify your email, you will not be 	 able to recieve any email updates.)
+8. If your username and password are acceptable, you will be automatically logged into the system, being directed to the home page, with "Welcome Home" being displayed. You can then use this same username and password to login in future. If your username is already in use, or your password and confirm password are not the same, then you will not be able to sign up and an error message will be displayed. Make sure your username is unique and your passwords the same to proceed.
+(Note: There is no minimum amount of characters required for any of these fields, and the email field does not require a real email address or the @ key. However if you do not enter a valid email, and verify your email, you will not be able to recieve any email updates.)
 
 ###Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily.
 1. The ability to check all deatils about an event is availaible on the "View Events" page. 
