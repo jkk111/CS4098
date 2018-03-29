@@ -7,7 +7,7 @@ Repo to store source code for CS4098 - Group Design Project
 4. [Tests](#tests)
 
 ## Installation
-### From a fresh ubuntu 16.04 LTS install
+From a fresh ubuntu 16.04 LTS install
 1. Open a terminal - 'ctrl/⌘ + alt + t'
 2. Install git - ```sudo apt-get install -y git```
 3. Enter your password when prompted.
@@ -26,7 +26,7 @@ Mail Password - You can't leave this blank. Enter something simple like 'passwor
 1. To login, first you need to have signed up as described in "Installation". Alternatively you can create an account for a new user (not admin) in the "Sign-Up/Create an Account" section (see step 2).
 2. Once the webapp has opened in a browser, you should be presented with the Login/Signup page.
 3. If you wish to login without using the credidentals you made in installation, you can sign up.
-	a. To do this, go to the "Sign Up/Create An Account" section.
+	a. To do this, go to the "Sign Up/Create An Account" 			   section.
 	b. Enter your first name in the "First Name" field.
 	c. Enter your Surname in the "Last Name" field.
 	d. Enter whatever username you want to use in the app into the "Username" field.
@@ -45,6 +45,7 @@ Mail Password - You can't leave this blank. Enter something simple like 'passwor
  	
 	
 ### Feature 2 - I want to be able to give admin access to other people.
+
 Admin Access Only
 1. To give admin access to other people go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
@@ -52,6 +53,7 @@ Admin Access Only
  
  
 ### Feature 4 - I would like to be able to create an event e.g. a dinner.
+
 Admin access only
 1.  To begin adding events to the system, ensure you've already added tickets. (See "Creating Tickets")
 2.  Once tickets and have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event'.
@@ -67,7 +69,9 @@ This can be the name of the event, or the type etc.
 11. Any event created will automatically sent out email invites to all users.
 12. Saved events appear in the "View Events" section in the main menu.
 
+
 #### Creating Tickets
+
 Admin access only
 1. Before we can create events, we need to add tickets for these events.
 2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Ticket';
@@ -80,28 +84,35 @@ Admin access only
 
 
 ### Feature 6 - Keep track of possible/previous guests.
+
 Admin Access Only
 1. To keep track of all the users on the app, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
   
+  
 ### Feature 7 & 8 - I want to sent invitations to a mailing list, so that people know to come and that they are invited.
+
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket.
  
+ 
 ### Feature 9 - I want to see guests contact details.
+
 Admin Access Only
 1. To see guests contact details, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'.
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
 3. When you click on a name, you will be able to see the users email address, as well as their phone number if they have provided one.
 
+
 ### Feature 10 - I want to see the invite list.
+
 1. All users who have verified their emails with the app are automatically invited to all events created.
 2. To see the users, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'.
 3. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
 
  
-
 ### Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event.
+
 Admin Access Only
 1. To register a guest, an Admin can make them an account in "Create User". They should know the guests first name, last name,and email.
 2. To create a user, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create User'
@@ -109,10 +120,13 @@ Admin Access Only
 
     
 ### Feature 16 - I want to be able to send automated invitations, with link to register for the event.
+
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, with links to the app for them to buy tickets.
   
+  
 ### Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction.
+
 1. The ability to buy a ticket online can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -122,6 +136,7 @@ Admin Access Only
 
   
 ### Feature 32 - e-ticketing for users.
+
 1. The e-ticketing system can be seen on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -131,10 +146,13 @@ Admin Access Only
 
 
 ### Feature 34 - Send out emails automatically when an event is created.
+
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
  
+ 
 ### Feature 36 - Online ticketing - keeping in mind that mostly repeat customers/attendees.
+
 1. The ability to buy a ticket online can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -145,27 +163,32 @@ Admin Access Only
 
 
 ### Feature 40 - I would like to email (legitimately) subscribed users.
+
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
    
+   
 ### Feature 42 - I want to be able to contact attendees easily e.g. group emails.
+
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
 
 
 ### Feature 46 - I want to create menus.
+
 Admin Access Only
 1. This is where the admin can create a menu for a certain event.
 2. To create a menu, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create menu'
 3. First name the menu by using the "Menu Name" field. Any name is accepted.
 4. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolates to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "Add Starter" button. Then input the same information as detailed in this step.
 5. Repeat step 4 for the main course, desserts, and drinks.
-6. You must enter a name for your menu for it to create. Additionally you must have at least one item in each course (only the name field is mandetory) or your menu will not create and you will be presented with a warning message. If you do not want to add for example, a drink, to your menu, just enter "None" or N/A into the relevent boxes.
+6. You must enter a name for your menu for it to create. Additionally if there are any empty fields your menu will not create and you will be presented with a warning message. If you do not want to add for example, a drink, to your menu, just enter "None" or N/A into the relevent boxes.
 8. When you have finished adding things to your menu, click "Create Menu".
 9. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
 
 
 ### Feature 61 - I want to be able to purchase tickets through a simple online site, so I can attend the event.
+
 1. The ability to buy a ticket online can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -173,11 +196,15 @@ Admin Access Only
 6. To see more information about an event, click on the event name.
 7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
  
+ 
 ### Feature 62 - View tickets.
+
 1. An admin can see tickets they have created on the "Create Event" page. This is done by clicking the "Add Ticket" button, and then selected the required ticket from the dropdown.
 2. A guest can view a ticket in "View Events". This is done by clicking on the event you want to attend. The ticket name will appear, along with the option to buy it.
  
+ 
 ### Feature 63 - Create an account/register.
+
 1. If you are already logged in, log out (See logging out).
 1. To create an account, go to the "Sign Up/Create An Account" screen. If you have not been previously logged in your will be automatically be sent to this page on startup.
 2. Enter your first name in the "First Name" field.
@@ -189,7 +216,9 @@ Admin Access Only
 8. If your username and password are acceptable, you will be automatically logged into the system, being directed to the home page, with "Welcome Home" being displayed. You can then use this same username and password to login in future. If your username is already in use, or your password and confirm password are not the same, then you will not be able to sign up and an error message will be displayed. Make sure your username is unique and your passwords the same to proceed.
 (Note: There is no minimum amount of characters required for any of these fields, and the email field does not require a real email address or the @ key. However if you do not enter a valid email, and verify your email, you will not be able to recieve any email updates.)
 
+
 ### Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily.
+
 1. The ability to check all deatils about an event is availaible on the "View Events" page. 
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
@@ -198,20 +227,25 @@ Admin Access Only
 
 
 ### Feature 71 - I want to view event information so I can decide if I want to attend.  
+
 1. The ability to check all information about an event is availaible on the "View Events" page. 
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
 4. If you see a message saying there are no events, then there are no events in the system.
 5. To see more information about an event, click on the event name. If you decide you want to atttend, you can buy a ticket on that page by clciking the "Buy for..." button.
 
+
 ### Feature 72 - I want to be able to easily see details fo the event - time, venue, etc.
+
 1. The ability to check all information about an event is availaible on the "View Events" page. 
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
 4. If you see a message saying there are no events, then there are no events in the system.
 5. To see more information about an event, click on the event name. 
 
+
 ### Feature 73 - Look at dinner menu.
+
 Admin Access Only
 1. This is where admins can see the menu options they created.
 2. To view menus, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Menus'.
@@ -221,6 +255,7 @@ Admin Access Only
 
   
 ### Feature 74- I would like to buy a ticket to attend the event.
+
 1. The ability to buy a ticket can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -230,18 +265,21 @@ Admin Access Only
 
   
 ### Feature 87 - I want to be notified when new events are released. 
+
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
   
 
 #### Logging Out
-1. To log out, simply press the logout button in the menu. You should be redirected to the login/signup page.
 
+1. To log out, simply press the logout button in the menu. You should be redirected to the login/signup page.
 
 
 
 ## Release 2
 
+
 ### Feature 4 - I would like to be able to create an event, e.g. a dinner
+
 Admin access only
 1.  To begin adding events to the system, ensure you've already added tickets. (See "Creating Tickets")
 2.  Once tickets and have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event'.
@@ -259,6 +297,7 @@ This can be the name of the event, or the type etc.
 
 
 ### Feature 5 - I want to be able to update event information and submit event updates
+
 Admin Access only
 1. The ability to edit events can be used from the "View Events" page.
 2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
@@ -271,6 +310,7 @@ Admin Access only
 
 
 ### Feature 30 - I want to see dietary requirements and access requirements of attendees so I can provide details to catering
+
 Admin Access Only
 1. Users are able to enter dietary requirements and access requirements in the settings page.
 2. They do this by clicking on the menu button on the top of the screen. This will drop down all the menu options. They then click on 'Settings'.
@@ -279,23 +319,29 @@ Admin Access Only
 5. Admins can then see this information on the "View Users" page. If they click on a users name, that users details will appear, including dietary and accessability requirements.
 6. If an Admin wants to share dietary/accessability information with staff, they can do so by going to the "View Events" page. If they click on the event they are involved in, they can see an "Export Attendee Allergen/Access Information" button. Clicking this will download a text file, listing each table number and seat number, and which seat number has what needs.
 
+
 ### Feature 31 - I want to be able to share special dietary requirements (including table info for guests) with the caterer
+
 Admin Access Only
 1. If an Admin wants to share dietary/accessability information with staff, they can do so by going to the "View Events" page. If they click on the event they are involved in, they can see an "Export Attendee Allergen/Access Information" button. Clicking this will download a text file, listing each table number and seat number, and which seat number has what needs.
 2. Additionally the admin can view individual guests needs by navigating to the "View Users" page. They can see the dietary and access requirements that the users have previously entered in "Settings".
 
+
 ### Feature 32 - I want to see the table layout and seating arrangements so the tables can be organised
+
 Admin Access Only
 1. Admins can edit and see the seating layout on the "Create Tables" page.
 2. To do this, click on the menu button on the top of the screen. This will drop down all the menu options. Then click on "Create Tables".
-3. If you wish to add a new table layout, leave the dropdown as is, and name your layout. This can be a description of the layout, or the room it is designed for etc.
+3. If it is the first table layout, leave the dropdown as is, and name your layout. This can be a description of the layout, or the room it is designed for etc.
 4. To add a table, click anywhere on the grey canvas. You can then click and drag your table anywhere on the canvas. To add another table, just click anywhere on the canvas again.
 5. If you accidentally add a table you don't want, you can get rid of it by clicking the "Click to delete the last table you interacted with". The last table you interacted with is either the last table you added, or the last one you dragged. This table is indicated by a blue border around it.
-6. When you are finished your layout, click "Create Table Layout". If you try to create a layout without giving it a name/description you will be presented with a warning message. Name the layout to save it.
-7. If you want to view/edit your layout, simply select it from the dropdown. You can then see where the tables are and move them/ add or delete if necessary. You cannot change the layout name/description. When you have finished updating your table click the "Update Table Layout" to save.
+6. When you are finished your layout, click "Update Table Layout". If you try to create a layout without giving it a name/description you will be presented with a warning message. Name the layout to save it.
+7. If you want to view/edit your layout, simply select it from the dropdown. You can then see where the tables are and move them/ add or delete if necessary. You cannot change the layout name/description.
 8. Additionally, admins can few the seating aragements on the "View Events" page. Click on the name of the event you want to view the seating arangements for, and a "Show Seating Arrangments" button will appear. Click on this to view the seating arragments for the event. If no one has bought a ticket yet, there will be no button, instead "There are currently no attendees for this event" will appear.
 
+
 ### Feature 49 - I want to be able to accept and see payments
+
 Admin Access Only
 1. When a user buys a ticket, donates or pays for an item in an auction, the payment is accepted automatically through stripe.
 2. An admin can see the payments that have been made on the "View Events" page.
@@ -304,7 +350,9 @@ Admin Access Only
 5. If you click on this button, it will show you a list of all the payments that haave been made, including donations, and completed bids for the selected event.
 6. If there are no transactions, the screen will tell you "There are currently no transactions for the selected event".
 
+
 ### Feature 53 - Have a live tracker that updates with donations throughout the event
+
 1. Both users and admins can see a live tracker associated with each event.
 2. The live tracker can be accessed in the "View Events" page.
 3. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
@@ -317,6 +365,7 @@ Admin Access Only
 
 
 ### Feature 54 - I want to track current amount raised
+
 1. Both users and admins can see a live tracker associated with each event.
 2. The live tracker can be accessed in the "View Events" page.
 3. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
@@ -328,7 +377,9 @@ Admin Access Only
 9. To exit the live tracker, click on the menu button at the top of the page.
 10. At the end of the event, the live tracker will show the total amount that has been raised on the night.
 
+
 ### Feature 121 - I want to set up an auction
+
 Admin Access Only
 1. To create an auction, you must go to the "Create Auction" page.
 2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Auction'.
@@ -347,7 +398,9 @@ This can be the name of the auction, or the type etc.
 14. To save this item, click the "Create Item" button. All fields are mandetory.
 15. To view a created auction and its associated items, go to the "View Auction" page (see feature 132)
 
+
 ### Feature 122 - I want a way to record payments on the night.
+
 1. An admin can see the payments that have been made on the night on the "View Events" page.
 2. To do this, click on the menu button on the top of the screen. This will drop down all the menu options. Then click on "View Events".
 3. Click on the event taking place on the night, and the dropdown will include a "View Transactions" button.
@@ -356,6 +409,7 @@ This can be the name of the auction, or the type etc.
 
 
 ### Feature 132 - I want to be able to see auction information, including information on auction items
+
 1. Users and Admins can see information on auctions in the "View Auctions" page.
 2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Auction'.
 3. On the view auctions page, all previously created auction names are displayed. Click on an auction page and a drop down will show all the information on that auction.
@@ -365,6 +419,7 @@ This can be the name of the auction, or the type etc.
 
 
 ## Tests
+
 Setup must be run before performing any tests.
 1. Server Test
    1. To run server tests after cloning the repo, open your terminal and navigate to ```/cs4098/server/```.
