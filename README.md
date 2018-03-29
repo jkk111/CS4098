@@ -155,7 +155,7 @@ Admin Access Only
 3. First name the menu by using the "Menu Name" field. Any name is accepted.
 4. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolates to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "Add Starter" button. Then input the same information as detailed in this step.
 5. Repeat step 4 for the main course, desserts, and drinks.
-6. You must enter a name for your menu for it to create. Additionally if there are any empty fields your menu will not create and you will be presented with a warning message. If you do not want to add for example, a drink, to your menu, use the red X on the right hand side to delete that option.
+6. You must enter a name for your menu for it to create. Additionally if there are any empty fields your menu will not create and you will be presented with a warning message. If you do not want to add for example, a drink, to your menu, just enter "None" or N/A into the relevent boxes.
 8. When you have finished adding things to your menu, click "Create Menu".
 9. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
 
@@ -287,7 +287,8 @@ Admin Access Only
 4. To add a table, click anywhere on the grey canvas. You can then click and drag your table anywhere on the canvas. To add another table, just click anywhere on the canvas again.
 5. If you accidentally add a table you don't want, you can get rid of it by clicking the "Click to delete the last table you interacted with". The last table you interacted with is either the last table you added, or the last one you dragged. This table is indicated by a blue border around it.
 6. When you are finished your layout, click "Update Table Layout". If you try to create a layout without giving it a name/description you will be presented with a warning message. Name the layout to save it.
-7. If you want to view/edit your layout, simply select it from the dropdown. You can then see where the tables are and move them/ add or delete if necessary. You cannot change the layout name/description. 
+7. If you want to view/edit your layout, simply select it from the dropdown. You can then see where the tables are and move them/ add or delete if necessary. You cannot change the layout name/description.
+8. Additionally, admins can few the seating aragements on the "View Events" page. Click on the name of the event you want to view the seating arangements for, and a "Show Seating Arrangments" button will appear. Click on this to view the seating arragments for the event. If no one has bought a ticket yet, there will be no button, instead "There are currently no attendees for this event" will appear.
 
 ### Feature 49 - I want to be able to accept and see payments
 Admin Access Only
