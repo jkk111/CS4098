@@ -28,7 +28,7 @@ class Email {
 }
 
 let _send = (conf, options, cb) => {
-  if(conf.noEmail)
+  if(conf.noEmail || !options.to)
     return
   let smtpTransport = nodemailer.createTransport({
     host: conf.smtp_host,
@@ -66,7 +66,11 @@ let render_template = (template, data) => {
   return mail;
 }
 
-let sendTemplate = (template, data) => {
+let sendTemplate = (template, data = {}) => {
+  if(!data.to) {
+    return console.warn("No Recipient Specified")
+  }
+
   console.log('[EMAIL]'.blue, template, data)
   try {
     let mail = render_template(template, data)

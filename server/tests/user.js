@@ -106,7 +106,7 @@ let create_user = async() => {
 }
 
 let get_user_info = async() => {
-  let user_info_test = new Test('Getting User Info', {"f_name":"test","l_name":"test","email":"test","username":"test","subscribed":0});
+  let user_info_test = new Test('Getting User Info', {"f_name":"test","l_name":"test","email":"test","username":"test","phone":"","email_verified":0,"subscribed":0,"accessibility":"","allergens":[]});
   user_info_test.pre();
 
   let resp = await get({
@@ -119,7 +119,7 @@ let get_user_info = async() => {
 }
 
 let get_user_info2 = async() => {
-  let user_info_test = new Test('Getting Updated User Info', {"f_name":"test","l_name":"updated","email":"test","username":"test","subscribed":0});
+  let user_info_test = new Test('Getting Updated User Info', {"f_name":"test","l_name":"updated","email":"test","username":"test","phone":"","email_verified":0,"subscribed":0,"accessibility":"","allergens":[]});
   user_info_test.pre();
 
   let resp = await get({

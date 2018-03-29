@@ -34,44 +34,45 @@ class MenuForm extends React.Component {
       })
       return
     }
-    /*
-    if(typeof starters == "undefined" || typeof mains == "undefined" || typeof desserts == "undefined" || typeof drinks == "undefined"){
+
+    if(starters.length === 0 && mains.length && desserts.length && drinks.length) {
       this.setState({
-            course_error: 'Name/Description Fields Cannot Be Empty'
+          course_error: 'Name Fields Cannot Be Empty'
       })
       return
     }
-    */
-    for (var i = 0; i <starters.length; i++){
-      if(starters[i].name === '' || starters[i].description === ''){
-        this.setState({
-          course_error: 'Name/Description Fields Cannot Be Empty'
-        })
-      }
-    }
 
-    for (var i = 0; i <mains.length; i++){
-      if(mains[i].name === '' || mains[i].description === ''){
+    for (let i = 0; i < starters.length; i++) {
+      if(starters[i].name === '') {
         this.setState({
-          course_error: 'Name/Description Fields Cannot Be Empty'
+          course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
         })
         return
       }
     }
 
-    for (var i = 0; i <desserts.length; i++){
-      if(desserts[i].name === '' || desserts[i].description === ''){
+    for (let i = 0; i < mains.length; i++) {
+      if(mains[i].name === '') {
         this.setState({
-          course_error: 'Name/Description Fields Cannot Be Empty'
+          course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
         })
         return
       }
     }
 
-    for (var i = 0; i <drinks.length; i++){
-      if(drinks[i].name === '' || drinks[i].description === ''){
+    for (let i = 0; i < desserts.length; i++) {
+      if(desserts[i].name === '' ) {
         this.setState({
-          course_error: 'Name/Description Fields Cannot Be Empty'
+          course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
+        })
+        return
+      }
+    }
+
+    for (let i = 0; i < drinks.length; i++) {
+      if(drinks[i].name === '' ) {
+        this.setState({
+          course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
         })
         return
       }

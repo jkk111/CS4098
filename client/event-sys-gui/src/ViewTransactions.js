@@ -16,7 +16,7 @@ class ViewTransactions extends React.Component {
     this.refresh();
   }
 
-  async refresh(){
+  async refresh() {
     let { id } = this.props;
 
     console.log('event_id: ', id);
@@ -46,7 +46,7 @@ class ViewTransactions extends React.Component {
     let { transactions } = this.state;
     let { id } = this.props;
 
-    if (transactions.length !== 0){
+    if (transactions.length !== 0) {
       transactions = transactions.map((transaction, i) => {
         let { id, user_id, amount, type } = transaction
         return <tr key={i}>

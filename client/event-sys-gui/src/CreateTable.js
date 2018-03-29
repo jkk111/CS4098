@@ -40,7 +40,7 @@ let Table = ({ x, y, updatePosition, updateFocused, focused, mobileView}) => {
     stroke_color = FOCUSED_STROKE_COLOR;
   }
 
-  else if(mobileView){
+  else if(mobileView) {
     table_height = MOBILE_TABLE_HEIGHT;
     table_width = MOBILE_TABLE_WIDTH;
     table_offset = MOBILE_TABLE_OFFSET;
@@ -70,7 +70,7 @@ let TableText = ( {x, y, id, dragging, focused, mobileView} ) => {
     visBool = false;
   }
 
-  else if(mobileView){
+  else if(mobileView) {
     text_width = MOBILE_TEXT_WIDTH;
     text_height = MOBILE_TEXT_HEIGHT;
     table_offset = MOBILE_TABLE_OFFSET;
@@ -134,7 +134,7 @@ class CreateTable extends React.Component {
     return true;
   }
 
-  async updateTable(e){
+  async updateTable(e) {
     let {tables = [], selectedLayout} = this.state;
     let table_positions = [];
     let form = e.target
@@ -170,7 +170,7 @@ class CreateTable extends React.Component {
     })
   }
 
-  async createTable(e){
+  async createTable(e) {
     e.preventDefault();
     if(!this.check(e)) {
       return;
@@ -213,19 +213,21 @@ class CreateTable extends React.Component {
     })
   }
 
-  handleLayoutChange(value){
+  handleLayoutChange(value) {
     let layouts = this.state.layouts;
-    if(value != 0){
-      this.setState({editing: true,
-                    selectedLayout: value,
-                    tables: layouts[(value-1)].tables
-                    })
+    if(value !== 0) {
+      this.setState({
+        editing: true,
+        selectedLayout: value,
+        tables: layouts[(value-1)].tables
+      })
     }
     else{
-      this.setState({editing: false,
-                    selectedLayout: value,
-                    tables: []
-                    })
+      this.setState({
+        editing: false,
+        selectedLayout: value,
+        tables: []
+      })
     }
   }
 
@@ -238,7 +240,7 @@ class CreateTable extends React.Component {
     Logger.log("Loaded Layouts", response)
   }
 
-  buildLayoutList(){
+  buildLayoutList() {
     let layouts = this.state.layouts;
     let layoutList = [<option key="0" value="0">-select a layout to edit or leave as is to a create new layout-</option>]
 
@@ -257,8 +259,8 @@ class CreateTable extends React.Component {
     var xNew,yNew,table,before,after;
     let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
     let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
-    if (tables.length !== 0){
-      for(var i=0; i < tables.length; i++){
+    if (tables.length !== 0) {
+      for(var i=0; i < tables.length; i++) {
         let {tables = []} = this.state;
         xNew = Number((tables[i].x*transformWidth).toFixed(4));
         yNew = Number((tables[i].y*transformHeight).toFixed(4));
@@ -302,7 +304,7 @@ class CreateTable extends React.Component {
     return (e) => {
       console.log(e.evt);
       let dragNode = e.evt.dragEndNode;
-      if(dragNode !== 'undefined'){
+      if(dragNode !== 'undefined') {
         let x = dragNode.attrs.x+(TABLE_OFFSET);
         let y = dragNode.attrs.y+(TABLE_OFFSET);
         let { tables} = this.state;
@@ -321,7 +323,7 @@ class CreateTable extends React.Component {
     }
   }
 
-  tapped(e){
+  tapped(e) {
     this.setState({
       x: e.evt.changedTouches[0].clientX,
       y: e.evt.changedTouches[0].clientY
@@ -334,7 +336,7 @@ class CreateTable extends React.Component {
 
 
   mouseMove(e) {
-    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
       this.setState({mobileView: true})
     }
     else{
@@ -347,7 +349,7 @@ class CreateTable extends React.Component {
   }
 
   handleClick(e) {
-    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
       this.setState({mobileView: true})
     }
     this.setState({
@@ -367,7 +369,7 @@ class CreateTable extends React.Component {
   deleteTable(e) {
     let { focused, tables = [] } = this.state;
 
-    if(focused === null || tables.length == 0) {
+    if(focused === null || tables.length === 0) {
       return;
     }
 

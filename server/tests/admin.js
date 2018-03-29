@@ -94,9 +94,13 @@ let setup = async() => {
   return new Promise(async(resolve) => {
     await Database.Destroy('user');
     await Database.Destroy('event');
+    await Database.Destroy('payment');
+    await Database.Destroy('table');
     srv = fork('index')
     await Database.Get('user').prepare();
     await Database.Get('event').prepare();
+    await Database.Get('payment').prepare();
+    await Database.Get('table').prepare();
     setTimeout(resolve, 2000);
   })
 }
@@ -169,20 +173,6 @@ let create_new_admin = async() => {
   promote_test.post(promoted.auth_level);
 }
 
-let test_venue_list = async() => {
-  let test = new Test("Expecting Array Response", true)
-  test.pre();
-  let resp = await get('http://localhost/admin/venues');
-  test.post(Array.isArray(resp))
-}
-
-let test_ticket_list = async() => {
-  let test = new Test("Expecting Array Response", true)
-  test.pre();
-  let resp = await get('http://localhost/admin/venues');
-  test.post(Array.isArray(resp))
-}
-
 let test_create_ticket = async() => {
   let test = new Test("Testing Creating a ticket", { success: true, id: 1});
   test.pre();
@@ -199,25 +189,6 @@ let test_create_ticket = async() => {
   test.post(ticket)
 }
 
-let test_create_venue = async() => {
-  let test = new Test("Testing Creating a venue", { success: true, id: 1});
-  test.pre();
-  let venue = await post({
-    url: 'http://localhost/admin/create_venue',
-    body: {
-      name: 'Lloyd',
-      description: "Lloyd Building",
-      address_1: "42a Pearse St",
-      address_2: "",
-      city: "Dublin",
-      country: "IE",
-      capacity: 100
-    }
-  })
-
-  test.post(venue)
-}
-
 let create_event = async() => {
   let test = new Test("Creating Event", { success: true, id: 1});
   test.pre();
@@ -230,12 +201,10 @@ let create_event = async() => {
   let event = {
     name: "Test Event",
     description: "Test Description",
-    venue_id: 1,
-    max_attendees: 100,
+    location: 'Test Location',
     tickets: [
       { id: 1, count: 100 }
     ],
-    timezone: "Europe/Dublin",
     start_time: start.getTime(),
     end_time: end.getTime()
   }
@@ -274,16 +243,91 @@ let admin_create_user = async() => {
   test.post(resp.token != null)
 }
 
+let event_income_breakdown_test = async() => {
+  let test = new Test('Testing Event Income Breakdown Endpoint', [])
+  let body = { event_id: 1 };
+  test.pre();
+  let resp = await post({
+    url: 'http://localhost/admin/event_income_breakdown',
+    body
+  })
+
+  test.post(resp);
+}
+
+let layouts_Test = async() => {
+  let test = new Test('Testing Table Layouts Endpoint', [])
+  test.pre();
+  let resp = await get({
+    url: 'http://localhost/admin/layouts'
+  })
+
+  test.post(resp);
+}
+
+let create_layouts_Test = async() => {
+  let test = new Test('Testing Table Layouts Endpoint', { id: 1 })
+  test.pre();
+
+  let body = { description: "Test Layout", tables: [ { x: 1, y: 1} ]}
+
+  let resp = await post({
+    url: 'http://localhost/admin/create_layout',
+    body
+  })
+
+  test.post(resp);
+}
+
+let update_layouts_Test = async() => {
+  let test = new Test('Testing Table Layouts Endpoint', { id: 1 })
+  test.pre();
+
+  let body = { layout_id: 1, tables: [ { x: 1, y: 1} ]}
+
+  let resp = await post({
+    url: 'http://localhost/admin/update_layout',
+    body
+  })
+
+  test.post(resp);
+}
+
+let test_spenders = async () => {
+  let test = new Test('Testing Big Spenders', []);
+
+  test.pre();
+
+  let body = { minimum: 0 }
+
+  let resp = await post({
+    url: 'http://localhost/admin/big_spenders',
+    body
+  })
+
+  test.post(resp);
+  test = new Test('Testing Regular Spenders', []);
+
+  test.pre();
+
+  resp = await post({
+    url: 'http://localhost/admin/regular_spenders',
+    body
+  })
+
+  test.post(resp);
+}
+
 let test = async() => {
   await create_admin_user();
   await create_new_admin();
-  await test_venue_list();
-  await test_ticket_list();
   await test_users();
   await test_create_ticket();
-  await test_create_venue();
   await create_event();
   await admin_create_user();
+  await event_income_breakdown_test();
+  await layouts_Test();
+  await create_layouts_Test();
 }
 
 let teardown = async() => {

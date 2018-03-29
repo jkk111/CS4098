@@ -14,7 +14,6 @@ let Tables = Database.Get('table')
 let Payment = require('../auth_modules/payments')
 
 let { sendTemplate } = require('../email')
-let eventbrite = require('../eventbrite')
 
 const user_info_keys = [ 'id', 'username', 'f_name', 'l_name', 'registered', 'email', 'phone', 'email_verified', 'subscribed', 'accessibility', 'is_admin' ]
 
@@ -345,30 +344,30 @@ app.post('/create_auction_item', bodyParser.json(), async(req, res) => {
   res.send({ id })
 });
 
-app.post('/create_raffle', bodyParser.json(), async(req, res) => {
-  let { description, ticket_count, ticket_price, end_date, prizes = [] } = req.body;
-  let raffle = { description, ticket_count, ticket_price, end_date };
-  let insert = await Raffle.add('raffles', raffle);
-  let raffle_id = insert.lastID;
+// app.post('/create_raffle', bodyParser.json(), async(req, res) => {
+//   let { description, ticket_count, ticket_price, end_date, prizes = [] } = req.body;
+//   let raffle = { description, ticket_count, ticket_price, end_date };
+//   let insert = await Raffle.add('raffles', raffle);
+//   let raffle_id = insert.lastID;
 
-  for(var prize of prizes) {
-    let winning_value = crypto.randomBytes(4).readUInt32LE(0);
-    prize.winning_value = winning_value;
-    prize.raffle_id = raffle_id;
-    await Raffle.add('prizes', prize, '*')
-  }
+//   for(var prize of prizes) {
+//     let winning_value = crypto.randomBytes(4).readUInt32LE(0);
+//     prize.winning_value = winning_value;
+//     prize.raffle_id = raffle_id;
+//     await Raffle.add('prizes', prize, '*')
+//   }
 
-  res.send({ id: raffle_id });
-});
+//   res.send({ id: raffle_id });
+// });
 
-app.post('/add_prize', bodyParser.json(), async(req, res) => {
-  let { raffle_id, prize } = req.body;
-  let winning_value = crypto.randomBytes(4).readUInt32LE(0);
-  prize.winning_value = winning_value;
-  prize.raffle_id = raffle_id;
-  await Raffle.add('prizes', prize, '*')
-  res.send('OK')
-})
+// app.post('/add_prize', bodyParser.json(), async(req, res) => {
+//   let { raffle_id, prize } = req.body;
+//   let winning_value = crypto.randomBytes(4).readUInt32LE(0);
+//   prize.winning_value = winning_value;
+//   prize.raffle_id = raffle_id;
+//   await Raffle.add('prizes', prize, '*')
+//   res.send('OK')
+// })
 
 app.get('/tickets', async(req, res) => {
   res.json(await Events.get('tickets', {}, '*'))
