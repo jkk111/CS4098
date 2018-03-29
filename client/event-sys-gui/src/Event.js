@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ViewTickets from './ViewTickets'
 import Menu from './Menu'
 import Donate from './Donate'
+import Seating from './Seating'
 
 const TABLE_SIZE = 10;
 console.log(TABLE_SIZE)
@@ -100,13 +101,14 @@ class Event extends React.Component {
 
   render() {
     let { expanded } = this.state;
-    let { single_view, logged_in, id, name, description, tickets, menu = null, start_time, end_time, is_admin} = this.props;
+    let { attendees, single_view, logged_in, id, name, description, tickets, menu = null, start_time, end_time, is_admin} = this.props;
 
     let admin_buttons = null;
     let content = null;
     let user_buttons = null;
     let menu_content = null;
     let donate_content = null;
+    let seating_content = null;
 
     console.log("Start Time", start_time)
 
@@ -131,6 +133,10 @@ class Event extends React.Component {
           <div>
             <span className="user-content-button" onClick={this.view_transactions}>View Transactions</span>
           </div>
+        </div>
+
+        seating_content = <div>
+          <Seating attendees={attendees}/>
         </div>
 
       }
@@ -174,6 +180,7 @@ class Event extends React.Component {
       <div className={event_name_class} onClick={this.toggle}>{name}</div>
       {content}
       {admin_buttons}
+      {seating_content}
       {user_buttons}
       {donate_content}
       {menu_content}
