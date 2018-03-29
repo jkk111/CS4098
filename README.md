@@ -39,14 +39,14 @@ Mail Password - You can't leave this blank. Enter something simple like 'passwor
 10. If you wish to change your password, click on the change password button. Enter your current password, and then enter the new password you want, and confirm it. This password can be any combination of letters and numbers. It has no minimum length. Then click the "Save changes" button. You can now log in using your new password instead of the old one. If you click into this page automatically just click on cancel to exit. Do not save changes unless you actaully want to change your password.
  	
 	
-###Feature 2 - I want to be able to give admin access to other people.
+### Feature 2 - I want to be able to give admin access to other people.
 Admin Access Only
 1. To give admin access to other people go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
 3. An Admin may grant a user admin status on this screen by clicking the grant admin button visible in the users details.
  
  
-###Feature 4 - I would like to be able to create an event e.g. a dinner.
+### Feature 4 - I would like to be able to create an event e.g. a dinner.
 Admin access only
 1.  To begin adding events to the system, ensure you've already added tickets. (See "Creating Tickets")
 2.  Once tickets and have been created, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Event'.
@@ -79,35 +79,35 @@ Admin Access Only
 1. To keep track of all the users on the app, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
   
-###Feature 7 & 8 - I want to sent invitations to a mailing list, so that people know to come and that they are invited.
+### Feature 7 & 8 - I want to sent invitations to a mailing list, so that people know to come and that they are invited.
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket.
  
-###Feature 9 - I want to see guests contact details.
+### Feature 9 - I want to see guests contact details.
 Admin Access Only
 1. To see guests contact details, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'.
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
 3. When you click on a name, you will be able to see the users email address, as well as their phone number if they have provided one.
 
-###Feature 10 - I want to see the invite list.
+### Feature 10 - I want to see the invite list.
 1. All users who have verified their emails with the app are automatically invited to all events created.
 2. To see the users, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'.
 3. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
 
  
 
-###Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event.
+### Feature 13 - As staff, I need to register a guest for one event (including their details), so I can track what is needed for the event.
 Admin Access Only
 1. To register a guest, an Admin can make them an account in "Create User". They should know the guests first name, last name,and email.
 2. To create a user, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create User'
 3. Fill in the customers first name, last name and email address. Initials are accepted as there is no minimal character length. If you enter the correct email for the guest, they will be sent a link that will allow them to create their account and fill in their details.
 
     
-###Feature 16 - I want to be able to send automated invitations, with link to register for the event.
+### Feature 16 - I want to be able to send automated invitations, with link to register for the event.
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, with links to the app for them to buy tickets.
   
-###Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction.
+### Feature 18 - Set up a ticketing service, so people can buy tickets without human interaction.
 1. The ability to buy a ticket online can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -116,7 +116,7 @@ Admin Access Only
 7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
 
   
-###Feature 32 - e-ticketing for users.
+### Feature 32 - e-ticketing for users.
 1. The e-ticketing system can be seen on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -125,11 +125,11 @@ Admin Access Only
 7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
 
 
-###Feature 34 - Send out emails automatically when an event is created.
+### Feature 34 - Send out emails automatically when an event is created.
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
  
-###Feature 36 - Online ticketing - keeping in mind that mostly repeat customers/attendees.
+### Feature 36 - Online ticketing - keeping in mind that mostly repeat customers/attendees.
 1. The ability to buy a ticket online can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -139,28 +139,28 @@ Admin Access Only
 8. Users can select "Remember me" to securely store their payment information, so regular customers can quickly checkout. For verification purposes the customer must provide their mobile number.
 
 
-###Feature 40 - I would like to email (legitimately) subscribed users.
+### Feature 40 - I would like to email (legitimately) subscribed users.
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
    
-###Feature 42 - I want to be able to contact attendees easily e.g. group emails.
+### Feature 42 - I want to be able to contact attendees easily e.g. group emails.
 Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
 
 
-###Feature 46 - I want to create menus.
+### Feature 46 - I want to create menus.
 Admin Access Only
 1. This is where the admin can create a menu for a certain event.
 2. To create a menu, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create menu'
 3. First name the menu by using the "Menu Name" field. Any name is accepted.
 4. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolates to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "Add Starter" button. Then input the same information as detailed in this step.
 5. Repeat step 4 for the main course, desserts, and drinks.
-6. You must enter a name for your menu, as well as have a least one of each item in order for the menu to create.
+6. You must enter a name for your menu for it to create. Additionally if there are any empty fields your menu will not create and you will be presented with a warning message. If you do not want to add for example, a drink, to your menu, use the red X on the right hand side to delete that option.
 8. When you have finished adding things to your menu, click "Create Menu".
 9. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
 
 
-###Feature 61 - I want to be able to purchase tickets through a simple online site, so I can attend the event.
+### Feature 61 - I want to be able to purchase tickets through a simple online site, so I can attend the event.
 1. The ability to buy a ticket online can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -168,11 +168,11 @@ Admin Access Only
 6. To see more information about an event, click on the event name.
 7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
  
-###Feature 62 - View tickets.
+### Feature 62 - View tickets.
 1. An admin can see tickets they have created on the "Create Event" page. This is done by clicking the "Add Ticket" button, and then selected the required ticket from the dropdown.
 2. A guest can view a ticket in "View Events". This is done by clicking on the event you want to attend. The ticket name will appear, along with the option to buy it.
  
-###Feature 63 - Create an account/register.
+### Feature 63 - Create an account/register.
 1. If you are already logged in, log out (See logging out).
 1. To create an account, go to the "Sign Up/Create An Account" screen. If you have not been previously logged in your will be automatically be sent to this page on startup.
 2. Enter your first name in the "First Name" field.
@@ -184,7 +184,7 @@ Admin Access Only
 8. If your username and password are acceptable, you will be automatically logged into the system, being directed to the home page, with "Welcome Home" being displayed. You can then use this same username and password to login in future. If your username is already in use, or your password and confirm password are not the same, then you will not be able to sign up and an error message will be displayed. Make sure your username is unique and your passwords the same to proceed.
 (Note: There is no minimum amount of characters required for any of these fields, and the email field does not require a real email address or the @ key. However if you do not enter a valid email, and verify your email, you will not be able to recieve any email updates.)
 
-###Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily.
+### Feature 64 - Check date, time, seat at event, so I can arrive on time and find my seat easily.
 1. The ability to check all deatils about an event is availaible on the "View Events" page. 
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
@@ -192,21 +192,21 @@ Admin Access Only
 5. To see more information about an event, click on the event name.
 
 
-###Feature 71 - I want to view event information so I can decide if I want to attend.  
+### Feature 71 - I want to view event information so I can decide if I want to attend.  
 1. The ability to check all information about an event is availaible on the "View Events" page. 
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
 4. If you see a message saying there are no events, then there are no events in the system.
 5. To see more information about an event, click on the event name. If you decide you want to atttend, you can buy a ticket on that page by clciking the "Buy for..." button.
 
-###Feature 72 - I want to be able to easily see details fo the event - time, venue, etc.
+### Feature 72 - I want to be able to easily see details fo the event - time, venue, etc.
 1. The ability to check all information about an event is availaible on the "View Events" page. 
 2. To view all events, click on 'menu' and select the 'Events' option.
 3. You should now see a list of all events in the system.
 4. If you see a message saying there are no events, then there are no events in the system.
 5. To see more information about an event, click on the event name. 
 
-###Feature 73 - Look at dinner menu.
+### Feature 73 - Look at dinner menu.
 Admin Access Only
 1. This is where admins can see the menu options they created.
 2. To view menus, click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Menus'.
@@ -215,7 +215,7 @@ Admin Access Only
 5. Guests can see the menu for an event on the "View Events" page. On the "View Events" page, click on the event you are interested. The dropdown will show a "View Menu" option. Click on it to see the menu for the event.
 
   
-###Feature 74- I would like to buy a ticket to attend the event.
+### Feature 74- I would like to buy a ticket to attend the event.
 1. The ability to buy a ticket can be used on the "View Events" page.
 2. To view all events, click on 'menu' and select the 'View Events' option.
 3. You should now see a list of all events in the system.
@@ -224,7 +224,7 @@ Admin Access Only
 7. To buy a ticket, click on the "Buy for ..." button. A pop-up from stripe will then appear, prompting you to enter your payment details. This action can be cancelled by clicking the X button at the top right corner of the pop-up. If you successfully buy a ticket, you will be emailed your ticket and reciept.
 
   
-###Feature 87 - I want to be notified when new events are released. 
+### Feature 87 - I want to be notified when new events are released. 
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
   
 
