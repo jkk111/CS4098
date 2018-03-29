@@ -54,12 +54,6 @@ let init = async() => {
     pass = await password("Password");
   }
 
-  let eventbrite_key = await question("Eventbrite Token (enter no to disable)");
-
-  if(eventbrite_key.trim() === 'no') {
-    eventbrite_key = undefined;
-  }
-
   pass = await hash_password(pass, salt)
   let mail = await question("Email");
 
@@ -114,8 +108,7 @@ let init = async() => {
     smtp_port: port,
     smtp_user: m_user,
     smtp_pass: m_pass,
-    salt: salt,
-    token: conf.token || eventbrite_key
+    salt: salt
   }
 
   _send(config, options, (err, info) => {

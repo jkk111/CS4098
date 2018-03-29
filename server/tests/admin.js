@@ -94,9 +94,13 @@ let setup = async() => {
   return new Promise(async(resolve) => {
     await Database.Destroy('user');
     await Database.Destroy('event');
+    await Database.Destroy('payment');
+    await Database.Destroy('table');
     srv = fork('index')
     await Database.Get('user').prepare();
     await Database.Get('event').prepare();
+    await Database.Get('payment').prepare();
+    await Database.Get('table').prepare();
     setTimeout(resolve, 2000);
   })
 }
@@ -239,6 +243,81 @@ let admin_create_user = async() => {
   test.post(resp.token != null)
 }
 
+let event_income_breakdown_test = async() => {
+  let test = new Test('Testing Event Income Breakdown Endpoint', [])
+  let body = { event_id: 1 };
+  test.pre();
+  let resp = await post({
+    url: 'http://localhost/admin/event_income_breakdown',
+    body
+  })
+
+  test.post(resp);
+}
+
+let layouts_Test = async() => {
+  let test = new Test('Testing Table Layouts Endpoint', [])
+  test.pre();
+  let resp = await get({
+    url: 'http://localhost/admin/layouts'
+  })
+
+  test.post(resp);
+}
+
+let create_layouts_Test = async() => {
+  let test = new Test('Testing Table Layouts Endpoint', { id: 1 })
+  test.pre();
+
+  let body = { description: "Test Layout", tables: [ { x: 1, y: 1} ]}
+
+  let resp = await post({
+    url: 'http://localhost/admin/create_layout',
+    body
+  })
+
+  test.post(resp);
+}
+
+let update_layouts_Test = async() => {
+  let test = new Test('Testing Table Layouts Endpoint', { id: 1 })
+  test.pre();
+
+  let body = { layout_id: 1, tables: [ { x: 1, y: 1} ]}
+
+  let resp = await post({
+    url: 'http://localhost/admin/update_layout',
+    body
+  })
+
+  test.post(resp);
+}
+
+let test_spenders = async () => {
+  let test = new Test('Testing Big Spenders', []);
+
+  test.pre();
+
+  let body = { minimum: 0 }
+
+  let resp = await post({
+    url: 'http://localhost/admin/big_spenders',
+    body
+  })
+
+  test.post(resp);
+  test = new Test('Testing Regular Spenders', []);
+
+  test.pre();
+
+  resp = await post({
+    url: 'http://localhost/admin/regular_spenders',
+    body
+  })
+
+  test.post(resp);
+}
+
 let test = async() => {
   await create_admin_user();
   await create_new_admin();
@@ -246,6 +325,9 @@ let test = async() => {
   await test_create_ticket();
   await create_event();
   await admin_create_user();
+  await event_income_breakdown_test();
+  await layouts_Test();
+  await create_layouts_Test();
 }
 
 let teardown = async() => {
