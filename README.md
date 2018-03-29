@@ -16,7 +16,7 @@ Mail Password - You can't leave this blank. Enter something simple like 'passwor
 
 ## Release 1
 
-###Feature 1 - I want to be able to login (change password/details/create account).
+### Feature 1 - I want to be able to login (change password/details/create account).
 
 1. To login, first you need to have signed up as described in "Installation". Alternatively you can create an account for a new user (not admin) in the "Sign-Up/Create an Account" section (see step 2).
 2. Once the webapp has opened in a browser, you should be presented with the Login/Signup page.
@@ -24,12 +24,12 @@ Mail Password - You can't leave this blank. Enter something simple like 'passwor
 	a. To do this, go to the "Sign Up/Create An Account" 			   section.
 	b. Enter your first name in the "First Name" field.
 	c. Enter your Surname in the "Last Name" field.
-	d. Enter whatever username you want to use in the app into 	  	   the "Username" field.
+	d. Enter whatever username you want to use in the app into the "Username" field.
 	e. Enter your email in the "email" field.
-	f. Create a password for your account and enter it into the 	   "Password" field.
+	f. Create a password for your account and enter it into the "Password" field.
 	g. Confirm the password you just entered.
-	h. If your username and password are acceptable, you will be  	   automatically logged into the system, being directed to 	  	   the home page, with "Welcome Home" being displayed. You 	 	   can then use this same username and password to login in  	   future. If your username is already in use, or your 	 	   password and confirm password are not the same, then you 	   will not be able to sign up and an error message will be 	   displayed. Make sure your username is unique and your 		   passwords the same to proceed.
-	(Note: There is no minimum amount of characters required for 	 any of these fields, and the email field does not require a 	 real email address or the @ key. However if you do not 	 	 enter a valid email, and verify your email, you will not be 	 able to recieve any email updates.)
+	h. If your username and password are acceptable, you will be automatically logged into the system, being directed to the home page, with "Welcome Home" being displayed. You can then use this same username and password to login in future. If your username is already in use, or your password and confirm password are not the same, then you will not be able to sign up and an error message will be displayed. Make sure your username is unique and your passwords the same to proceed.
+	(Note: There is no minimum amount of characters required for any of these fields, and the email field does not require a real email address or the @ key. However if you do not enter a valid email, and verify your email, you will not be able to recieve any email updates.)
 4. Enter your username and password into the login form. You may use the username and password you created during the installation steps(This will be an admin account), or one created during the signing up step(This will not be an admin account).
 5. A successful login will redirect you to the main landing page. (Welcome Home)
 6. If your credidentials do not match, have not been previously created, or incorrect in general, then you will be unable to login and "Invalid Username/Password" will be displayed. Ensure your username and password are correct to proceed.
@@ -44,7 +44,7 @@ Admin Access Only
 1. To give admin access to other people go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
 3. An Admin may grant a user admin status on this screen by clicking the grant admin button visible in the users details.
-
+ 
  
 ###Feature 4 - I would like to be able to create an event e.g. a dinner.
 Admin access only
@@ -62,7 +62,7 @@ This can be the name of the event, or the type etc.
 11. Any event created will automatically sent out email invites to all users.
 12. Saved events appear in the "View Events" section in the main menu.
 
-### Creating Tickets
+#### Creating Tickets
 Admin access only
 1. Before we can create events, we need to add tickets for these events.
 2. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'Create Ticket';
@@ -74,7 +74,7 @@ Admin access only
 6. To check if your ticket was added, click on the menu button again, and then select 'Create Event' on the dropdown menu. In the "Create Event" page, there is a button called "Add Ticket" Selecting this should a dropdown with the ticket name of the ticket you just created, and allow you to select it. 
 
 
-###Feature 6 - Keep track of possible/previous guests.
+### Feature 6 - Keep track of possible/previous guests.
 Admin Access Only
 1. To keep track of all the users on the app, go to the "View Users" page. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Users'
 2. The list of users, both admin and not, will appear. You can click on a users name to see more details about them.
@@ -228,7 +228,7 @@ Admin Access Only
 1. When you create any new event (see feature 4) all subscribed users are automatically emailed about the event, giving them information and telling them how to get a ticket. 
   
 
-### Logging Out
+#### Logging Out
 1. To log out, simply press the logout button in the menu. You should be redirected to the login/signup page.
 
 
