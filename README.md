@@ -359,6 +359,7 @@ This can be the name of the auction, or the type etc.
 
 
 ## Tests
+Setup must be run before performing any tests.
 1. Server Test
    1. To run server tests after cloning the repo, open your terminal and navigate to ```/cs4098/server/```.
    2. Run commands ```npm install``` followed by ```sudo npm test```.
