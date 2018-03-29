@@ -25,8 +25,3 @@ it('Test View Hidden', () => {
   const wrapper = mount(<CreateUser test_view={true} />)
   expect(wrapper.find("Test").length).toBe(0)
 });
-
-it('should be defined', () => {
-    expect(CreateUser).toBeDefined();
-});
-

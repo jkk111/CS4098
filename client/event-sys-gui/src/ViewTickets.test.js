@@ -3,9 +3,6 @@ import ViewTickets from './ViewTickets.js';
 import ReactDOM from 'react-dom';
 
 describe('ViewTickets', () => {
-  it('should be defined', () => {
-    expect(ViewTickets).toBeDefined();
-  });
 
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
