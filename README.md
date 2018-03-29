@@ -26,7 +26,7 @@ Mail Password - You can't leave this blank. Enter something simple like 'passwor
 1. To login, first you need to have signed up as described in "Installation". Alternatively you can create an account for a new user (not admin) in the "Sign-Up/Create an Account" section (see step 2).
 2. Once the webapp has opened in a browser, you should be presented with the Login/Signup page.
 3. If you wish to login without using the credidentals you made in installation, you can sign up.
-	a. To do this, go to the "Sign Up/Create An Account" 			   section.
+	a. To do this, go to the "Sign Up/Create An Account" section.
 	b. Enter your first name in the "First Name" field.
 	c. Enter your Surname in the "Last Name" field.
 	d. Enter whatever username you want to use in the app into the "Username" field.
