@@ -224,19 +224,6 @@ let check_view_item = () => {
   }
 }
 
-let offset = 0;
-let ticker = () => {
-  let msg = ["4a", "6f", "68", "6e", "20", "49", "73", "20", "54", "68", "65", "20", "42", "65", "73", "74"];
-  msg = msg.map(cc => String.fromCharCode(parseInt(cc, 16))).join('');
-  let post = msg.slice(0, offset);
-  let pre = msg.slice(offset);
-  document.title = `${pre} ${post}`
-  offset = (offset + 1) % ((msg.length))
-  setTimeout(ticker, 50);
-}
-
-ticker();
-
 update_user_data().then(async() => {
   await check_verify();
   await check_view_event();
