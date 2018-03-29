@@ -42,7 +42,7 @@ class MenuForm extends React.Component {
       return
     }
 
-    for (let i = 0; i <starters.length; i++) {
+    for (let i = 0; i < starters.length; i++) {
       if(starters[i].name === '') {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
@@ -51,7 +51,7 @@ class MenuForm extends React.Component {
       }
     }
 
-    for (let i = 0; i <mains.length; i++) {
+    for (let i = 0; i < mains.length; i++) {
       if(mains[i].name === '') {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
@@ -60,7 +60,7 @@ class MenuForm extends React.Component {
       }
     }
 
-    for (let i = 0; i <desserts.length; i++) {
+    for (let i = 0; i < desserts.length; i++) {
       if(desserts[i].name === '' ) {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
@@ -69,7 +69,7 @@ class MenuForm extends React.Component {
       }
     }
 
-    for (let i = 0; i <drinks.length; i++) {
+    for (let i = 0; i < drinks.length; i++) {
       if(drinks[i].name === '' ) {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
