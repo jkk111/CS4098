@@ -215,7 +215,7 @@ class CreateTable extends React.Component {
 
   handleLayoutChange(value) {
     let layouts = this.state.layouts;
-    if(value !== 0) {
+    if(value != 0) {
       this.setState({
         editing: true,
         selectedLayout: value,
