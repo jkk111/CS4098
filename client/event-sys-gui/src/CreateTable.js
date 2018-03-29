@@ -46,8 +46,8 @@ let Table = ({ x, y, updatePosition, updateFocused, focused, mobileView}) => {
     table_offset = MOBILE_TABLE_OFFSET;
   }
 
-  return <Rect x={x-(table_offset)}
-               y={y-(table_offset)}
+  return <Rect x={x - (table_offset)}
+               y={y - (table_offset)}
                fill={FILL_COLOR}
                draggable={true}
                onDragStart={updateFocused}
@@ -78,8 +78,8 @@ let TableText = ( {x, y, id, dragging, focused, mobileView} ) => {
     font_size = MOBILE_FONT_SIZE;
   }
 
-  return <Text x={x-(table_offset)}
-               y={y-(text_offset)}
+  return <Text x={x - (table_offset)}
+               y={y - (text_offset)}
                fontSize={font_size}
                fontStyle={FONT_STYLE}
                align={ALIGN}
@@ -219,7 +219,7 @@ class CreateTable extends React.Component {
       this.setState({
         editing: true,
         selectedLayout: value,
-        tables: layouts[(value-1)].tables
+        tables: layouts[(value - 1)].tables
       })
     }
     else{
@@ -260,7 +260,7 @@ class CreateTable extends React.Component {
     let transformWidth =  Number(((window.innerWidth/containerWidth).toFixed(8)));
     let transformHeight = Number(((window.innerHeight/containerHeight).toFixed(8)));
     if (tables.length !== 0) {
-      for(var i=0; i < tables.length; i++) {
+      for(var i = 0; i < tables.length; i++) {
         let {tables = []} = this.state;
         xNew = Number((tables[i].x*transformWidth).toFixed(4));
         yNew = Number((tables[i].y*transformHeight).toFixed(4));
@@ -305,8 +305,8 @@ class CreateTable extends React.Component {
       console.log(e.evt);
       let dragNode = e.evt.dragEndNode;
       if(dragNode !== 'undefined') {
-        let x = dragNode.attrs.x+(TABLE_OFFSET);
-        let y = dragNode.attrs.y+(TABLE_OFFSET);
+        let x = dragNode.attrs.x + (TABLE_OFFSET);
+        let y = dragNode.attrs.y + (TABLE_OFFSET);
         let { tables} = this.state;
 
         let before = tables.slice(0, i);
