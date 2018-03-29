@@ -3,9 +3,6 @@ import AuctionItem from './AuctionItem.js';
 import ReactDOM from 'react-dom';
 
 describe('AuctionItem', () => {
-  it('should be defined', () => {
-    expect(AuctionItem).toBeDefined();
-  });
 
   it('Renders App Without Crashing', () => {
     const div = document.createElement('div');
