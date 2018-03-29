@@ -155,7 +155,7 @@ Admin Access Only
 3. First name the menu by using the "Menu Name" field. Any name is accepted.
 4. Then input the starter information. Enter the name of the starter, a description of the starter, and any allergen information that corrolates to the allergens involved in the dish, all in the relevant fields. If you wish to add another starter option as well as the one you already have, click the "Add Starter" button. Then input the same information as detailed in this step.
 5. Repeat step 4 for the main course, desserts, and drinks.
-6. Not all fields are mandetory. However if you do not enter a name for your menu it will appear as an empty string in the "view menu" screen, as well as in the dropdown in create events.
+6. You must enter a name for your menu, as well as have a least one of each item in order for the menu to create.
 8. When you have finished adding things to your menu, click "Create Menu".
 9. To check if your menu was added, click on the menu button again, and then select 'view menus' on the dropdown menu. The name of the menu should appear there.
 
