@@ -226,7 +226,7 @@ class MenuForm extends React.Component {
       {name_error}
       <FloatText name="menu_name" label="Menu Name:" />
       {this.render_sections('starters', 'mains', 'desserts', 'drinks')}
-      <input type = 'submit' className = 'form-button' value = 'Create Menu'/>
+      <input type='submit' className='form-button' value='Create Menu'/>
     </form>
   }
 }
