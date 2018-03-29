@@ -35,13 +35,6 @@ class MenuForm extends React.Component {
       return
     }
 
-    if(starters.length === 0 && mains.length && desserts.length && drinks.length) {
-      this.setState({
-          course_error: 'Name Fields Cannot Be Empty'
-      })
-      return
-    }
-
     for (let i = 0; i < starters.length; i++) {
       if(starters[i].name === '') {
         this.setState({
