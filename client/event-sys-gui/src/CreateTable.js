@@ -401,7 +401,9 @@ class CreateTable extends React.Component {
       layout_id = this.state.selectedLayout
     }
     let layoutOptions = this.buildLayoutList();
-    let description_props = {};
+    let description_props = {
+
+    };
     if(editing) {
       description_props.disabled = 'disabled'
     }
@@ -438,7 +440,7 @@ class CreateTable extends React.Component {
         </Stage>
         <div className='form-button form-field' onClick={this.deleteTable}>Click to Delete the Last Table You Interacted With</div>
         <div className='layout_form-input'>
-          <div type='submit' className='form-button' submit="create_table_layout">{input_value}</div>
+          <input type='submit' className='form-button' submit="create_table_layout" value={input_value} />
         </div>
       </form>
     </div>
