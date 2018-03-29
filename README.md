@@ -366,16 +366,7 @@ Admin Access Only
 
 ### Feature 54 - I want to track current amount raised
 
-1. Both users and admins can see a live tracker associated with each event.
-2. The live tracker can be accessed in the "View Events" page.
-3. Click on the menu button on the top of the screen. This will drop down all the menu options. Click on 'View Events'.
-4. In the view events page, you can see all the events you have created. Click on the event name you wish to view and all the details of that event will appear.
-5. Click the "View Live Tracker" button. This will bring you to the donation tracker page.
-6. When someone makes a donation, the tracker will refresh to show the amount.
-7. When someone donates, the tracker will refresh to show the amount.
-8. Throughout the event, the live tracker will reflect the current amount raised through donations and bids.
-9. To exit the live tracker, click on the menu button at the top of the page.
-10. At the end of the event, the live tracker will show the total amount that has been raised on the night.
+See Feature 53
 
 
 ### Feature 121 - I want to set up an auction
@@ -401,11 +392,7 @@ This can be the name of the auction, or the type etc.
 
 ### Feature 122 - I want a way to record payments on the night.
 
-1. An admin can see the payments that have been made on the night on the "View Events" page.
-2. To do this, click on the menu button on the top of the screen. This will drop down all the menu options. Then click on "View Events".
-3. Click on the event taking place on the night, and the dropdown will include a "View Transactions" button.
-4. If you click on this button, it will show you a list of all the payments that haave been made, including donations, and completed bids for the selected event.
-5. If there are no transactions, the screen will tell you "There are currently no transactions for the selected event".
+See Feature 49
 
 
 ### Feature 132 - I want to be able to see auction information, including information on auction items
