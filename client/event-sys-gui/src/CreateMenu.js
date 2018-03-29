@@ -34,23 +34,16 @@ class MenuForm extends React.Component {
       })
       return
     }
-    /*
-    if(typeof starters == "undefined" || typeof mains == "undefined" || typeof desserts == "undefined" || typeof drinks == "undefined"){
-      this.setState({
-            course_error: 'Name/Description Fields Cannot Be Empty'
-      })
-      return
-    }
-    */
-    if(starters.length == 0 && mains.length && desserts.length && drinks.length){
+
+    if(starters.length === 0 && mains.length && desserts.length && drinks.length) {
       this.setState({
           course_error: 'Name Fields Cannot Be Empty'
       })
       return
     }
 
-    for (var i = 0; i <starters.length; i++){
-      if(starters[i].name === ''){
+    for (let i = 0; i <starters.length; i++) {
+      if(starters[i].name === '') {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
         })
@@ -58,8 +51,8 @@ class MenuForm extends React.Component {
       }
     }
 
-    for (var i = 0; i <mains.length; i++){
-      if(mains[i].name === ''){
+    for (let i = 0; i <mains.length; i++) {
+      if(mains[i].name === '') {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
         })
@@ -67,8 +60,8 @@ class MenuForm extends React.Component {
       }
     }
 
-    for (var i = 0; i <desserts.length; i++){
-      if(desserts[i].name === '' ){
+    for (let i = 0; i <desserts.length; i++) {
+      if(desserts[i].name === '' ) {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
         })
@@ -76,8 +69,8 @@ class MenuForm extends React.Component {
       }
     }
 
-    for (var i = 0; i <drinks.length; i++){
-      if(drinks[i].name === '' ){
+    for (let i = 0; i <drinks.length; i++) {
+      if(drinks[i].name === '' ) {
         this.setState({
           course_error: 'Course Name Fields Cannot Be Empty, Enter "None" If You Dont Wish To Have A Particular Course'
         })

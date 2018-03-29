@@ -169,20 +169,6 @@ let create_new_admin = async() => {
   promote_test.post(promoted.auth_level);
 }
 
-let test_venue_list = async() => {
-  let test = new Test("Expecting Array Response", true)
-  test.pre();
-  let resp = await get('http://localhost/admin/venues');
-  test.post(Array.isArray(resp))
-}
-
-let test_ticket_list = async() => {
-  let test = new Test("Expecting Array Response", true)
-  test.pre();
-  let resp = await get('http://localhost/admin/venues');
-  test.post(Array.isArray(resp))
-}
-
 let test_create_ticket = async() => {
   let test = new Test("Testing Creating a ticket", { success: true, id: 1});
   test.pre();
@@ -199,25 +185,6 @@ let test_create_ticket = async() => {
   test.post(ticket)
 }
 
-let test_create_venue = async() => {
-  let test = new Test("Testing Creating a venue", { success: true, id: 1});
-  test.pre();
-  let venue = await post({
-    url: 'http://localhost/admin/create_venue',
-    body: {
-      name: 'Lloyd',
-      description: "Lloyd Building",
-      address_1: "42a Pearse St",
-      address_2: "",
-      city: "Dublin",
-      country: "IE",
-      capacity: 100
-    }
-  })
-
-  test.post(venue)
-}
-
 let create_event = async() => {
   let test = new Test("Creating Event", { success: true, id: 1});
   test.pre();
@@ -230,12 +197,10 @@ let create_event = async() => {
   let event = {
     name: "Test Event",
     description: "Test Description",
-    venue_id: 1,
-    max_attendees: 100,
+    location: 'Test Location',
     tickets: [
       { id: 1, count: 100 }
     ],
-    timezone: "Europe/Dublin",
     start_time: start.getTime(),
     end_time: end.getTime()
   }
@@ -277,11 +242,8 @@ let admin_create_user = async() => {
 let test = async() => {
   await create_admin_user();
   await create_new_admin();
-  await test_venue_list();
-  await test_ticket_list();
   await test_users();
   await test_create_ticket();
-  await test_create_venue();
   await create_event();
   await admin_create_user();
 }

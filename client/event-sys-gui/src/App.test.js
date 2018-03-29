@@ -9,6 +9,13 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() })
 
+beforeEach(() => {
+  window.StripeCheckout = {
+    // We just need to mock the checkout API here so we don't crash
+    configure: () => { return { open: () => {}, close: () => {} }}
+  }
+})
+
 it('Renders App Without Crashing', () => {
   const div = document.createElement('div');
 
