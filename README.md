@@ -1,10 +1,10 @@
 # CS4098
 Repo to store source code for CS4098 - Group Design Project
 
-### [Installation](#installation)
-### [Release 1](#release-1)
-### [Release 2](#release-2)
-### [Tests](#tests)
+1. [Installation](#installation)
+2. [Release 1](#release-1)
+3. [Release 2](#release-2)
+4. [Tests](#tests)
 
 ## Installation
 ### From a fresh ubuntu 16.04 LTS install
